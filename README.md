@@ -1,2 +1,2 @@
-# Andrii Rybka's homeworks
-Homework1
+# homeworks
+good luck!
