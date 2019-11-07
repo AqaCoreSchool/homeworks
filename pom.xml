@@ -7,6 +7,7 @@
     <groupId>aqa</groupId>
     <artifactId>homeworks</artifactId>
     <version>1.0-SNAPSHOT</version>
+<<<<<<< HEAD
     <build>
         <plugins>
             <plugin>
@@ -19,6 +20,8 @@
             </plugin>
         </plugins>
     </build>
+=======
+>>>>>>> 5af6b57e7f6489d9863b67d1f23d1b1c658cd6dc
 
 
 </project>
