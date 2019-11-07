@@ -1,4 +1,4 @@
-package com.rybka.homework1;
+package rybka;
 
 public class FullNameChecker {
 

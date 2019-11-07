@@ -1,4 +1,4 @@
-package com.rybka.homework1;
+package rybka;
 
 import java.util.Scanner;
 
@@ -31,3 +31,4 @@ public class WeekDays {
         }
     }
 }
+
