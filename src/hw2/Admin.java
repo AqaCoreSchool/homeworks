@@ -8,14 +8,6 @@ class Admin extends Comics {
         id = i;
     }
 
-//    int c_year(){
-//        return year;
-//    }
-//
-//    String c_author(){
-//        return name_of_book;
-//    }
-
     void staff() {
         System.out.println(String.format("Customer search %s from |%d|. Admin with %d ID help you soon.", getName(), getYear(),id));
     }
