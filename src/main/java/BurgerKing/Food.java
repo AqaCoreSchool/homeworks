@@ -57,22 +57,22 @@ public class Food implements Cookable {
 
     @Override
     public void cooking() {
-        String name = this.type.name();
+        int name = this.type.ordinal();
         switch (name){
-            case "BURGER":{
-                System.out.println("Burger is cooking...Done!");
+            case 0:{
+                System.out.println(this.name + " is cooking...Done!");
                 break;
             }
-            case "BEVERAGE":{
-                System.out.println("Pouring drink...Done!");
+            case 1:{
+                System.out.println("Pouring "+ this.name + "...Done!");
                 break;
             }
-            case "COFFEE":{
-                System.out.println("Coffee is brewing...Done!");
+            case 2:{
+                System.out.println(this.name + "is brewing...Done!");
                 break;
             }
-            case "FRIED":{
-                System.out.println("Meal is frying...Done!");
+            case 3:{
+                System.out.println(this.name + "is frying...Done!");
                 break;
             }
             default:
