@@ -57,8 +57,8 @@ public class Food implements Cookable {
 
     @Override
     public void cooking() {
-        int name = this.type.ordinal();
-        switch (name){
+        int mealtype = this.type.ordinal();
+        switch (mealtype){
             case 0:{
                 System.out.println(this.name + " is cooking...Done!");
                 break;
