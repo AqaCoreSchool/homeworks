@@ -8,7 +8,7 @@ public class Main {
 
     public static void main(String[] args) {
         System.out.println("Online ticket booking");
-        Customer mCustomer = new Customer();
+        Customer mCustomer = new Customer("Andrew", 31);
         mCustomer.selectHall();
 
 
