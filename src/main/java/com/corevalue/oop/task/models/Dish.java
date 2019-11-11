@@ -19,9 +19,7 @@ public class Dish implements Comparable<Dish> {
         }
         this.calories = calories;
 
-        if (name == null) {
-            throw new NullPointerException("Argument name can not be null.");
-        }
+
         if (name.isEmpty() || name == null) {
             throw new IllegalArgumentException("Name of dishes can not be empty.");
         }
