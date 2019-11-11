@@ -40,6 +40,6 @@ public class Customer {
         }else if(movie.matches("REAL2D")){
             return new Real2D().showListOfFilms();
         }
-        return selectHall();
+        return null;
     }
 }
