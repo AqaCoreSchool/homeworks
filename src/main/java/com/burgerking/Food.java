@@ -1,14 +1,16 @@
-package BurgerKing;
+package com.burgerking;
 
 public class Food implements Cookable {
     private String name;
     private FoodType type;
+    private Integer calories;
     private Double price;
     private String size;
 
-    public Food(String name, FoodType type, Double price, String size) {
+    public Food(String name, FoodType type, Integer calories, Double price, String size) {
         this.name = name;
         this.type = type;
+        this.calories = calories;
         this.price = price;
         this.size = size;
     }
@@ -21,12 +23,24 @@ public class Food implements Cookable {
         this.name = name;
     }
 
+    public String getTypeName() {
+        return type.name();
+    }
+
     public FoodType getType() {
         return type;
     }
 
     public void setType(FoodType type) {
         this.type = type;
+    }
+
+    public Integer getCalories() {
+        return calories;
+    }
+
+    public void setCalories(Integer calories) {
+        this.calories = calories;
     }
 
     public Double getPrice() {
@@ -50,6 +64,7 @@ public class Food implements Cookable {
         return "Food{" +
                 "name='" + name + '\'' +
                 ", type=" + type +
+                ", calories=" + calories +
                 ", price=" + price +
                 ", size='" + size + '\'' +
                 '}';

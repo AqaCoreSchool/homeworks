@@ -1,4 +1,4 @@
-package BurgerKing;
+package com.burgerking;
 
 public interface Cookable {
 

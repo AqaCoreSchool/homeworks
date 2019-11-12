@@ -1,4 +1,4 @@
-package BurgerKing;
+package com.burgerking;
 
 import java.util.ArrayList;
 import java.util.List;
