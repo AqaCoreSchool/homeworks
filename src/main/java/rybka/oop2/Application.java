@@ -1,6 +1,9 @@
 package rybka.oop2;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 class Application {
 
@@ -51,37 +54,46 @@ class Application {
         }
     }
 
-    void checkIfAtLeastOneMovie(double duration) {
+    boolean checkIfAtLeastOneMovie(double duration) {
+        byte counter = 0;
         for (Movie movie : movies) {
             if (movie.getDuration() > duration) {
-                System.out.println(movie.getTitle() + "\t" + movie.getDuration());
+                counter++;
             }
         }
+        return counter <= 1;
     }
 
-    void checkIfAllMovies(int year) {
+    boolean checkIfAllMovies(int year) {
+        int counter = 0;
         for (Movie movie : movies) {
             if (movie.getYear() >= year) {
-                System.out.println(movie.getTitle() + "\t" + movie.getYear());
+                counter++;
             }
         }
+        return counter == movies.size();
     }
 
-    void checkIfNoneMovies(String title) {
+    boolean checkIfNoneMovies(String title) {
+        int counter = 0;
         for (Movie movie : movies) {
             if (movie.getTitle().equals(title) || movie.getTitle().contains(title)) {
-                System.out.println(movie.getSessions() + "\t" + movie.getTitle());
+                counter++;
             }
         }
+        return counter == 0;
     }
 
     void collectUniqueGenres() {
-        Set<String> genres = new TreeSet<>();
+        List<String> genres = new ArrayList<>();
 
         for (Movie movie : movies) {
-            genres.add(movie.getGenre());
+            if (!genres.contains(movie.getGenre())) {
+                genres.add(movie.getGenre());
+            }
         }
 
+        Collections.sort(genres);
         System.out.println(String.join(", ", genres));
     }
 }

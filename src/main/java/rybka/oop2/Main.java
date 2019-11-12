@@ -35,17 +35,17 @@ public class Main {
             }
             case 4: {
                 System.out.print("Input duration: ");
-                application.checkIfAtLeastOneMovie(scanner.nextDouble());
+                System.out.println(application.checkIfAtLeastOneMovie(scanner.nextDouble()));
                 break;
             }
             case 5: {
                 System.out.print("Input year: ");
-                application.checkIfAllMovies(scanner.nextInt());
+                System.out.println(application.checkIfAllMovies(scanner.nextInt()));
                 break;
             }
             case 6: {
                 System.out.print("Input title: ");
-                application.checkIfNoneMovies(scanner.next());
+                System.out.println(application.checkIfNoneMovies(scanner.next()));
                 break;
             }
             case 7: {
