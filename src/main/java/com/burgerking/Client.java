@@ -1,4 +1,4 @@
-package BurgerKing;
+package com.burgerking;
 
 public class Client {
     private String name;
@@ -63,7 +63,6 @@ public class Client {
     public void payForOrder(){
 //        to be added...
     }
-
 
     @Override
     public String toString() {

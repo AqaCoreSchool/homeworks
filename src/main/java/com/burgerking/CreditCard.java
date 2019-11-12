@@ -1,4 +1,4 @@
-package BurgerKing;
+package com.burgerking;
 
 public class CreditCard {
     private String name;
