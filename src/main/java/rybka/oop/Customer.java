@@ -2,17 +2,15 @@ package rybka.oop;
 
 public class Customer {
     private String name;
-    private Cinema cinemaType;
     private String filmTitle;
     private String filmStart;
-    private int ticketsNumber;
+    private int customerPlace;
 
-    Customer(String name, Cinema cinemaType, String filmTitle, String filmStart, int ticketsNumber) {
+    Customer(String name, String filmTitle, String filmStart, int customerPlace) {
         this.name = name;
-        this.cinemaType = cinemaType;
         this.filmTitle = filmTitle;
         this.filmStart = filmStart;
-        this.ticketsNumber = ticketsNumber;
+        this.customerPlace = customerPlace;
     }
 
     public String getName() {
@@ -21,14 +19,6 @@ public class Customer {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Cinema getCinemaType() {
-        return cinemaType;
-    }
-
-    public void setCinemaType(Cinema cinemaType) {
-        this.cinemaType = cinemaType;
     }
 
     public String getFilmTitle() {
@@ -47,11 +37,11 @@ public class Customer {
         this.filmStart = filmStart;
     }
 
-    public int getTicketsNumber() {
-        return ticketsNumber;
+    public int getCustomerPlace() {
+        return customerPlace;
     }
 
-    public void setTicketsNumber(int ticketsNumber) {
-        this.ticketsNumber = ticketsNumber;
+    public void setCustomerPlace(int customerPlace) {
+        this.customerPlace = customerPlace;
     }
 }

@@ -3,10 +3,12 @@ package rybka.oop;
 public abstract class Cinema {
     private int seatsNumber;
     private int filmsNumber;
+    private int ticketPrice;
 
-    public Cinema(int seatsNumber, int filmsNumber) {
+    public Cinema(int seatsNumber, int filmsNumber, int ticketPrice) {
         this.seatsNumber = seatsNumber;
         this.filmsNumber = filmsNumber;
+        this.ticketPrice = ticketPrice;
     }
 
     public int getSeatsNumber() {
@@ -23,5 +25,13 @@ public abstract class Cinema {
 
     public void setFilmsNumber(int filmsNumber) {
         this.filmsNumber = filmsNumber;
+    }
+
+    public int getTicketPrice() {
+        return ticketPrice;
+    }
+
+    public void setTicketPrice(int ticketPrice) {
+        this.ticketPrice = ticketPrice;
     }
 }

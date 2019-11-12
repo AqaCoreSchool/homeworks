@@ -4,13 +4,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Schedule {
-    public static Map<String, Film> schedule = new HashMap<String, Film>();
+    public static Map<Film, String> schedule = new HashMap<Film, String>();
 
-    public Map<String, Film> getSchedule() {
+    public Map<Film, String> getSchedule() {
         return schedule;
     }
 
-    public static void setSchedule(String start, Film film) {
-        schedule.put(start, film);
+    public static void setSchedule(Film film, String start) {
+        schedule.put(film, start);
     }
 }

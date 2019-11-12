@@ -1,7 +1,5 @@
 package rybka.oop;
 
-import rybka.oop.Cinema;
-
 public class Film {
     private String title;
     private Cinema cinema;
