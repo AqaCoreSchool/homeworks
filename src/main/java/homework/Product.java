@@ -1,6 +1,4 @@
-package homework_king_burger;
-
-
+package homework;
 
 public class Product {
 

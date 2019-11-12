@@ -1,4 +1,4 @@
-package homework_king_burger;
+package homework;
 
 abstract public class AbstractPayment {
 

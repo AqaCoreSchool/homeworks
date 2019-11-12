@@ -1,4 +1,4 @@
-package homework_king_burger;
+package homework;
 
 public class Main {
     public static void main(String[] args) {

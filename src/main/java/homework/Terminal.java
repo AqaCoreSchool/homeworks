@@ -1,5 +1,6 @@
-package homework_king_burger;
+package homework;
 
+import homework.Product;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -61,11 +62,6 @@ public class Terminal {
             }
         }
 
-        System.out.println(listOfOrders.size());
-        for (Product test: listOfOrders){
-            System.out.println();
-
-        }
         in.close();
         return listOfOrders;
     }

@@ -1,4 +1,4 @@
-package homework_king_burger;
+package homework;
 
 import java.util.ArrayList;
 import java.util.List;
