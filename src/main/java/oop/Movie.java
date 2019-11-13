@@ -4,7 +4,7 @@ package oop;
 
 import java.util.List;
 
-public class Movie extends Cinema{
+public class Movie extends Cinema implements Comparable<Movie>{
     private String filmName;
     private String filmGenre;
     private int yearRelease;
@@ -83,4 +83,10 @@ public class Movie extends Cinema{
     }
 
 
+
+
+    @Override
+    public int compareTo(Movie m) {
+        return this.getFilmName().compareTo(m.getFilmName());
+    }
 }
