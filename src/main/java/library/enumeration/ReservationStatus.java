@@ -1,4 +1,4 @@
-package library.Enum;
+package library.enumeration;
 
 public enum ReservationStatus {
     ACCEPTED,

@@ -1,4 +1,4 @@
-package library.Interface;
+package library.interfaces;
 
 import library.Book;
 import java.util.List;

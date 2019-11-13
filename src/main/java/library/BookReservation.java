@@ -1,6 +1,6 @@
 package library;
 
-import library.Enum.ReservationStatus;
+import library.enumeration.ReservationStatus;
 
 public class BookReservation {
     private String creationDate;

@@ -1,4 +1,4 @@
-package library.Model;
+package library.model;
 
 public class Person {
     private String firstName;

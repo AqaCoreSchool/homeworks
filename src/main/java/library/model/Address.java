@@ -1,4 +1,4 @@
-package library.Model;
+package library.model;
 
 public class Address {
     private String country;

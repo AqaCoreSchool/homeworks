@@ -1,10 +1,11 @@
 package library;
 
-import library.Enum.BookStatus;
-import library.Model.Author;
+import library.enumeration.BookAuthor;
+import library.enumeration.BookGenre;
+import library.enumeration.BookLanguage;
+import library.enumeration.BookStatus;
 
 import java.util.Date;
-import java.util.List;
 
 public class BookItem extends Book {
     private String bookBarCode;
@@ -12,15 +13,52 @@ public class BookItem extends Book {
     private BookStatus status;
     private Date dateOfPurchase;
 
-    public BookItem(String isbn, String title, String publisher, String language, List<Author> authors,
-                    int numberOfPages, String bookBarCode, String borrowDate, BookStatus status,
-                    Date dateOfPurchase) {
-        super(isbn, title, publisher, language, authors, numberOfPages);
+    public BookItem() {
+    }
+
+    public BookItem(String title, String publisher, BookLanguage language, BookAuthor author,
+                    int numberOfPages, int releaseDate, BookGenre bookGenre, String bookBarCode, String borrowDate, BookStatus status, Date dateOfPurchase) {
+        super(title, language, author, numberOfPages, releaseDate, bookGenre);
         this.bookBarCode = bookBarCode;
         this.borrowDate = borrowDate;
         this.status = status;
         this.dateOfPurchase = dateOfPurchase;
     }
 
-    //book operation methods, getters, setters
+    public BookItem(String title, BookLanguage language, BookAuthor author,
+                    int numberOfPages, int releaseDate, BookGenre bookGenre) {
+        super(title, language, author, numberOfPages, releaseDate, bookGenre);
+    }
+
+    public String getBookBarCode() {
+        return bookBarCode;
+    }
+
+    public void setBookBarCode(String bookBarCode) {
+        this.bookBarCode = bookBarCode;
+    }
+
+    public String getBorrowDate() {
+        return borrowDate;
+    }
+
+    public void setBorrowDate(String borrowDate) {
+        this.borrowDate = borrowDate;
+    }
+
+    public BookStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(BookStatus status) {
+        this.status = status;
+    }
+
+    public Date getDateOfPurchase() {
+        return dateOfPurchase;
+    }
+
+    public void setDateOfPurchase(Date dateOfPurchase) {
+        this.dateOfPurchase = dateOfPurchase;
+    }
 }

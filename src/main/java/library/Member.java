@@ -1,9 +1,9 @@
 package library;
 
-import library.Common.Constant;
-import library.Enum.ProfileStatus;
-import library.Interface.Searchable;
-import library.Model.Person;
+import library.common.Constant;
+import library.enumeration.ProfileStatus;
+import library.interfaces.Searchable;
+import library.model.Person;
 
 import java.util.List;
 

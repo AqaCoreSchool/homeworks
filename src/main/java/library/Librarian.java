@@ -1,7 +1,7 @@
 package library;
 
-import library.Interface.Searchable;
-import library.Model.Person;
+import library.interfaces.Searchable;
+import library.model.Person;
 
 import java.util.List;
 

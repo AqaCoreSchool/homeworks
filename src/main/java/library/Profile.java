@@ -1,7 +1,7 @@
 package library;
 
-import library.Enum.ProfileStatus;
-import library.Model.Person;
+import library.enumeration.ProfileStatus;
+import library.model.Person;
 
 public abstract class Profile {
     private String id;
