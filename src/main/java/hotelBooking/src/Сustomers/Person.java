@@ -1,3 +1,5 @@
+package Сustomers;
+
 public abstract class Person {
 
     protected int pay;

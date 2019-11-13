@@ -1,3 +1,5 @@
+package HotelRooms;
+
 public abstract class Hotel {
 
     int r;

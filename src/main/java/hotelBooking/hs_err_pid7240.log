@@ -1,0 +1,200 @@
+#
+# There is insufficient memory for the Java Runtime Environment to continue.
+# Native memory allocation (mmap) failed to map 60817408 bytes for Failed to commit area from 0x00000000c6c00000 to 0x00000000ca600000 of length 60817408.
+# Possible reasons:
+#   The system is out of physical RAM or swap space
+#   The process is running with CompressedOops enabled, and the Java Heap may be blocking the growth of the native heap
+# Possible solutions:
+#   Reduce memory load on the system
+#   Increase physical memory or swap space
+#   Check if swap backing store is full
+#   Decrease Java heap size (-Xmx/-Xms)
+#   Decrease number of Java threads
+#   Decrease Java thread stack sizes (-Xss)
+#   Set larger code cache with -XX:ReservedCodeCacheSize=
+# This output file may be truncated or incomplete.
+#
+#  Out of Memory Error (c:/BuildAgent/work/494cbf65e275b67e/src/hotspot/os/windows/os_windows.cpp:3272), pid=7240, tid=3832
+#
+# JRE version:  (11.0.3+12) (build )
+# Java VM: OpenJDK 64-Bit Server VM (11.0.3+12-b304.10, mixed mode, aot, sharing, tiered, compressed oops, g1 gc, windows-amd64)
+# No core dump will be written. Minidumps are not enabled by default on client versions of Windows
+#
+
+---------------  S U M M A R Y ------------
+
+Command Line: -XX:+FlightRecorder -XX:StartFlightRecording=name="Main 2019_11_12_212308",settings="default",dumponexit=true,filename="C:\Users\Home\AppData\Local\Temp\javaFlightRecorder.jfr" -XX:FlightRecorderOptions=stackdepth=2048 -javaagent:C:\Program Files\JetBrains\IntelliJ IDEA 2019.2\lib\idea_rt.jar=61814:C:\Program Files\JetBrains\IntelliJ IDEA 2019.2\bin -Dfile.encoding=UTF-8 Main
+
+Host: Intel(R) Core(TM) i3-3110M CPU @ 2.40GHz, 4 cores, 3G,  Windows 10 , 64 bit Build 17763 (10.0.17763.475)
+Time: Tue Nov 12 21:23:08 2019 Oeieyiaey (ceia) elapsed time: 0 seconds (0d 0h 0m 0s)
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x0000017fd1d97000):  JavaThread "Unknown thread" [_thread_in_vm, id=3832, stack(0x0000000133d00000,0x0000000133e00000)]
+
+Stack: [0x0000000133d00000,0x0000000133e00000]
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+V  [jvm.dll+0x5da77a]
+V  [jvm.dll+0x70b9c9]
+V  [jvm.dll+0x70cee8]
+V  [jvm.dll+0x70d5b3]
+V  [jvm.dll+0x23ddc8]
+V  [jvm.dll+0x5d7ef4]
+V  [jvm.dll+0x5ccfc5]
+V  [jvm.dll+0x2fa44b]
+V  [jvm.dll+0x2fa3ba]
+V  [jvm.dll+0x2fa292]
+V  [jvm.dll+0x2ff156]
+V  [jvm.dll+0x3474c3]
+V  [jvm.dll+0x347bc6]
+V  [jvm.dll+0x3475c3]
+V  [jvm.dll+0x2d4f68]
+V  [jvm.dll+0x2d6107]
+V  [jvm.dll+0x6eabf7]
+V  [jvm.dll+0x6ec38c]
+V  [jvm.dll+0x354c29]
+V  [jvm.dll+0x6d28ae]
+V  [jvm.dll+0x3bd363]
+V  [jvm.dll+0x3bf7a1]
+C  [java.exe+0x3763]
+C  [java.exe+0x17a0c]
+C  [KERNEL32.DLL+0x17974]
+C  [ntdll.dll+0x6a271]
+
+
+---------------  P R O C E S S  ---------------
+
+Threads class SMR info:
+_java_thread_list=0x0000017fd0427080, length=0, elements={
+}
+
+Java Threads: ( => current thread )
+
+Other Threads:
+  0x0000017fd1db0000 GCTaskThread "GC Thread#0" [stack: 0x0000000133e00000,0x0000000133f00000] [id=4796]
+  0x0000017fd1dc8800 ConcurrentGCThread "G1 Main Marker" [stack: 0x0000000133f00000,0x0000000134000000] [id=5712]
+  0x0000017fd1dca000 ConcurrentGCThread "G1 Conc#0" [stack: 0x0000000134000000,0x0000000134100000] [id=2724]
+
+[error occurred during error reporting (printing all threads), id 0xc0000005, EXCEPTION_ACCESS_VIOLATION (0xc0000005) at pc=0x00007ffa4cf15507]
+
+VM state:not at safepoint (not fully initialized)
+
+VM Mutex/Monitor currently owned by a thread:  ([mutex/lock_event])
+[0x0000017fd1d93650] Heap_lock - owner thread: 0x0000017fd1d97000
+
+Heap address: 0x00000000c6c00000, size: 916 MB, Compressed Oops mode: Non-zero based: 0x00000000c6c00000
+Narrow klass base: 0x0000000000000000, Narrow klass shift: 0
+
+GC Heap History (0 events):
+No events
+
+Deoptimization events (0 events):
+No events
+
+Classes redefined (0 events):
+No events
+
+Internal exceptions (0 events):
+No events
+
+Events (0 events):
+No events
+
+
+Dynamic libraries:
+0x00007ff67b640000 - 0x00007ff67b687000 	C:\Program Files\JetBrains\IntelliJ IDEA 2019.2\jbr\bin\java.exe
+0x00007ffa78f30000 - 0x00007ffa7911d000 	C:\Windows\SYSTEM32\ntdll.dll
+0x00007ffa787e0000 - 0x00007ffa78893000 	C:\Windows\System32\KERNEL32.DLL
+0x00007ffa75380000 - 0x00007ffa75613000 	C:\Windows\System32\KERNELBASE.dll
+0x00007ffa78ab0000 - 0x00007ffa78c47000 	C:\Windows\System32\USER32.dll
+0x00007ffa75950000 - 0x00007ffa75970000 	C:\Windows\System32\win32u.dll
+0x00007ffa761c0000 - 0x00007ffa761e9000 	C:\Windows\System32\GDI32.dll
+0x00007ffa757b0000 - 0x00007ffa75949000 	C:\Windows\System32\gdi32full.dll
+0x00007ffa75690000 - 0x00007ffa75730000 	C:\Windows\System32\msvcp_win.dll
+0x00007ffa750a0000 - 0x00007ffa7519a000 	C:\Windows\System32\ucrtbase.dll
+0x00007ffa637d0000 - 0x00007ffa63a49000 	C:\Windows\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.17763.802_none_05b1445c0722d2cc\COMCTL32.dll
+0x00007ffa76380000 - 0x00007ffa7641e000 	C:\Windows\System32\msvcrt.dll
+0x00007ffa78210000 - 0x00007ffa7853c000 	C:\Windows\System32\combase.dll
+0x00007ffa786b0000 - 0x00007ffa787d2000 	C:\Windows\System32\RPCRT4.dll
+0x00007ffa75730000 - 0x00007ffa757ae000 	C:\Windows\System32\bcryptPrimitives.dll
+0x00007ffa76350000 - 0x00007ffa7637e000 	C:\Windows\System32\IMM32.DLL
+0x00007ffa6c880000 - 0x00007ffa6c897000 	C:\Program Files\JetBrains\IntelliJ IDEA 2019.2\jbr\bin\vcruntime140.dll
+0x00007ffa68d10000 - 0x00007ffa68dad000 	C:\Program Files\JetBrains\IntelliJ IDEA 2019.2\jbr\bin\msvcp140.dll
+0x00007ffa4cc30000 - 0x00007ffa4d6e7000 	C:\Program Files\JetBrains\IntelliJ IDEA 2019.2\jbr\bin\server\jvm.dll
+0x00007ffa76420000 - 0x00007ffa764c3000 	C:\Windows\System32\ADVAPI32.dll
+0x00007ffa76c60000 - 0x00007ffa76cfe000 	C:\Windows\System32\sechost.dll
+0x00007ffa78200000 - 0x00007ffa78208000 	C:\Windows\System32\PSAPI.DLL
+0x00007ffa70cb0000 - 0x00007ffa70cb9000 	C:\Windows\SYSTEM32\WSOCK32.dll
+0x00007ffa71d20000 - 0x00007ffa71d44000 	C:\Windows\SYSTEM32\WINMM.dll
+0x00007ffa6b120000 - 0x00007ffa6b12a000 	C:\Windows\SYSTEM32\VERSION.dll
+0x00007ffa76150000 - 0x00007ffa761bd000 	C:\Windows\System32\WS2_32.dll
+0x00007ffa71cf0000 - 0x00007ffa71d1d000 	C:\Windows\SYSTEM32\WINMMBASE.dll
+0x00007ffa75620000 - 0x00007ffa7566a000 	C:\Windows\System32\cfgmgr32.dll
+0x00007ffa74f20000 - 0x00007ffa74f31000 	C:\Windows\System32\kernel.appcore.dll
+0x00007ffa6fe70000 - 0x00007ffa6fe81000 	C:\Program Files\JetBrains\IntelliJ IDEA 2019.2\jbr\bin\verify.dll
+0x00007ffa63a50000 - 0x00007ffa63c3d000 	C:\Windows\SYSTEM32\DBGHELP.DLL
+0x00007ffa637a0000 - 0x00007ffa637ca000 	C:\Windows\SYSTEM32\dbgcore.DLL
+0x00007ffa6a980000 - 0x00007ffa6a9a9000 	C:\Program Files\JetBrains\IntelliJ IDEA 2019.2\jbr\bin\java.dll
+0x00007ffa670f0000 - 0x00007ffa67124000 	C:\Program Files\JetBrains\IntelliJ IDEA 2019.2\jbr\bin\instrument.dll
+0x00007ffa6a960000 - 0x00007ffa6a977000 	C:\Program Files\JetBrains\IntelliJ IDEA 2019.2\jbr\bin\zip.dll
+0x00007ffa70ca0000 - 0x00007ffa70cab000 	C:\Program Files\JetBrains\IntelliJ IDEA 2019.2\jbr\bin\jimage.dll
+
+dbghelp: loaded successfully - version: 4.0.5 - missing functions: none
+symbol engine: initialized successfully - sym options: 0x614 - pdb path: .;C:\Program Files\JetBrains\IntelliJ IDEA 2019.2\jbr\bin;C:\Windows\SYSTEM32;C:\Windows\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.17763.802_none_05b1445c0722d2cc;C:\Program Files\JetBrains\IntelliJ IDEA 2019.2\jbr\bin\server
+
+VM Arguments:
+jvm_args: -XX:+FlightRecorder -XX:StartFlightRecording=name="Main 2019_11_12_212308",settings="default",dumponexit=true,filename="C:\Users\Home\AppData\Local\Temp\javaFlightRecorder.jfr" -XX:FlightRecorderOptions=stackdepth=2048 -javaagent:C:\Program Files\JetBrains\IntelliJ IDEA 2019.2\lib\idea_rt.jar=61814:C:\Program Files\JetBrains\IntelliJ IDEA 2019.2\bin -Dfile.encoding=UTF-8 
+java_command: Main
+java_class_path (initial): C:\Users\Home\IdeaProjects\hotelBooking\out\production\hotelBooking
+Launcher Type: SUN_STANDARD
+
+[Global flags]
+     intx CICompilerCount                          = 3                                         {product} {ergonomic}
+     uint ConcGCThreads                            = 1                                         {product} {ergonomic}
+     bool FlightRecorder                           = true                                      {product} {command line}
+    ccstr FlightRecorderOptions                    = stackdepth=2048                           {product} {command line}
+     uint G1ConcRefinementThreads                  = 4                                         {product} {ergonomic}
+   size_t G1HeapRegionSize                         = 1048576                                   {product} {ergonomic}
+    uintx GCDrainStackTargetSize                   = 64                                        {product} {ergonomic}
+   size_t InitialHeapSize                          = 60817408                                  {product} {ergonomic}
+   size_t MarkStackSize                            = 4194304                                   {product} {ergonomic}
+   size_t MaxHeapSize                              = 960495616                                 {product} {ergonomic}
+   size_t MinHeapDeltaBytes                        = 1048576                                   {product} {ergonomic}
+    uintx NonNMethodCodeHeapSize                   = 5830092                                {pd product} {ergonomic}
+    uintx NonProfiledCodeHeapSize                  = 122914074                              {pd product} {ergonomic}
+    uintx ProfiledCodeHeapSize                     = 122914074                              {pd product} {ergonomic}
+    uintx ReservedCodeCacheSize                    = 251658240                              {pd product} {ergonomic}
+     bool SegmentedCodeCache                       = true                                      {product} {ergonomic}
+    ccstr StartFlightRecording                     = name="Main 2019_11_12_212308",settings="default",dumponexit=true,filename="C:\Users\Home\AppData\Local\Temp\javaFlightRecorder.jfr"            {product} {command line}
+     bool UseCompressedClassPointers               = true                                 {lp64_product} {ergonomic}
+     bool UseCompressedOops                        = true                                 {lp64_product} {ergonomic}
+     bool UseG1GC                                  = true                                      {product} {ergonomic}
+     bool UseLargePagesIndividualAllocation        = false                                  {pd product} {ergonomic}
+
+Logging:
+Log output configuration:
+ #0: stdout all=warning uptime,level,tags
+ #1: stderr all=off uptime,level,tags
+
+Environment Variables:
+PATH=C:\Program Files\JetBrains\IntelliJ IDEA 2019.2\jbr\\bin;C:\Program Files\JetBrains\IntelliJ IDEA 2019.2\jbr\\bin\server;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Users\Home\AppData\Local\Microsoft\WindowsApps;
+USERNAME=Home
+OS=Windows_NT
+PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 58 Stepping 9, GenuineIntel
+
+
+
+---------------  S Y S T E M  ---------------
+
+OS: Windows 10 , 64 bit Build 17763 (10.0.17763.475)
+
+CPU:total 4 (initial active 4) (2 cores per cpu, 2 threads per core) family 6 model 58 stepping 9, cmov, cx8, fxsr, mmx, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt, avx, clmul, erms, ht, tsc, tscinvbit, tscinv
+
+Memory: 4k page, system-wide physical 3661M (581M free)
+TotalPageFile size 4461M (AvailPageFile size 51M)
+current process WorkingSet (physical memory assigned to process): 10M, peak: 10M
+current process commit charge ("private bytes"): 51M, peak: 109M
+
+vm_info: OpenJDK 64-Bit Server VM (11.0.3+12-b304.10) for windows-amd64 JRE (11.0.3+12-b304.10), built on Jun 25 2019 07:10:45 by "" with MS VC++ 14.0 (VS2015)
+
+END.
