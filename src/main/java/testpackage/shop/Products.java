@@ -1,4 +1,4 @@
-package testpackage.secondTry.shop;
+package testpackage.shop;
 
 public enum Products {
     POPCORNWITHCHEESE,

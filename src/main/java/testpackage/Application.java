@@ -1,7 +1,7 @@
-package testpackage.secondTry;
+package testpackage;
 
-import testpackage.secondTry.factory.UserFactory;
-import testpackage.secondTry.sessions.tickets.Sessions;
+import testpackage.factory.UserFactory;
+import testpackage.sessions.tickets.Sessions;
 
 public class Application {
     public static void main(String[] args)  {
@@ -13,8 +13,8 @@ public class Application {
         user.getDefaultFilmList();
         user.sortFilmsByAlphabetically().printFilmList();
         System.out.println("\n");
+        user.hasOneMovieCriteria("Horror");
+        System.out.println("\n");
         user.sortFilmsByGenre("Horror").printFilmList();
-
-
     }
 }

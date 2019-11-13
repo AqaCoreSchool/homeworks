@@ -1,8 +1,8 @@
-package testpackage.secondTry.factory;
+package testpackage.factory;
 
-import testpackage.secondTry.base.BaseClass;
-import testpackage.secondTry.cinema.Movie;
-import testpackage.secondTry.entity.Film;
+import testpackage.base.BaseClass;
+import testpackage.entity.Film;
+import testpackage.cinema.Movie;
 
 public class FilmFactory extends BaseClass {
 

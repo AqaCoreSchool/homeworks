@@ -1,4 +1,4 @@
-package testpackage.secondTry.base;
+package testpackage.base;
 
 public abstract  class BaseClass {
      void backToMainMenu(){

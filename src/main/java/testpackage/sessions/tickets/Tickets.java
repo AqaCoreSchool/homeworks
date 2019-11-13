@@ -1,7 +1,7 @@
-package testpackage.secondTry.sessions.tickets;
+package testpackage.sessions.tickets;
 
 
-import testpackage.secondTry.base.BaseClass;
+import testpackage.base.BaseClass;
 
 public class Tickets extends BaseClass {
 

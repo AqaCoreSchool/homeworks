@@ -1,4 +1,4 @@
-package testpackage.secondTry.cinema;
+package testpackage.cinema;
 
 public class Movie {
     public enum Films {

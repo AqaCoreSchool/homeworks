@@ -1,4 +1,4 @@
-package testpackage.secondTry.entity;
+package testpackage.entity;
 
 import lombok.*;
 
