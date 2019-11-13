@@ -1,12 +1,37 @@
 package oop;
 
-import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
 
-public abstract class Cinema {
-    Scanner scan = new Scanner(System.in);
-    public abstract String showListOfFilms();
 
-    public abstract Object choosePreferFilm();
+public class Cinema {
+    private String name;
+    private String address;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    @Override
+    public String toString() {
+        return "Cinema{" +
+                "name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                '}';
+    }
+
 
 
 
