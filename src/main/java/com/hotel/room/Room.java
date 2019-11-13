@@ -1,6 +1,6 @@
 package com.hotel.room;
 
-public class Room {
+public abstract class Room {
 
     private int number;
     private double price;
@@ -29,5 +29,13 @@ public class Room {
 
     public void setBooking(boolean booking) {
         this.booking = booking;
+    }
+
+    @Override
+    public String toString() {
+        return "Room type " +this.getClass().getSimpleName()+
+                ", №" + number +
+                ", price=" + price +
+                " UAH";
     }
 }

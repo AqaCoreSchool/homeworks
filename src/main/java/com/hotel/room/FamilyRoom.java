@@ -2,7 +2,7 @@ package com.hotel.room;
 
 import com.hotel.user.Customer;
 
-public class FamilyRoom extends Room implements getPlaces {
+public class FamilyRoom extends Room implements IPlace {
 
     private int numberOfRoom;
     private int numberOfPlaces;

@@ -3,6 +3,8 @@ package com.hotel.user;
 import com.hotel.HotelAccount;
 import com.hotel.room.Room;
 
+import java.util.List;
+
 public abstract class User {
 
     private String name;
@@ -28,5 +30,11 @@ public abstract class User {
         User.hotelAccount = hotelAccount;
     }
 
-    public abstract Room chooseRoom();
+    public abstract Room chooseRoom(List<Room> rooms);
+
+    public void showChooseRooms(List<Room> chooseRooms) {
+        if(chooseRooms.isEmpty()) System.out.println("Your search did not match any rooms");
+        else for (Room room:chooseRooms) System.out.println(room.toString());
+
+    }
 }

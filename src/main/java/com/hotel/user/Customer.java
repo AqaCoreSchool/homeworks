@@ -12,8 +12,8 @@ public class Customer extends User {
 
     public Customer(String name, int age, String email) {
         super(name);
-        this.age=age;
-        this.email=email;
+        this.age = age;
+        this.email = email;
     }
 
     public int getAge() {
@@ -32,27 +32,27 @@ public class Customer extends User {
         this.room = room;
     }
 
+
     @Override
-    public Room chooseRoom() {
-        //Some code where Customer choose room
+    public Room chooseRoom(List<Room> rooms) {
+        //Some code where Customer choose room from
         //For example
         Room myRoom = null;
-        List<Room> freeRooms = getHotelAccount().getAllFreeRooms();
+        List<Room> freeRooms = getHotelAccount().getFreeRooms();
         for (Room room : freeRooms) {
             if (room.getPrice() < 1000) myRoom = room;
         }
-
         return myRoom;
     }
 
     public void createBookingRequest(Room myRoom) {
-        if (myRoom != null) {
-            setRoom(myRoom);
-            //Запит адміну на підтвердження бронювання
-        } else System.out.println("Потрібної кімнати не знайдено");
+        setRoom(myRoom);
+        //Запит адміну на підтвердження бронювання
+        System.out.println("Your booking request has been sent to the administrator");
     }
 
     public void cancelBooking() {
-        if(getRoom()!=null)getRoom().setBooking(false);
+        if (getRoom() != null) getRoom().setBooking(false);
+
     }
 }

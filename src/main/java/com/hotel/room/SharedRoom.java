@@ -5,7 +5,7 @@ import com.hotel.user.Customer;
 import java.util.LinkedList;
 import java.util.List;
 
-public class SharedRoom extends Room implements getPlaces {
+public class SharedRoom extends Room implements IPlace {
 
     private int numberOfPlaces;
     private int numberOfBookingPlaces;
