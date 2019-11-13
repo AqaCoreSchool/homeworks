@@ -15,8 +15,6 @@ public class Main {
         System.out.println(aUser.isFilmDurationRespondsToFilter(films, 90));
         System.out.println(aUser.isReleaseOfAllFilmsRespondToCriteria(films, 2008));
         System.out.println(aUser.isFilmNameRespondsToCriteria(films, "Sunset Beach"));
-        Collections.sort(films);
-        System.out.println(films);
 
 
 

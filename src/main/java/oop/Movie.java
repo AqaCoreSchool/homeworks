@@ -1,10 +1,10 @@
 package oop;
 
 
-import java.util.Comparator;
+
 import java.util.List;
 
-public class Movie extends Cinema implements Comparable<Movie>{
+public class Movie extends Cinema{
     private String filmName;
     private String filmGenre;
     private int yearRelease;
@@ -80,11 +80,6 @@ public class Movie extends Cinema implements Comparable<Movie>{
                 ", ageRating=" + ageRating +
                 ", sessions=" + sessions +
                 '}';
-    }
-
-    @Override
-    public int compareTo(Movie o) {
-        return 0;
     }
 
 

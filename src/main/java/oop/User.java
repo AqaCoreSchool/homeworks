@@ -88,7 +88,7 @@ public class User extends Cinema {
                 2009, 140, 12, Arrays.asList(thirdSession, fourSession)));
         movies.add(new Movie("Aliens", "fantasy",
                 1989, 98, 16, Arrays.asList(thirdSession, fourSession)));
-        Collections.sort(movies);
+
 
         return movies;
     }
