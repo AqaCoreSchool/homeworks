@@ -16,12 +16,13 @@ public class User {
 
     private String lastName;
 
-    private Date birthDate;
+    private String birthDate;
 
     private String email;
 
     private String typeOfSubscription;
 
-    private String preferebleFilmLanguage;
+    private String preferFilmLanguage;
+
 
 }

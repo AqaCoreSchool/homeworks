@@ -1,4 +1,4 @@
-package secondTry.subscribe;
+package testpackage.secondTry.subscribe;
 
 import testpackage.secondTry.base.BaseClass;
 

@@ -7,7 +7,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class Film {
+public  class Film {
 
    private String nameFilm;
 
@@ -22,5 +22,6 @@ public class Film {
    private  String[] session;
 
    private  int ageLimit;
+
 
 }
