@@ -46,6 +46,7 @@ public class User extends Cinema {
                 '}';
     }
 
+    // Повертає список усіх фільмів і сортує їх по алфавіту
     public List<Movie> getAllMovies(){
         List<Movie> movies = new ArrayList<>();
         Hall hallOne = new Hall(1, "Imax", 60, 15.4);
@@ -93,6 +94,7 @@ public class User extends Cinema {
         return movies;
     }
 
+    //Фільтрує список фільмів на відповідність по жанру
     public List<Movie> filterMovieByGenre(List<Movie> films, String genre){
         List<Movie> filteredMovie = new ArrayList<>();
         for(Movie elem: films){
@@ -104,7 +106,7 @@ public class User extends Cinema {
 
         return filteredMovie;
     }
-
+    //Перевіряє список фільмів на відповідність по тривалості
     public boolean isFilmDurationRespondsToFilter(List<Movie> films, int duration){
        for(Movie elem: films){
             if(elem.getDuration() > duration){
@@ -113,7 +115,7 @@ public class User extends Cinema {
         }
         return false;
     }
-
+    //Перевіряє список фільмів на відповідність по року релізу
     public boolean isReleaseOfAllFilmsRespondToCriteria(List<Movie> films, int yearRelease){
         for(Movie elem: films){
             if(elem.getYearRelease() < yearRelease){
@@ -122,7 +124,7 @@ public class User extends Cinema {
         }
         return true;
     }
-
+    //Перевіряє список фільмів на відповідність по імені
     public boolean isFilmNameRespondsToCriteria(List<Movie> films, String filmName){
         for(Movie elem: films){
             if(elem.getFilmName().equals(filmName.toLowerCase())){
