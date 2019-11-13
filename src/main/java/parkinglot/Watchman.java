@@ -1,4 +1,4 @@
-package Homework2;
+package parkinglot;
 
 public class Watchman extends Human implements CanDrink{
     String placeOfTheWorking = "Watchman";

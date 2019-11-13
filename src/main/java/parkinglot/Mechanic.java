@@ -1,20 +1,20 @@
-package Homework2;
+package parkinglot;
 
 public class Mechanic extends Human implements CanDrink{
     String placeOfTheWorking = "Mechanic";
-    Integer realSalary = 500;
+    int realSalary = 500;
     String canDrinkTillDrunk = "Until can see the wheels";
 
 
 
 
     @Override
-    String workingPlace() {
+    public String workingPlace() {
         return placeOfTheWorking;
     }
 
     @Override
-    Integer salary() {
+    public Integer salary() {
         return realSalary;
     }
 

@@ -1,4 +1,4 @@
-package Homework2;
+package parkinglot;
 
 public abstract class Human {
     abstract String workingPlace();
