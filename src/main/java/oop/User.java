@@ -125,7 +125,7 @@ public class User extends Cinema {
 
     public boolean isFilmNameRespondsToCriteria(List<Movie> films, String filmName){
         for(Movie elem: films){
-            if(elem.getFilmName() == filmName.toLowerCase()){
+            if(elem.getFilmName().equals(filmName.toLowerCase())){
                 return true;
             }
         }
