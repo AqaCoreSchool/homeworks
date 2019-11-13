@@ -1,10 +1,11 @@
-package com.company;
+package ParkingLot;
 
 public abstract class Employees {
     private String name;
     private String position;
     private int workHours;
     private int ratePerHour;
+
 
     public Employees() {
     }
@@ -14,7 +15,7 @@ public abstract class Employees {
         this.workHours = workHours;
     }
 
-    abstract void Standard();
+    abstract void standard();
 
     public int getSalary() {
         return this.ratePerHour * this.workHours;

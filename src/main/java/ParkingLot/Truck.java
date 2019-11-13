@@ -1,20 +1,20 @@
-package com.company;
+package /**/ParkingLot;
 
 import java.util.Date;
 
 public class Truck extends Vehicle {
 
     public Truck() {
-        Standard();
+        standard();
     }
 
     public Truck(String owner, String number) {
         super(owner, number);
-        Standard();
+        standard();
     }
 
     @Override
-    void Standard() {
+    void standard() {
         this.setType("Truck");
         this.setPrice(20);
         this.setDateIn(new Date());

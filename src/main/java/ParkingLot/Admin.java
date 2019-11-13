@@ -1,18 +1,18 @@
-package com.company;
+package ParkingLot;
 
 public class Admin extends Employees {
 
     public Admin() {
-        Standard();
+        standard();
     }
 
     public Admin(String name, int workHours) {
         super(name, workHours);
-        Standard();
+        standard();
     }
 
     @Override
-    public void Standard() {
+    public void standard() {
         this.setRatePerHour(100);
         this.setPosition("Admin");
     }

@@ -1,8 +1,11 @@
-package com.company;
+package ParkingLot;
 
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 abstract public class Vehicle {
+    static String pattern = "([А-Я][А-Я](\\s)[0-9][0-9][0-9][0-9](\\s)[А-Я][А-Я])";
     private String owner;
     private String number;
     private String type;
@@ -11,6 +14,7 @@ abstract public class Vehicle {
     private int pricePerHour;
     private int bill;
     private int duration;
+    private int lotNumber;
 
     public Vehicle() {
         this.dateIn = new Date();
@@ -24,25 +28,37 @@ abstract public class Vehicle {
         this.dateOut = new Date();
     }
 
-    abstract void Standard();
+    public int getLotNumber() {
+        return lotNumber;
+    }
+
+    public void setLotNumber(int lotNumber) {
+        this.lotNumber = lotNumber;
+    }
+
+    abstract void standard();
 
     @Override
     public String toString() {
         return this.type + " number: " + this.number + ". Owner: " + this.owner + ". Check in: " + this.getDateIn(); //
     }
 
+
     public boolean checkIn() {
-        if (Main.freeLots >= 0) {
+        if ((Main.freeLots > 0) && validateNumber(this.number)) {
             Date dateIn = new Date();
             Main.freeLots = Main.freeLots - 1;
+            assignCarToLot(this.number);
             return true;
         } else return false;
     }
 
-    public boolean checkOut() {
+    public boolean checkOut(Vehicle vehicle) {
         if (Main.freeLots < Main.lotCount) {
             Main.freeLots = Main.freeLots + 1;
             this.dateOut = new Date();
+            deleteCarFromLot(this.number);
+            Main.carAll.remove(vehicle);
             System.out.println("You need to pay: " + (getBill()) + " UAH");
             return true;
         } else
@@ -50,9 +66,39 @@ abstract public class Vehicle {
         return false;
     }
 
+    public boolean assignCarToLot(String number) {
+        if ((Main.lots.size() < Main.lotCount)) {
+            Main.lots.add(number);
+            System.out.println("You have place №:" + (Main.lots.indexOf(number) + 1));
+        } else {
+            System.out.println("Sorry, there's no lots available.");
+        }
+        return true;
+    }
+
+    public void deleteCarFromLot(String number) {
+        if (Main.lots.contains(number)) {
+            Main.lots.remove(number);
+            System.out.println("You are unchecked from your place");
+        } else {
+            System.out.println("Sorry, you weren't checked. Maybe, it is not your Parking? ");
+        }
+    }
+
+    public boolean validateNumber(String number) {
+        Pattern p = Pattern.compile(pattern);
+        Matcher m = p.matcher(this.number);
+        if (m.matches()) {
+            System.out.println("Hello, your vehicle is added");
+            return true;
+        } else
+            System.out.println("Wrong format of vehicle number ");
+        return false;
+    }
+
     public int getDuration() {
         if (dateOut.after(dateIn)) {
-            duration = (int) ((dateOut.getTime() - dateIn.getTime())); // need add "/3600000" now without this? just for testing
+            duration = (int) ((dateOut.getTime() - dateIn.getTime())); // need add "/3600000" now without this, just for testing
             return duration;
         } else
             return 0;
@@ -62,10 +108,16 @@ abstract public class Vehicle {
         return this.pricePerHour * this.getDuration();
     }
 
-    public void setVehicle(String number, String owner) {
+    public void setVehicle(String owner, String number) {
         this.number = number;
         this.owner = owner;
         this.dateIn = new Date();
+    }
+
+    public void getCarByNumber() {
+        for (int i = 0; i < Main.lots.size(); i++) {
+
+        }
     }
 
     public Date getDateIn() {
@@ -81,7 +133,7 @@ abstract public class Vehicle {
     }
 
     public String getOwner() {
-        return owner;
+        return this.owner;
     }
 
     public void setOwner(String owner) {
@@ -102,6 +154,10 @@ abstract public class Vehicle {
 
     public void setPrice(int pricePerHour) {
         this.pricePerHour = pricePerHour;
+    }
+
+    public String getNumber() {
+        return this.number;
     }
 
 }
