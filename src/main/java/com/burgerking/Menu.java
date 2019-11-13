@@ -47,14 +47,14 @@ public class Menu {
         this.productList.remove(food);
     }
 
-    Comparator<Food> compareByPrice = new Comparator<Food>() {
+    private Comparator<Food> compareByPrice = new Comparator<Food>() {
         @Override
         public int compare(Food f1, Food f2) {
             return f1.getPrice().compareTo(f2.getPrice());
         }
     };
 
-    Comparator<Food> compareByName = new Comparator<Food>() {
+    private Comparator<Food> compareByName = new Comparator<Food>() {
         @Override
         public int compare(Food f1, Food f2) {
             return f1.getName().compareTo(f2.getName());
@@ -91,15 +91,15 @@ public class Menu {
     }
 
     public Boolean checkOneOf(Double price){
-        if(price>0){
+        if(price>=0){
             for(Food food: this.getProductList()){
-                if(food.getPrice()>=price){
+                if(food.getPrice()>price){
                     return true;
                 }
             }
         } else if (price<0) {
             for(Food food: this.getProductList()){
-                if(food.getPrice()<=Math.abs(price)){
+                if(food.getPrice()<Math.abs(price)){
                     return true;
                 }
             }
@@ -108,15 +108,15 @@ public class Menu {
     }
 
     public Boolean checkOneOf(Integer calories){
-        if(calories>0){
+        if(calories>=0){
             for(Food food: this.getProductList()){
-                if(food.getCalories()>=calories){
+                if(food.getCalories()>calories){
                     return true;
                 }
             }
         } else if (calories<0) {
             for(Food food: this.getProductList()){
-                if(food.getCalories()<=Math.abs(calories)){
+                if(food.getCalories()<Math.abs(calories)){
                     return true;
                 }
             }
@@ -134,15 +134,15 @@ public class Menu {
     }
 
     public Boolean checkAll(Double price){
-        if(price>0){
+        if(price>=0){
             for(Food food: this.getProductList()){
-                if(food.getPrice()<=price){
+                if(food.getPrice()<price){
                     return false;
                 }
             }
         } else if (price<0) {
             for(Food food: this.getProductList()){
-                if(food.getPrice()>=Math.abs(price)){
+                if(food.getPrice()>Math.abs(price)){
                     return false;
                 }
             }
@@ -151,15 +151,15 @@ public class Menu {
     }
 
     public Boolean checkAll(Integer calories){
-        if(calories>0){
+        if(calories>=0){
             for(Food food: this.getProductList()){
-                if(food.getCalories()<=calories){
+                if(food.getCalories()<calories){
                     return false;
                 }
             }
         } else if (calories<0) {
             for(Food food: this.getProductList()){
-                if(food.getCalories()>=Math.abs(calories)){
+                if(food.getCalories()>Math.abs(calories)){
                     return false;
                 }
             }
@@ -177,15 +177,15 @@ public class Menu {
     }
 
     public Boolean checkNone(Double price){
-        if(price>0){
+        if(price>=0){
             for(Food food: this.getProductList()){
-                if(food.getPrice()>=price){
+                if(food.getPrice()>price){
                     return false;
                 }
             }
         } else if (price<0) {
             for(Food food: this.getProductList()){
-                if(food.getPrice()<=Math.abs(price)){
+                if(food.getPrice()<Math.abs(price)){
                     return false;
                 }
             }
@@ -194,15 +194,15 @@ public class Menu {
     }
 
     public Boolean checkNone(Integer calories){
-        if(calories>0){
+        if(calories>=0){
             for(Food food: this.getProductList()){
-                if(food.getCalories()>=calories){
+                if(food.getCalories()>calories){
                     return false;
                 }
             }
         } else if (calories<0) {
             for(Food food: this.getProductList()){
-                if(food.getCalories()<=Math.abs(calories)){
+                if(food.getCalories()<Math.abs(calories)){
                     return false;
                 }
             }
