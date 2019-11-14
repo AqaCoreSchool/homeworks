@@ -1,29 +1,25 @@
-package hw3;
+package com.company.hw;
 
-
-abstract class Library {
+public abstract class Library {
     private String bookAuthor;
     private int bookYear;
     private String bookName;
     boolean available;
 
-
-    protected abstract void inform();
-    public abstract void pay(double price);
-
-    Library(String author, String name, int year, boolean avail){
+    public Library(String author, String name, int year, boolean avail){
         bookAuthor = author;
         bookName = name;
         bookYear = year;
         available = avail;
     }
 
-    String getAuthor() {
+
+    public String getAuthor() {
         return bookAuthor;
     }
-    String getBookName(){return bookName;}
+    public String getBookName(){return bookName;}
 
-    int getYear() {
+    public int getYear() {
         return bookYear;
     }
 
