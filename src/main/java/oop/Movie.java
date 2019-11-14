@@ -82,11 +82,23 @@ public class Movie extends Cinema implements Comparable<Movie>{
                 '}';
     }
 
-
-
-
     @Override
     public int compareTo(Movie m) {
         return this.getFilmName().compareTo(m.getFilmName());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Movie movie = (Movie) o;
+
+        return filmGenre.equals(movie.filmGenre);
+    }
+
+    @Override
+    public int hashCode() {
+        return filmGenre.hashCode();
     }
 }

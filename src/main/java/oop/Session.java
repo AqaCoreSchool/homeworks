@@ -1,6 +1,6 @@
 package oop;
 
-public class Session extends Cinema {
+public class Session {
     private Hall hall;
     private double price;
     private double startSession;

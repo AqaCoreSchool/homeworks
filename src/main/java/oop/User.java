@@ -2,7 +2,7 @@ package oop;
 
 import java.util.*;
 
-public class User extends Cinema {
+public class User {
     private String name;
     private int age;
     private int discount;
@@ -37,6 +37,7 @@ public class User extends Cinema {
         this.discount = discount;
     }
 
+    //This is override of toString method... he-he)) It's a joke)
     @Override
     public String toString() {
         return "Customer{" +
@@ -46,7 +47,7 @@ public class User extends Cinema {
                 '}';
     }
 
-    // Повертає список усіх фільмів і сортує їх по алфавіту
+    //This method creates and returns a list of all movies
     public List<Movie> getAllMovies(){
         List<Movie> movies = new ArrayList<>();
         Hall hallOne = new Hall(1, "Imax", 60, 15.4);
@@ -94,19 +95,27 @@ public class User extends Cinema {
         return movies;
     }
 
-    //Фільтрує список фільмів на відповідність по жанру
-    public List<Movie> filterMovieByGenre(List<Movie> films, String genre){
+    //This method returns a Map with pairs: Film - his Sessions
+    public Map<String, List<Session>> getAllSessionsOfAllFilms(List<Movie> films){
+        Map<String, List<Session>> sessionMap = new HashMap<>();
+        for(Movie elem: films){
+            sessionMap.put(elem.getFilmName(),elem.getSessions());
+        }
+        return  sessionMap;
+    }
+
+    //This method returns a List of films filtered by particular genre
+    public List<Movie> getMovieListFilteredByGenre(List<Movie> films, String genre){
         List<Movie> filteredMovie = new ArrayList<>();
         for(Movie elem: films){
-            if(elem.getFilmGenre().equals(genre.toLowerCase())){
+            if(elem.getFilmGenre().equalsIgnoreCase(genre)){
                 filteredMovie.add(elem);
             }
-
         }
-
         return filteredMovie;
     }
-    //Перевіряє список фільмів на відповідність по тривалості
+
+    //This method checks if at least one movie in a list corresponds to search by duration
     public boolean isFilmDurationRespondsToFilter(List<Movie> films, int duration){
        for(Movie elem: films){
             if(elem.getDuration() > duration){
@@ -115,8 +124,9 @@ public class User extends Cinema {
         }
         return false;
     }
-    //Перевіряє список фільмів на відповідність по року релізу
-    public boolean isReleaseOfAllFilmsRespondToCriteria(List<Movie> films, int yearRelease){
+
+    //This method checks if all movies in a list corresponds to search by year of release
+    public boolean isReleasesOfAllFilmsRespondToCriteria(List<Movie> films, int yearRelease){
         for(Movie elem: films){
             if(elem.getYearRelease() < yearRelease){
                 return false;
@@ -124,15 +134,20 @@ public class User extends Cinema {
         }
         return true;
     }
-    //Перевіряє список фільмів на відповідність по імені
-    public boolean isFilmNameRespondsToCriteria(List<Movie> films, String filmName){
+
+    //This method checks if films in a list contain particular words in their names
+    public boolean isNoneOfFilmsRespondsToCriteria(List<Movie> films, String filmName){
         for(Movie elem: films){
-            if(elem.getFilmName().equals(filmName.toLowerCase())){
+            if(elem.getFilmName().contains(filmName)){
                 return true;
             }
         }
         return false;
     }
 
+    //work in progress......
+    public Set<Movie> getMovieSetWithUniqueGenres(List<Movie> films){
 
+        return new HashSet<>(films);
+    }
 }
