@@ -1,65 +1,13 @@
 package ParkingLot;
 
-import java.util.*;
+import java.util.Scanner;
 
-class DateComparator implements Comparator<Vehicle> {
-    @Override
-    public int compare(Vehicle v1, Vehicle v2) {
-        return v1.getDateIn().compareTo(v2.getDateOut());
-    }
-}
+import static ParkingLot.VehicleParking.*;
 
 public class Main {
-
-    public final static int lotCount = 100;
-    public static int freeLots = 100;
-    public static List<String> lots = new ArrayList();
-    public static List<String> uniqueNumbers = new ArrayList();
-    public static List<Vehicle> carAll = new ArrayList();
-
-    public static void printVehicleList(List list) {
-        list.stream().forEach(System.out::println);
-    }
-
-    public static void filterByNumber(String template) {
-        for (Vehicle vehicle : carAll) {
-            if (vehicle.getNumber().substring(0, 2).equals(template)) {
-                System.out.println(vehicle);
-            }
-        }
-    }
-
-    public static void filterByOwner(String ownerSearch) {
-        for (Vehicle vehicle : carAll) {
-            if (vehicle.getOwner().equalsIgnoreCase("Ivan Ivanov")) {
-                System.out.println(vehicle);
-            }
-        }
-    }
-
-    public static void sortByDurations(List cars) {
-        Collections.sort(carAll, new DateComparator());
-        Collections.reverse(carAll);
-        Main.printVehicleList(carAll);
-    }
-
-    public static void waitConsole() {
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException ex) {
-            Thread.currentThread().interrupt();
-        }
-    }
-
-    public static void deleteDuplicates() {
-        Set<String> set = new HashSet<>(lots);
-        uniqueNumbers.addAll(set);
-        uniqueNumbers.sort(String::compareTo);
-        Main.printVehicleList(uniqueNumbers);
-    }
-
     public static void main(String[] args) {
-        System.out.println();
+        Scanner scanner = new Scanner(System.in);
+
         Employees s1 = new SecurityStaff();
         s1.setStaff("Ivan", 250);
         System.out.println(s1.toString());
@@ -67,19 +15,19 @@ public class Main {
         System.out.println(admin1.toString());
 
         Vehicle v1 = new Truck("Ivan Ivanov", "АА 6789 АК");
-        waitConsole();
-        Vehicle v2 = new Truck("Petro Pupkin", "ВС 3454 РП");
-        waitConsole();
-        Vehicle v3 = new Truck("Vasya Ivanov", "АА 1111 ТИ");
-        waitConsole();
-        Vehicle v4 = new Truck("Ivan Ivanov", "ВС 2222 ТИ");
-        waitConsole();
-        Vehicle v5 = new Truck("Ivan Ivanov", "АА 3333 ТИ");
-        waitConsole();
-        Vehicle v6 = new Truck("Ivan Ivanov", "АА 4444 ТИ");
-        waitConsole();
-        Vehicle v7 = new Truck("Ivan Ivanov", "АА 5555 ТИ");
-        waitConsole();
+        VehicleParking.waitConsole();
+        Vehicle v2 = new Car("Ivan Pupkin", "ВС 3454 РП");
+        VehicleParking.waitConsole();
+        Vehicle v3 = new Truck("Ivan Ivanov", "ТМ 1111 ТИ");
+        VehicleParking.waitConsole();
+        Vehicle v4 = new Car("Ivan Ivanov", "ВС 2222 АВ");
+        VehicleParking.waitConsole();
+        Vehicle v5 = new Truck("Ivan Shevchenko", "АА 3333 АК");
+        VehicleParking.waitConsole();
+        Vehicle v6 = new Car("Ivan Franko", "АА 4444 КЛ");
+        VehicleParking.waitConsole();
+        Vehicle v7 = new Truck("Ivan Ivanov", "АА 5555 ОП");
+        VehicleParking.waitConsole();
         Vehicle v8 = new Truck("Ivan Ivanov", "АА 5556 ТИ");
         carAll.add(v1);
         carAll.add(v2);
@@ -90,30 +38,40 @@ public class Main {
         carAll.add(v7);
         carAll.add(v8);
         System.out.println("Results of method CheckIn/CheckOut");
-        v1.checkIn();
-        v2.checkIn();
-        v3.checkIn();
+        v1.checkIn(v1);
+        v2.checkIn(v2);
+        v3.checkIn(v3);
         v1.checkOut(v1);
-        v4.checkIn();
+        v2.checkOut(v1);
+        v4.checkIn(v4);
+        System.out.println("\nResult of printing map\n");
+        System.out.println(carNumLotMap.values().toString());
 
-        System.out.println("Results of method which prints all vehicles");
-        printVehicleList(carAll);
+        System.out.println("\nResults of method which prints all vehicles\n"); // Task #1 Add possibility for user to retrieve list of vehicles on a parking lot
+        VehicleParking.printVehicleList(carAll);
 
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Method which prints, vehicles with numbers, like ВС **** **. Please, enter first 2 letters of vehicle number");
+        System.out.println("\nMethod which prints all vehicles, which type are ... Please enter type: Car or Truck\n");
+        String typeForSearch = scanner.nextLine();
+        checkType(typeForSearch); //Task #2 Add possibility for user to retrieve list of vehicles filtered by type (e.g. car, bike, lorry etc)
+
+        System.out.println("\nRevers sorting by durations\n"); // Task #3 Sort vehicles list according to duration it is staying on a parking lot
+        sortByDurations();
+
+        System.out.println("\nMethod which prints, vehicles with numbers, like ВС **** **. Please, enter first 2 letters of vehicle number\n");
         String numberForSearch = scanner.nextLine();
         filterByNumber(numberForSearch);
+        System.out.println("\nMethod which, checking if at least one vehicle in list corresponds to some search criteria.\n (e.g. vehicle number starts with ‘BC’))\n");
+        System.out.println(checkIfExistNumber(numberForSearch)); // Task #4
 
-        System.out.println("Method which prints all vehicles, which owners are .... Please enter owner's name");
+        System.out.println("\nMethod which prints all vehicles, which owners are .... Please enter owner's name");// Task #5 Check if all vehicles correspond to some search criteria (e.g. name of Vehicle owner is Ivan)
         String ownerForSearch = scanner.nextLine();
-        filterByNumber(ownerForSearch);
+        filterByOwner(ownerForSearch);
 
-        System.out.println("Revers sorting by durations");
-        ;
-        sortByDurations(carAll);
+        System.out.println("\nCheck if all vehicles correspond to some search criteria (e.g. name of Vehicle owner is Ivan)\n");
+        System.out.println(isAllOwners(ownerForSearch));
 
-        System.out.println("Vehicle list, with unique numbers, sorted alphabetically");
-        Main.deleteDuplicates();
-
+        System.out.println(isAllTypes(typeForSearch));
+        System.out.println("\nVehicle list, with unique numbers, sorted alphabetically\n");
+        //   deleteDuplicates(carNumLotMap);
     }
 }

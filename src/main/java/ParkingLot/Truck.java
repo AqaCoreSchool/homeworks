@@ -1,4 +1,4 @@
-package /**/ParkingLot;
+package ParkingLot;
 
 import java.util.Date;
 

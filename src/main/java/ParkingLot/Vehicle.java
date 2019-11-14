@@ -4,8 +4,9 @@ import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static ParkingLot.VehicleParking.*;
+
 abstract public class Vehicle {
-    static String pattern = "([А-Я][А-Я](\\s)[0-9][0-9][0-9][0-9](\\s)[А-Я][А-Я])";
     private String owner;
     private String number;
     private String type;
@@ -16,12 +17,12 @@ abstract public class Vehicle {
     private int duration;
     private int lotNumber;
 
-    public Vehicle() {
+    Vehicle() {
         this.dateIn = new Date();
         this.dateOut = new Date();
     }
 
-    public Vehicle(String owner, String number) {
+    Vehicle(String owner, String number) {
         this.owner = owner;
         this.number = number;
         this.dateIn = new Date();
@@ -44,48 +45,66 @@ abstract public class Vehicle {
     }
 
 
-    public boolean checkIn() {
-        if ((Main.freeLots > 0) && validateNumber(this.number)) {
+    void checkIn(Vehicle vehicle) {
+        if ((freeLots > 0) && validateNumber()) { //// треба переробити
             Date dateIn = new Date();
-            Main.freeLots = Main.freeLots - 1;
+            freeLots = freeLots - 1;
             assignCarToLot(this.number);
-            return true;
-        } else return false;
+            addCarToMap(vehicle.getNumber(), vehicle);
+        }
+        else
+            System.out.println("There aren't available lots");
     }
 
-    public boolean checkOut(Vehicle vehicle) {
-        if (Main.freeLots < Main.lotCount) {
-            Main.freeLots = Main.freeLots + 1;
+   void checkOut(Vehicle vehicle) {
+        if (freeLots < VehicleParking.LOT_COUNT) {
+            freeLots = freeLots + 1;
             this.dateOut = new Date();
             deleteCarFromLot(this.number);
-            Main.carAll.remove(vehicle);
+            carAll.remove(vehicle);
+            carNumLotMap.remove(this.number);
             System.out.println("You need to pay: " + (getBill()) + " UAH");
-            return true;
         } else
             System.out.println("Oops, You aren't checked in. You need to do it!");
-        return false;
     }
 
-    public boolean assignCarToLot(String number) {
-        if ((Main.lots.size() < Main.lotCount)) {
-            Main.lots.add(number);
-            System.out.println("You have place №:" + (Main.lots.indexOf(number) + 1));
+    private void assignCarToLot(String number) {
+        if ((VehicleParking.lots.size() < VehicleParking.LOT_COUNT)) {
+            VehicleParking.lots.add(number);
+            System.out.println("You have place №:" + (VehicleParking.lots.indexOf(number) + 1));
         } else {
             System.out.println("Sorry, there's no lots available.");
         }
-        return true;
     }
 
-    public void deleteCarFromLot(String number) {
-        if (Main.lots.contains(number)) {
-            Main.lots.remove(number);
+    private void deleteCarFromLot(String number) {
+        if (VehicleParking.lots.contains(number)) {
+            VehicleParking.lots.remove(number);
             System.out.println("You are unchecked from your place");
         } else {
             System.out.println("Sorry, you weren't checked. Maybe, it is not your Parking? ");
         }
     }
 
-    public boolean validateNumber(String number) {
+    private int getDuration() {
+        if (dateOut.after(dateIn)) {
+            duration = (int) ((dateOut.getTime() - dateIn.getTime())); // need add "/3600000" now without this, just for testing
+            return duration;
+        } else
+            return 0;
+    }
+
+    private int getBill() {
+        return this.pricePerHour * this.getDuration();
+    }
+
+    public void setVehicle(String owner, String number) {
+        this.number = number;
+        this.owner = owner;
+        this.dateIn = new Date();
+    }
+
+    private boolean validateNumber() {
         Pattern p = Pattern.compile(pattern);
         Matcher m = p.matcher(this.number);
         if (m.matches()) {
@@ -96,43 +115,19 @@ abstract public class Vehicle {
         return false;
     }
 
-    public int getDuration() {
-        if (dateOut.after(dateIn)) {
-            duration = (int) ((dateOut.getTime() - dateIn.getTime())); // need add "/3600000" now without this, just for testing
-            return duration;
-        } else
-            return 0;
-    }
-
-    public int getBill() {
-        return this.pricePerHour * this.getDuration();
-    }
-
-    public void setVehicle(String owner, String number) {
-        this.number = number;
-        this.owner = owner;
-        this.dateIn = new Date();
-    }
-
-    public void getCarByNumber() {
-        for (int i = 0; i < Main.lots.size(); i++) {
-
-        }
-    }
-
-    public Date getDateIn() {
+    Date getDateIn() {
         return dateIn;
     }
 
-    public void setDateIn(Date dateIn) {
+    void setDateIn(Date dateIn) {
         this.dateIn = new Date();
     }
 
-    public Date getDateOut() {
+    Date getDateOut() {
         return this.dateOut;
     }
 
-    public String getOwner() {
+    String getOwner() {
         return this.owner;
     }
 
@@ -140,11 +135,11 @@ abstract public class Vehicle {
         this.owner = owner;
     }
 
-    public String getType() {
+    String getType() {
         return type;
     }
 
-    public void setType(String type) {
+    void setType(String type) {
         this.type = type;
     }
 
@@ -152,11 +147,11 @@ abstract public class Vehicle {
         return pricePerHour;
     }
 
-    public void setPrice(int pricePerHour) {
+    void setPrice(int pricePerHour) {
         this.pricePerHour = pricePerHour;
     }
 
-    public String getNumber() {
+    String getNumber() {
         return this.number;
     }
 
