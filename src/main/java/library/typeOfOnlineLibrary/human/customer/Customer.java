@@ -1,24 +1,24 @@
 package library.typeOfOnlineLibrary.people.customer;
 
-import library.typeOfOnlineLibrary.people.stuff.People;
+import library.typeOfOnlineLibrary.people.stuff.Human;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public  class Customer extends People {
+public  class Customer extends Human {
     private Map<String, String> books = new HashMap<String, String>();
 
     private long passportData;
     @Override
     protected void setName(String name){
-     name =this.name;
+        name =this.name;
     }
     @Override
-   protected void setSex(boolean sex){
-     sex = this.sex;
+   protected void setGender(boolean isMale){
+        this.isMale = isMale;
     }
 
-   protected void setPassportData(){
-
+   protected void setPassportData(long passportData){
+        this.passportData = passportData;
    }
 }
