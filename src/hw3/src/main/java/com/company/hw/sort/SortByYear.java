@@ -1,4 +1,6 @@
-package hw3;
+package com.company.hw.sort;
+import com.company.hw.Library;
+
 import java.util.Comparator;
 
 public class SortByYear implements Comparator<Library> {

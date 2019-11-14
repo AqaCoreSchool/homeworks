@@ -1,4 +1,4 @@
-package hw3;
+package com.company.hw.interfaces;
 
 public interface Artistic {
 
