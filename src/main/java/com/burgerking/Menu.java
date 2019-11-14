@@ -81,7 +81,7 @@ public class Menu {
         int printIdCounter = 0;
         for(Food food: list){
             printIdCounter++;
-            System.out.format("%3s %8s %16s %7.2f$ %5d Cal. %8s",
+            System.out.format("%3s %8s %18s %7.2f$ %5d Cal. %8s",
                     printIdCounter, food.getTypeName(), food.getName(), food.getPrice(), food.getCalories(), food.getSize());
             System.out.println();
         }
