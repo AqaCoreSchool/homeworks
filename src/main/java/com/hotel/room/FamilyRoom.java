@@ -6,12 +6,12 @@ public class FamilyRoom extends Room implements IPlace {
 
     private int numberOfRoom;
     private int numberOfPlaces;
-    Customer familyCustomer;
+    private Customer familyCustomer;
 
-    public FamilyRoom(int number, int numberOfPlaces, int numberOfRoom, double price) {
-        super(number, price);
-        this.numberOfRoom = numberOfRoom;
-        this.numberOfPlaces = numberOfPlaces;
+    public FamilyRoom(int number, double price, double size, int numbOfPlaces, int numbOfRoom, boolean petFriendly) {
+        super(number, price, size, petFriendly);
+        this.numberOfRoom = numbOfRoom;
+        this.numberOfPlaces = numbOfPlaces;
     }
 
     public int getNumberOfRoom() {

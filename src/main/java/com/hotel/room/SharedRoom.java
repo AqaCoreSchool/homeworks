@@ -11,8 +11,8 @@ public class SharedRoom extends Room implements IPlace {
     private int numberOfBookingPlaces;
     private List<Customer> guests = new LinkedList();
 
-    public SharedRoom(int number, int numberOfPlaces, double price) {
-        super(number, price);
+    public SharedRoom(int number, int numbOfPlaces, double price, double size, boolean petFriendly) {
+        super(number, price, size, petFriendly);
         this.numberOfPlaces = numberOfPlaces;
     }
 
@@ -26,16 +26,16 @@ public class SharedRoom extends Room implements IPlace {
 
     @Override
     public int getNumberOfFreePlaces() {
-        return numberOfPlaces-numberOfBookingPlaces;
+        return numberOfPlaces - numberOfBookingPlaces;
     }
 
-    public void addNewBooking(Customer customer){
-       if(!isBooking()) {
-           guests.add(customer);
-           numberOfBookingPlaces++;
-       }else System.out.println("All places in this room are booking");
+    public void addNewBooking(Customer customer) {
+        if (!isBooking()) {
+            guests.add(customer);
+            numberOfBookingPlaces++;
+        } else System.out.println("All places in this room are booking");
 
-       if(numberOfBookingPlaces==numberOfPlaces)setBooking(true);
+        if (numberOfBookingPlaces == numberOfPlaces) setBooking(true);
     }
 
 }

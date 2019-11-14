@@ -33,8 +33,16 @@ public abstract class User {
     public abstract Room chooseRoom(List<Room> rooms);
 
     public void showChooseRooms(List<Room> chooseRooms) {
-        if(chooseRooms.isEmpty()) System.out.println("Your search did not match any rooms");
-        else for (Room room:chooseRooms) System.out.println(room.toString());
+        if (chooseRooms.isEmpty()) System.out.println("Your search did not match any rooms");
+        else for (Room room : chooseRooms) System.out.println(room.toString());
 
+    }
+
+    public void showCheckingResult(boolean result) {
+        if (result) {
+            System.out.println("Checking successful");
+        } else {
+            System.out.println("Checking unsuccessful");
+        }
     }
 }
