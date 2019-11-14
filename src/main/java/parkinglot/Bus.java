@@ -2,14 +2,13 @@ package parkinglot;
 
 import parkinglot.Enums.VehicleType;
 
-public class Car extends Vehicle {
+public class Bus extends Vehicle {
 
-    private final String type = VehicleType.CAR.toString();
-    private final int size = VehicleType.CAR.getSize();
+    private final String type = VehicleType.BUS.toString();
+    private final int size = VehicleType.BUS.getSize();
 
-    Car (String licensePlate, String ownerName) {
+    Bus(String licensePlate, String ownerName) {
         super(licensePlate, ownerName);
-
     }
 
     public String getVehicleType() {

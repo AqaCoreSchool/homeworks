@@ -1,10 +1,13 @@
 package parkinglot;
 
+import parkinglot.Enums.SpotStatus;
+
 public class ParkingSpot {
-    private int spotNumber;
+
+    private final int spotNumber;
     private String spotStatus;
 
-    private Vehicle vehicle;
+    // add subSpot1 and subSpot2
 
     ParkingSpot(int spotNumber) {
         //System.out.println("Initialization of new parking spot: " + spotNumber);
@@ -12,28 +15,23 @@ public class ParkingSpot {
         this.spotStatus = SpotStatus.FREE.toString();
     }
 
-    public void addVehicle (Vehicle vehicle) {
+    public void parkVehicleOnParkingSpot(Vehicle vehicle) {
         spotStatus = SpotStatus.BUSY.toString();
     }
 
-    public void removeVehicle(Vehicle vehicle) {
+    public void unparkVehicleFromParkingSpot(Vehicle vehicle) {
         spotStatus = SpotStatus.FREE.toString();
     }
+
     public String getSpotStatus() {
         return spotStatus;
-    }
-
-    public String getVehicleLicensePlates() {
-        return vehicle.getLicensePlate();
-    }
-
-    public String getVehicleType() {
-        return vehicle.getVehicleType();
     }
 
     public int getSpotNumber() {
         return spotNumber;
     }
+
+    // add subSpots methods
 }
 
 
