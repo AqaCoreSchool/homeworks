@@ -5,7 +5,7 @@ import parkinglot.Enums.PaymentStatus;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class ParkingTicket  {//implements Comparable {
+public class ParkingTicket  {
 
     private String parkingTicketNumber;
     private String paymentStatus;

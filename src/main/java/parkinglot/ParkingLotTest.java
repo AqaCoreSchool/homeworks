@@ -6,10 +6,10 @@ public class ParkingLotTest {
 
     public static void main(String[] args) throws InterruptedException {
 
+        // initialization of parking lot
         ParkingLot parkingLot = new ParkingLot("Lviv1","Rynok square, 1", 10);
 
         // initialization of vehicles
-
         Vehicle car1 = new Car("AA0001AA", "Max");
         Vehicle car2 = new Car("BC0001AC", "Ivan");
         Vehicle car3 = new Car("BX5678XX", "Petro");
@@ -22,8 +22,11 @@ public class ParkingLotTest {
 
         int timeout = 2; // timeout for delay between parking/unparking of new vehicle
 
+        // park vehicle
         System.out.println(parkingLot.parkVehicleOnParkingLot(car1));
         TimeUnit.SECONDS.sleep(timeout);
+
+        // park vehicle
         System.out.println(parkingLot.parkVehicleOnParkingLot(car2));
         TimeUnit.SECONDS.sleep(timeout);
 
@@ -31,20 +34,24 @@ public class ParkingLotTest {
         String parkingTicketNumber = parkingLot.getParkingTicketNumber(car1);
         System.out.println(parkingLot.unparkVehicleFromParkingLot(car1, parkingTicketNumber));
 
-
+        // park vehicle
         System.out.println(parkingLot.parkVehicleOnParkingLot(car3));
         TimeUnit.SECONDS.sleep(timeout);
 
+        // park vehicle
         System.out.println(parkingLot.parkVehicleOnParkingLot(motorcycle1));
         TimeUnit.SECONDS.sleep(timeout);
 
+        // park vehicle
         System.out.println(parkingLot.parkVehicleOnParkingLot(bus3));
         TimeUnit.SECONDS.sleep(timeout);
+
         // unpark vehicle
         parkingTicketNumber = parkingLot.getParkingTicketNumber(motorcycle1);
         System.out.println(parkingLot.unparkVehicleFromParkingLot(motorcycle1, parkingTicketNumber));
         TimeUnit.SECONDS.sleep(timeout);
 
+        // park vehicle
         System.out.println(parkingLot.parkVehicleOnParkingLot(motorcycle1));
         TimeUnit.SECONDS.sleep(timeout);
 
@@ -53,15 +60,16 @@ public class ParkingLotTest {
 
         System.out.println("\n");
 
-        String type = "car";
+
         System.out.println("List of parked vehicles by type: " + type);
+        String type = "car";
         System.out.println(parkingLot.getListOfVehicles(type));
 
         System.out.println("\n");
 
-        String searchCriteria;
-        System.out.println("Check parked vehicles by search criteria");
 
+        System.out.println("Check parked vehicles by search criteria");
+        String searchCriteria;
         searchCriteria = "t*car";
         System.out.println(searchCriteria + ": " + parkingLot.checkVehicle(searchCriteria)); // returns true if all <*> parked vehicles are of type <t> "car"
 
@@ -81,7 +89,7 @@ public class ParkingLotTest {
 
         System.out.println("\n");
 
-        System.out.println("Print vehicles list according to duration staying on a parking lot");
+        System.out.println("Print vehicles list according to staying duration on a parking lot");
         System.out.println(parkingLot.sortAccordingToDuration());
 
     }
