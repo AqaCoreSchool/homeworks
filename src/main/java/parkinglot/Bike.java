@@ -1,10 +1,9 @@
 package parkinglot;
 
-public class Bike extends Vehicle implements CanRunnig {
+public class Bike extends Vehicle implements Movable {
     private String stateNumber;
     private String form = "bike";
     private int countOfWheels = 2;
-    private String speed = "normal";
     private int parkingPlace;
     private int stayOnParking;
     private String owner;
@@ -34,11 +33,6 @@ public class Bike extends Vehicle implements CanRunnig {
 
     public void setCountOfWheels(int countOfWheels) {
         this.countOfWheels = countOfWheels;
-    }
-
-    @Override
-    public String howCanRunVehicle() {
-        return speed;
     }
 
     public int getParkingPlace() {
@@ -71,5 +65,10 @@ public class Bike extends Vehicle implements CanRunnig {
 
     public void setStayOnParking(int stayOnParking) {
         this.stayOnParking = stayOnParking;
+    }
+
+    @Override
+    public String move() {
+        return "normal";
     }
 }

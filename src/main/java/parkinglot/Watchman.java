@@ -1,24 +1,9 @@
 package parkinglot;
 
-public class Watchman extends Human implements CanDrink{
-    String placeOfTheWorking = "Watchman";
-    Integer realSalary = 200;
-    String canDrinkTillDrunk = "Until down to the ground";
-
-
-
+public class Watchman extends Human{
     @Override
-    String workingPlace() {
-        return placeOfTheWorking;
+    public String goToWorkingPlace() {
+        return "Slow";
     }
 
-    @Override
-    Integer salary() {
-        return realSalary;
-    }
-
-    @Override
-    public String howCanDrinkHuman() {
-        return canDrinkTillDrunk;
-    }
 }

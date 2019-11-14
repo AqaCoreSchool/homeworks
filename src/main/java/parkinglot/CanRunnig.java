@@ -1,5 +1,5 @@
 package parkinglot;
 
-public interface CanRunnig {
-    String howCanRunVehicle();
+interface Movable {
+    String move();
 }

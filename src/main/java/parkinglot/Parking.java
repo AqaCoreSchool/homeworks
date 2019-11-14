@@ -23,7 +23,7 @@ public class Parking {
 
         getVehiclesAtTheParking(vehicles); //1.  list of parking lot
         out.println();
-        getVehiclesFilteredByType(vehicles, "Lorry"); //2. filtered by type "Lorry"
+        getVehiclesFilteredByType(vehicles, "Lorry"); //2. create new list, filtered by type "Lorry"
         out.println();
         sortAccordingToDurationStaying(vehicles); //3. Sorting according to duration staying on parking
         out.println();
@@ -46,13 +46,11 @@ public class Parking {
     private static void getVehiclesFilteredByType(List<Vehicle> veh, String type) {
         List<Vehicle> filteredVehicles = new ArrayList<>();
         for (Vehicle vehicle : veh) {
-            if ((vehicle.getClass().getName()).endsWith(type)) {
+            if ((vehicle.getForm().equalsIgnoreCase(type))) {
                 filteredVehicles.add(vehicle);
             }
         }
-        if (filteredVehicles.isEmpty()) {
-            out.println("vehicles with type : " + type + " enabled");
-        }
+
     }
 
     static class SortByDurationStaying implements Comparator<Vehicle> {

@@ -1,6 +1,6 @@
 package parkinglot;
 
 public abstract class Human {
-    abstract String workingPlace();
-    abstract  Integer salary();
+
+    abstract String goToWorkingPlace();
 }
