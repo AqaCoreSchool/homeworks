@@ -1,18 +1,18 @@
 package com.burgerking;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 public class Menu {
     private String name;
     private List<Food> productList;
     private List<Food> filteredList;
+    private Map<FoodType, Integer> amountTypeMap;
 
     public Menu(String name) {
         this.name = name;
         this.productList = new ArrayList<>();
         this.filteredList = new ArrayList<>();
+        this.amountTypeMap = new HashMap<>();
     }
 
     public String getName() {
@@ -37,6 +37,14 @@ public class Menu {
 
     public void setFilteredList(List<Food> filteredList) {
         this.filteredList = filteredList;
+    }
+
+    public Map<FoodType, Integer> getAmountTypeMap() {
+        return amountTypeMap;
+    }
+
+    public void setAmountTypeMap(Map<FoodType, Integer> amountPerType) {
+        this.amountTypeMap = amountPerType;
     }
 
     public void addProduct(Food food){
@@ -73,7 +81,7 @@ public class Menu {
         int printIdCounter = 0;
         for(Food food: list){
             printIdCounter++;
-            System.out.format("%3s %8s %18s %7.2f$ %5d Cal. %8s",
+            System.out.format("%3s %8s %16s %7.2f$ %5d Cal. %8s",
                     printIdCounter, food.getTypeName(), food.getName(), food.getPrice(), food.getCalories(), food.getSize());
             System.out.println();
         }
@@ -90,41 +98,44 @@ public class Menu {
         this.setFilteredList(filtered);
     }
 
-    public Boolean checkOneOf(Double price){
-        if(price>=0){
-            for(Food food: this.getProductList()){
-                if(food.getPrice()>price){
-                    return true;
-                }
-            }
-        } else if (price<0) {
-            for(Food food: this.getProductList()){
-                if(food.getPrice()<Math.abs(price)){
-                    return true;
-                }
+    public boolean isOneOfBigger(Double price) {
+        for (Food food : this.getProductList()) {
+            if (food.getPrice() > price) {
+                return true;
             }
         }
         return false;
     }
 
-    public Boolean checkOneOf(Integer calories){
-        if(calories>=0){
-            for(Food food: this.getProductList()){
-                if(food.getCalories()>calories){
-                    return true;
-                }
-            }
-        } else if (calories<0) {
-            for(Food food: this.getProductList()){
-                if(food.getCalories()<Math.abs(calories)){
-                    return true;
-                }
+    public boolean isOneOfLower(Double price) {
+        for (Food food : this.getProductList()) {
+            if (food.getPrice() < price) {
+                return true;
             }
         }
         return false;
     }
 
-    public Boolean checkOneOf(String size){
+
+    public boolean isOneOfBigger(Integer calories){
+        for(Food food: this.getProductList()){
+            if(food.getCalories()>calories){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean isOneOfLower(Integer calories){
+        for(Food food: this.getProductList()){
+            if(food.getCalories()<calories){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean isOneOf(String size){
         for(Food food: this.getProductList()){
             if(food.getSize().equalsIgnoreCase(size)){
                 return true;
@@ -133,41 +144,43 @@ public class Menu {
         return false;
     }
 
-    public Boolean checkAll(Double price){
-        if(price>=0){
-            for(Food food: this.getProductList()){
-                if(food.getPrice()<price){
-                    return false;
-                }
-            }
-        } else if (price<0) {
-            for(Food food: this.getProductList()){
-                if(food.getPrice()>Math.abs(price)){
-                    return false;
-                }
+    public boolean isAllBigger(Double price) {
+        for (Food food : this.getProductList()) {
+            if (food.getPrice() < price) {
+                return false;
             }
         }
         return true;
     }
 
-    public Boolean checkAll(Integer calories){
-        if(calories>=0){
-            for(Food food: this.getProductList()){
-                if(food.getCalories()<calories){
-                    return false;
-                }
-            }
-        } else if (calories<0) {
-            for(Food food: this.getProductList()){
-                if(food.getCalories()>Math.abs(calories)){
-                    return false;
-                }
+    public boolean isAllLower(Double price) {
+        for (Food food : this.getProductList()) {
+            if (food.getPrice() > price) {
+                return false;
             }
         }
         return true;
     }
 
-    public Boolean checkAll(String size){
+    public boolean isAllBigger(Integer calories){
+        for(Food food: this.getProductList()){
+            if(food.getCalories() < calories){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean isAllLower(Integer calories){
+        for(Food food: this.getProductList()){
+            if(food.getCalories() > calories){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean isAll(String size){
         for(Food food: this.getProductList()){
             if(!food.getSize().equalsIgnoreCase(size)){
                 return false;
@@ -176,41 +189,43 @@ public class Menu {
         return true;
     }
 
-    public Boolean checkNone(Double price){
-        if(price>=0){
-            for(Food food: this.getProductList()){
-                if(food.getPrice()>price){
-                    return false;
-                }
-            }
-        } else if (price<0) {
-            for(Food food: this.getProductList()){
-                if(food.getPrice()<Math.abs(price)){
-                    return false;
-                }
+    public boolean isNoneBigger(Double price) {
+        for (Food food : this.getProductList()) {
+            if (food.getPrice() > price) {
+                return false;
             }
         }
         return true;
     }
 
-    public Boolean checkNone(Integer calories){
-        if(calories>=0){
-            for(Food food: this.getProductList()){
-                if(food.getCalories()>calories){
-                    return false;
-                }
-            }
-        } else if (calories<0) {
-            for(Food food: this.getProductList()){
-                if(food.getCalories()<Math.abs(calories)){
-                    return false;
-                }
+    public boolean isNoneLower(Double price) {
+        for (Food food : this.getProductList()) {
+            if (food.getPrice() < price) {
+                return false;
             }
         }
         return true;
     }
 
-    public Boolean checkNone(String size){
+    public boolean isNoneBigger(Integer calories){
+        for(Food food: this.getProductList()){
+            if(food.getCalories() > calories){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean isNoneLower(Integer calories){
+        for(Food food: this.getProductList()){
+            if(food.getCalories() < calories){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean isNone(String size){
         for(Food food: this.getProductList()){
             if(food.getSize().equalsIgnoreCase(size)){
                 return false;
@@ -238,12 +253,31 @@ public class Menu {
         return returnList;
     }
 
+    public int getAmountPerType(FoodType foodType){
+        int counter = 0;
+        for(Food food: this.getProductList()){
+            if(food.getType().equals(foodType)){
+                counter++;
+            }
+        }
+        return counter;
+    }
+
+    public void fillAmountTypeMap(){
+        for(int i=0;i<FoodType.values().length;i++){
+            this.amountTypeMap.put(FoodType.values()[i], getAmountPerType(FoodType.values()[i]));
+        }
+    }
 
     @Override
     public String toString() {
         return "Menu{" +
                 "name='" + name + '\'' +
                 ", productList=" + productList +
+                ", filteredList=" + filteredList +
+                ", amountPerType=" + amountTypeMap +
+                ", compareByPrice=" + compareByPrice +
+                ", compareByName=" + compareByName +
                 '}';
     }
 }
