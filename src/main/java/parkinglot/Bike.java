@@ -4,7 +4,7 @@ public class Bike extends Vehicle implements CanRunnig {
     private String stateNumber;
     private String form = "bike";
     private int countOfWheels = 2;
-    private String speed;
+    private String speed = "normal";
     private int parkingPlace;
     private int stayOnParking;
     private String owner;

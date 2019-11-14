@@ -10,6 +10,7 @@ public class Lorry extends Vehicle implements CanRunnig {
     private int parkingPlace;
     private int stayOnParking;
     private String owner;
+    private String speed = "slow";
 
     Lorry(String form, int countOfWheels, int parkingPlace, String stateNumber, int stayOnParking, String owner) {
 
@@ -20,7 +21,6 @@ public class Lorry extends Vehicle implements CanRunnig {
         this.owner = owner;
 
     }
-
 
 
     public String getForm() {
@@ -42,8 +42,8 @@ public class Lorry extends Vehicle implements CanRunnig {
     @Override
     public String howCanRunVehicle() {
 
-        String speed = "slow";
         return speed;
+
     }
 
     public int getParkingPlace() {
