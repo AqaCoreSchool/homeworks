@@ -11,7 +11,7 @@ import static java.lang.String.join;
 public class Main {
 
     public static void main(String[] args) {
-
+        //Done for review
         Searchable user = new User();
         ((User)user).setName("Andrew");
         ((User)user).setAge(25);
