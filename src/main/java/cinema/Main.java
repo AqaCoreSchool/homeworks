@@ -23,6 +23,6 @@ public class Main {
         System.out.println(user.isOneFilmDurationCorrespondsToFilter(films, 90));
         System.out.println(user.isReleasesOfAllFilmsCorrespondToFilter(films, 2008));
         System.out.println(user.isNamesOfFilmsContainWords(films, "mile"));
-        System.out.println(join(", ", new TreeSet<>(user.getUniqueGenresSet(films))));
+        System.out.println(join(", ", new TreeSet<>(user.getAllUniqueGenresSet(films))));
     }
 }

@@ -9,7 +9,7 @@ import java.util.*;
 
 public interface Searchable {
 
-    //This method creates and returns a list of all movies
+    //This method creates and returns a List of all movies
     default List<Movie> getAllMoviesList(){
         List<Movie> movies = new ArrayList<>();
         Hall hallOne = new Hall(1, "Imax", 60, 15.4);
@@ -77,7 +77,7 @@ public interface Searchable {
         return filteredMovie;
     }
 
-    //This method checks if at least one movie in a list corresponds to search by duration
+    //This method checks if at least one movie in a List corresponds to search by duration
     default boolean isOneFilmDurationCorrespondsToFilter(List<Movie> films, int duration){
         for(Movie elem: films){
             if(elem.getDuration() > duration){
@@ -87,7 +87,7 @@ public interface Searchable {
         return false;
     }
 
-    //This method checks if all movies in a list corresponds to search by year of release
+    //This method checks if all movies in a List corresponds to search by year of release
     default boolean isReleasesOfAllFilmsCorrespondToFilter(List<Movie> films, int yearRelease){
         for(Movie elem: films){
             if(elem.getYearRelease() < yearRelease){
@@ -97,7 +97,7 @@ public interface Searchable {
         return true;
     }
 
-    //This method checks if movies in a list contain particular words in their names
+    //This method checks if movies in a List contain particular words in their names
     default boolean isNamesOfFilmsContainWords(List<Movie> films, String filmName){
         for(Movie elem: films){
             if(elem.getFilmName().toLowerCase().contains(filmName.toLowerCase())){
@@ -107,8 +107,8 @@ public interface Searchable {
         return false;
     }
 
-    //This method
-    default Set<String> getUniqueGenresSet(List<Movie> films){
+    //This method returns Set of filtered unique genres
+    default Set<String> getAllUniqueGenresSet(List<Movie> films){
         Set<String> uniqueGenres = new HashSet<>();
         for(Movie elem: films){
             uniqueGenres.add(elem.getFilmGenre());
