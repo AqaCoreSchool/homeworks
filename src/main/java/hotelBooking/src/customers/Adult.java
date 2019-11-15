@@ -1,12 +1,12 @@
-package Сustomers;
+package customers;
 
 public class Adult extends Person implements Human {
 
     public Adult(int age, int pay) {
-        super(age,pay);
+        super(age, pay);
     }
 
-    public void getHuman() {
+    public void doHuman() {
         System.out.println(this.pay);
     }
 

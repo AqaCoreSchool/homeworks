@@ -1,18 +1,13 @@
-import HotelRooms.DoubleRoom;
-import HotelRooms.SingleRoom;
-import HotelRooms.SortRoom;
-import HotelRooms.VipRoom;
-import Сustomers.Adult;
-import Сustomers.Child;
-import Сustomers.Pensioner;
+import customers.Adult;
+import customers.Child;
+import customers.Pensioner;
+import hotelRooms.RoomsSort;
 
-import java.lang.reflect.Array;
 import java.util.*;
-import java.util.function.ToIntFunction;
 
 public class Main {
 
-    public static <T> void main(String[] args) {
+    public static void main(String[] args) {
 
         Adult adult;
         Child child;
@@ -28,28 +23,18 @@ public class Main {
         pensioner = new Pensioner(value, 70);
 
         if ((value >= 14)) {
-            adult.getHuman();
+            adult.doHuman();
         }else if(value <= 60) {
-            child.getHuman();
+            child.doHuman();
         }else {
-            pensioner.getHuman();
+            pensioner.doHuman();
         }
 
-        List <SortRoom> rooms = new ArrayList<>();
-
-        SortRoom singleRoom = new SortRoom(100, 1);
-        SortRoom doubleRoom = new SortRoom(200, 2);
-        SortRoom vipRoom = new SortRoom(400, 4);
-
-        rooms.add(singleRoom);
-        rooms.add(doubleRoom);
-        rooms.add(vipRoom);
 
 
-
-       /* Payment payment = new Payment();
+        Payment payment = new Payment();
         payment.cashToPay();
-        payment.cashlessToPay();*/
+        payment.cashlessToPay();
 
 
     }

@@ -1,10 +1,16 @@
-package HotelRooms;
+package hotelRooms;
 
-public abstract class Hotel {
+import java.util.HashMap;
+import java.util.Map;
 
-    int r;
-    public Hotel(int r){
-        this.r = r;
+public class Hotel {
+
+    private final int roomNumber;
+
+    private Map<Integer, Reservation> reservedDates;
+
+    public Hotel(int roomNumber){
+        reservedDates = new HashMap<Integer, Reservation>();
+        this.roomNumber = roomNumber;
     }
-
 }

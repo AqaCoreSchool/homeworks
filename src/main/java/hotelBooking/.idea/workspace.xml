@@ -25,10 +25,11 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$/gorod_OOP" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -74,6 +75,10 @@
       <workItem from="1573584839823" duration="1627000" />
       <workItem from="1573586712239" duration="1937000" />
       <workItem from="1573591569475" duration="22125000" />
+      <workItem from="1573665749344" duration="2780000" />
+      <workItem from="1573723901333" duration="2073000" />
+      <workItem from="1573731095730" duration="861000" />
+      <workItem from="1573739130373" duration="41616000" />
     </task>
     <servers />
   </component>
@@ -85,10 +90,15 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="SHOW_DIRTY_RECURSIVELY" value="true" />
   </component>
 </project>

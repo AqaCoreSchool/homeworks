@@ -1,4 +1,4 @@
-package Сustomers;
+package customers;
 
 public class Child extends Person implements Human {
 
@@ -7,7 +7,7 @@ public class Child extends Person implements Human {
         super(age, pay);
     }
 
-    public void getHuman(){
+    public void doHuman(){
         System.out.println(this.pay/2);
     }
 }
