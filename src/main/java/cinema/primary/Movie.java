@@ -1,17 +1,18 @@
 package cinema.primary;
 
+import cinema.enums.Genre;
+
 import java.util.List;
 
 public class Movie implements Comparable<Movie>{
     private String filmName;
-    private String filmGenre;
+    private Genre filmGenre;
     private int yearRelease;
     private int duration;
     private int ageRating;
     private List<Session> sessions;
 
-    public Movie(String filmName, String filmGenre, int yearRelease, int duration,
-                 int ageRating, List<Session> sessions) {
+    public Movie(String filmName, Genre filmGenre, int yearRelease, int duration, int ageRating, List<Session> sessions) {
         this.filmName = filmName;
         this.filmGenre = filmGenre;
         this.yearRelease = yearRelease;
@@ -28,11 +29,11 @@ public class Movie implements Comparable<Movie>{
         this.filmName = filmName;
     }
 
-    public String getFilmGenre() {
+    public Genre getFilmGenre() {
         return filmGenre;
     }
 
-    public void setFilmGenre(String filmGenre) {
+    public void setFilmGenre(Genre filmGenre) {
         this.filmGenre = filmGenre;
     }
 
@@ -72,7 +73,7 @@ public class Movie implements Comparable<Movie>{
     public String toString() {
         return "Movie{" +
                 "filmName='" + filmName + '\'' +
-                ", filmGenre='" + filmGenre + '\'' +
+                ", filmGenre=" + filmGenre +
                 ", yearRelease=" + yearRelease +
                 ", duration=" + duration +
                 ", ageRating=" + ageRating +
