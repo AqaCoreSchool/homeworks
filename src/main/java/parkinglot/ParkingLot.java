@@ -10,7 +10,7 @@ public class ParkingLot {
 
     private ParkingSpot[] parkingSpots;
     private ParkingTicket[] parkingTickets;
-    private Vehicle[] vehicles;
+    private AbstractVehicle[] vehicles;
 
 
     // initiate Parking Lot
@@ -21,7 +21,7 @@ public class ParkingLot {
 
         parkingSpots = new ParkingSpot[capacity];
         parkingTickets = new ParkingTicket[capacity];
-        vehicles = new Vehicle[capacity];
+        vehicles = new AbstractVehicle[capacity];
 
         for (int i = 0; i < capacity; i++) {
             parkingSpots[i] = new ParkingSpot(i + 1);
@@ -30,13 +30,10 @@ public class ParkingLot {
     }
 
     private boolean isFull () {
-        if (freeSpots == 0) {
-            return true;
-        }
-        return false;
+        return freeSpots == 0;
     }
 
-    public String addVehicleToParkingLot(Vehicle vehicle) {
+    public String addVehicleToParkingLot(AbstractVehicle vehicle) {
 
         if (isFull()) {
             return "Sorry, but parking spot is full. Try again later.";
@@ -54,12 +51,12 @@ public class ParkingLot {
         }
     }
 
-    public String removeVehicleFromParkingLot(Vehicle vehicle, String parkingTicketNumber) {
+    public String removeVehicleFromParkingLot(AbstractVehicle vehicle, String parkingTicketNumber) {
         freeSpots++;
         int spot = -1;
 
         for (int i = 0; i < capacity; i++) {
-            if (parkingTickets[i].getParkingTicketNumber() == parkingTicketNumber) {
+            if (parkingTickets[i].getParkingTicketNumber().equals(parkingTicketNumber)) {
                 spot = i;
                 parkingSpots[spot].removeVehicle(vehicle);
                 parkingTickets[spot].setPaymentStatus(PaymentStatus.PAYED.toString());
@@ -72,16 +69,16 @@ public class ParkingLot {
 
     private int checkFirstFreeParkingSpot() {
         for (int i = 0; i < capacity; i++) {
-            if (parkingSpots[i].getSpotStatus() == SpotStatus.FREE.toString()) {
+            if (parkingSpots[i].getSpotStatus().equals(SpotStatus.FREE.toString())) {
                 return i;
             }
         }
         return -1;
     }
 
-    public String getParkingTicketNumber(Vehicle vehicle) {
+    public String getParkingTicketNumber(AbstractVehicle vehicle) {
         for (int i = 0; i < capacity; i++) {
-            if (vehicles[i].getLicensePlate() == vehicle.getLicensePlate()) {
+            if (vehicles[i].getLicensePlate().equals(vehicle.getLicensePlate())) {
                 return parkingTickets[i].getParkingTicketNumber();
             }
         }
@@ -92,7 +89,7 @@ public class ParkingLot {
 
         String tmp = "";
 
-        if (action == "Remove") {
+        if (action.equals("Remove")) {
             tmp += "Removing vehicle\n";
         }
         else {
@@ -112,7 +109,7 @@ public class ParkingLot {
                 parkingTickets[spot].getEntranceTime() +
                 "\n";
 
-        if (action == "Remove") {
+        if (action.equals("Remove")) {
             tmp += "Exit time: " +
                     parkingTickets[spot].getExitTime() +
                     "\n";

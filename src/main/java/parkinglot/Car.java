@@ -1,6 +1,6 @@
 package parkinglot;
 
-public class Car extends Vehicle {
+public class Car extends AbstractVehicle {
 
     private String type;
 

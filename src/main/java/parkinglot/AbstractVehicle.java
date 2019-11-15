@@ -1,10 +1,10 @@
 package parkinglot;
 
-public abstract class Vehicle {
+public abstract class AbstractVehicle {
 
     private String licensePlate;
 
-    Vehicle(String licensePlate) {
+    AbstractVehicle(String licensePlate) {
         this.licensePlate = licensePlate;
     }
 
