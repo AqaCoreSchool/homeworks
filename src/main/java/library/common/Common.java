@@ -1,5 +1,8 @@
 package library.common;
 
+import library.BookItem;
+
+import java.util.List;
 import java.util.Random;
 
 public class Common {
@@ -9,5 +12,14 @@ public class Common {
         }
         Random r = new Random();
         return r.nextInt((max - min) + 1) + min;
+    }
+
+    public static String setCommaAsDelimiter(List<BookItem> itemList) {
+        StringBuffer sb = new StringBuffer();
+        for (BookItem item : itemList){
+            sb.append(item.getTitle()).append(", ");
+        }
+        sb.deleteCharAt(sb.lastIndexOf(","));
+        return sb.toString();
     }
 }

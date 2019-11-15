@@ -1,6 +1,10 @@
 package library;
 
+import library.common.Common;
+import library.common.Constant;
 import library.enumeration.BookGenre;
+
+import java.util.Comparator;
 import java.util.Scanner;
 
 public class Main {
@@ -13,7 +17,7 @@ public class Main {
 
         System.out.println("TITLE : AUTHOR : GENRE : RELEASEDATE : LANGUAGE : PAGES");
         System.out.println(lineSeparator);
-        template.getAllAvailableBooks();
+        template.getAllBooks();
         System.out.println(lineSeparator);
 
         System.out.println("What do you want to do? Make ur choice by entering a number of operation");
@@ -22,9 +26,9 @@ public class Main {
         System.out.println("3. Check if at least one book in your list corresponds to release year.");
         System.out.println("4. Are all books correspond genre.");
         System.out.println("5. Are none of books corresponds to author.");
-        /*System.out.println("6. Collect the oldest book names per each genre, sort them alphabetically and\n" +
-                "print them to console using comma as a delimiter");*/
-        System.out.println("6. Map task.");
+        System.out.println("6. Collect the oldest book names per each genre, sort them alphabetically and\n" +
+                "print them to console using comma as a delimiter");
+        System.out.println("I used Map in 6th task. ");
         System.out.println("INFO: enter 'exit' to finish");
 
         while (userInput.hasNext()) {
@@ -32,9 +36,9 @@ public class Main {
                 case "1":
                     System.out.println("Enter author's name:");
                     innerInput = new Scanner(System.in);
-                    innerString = innerInput.next();
+                    innerString = innerInput.next().toUpperCase();
                     template.getBooksByAuthor(innerString);
-                    System.out.println("Operation finished! Please, choose the next one!");
+                    System.out.println(Constant.OPERATION_FINISHED);
                     break;
                 case "2":
                     System.out.println("Sorting books alphabetically...");
@@ -42,39 +46,40 @@ public class Main {
                     for (BookItem item : template.getBooksList()) {
                         System.out.println(item.getTitle() + " : " + item.getAuthor());
                     }
-                    System.out.println("Operation finished! Please, choose the next one!");
+                    System.out.println(Constant.OPERATION_FINISHED);
                     break;
                 case "3":
                     System.out.println("Enter the year to check if at least one book in list corresponds it.");
                     innerInput = new Scanner(System.in);
                     innerString = innerInput.next();
-                    System.out.println(template.checkOneByYear(Integer.parseInt(innerString)));
-                    System.out.println("Operation finished! Please, choose the next one!");
+                    System.out.println(template.isOneByYear(Integer.parseInt(innerString)));
+                    System.out.println(Constant.OPERATION_FINISHED);
                     break;
                 case "4":
                     System.out.println("Enter the genre to check if all books in list correspond it.");
                     innerInput = new Scanner(System.in);
                     innerString = innerInput.next();
-                    System.out.println(template.checkAllByGenre(BookGenre.valueOf(innerString)));
-                    System.out.println("Operation finished! Please, choose the next one!");
+                    System.out.println(template.areAllByGenre(BookGenre.valueOf(innerString)));
+                    System.out.println(Constant.OPERATION_FINISHED);
                     break;
                 case "5":
                     System.out.println("Enter author's name to check if none of the books from list correspond it");
                     innerInput = new Scanner(System.in);
                     innerString = innerInput.next();
-                    System.out.println(template.checkAllByAuthor(innerString));
-                    System.out.println("Operation finished! Please, choose the next one!");
+                    System.out.println(template.areNoneByAuthor(innerString));
+                    System.out.println(Constant.OPERATION_FINISHED);
                     break;
-               /* case "6":
-                    template.printOldestBookPerEachGenre(template.getBooksList());
-                    for (BookItem bookItem : template.getBooksList()) {
-                        System.out.println(bookItem.getTitle());
-                    }
-                    System.out.println("Operation finished! Please, choose the next one!");
-                    break;*/
                 case "6":
-                    template.putValuesInMap(template.getBooksList());
-                    System.out.println(template.getMap().keySet() + ":" + template.getMap().values());
+                    template.resultList = template.getOldestBookPerGenre(template.getBooksList());
+                    template.resultList.sort(new Comparator<BookItem>() {
+                        @Override
+                        public int compare(BookItem bookItem, BookItem t1) {
+                            String title1 = bookItem.getTitle();
+                            String title2 = t1.getTitle();
+                            return title1.compareTo(title2);
+                        }
+                    });
+                    System.out.println(Common.setCommaAsDelimiter(template.resultList));
                     System.out.println("Operation finished! Please, choose the next one!");
                     break;
                 case "exit":

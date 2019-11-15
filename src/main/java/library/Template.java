@@ -11,13 +11,12 @@ import java.util.*;
 public class Template {
 
     private List<BookItem> booksList;
-    private Map<Integer, String> map;
-    //List<BookItem> tempList = new ArrayList<>();
+    List<BookItem> resultList;
 
 
     Template() {
         booksList = new ArrayList<>();
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 25; i++) {
             Faker faker = new Faker();
             String title = faker.book().title();
             BookLanguage language = BookLanguage.randomLanguage();
@@ -29,7 +28,7 @@ public class Template {
         }
     }
 
-    void getAllAvailableBooks() {
+    void getAllBooks() {
         for (BookItem item : booksList) {
             System.out.println(item.getTitle() + " : " + item.getAuthor() + " : " + item.getBookGenre() +
                     " : " + item.getReleaseDate() + " : " + item.getLanguage() + " : " + item.getNumberOfPages());
@@ -58,7 +57,7 @@ public class Template {
         });
    }
 
-    boolean checkOneByYear(int year) {
+    boolean isOneByYear(int year) {
        for (BookItem bookItem : booksList) {
            if (bookItem.getReleaseDate() < year) {
                return true;
@@ -67,7 +66,7 @@ public class Template {
        return false;
     }
 
-    boolean checkAllByGenre(BookGenre genre) {
+    boolean areAllByGenre(BookGenre genre) {
         List<BookItem> tempList = new ArrayList<>();
         for (BookItem book : booksList) {
             if (book.getBookGenre().equals(genre)) {
@@ -77,7 +76,7 @@ public class Template {
         return booksList.size() == tempList.size();
     }
 
-    boolean checkAllByAuthor(String author) {
+    boolean areNoneByAuthor(String author) {
         List<BookItem> tempList = new ArrayList<>();
         for (BookItem book : booksList) {
             if (!book.getAuthor().toString().contains(author)) {
@@ -91,38 +90,17 @@ public class Template {
         return booksList;
     }
 
-    public Map<Integer, String> getMap() {
-        return map;
-    }
+    List<BookItem> getOldestBookPerGenre(List<BookItem> bookItems) {
+        Map<String, BookItem> oldestBookByGenre = new HashMap<>();
 
-    //Task 7.Currently not working. I will fix it asap.
-    /*List<BookItem> printOldestBookPerEachGenre(List<BookItem> bookItems) {
-        List<BookItem> resultList = new ArrayList<>();
-        for (int i = 0; i < BookGenre.values().length; i++) {
-            for (BookItem bookItem : bookItems) {
-                if (bookItem.getBookGenre().ordinal() == i) {
-                    tempList.add(bookItem);
-                }
+        for (BookItem bookItem : bookItems) {
+            oldestBookByGenre.putIfAbsent(bookItem.getBookGenre().toString(), bookItem);
+            if (bookItem.getReleaseDate() < oldestBookByGenre.get(bookItem.getBookGenre().toString()).getReleaseDate()) {
+                oldestBookByGenre.put(bookItem.getBookGenre().toString(), bookItem);
             }
-            tempList.sort(new Comparator<BookItem>() {
-                @Override
-                public int compare(BookItem bookItem, BookItem t1) {
-                    Integer year = bookItem.getReleaseDate();
-                    Integer year2 = t1.getReleaseDate();
-                    return year.compareTo(year2);
-                }
-            });
-            resultList.add(tempList.get(0));
-            sortBooks(resultList);
         }
-        return resultList;
-    }*/
 
-    Map putValuesInMap(List<BookItem> bookItems) {
-        map = new HashMap<>();
-        for (BookItem item : booksList) {
-            map.put(item.getReleaseDate(), item.getTitle());
-        }
-        return map;
+        return new ArrayList<>(oldestBookByGenre.values());
     }
 }
+

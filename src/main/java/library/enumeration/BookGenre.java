@@ -6,7 +6,9 @@ public enum BookGenre {
     ADVENTURE,
     HORROR,
     HUMOR,
-    NOVEL;
+    NOVEL,
+    FANTASY,
+    SCIENCE;
 
     public static BookGenre randomGenre() {
         int pick = new Random().nextInt(BookGenre.values().length);
