@@ -1,6 +1,6 @@
 package ParkingLot;
 
-public class Admin extends Employees {
+public class Admin extends AbstractEmployees {
 
     public Admin() {
         standard();

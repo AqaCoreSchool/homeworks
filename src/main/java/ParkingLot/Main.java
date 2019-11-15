@@ -8,47 +8,55 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        Employees s1 = new SecurityStaff();
+        AbstractEmployees s1 = new SecurityStaff();
         s1.setStaff("Ivan", 250);
         System.out.println(s1.toString());
-        Employees admin1 = new Admin("Petro", 80);
+        AbstractEmployees admin1 = new Admin("Petro", 80);
         System.out.println(admin1.toString());
 
-        Vehicle v1 = new Truck("Ivan Ivanov", "АА 6789 АК");
+        AbstractVehicle v1 = new Truck("Ivan Franko", "АА 6789 КА");
         VehicleParking.waitConsole();
-        Vehicle v2 = new Car("Ivan Pupkin", "ВС 3454 РП");
+        AbstractVehicle v2 = new Car("Taras Shevchenko", "АВ 3454 КВ");
         VehicleParking.waitConsole();
-        Vehicle v3 = new Truck("Ivan Ivanov", "ТМ 1111 ТИ");
+        AbstractVehicle v3 = new Truck("Lesya Ukrainka", "АТ 1122211 ТИ");
         VehicleParking.waitConsole();
-        Vehicle v4 = new Car("Ivan Ivanov", "ВС 2222 АВ");
+        AbstractVehicle v4 = new Car("Grigoriy Scovoroda", "ВС 2222 АВ");
         VehicleParking.waitConsole();
-        Vehicle v5 = new Truck("Ivan Shevchenko", "АА 3333 АК");
+        AbstractVehicle v5 = new Truck("Ostap Vyshny", "ВВ 3333 АК");
         VehicleParking.waitConsole();
-        Vehicle v6 = new Car("Ivan Franko", "АА 4444 КЛ");
+        AbstractVehicle v6 = new Car("Ivan Petrov", "ВІ 44444 КЛ");
         VehicleParking.waitConsole();
-        Vehicle v7 = new Truck("Ivan Ivanov", "АА 5555 ОП");
+        AbstractVehicle v7 = new Truck("Ivan Petrenko", "АА 5555 ОП");
         VehicleParking.waitConsole();
-        Vehicle v8 = new Truck("Ivan Ivanov", "АА 5556 ТИ");
-        carAll.add(v1);
-        carAll.add(v2);
-        carAll.add(v3);
-        carAll.add(v4);
-        carAll.add(v5);
-        carAll.add(v6);
-        carAll.add(v7);
-        carAll.add(v8);
+        AbstractVehicle v8 = new Truck("Stephen King", "АА 5556 ТИ");
+        AbstractVehicle v9 = new Truck("George Martin", "АППА 5556 ТИ");
+        AbstractVehicle v10 = new Truck("Joanne Rowling", "АА 5556 ТИ");
+        AbstractVehicle v11 = new Truck("Taras Kvas", "АА 5556 ТИ");
+        AbstractVehicle v12 = new Truck("Ostap Ivanov", "АВ 5556 ТИ");
+        AbstractVehicle v13 = new Truck("Tim Barton", "АА 5586 ТИ");
+        AbstractVehicle v14 = new Truck("Ivan Ivanov", "АА 5556 ТИ");
+        AbstractVehicle v15 = new Truck("Ivan Ivanov", "АА 5556 ТИ");
         System.out.println("Results of method CheckIn/CheckOut");
         v1.checkIn(v1);
         v2.checkIn(v2);
         v3.checkIn(v3);
-        v1.checkOut(v1);
-        v2.checkOut(v1);
         v4.checkIn(v4);
+        v5.checkIn(v5);
+        v6.checkIn(v6);
+        v7.checkIn(v7);
+        v8.checkIn(v8);
+        v9.checkIn(v9);
+        v10.checkIn(v10);
+        System.out.println("\n");
+        v1.checkOut(v1);
+        v2.checkOut(v2);
+        v3.checkOut(v3); //incorrect Vehicle number, car wasn't check
+
         System.out.println("\nResult of printing map\n");
-        System.out.println(carNumLotMap.values().toString());
+        System.out.println(numberVehicleMap.values().toString());
 
         System.out.println("\nResults of method which prints all vehicles\n"); // Task #1 Add possibility for user to retrieve list of vehicles on a parking lot
-        VehicleParking.printVehicleList(carAll);
+        VehicleParking.printVehicleList(vehicleList);
 
         System.out.println("\nMethod which prints all vehicles, which type are ... Please enter type: Car or Truck\n");
         String typeForSearch = scanner.nextLine();
@@ -61,17 +69,20 @@ public class Main {
         String numberForSearch = scanner.nextLine();
         filterByNumber(numberForSearch);
         System.out.println("\nMethod which, checking if at least one vehicle in list corresponds to some search criteria.\n (e.g. vehicle number starts with ‘BC’))\n");
-        System.out.println(checkIfExistNumber(numberForSearch)); // Task #4
+        System.out.println(isNumberExist(numberForSearch)); // Task #4
 
-        System.out.println("\nMethod which prints all vehicles, which owners are .... Please enter owner's name");// Task #5 Check if all vehicles correspond to some search criteria (e.g. name of Vehicle owner is Ivan)
+        System.out.println("\nMethod which prints all vehicles, which owners are .... Please enter owner's name");
         String ownerForSearch = scanner.nextLine();
         filterByOwner(ownerForSearch);
 
         System.out.println("\nCheck if all vehicles correspond to some search criteria (e.g. name of Vehicle owner is Ivan)\n");
-        System.out.println(isAllOwners(ownerForSearch));
+        System.out.println(isAllOwners(ownerForSearch)); // Task #5 Check if all vehicles correspond to some search criteria (e.g. name of Vehicle owner is Ivan)
 
-        System.out.println(isAllTypes(typeForSearch));
-        System.out.println("\nVehicle list, with unique numbers, sorted alphabetically\n");
-        //   deleteDuplicates(carNumLotMap);
+        System.out.println("\nCheck if none of the vehicles from list corresponds to some search criteria (e.g. vehicle type is motorcycle)\n");
+        typeForSearch = scanner.nextLine();
+        System.out.println(isAllTypes(typeForSearch)); // Task #6
+
+        System.out.println("\nVehicle list, with unique numbers, sorted alphabetically\n"); // Task #7
+        getCarByUniqueNumber(); // list of all vehicles and list of numbers(just fo checking)
     }
 }
