@@ -1,4 +1,5 @@
-package oop;
+package cinema.primary;
+
 
 public class Session {
     private Hall hall;
