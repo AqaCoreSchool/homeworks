@@ -22,12 +22,34 @@ public class Main {
         Customer customer1 = new Customer("Andrii Rybka", "Hellboy", "12:00", 5);
         Customer customer2 = new Customer("Taras Gaydar", "Terminator", "14:00", 12);
         Customer customer3 = new Customer("Mickie Rurck", "It", "16:00", 30);
-        Customer customer4 = new Customer("Oleh Vynnyk", "It", "16:00", 60);
+        Customer customer4 = new Customer("Oleh Vynnyk", "Hellboy", "12:00", 12);
+        Customer customer5 = new Customer("Carl Johnson", "It", "16:00", 4);
+        Customer customer6 = new Customer("Mary Key", "Hellboy", "12:00", 6);
+        Customer customer7 = new Customer("Ann Smith", "Terminator", "14:00", 76);
+        Customer customer8 = new Customer("Henry Scott", "It", "16:00", 23);
+        Customer customer9 = new Customer("Steve Jobs", "Hellboy", "12:00", 34);
+        Customer customer10 = new Customer("Olga Popovich", "It", "16:00", 24);
+        Customer customer11 = new Customer("Nasar Popol", "Terminator", "14:00", 25);
+        Customer customer12 = new Customer("Bill Gates", "Hellboy", "12:00", 72);
+        Customer customer13 = new Customer("Rick Monte", "It", "16:00", 42);
+        Customer customer14 = new Customer("Bruce Waine", "Terminator", "14:00", 33);
+        Customer customer15 = new Customer("Mickie Mouse", "Hellboy", "12:00", 1);
 
         customers.add(customer1);
         customers.add(customer2);
         customers.add(customer3);
         customers.add(customer4);
+        customers.add(customer5);
+        customers.add(customer6);
+        customers.add(customer7);
+        customers.add(customer8);
+        customers.add(customer9);
+        customers.add(customer10);
+        customers.add(customer11);
+        customers.add(customer12);
+        customers.add(customer13);
+        customers.add(customer14);
+        customers.add(customer15);
 
         TicketSeller.sell(customers);
 
