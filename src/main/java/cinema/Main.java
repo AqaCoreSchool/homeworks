@@ -1,5 +1,6 @@
 package cinema;
 
+import cinema.people.Human;
 import cinema.people.User;
 import cinema.primary.Movie;
 
@@ -11,18 +12,18 @@ public class Main {
 
     public static void main(String[] args) {
 
-        User aUser = new User();
-        aUser.setName("Andrew");
-        aUser.setAge(25);
-        aUser.setDiscount(10);
+        Searchable user = new User();
+        ((User)user).setName("Andrew");
+        ((User)user).setAge(25);
+        ((User)user).setDiscount(10);
 
-        List<Movie> films = aUser.getAllMoviesList();
+        List<Movie> films = user.getAllMoviesList();
         System.out.println(films);
-        System.out.println(aUser.getAllSessionsOfAllMovies(films));
-        System.out.println(aUser.getMovieListFilteredByGenre(films,"criminal"));
-        System.out.println(aUser.isOneFilmDurationCorrespondsToFilter(films, 90));
-        System.out.println(aUser.isReleasesOfAllFilmsCorrespondToFilter(films, 2008));
-        System.out.println(aUser.isNamesOfFilmsContainWords(films, "mile"));
-        System.out.println(join(", ", new TreeSet<>(aUser.getAllUniqueGenresSet(films))));
+        System.out.println(user.getAllSessionsOfAllMovies(films));
+        System.out.println(user.getMovieListFilteredByGenre(films,"criminal"));
+        System.out.println(user.isOneFilmDurationCorrespondsToFilter(films, 90));
+        System.out.println(user.isReleasesOfAllFilmsCorrespondToFilter(films, 2008));
+        System.out.println(user.isNamesOfFilmsContainWords(films, "mile"));
+        System.out.println(join(", ", new TreeSet<>(user.getAllUniqueGenresSet(films))));
     }
 }
