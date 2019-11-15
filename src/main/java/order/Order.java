@@ -7,6 +7,10 @@ public class Order {
     private String clientsName;
     private int roomNumber;
 
+    public int calculatePrice(int price,int dayCount){
+        return price*dayCount;
+    }
+
     public int getDayCount() {
         return dayCount;
     }
@@ -30,4 +34,5 @@ public class Order {
     public void setRoomNumber(int roomNumber) {
         this.roomNumber = roomNumber;
     }
+
 }
