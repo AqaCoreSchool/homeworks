@@ -1,10 +1,8 @@
-package oop;
-
-
+package cinema.primary;
 
 import java.util.List;
 
-public class Movie extends Cinema implements Comparable<Movie>{
+public class Movie implements Comparable<Movie>{
     private String filmName;
     private String filmGenre;
     private int yearRelease;
@@ -12,8 +10,8 @@ public class Movie extends Cinema implements Comparable<Movie>{
     private int ageRating;
     private List<Session> sessions;
 
-
-    public Movie(String filmName, String filmGenre, int yearRelease, int duration, int ageRating, List<Session> sessions) {
+    public Movie(String filmName, String filmGenre, int yearRelease, int duration,
+                 int ageRating, List<Session> sessions) {
         this.filmName = filmName;
         this.filmGenre = filmGenre;
         this.yearRelease = yearRelease;
@@ -83,8 +81,8 @@ public class Movie extends Cinema implements Comparable<Movie>{
     }
 
     @Override
-    public int compareTo(Movie m) {
-        return this.getFilmName().compareTo(m.getFilmName());
+    public int compareTo(Movie o) {
+        return this.getFilmName().compareTo(o.getFilmName());
     }
 
     @Override
@@ -94,11 +92,22 @@ public class Movie extends Cinema implements Comparable<Movie>{
 
         Movie movie = (Movie) o;
 
-        return filmGenre.equals(movie.filmGenre);
+        if (yearRelease != movie.yearRelease) return false;
+        if (duration != movie.duration) return false;
+        if (ageRating != movie.ageRating) return false;
+        if (filmName != null ? !filmName.equals(movie.filmName) : movie.filmName != null) return false;
+        if (filmGenre != null ? !filmGenre.equals(movie.filmGenre) : movie.filmGenre != null) return false;
+        return sessions != null ? sessions.equals(movie.sessions) : movie.sessions == null;
     }
 
     @Override
     public int hashCode() {
-        return filmGenre.hashCode();
+        int result = filmName != null ? filmName.hashCode() : 0;
+        result = 31 * result + (filmGenre != null ? filmGenre.hashCode() : 0);
+        result = 31 * result + yearRelease;
+        result = 31 * result + duration;
+        result = 31 * result + ageRating;
+        result = 31 * result + (sessions != null ? sessions.hashCode() : 0);
+        return result;
     }
 }

@@ -1,6 +1,6 @@
-package oop;
+package cinema.primary;
 
-public class Hall extends Cinema {
+public class Hall {
     private int number;
     private String type;
     private int capasity;

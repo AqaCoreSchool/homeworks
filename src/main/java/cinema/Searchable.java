@@ -1,54 +1,16 @@
-package oop;
+package cinema;
+
+
+import cinema.primary.Hall;
+import cinema.primary.Movie;
+import cinema.primary.Session;
 
 import java.util.*;
 
-public class User {
-    private String name;
-    private int age;
-    private int discount;
-
-    public User(String name, int age, int discount) {
-        this.name = name;
-        this.age = age;
-        this.discount = discount;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public int getDiscount() {
-        return discount;
-    }
-
-    public void setDiscount(int discount) {
-        this.discount = discount;
-    }
-
-    //This is override of toString method... he-he)) It's a joke)
-    @Override
-    public String toString() {
-        return "Customer{" +
-                "name='" + name + '\'' +
-                ", age=" + age +
-                ", discount=" + discount +
-                '}';
-    }
+public interface Searchable {
 
     //This method creates and returns a list of all movies
-    public List<Movie> getAllMovies(){
+    default List<Movie> getAllMoviesList(){
         List<Movie> movies = new ArrayList<>();
         Hall hallOne = new Hall(1, "Imax", 60, 15.4);
         Hall hallTwo = new Hall(2, "3D", 80, 12.6);
@@ -95,8 +57,8 @@ public class User {
         return movies;
     }
 
-    //This method returns a Map with pairs: Film - his Sessions
-    public Map<String, List<Session>> getAllSessionsOfAllFilms(List<Movie> films){
+    //This method returns a Map with pairs: Movie - his Sessions
+    default Map<String, List<Session>> getAllSessionsOfAllMovies(List<Movie> films){
         Map<String, List<Session>> sessionMap = new HashMap<>();
         for(Movie elem: films){
             sessionMap.put(elem.getFilmName(),elem.getSessions());
@@ -104,8 +66,8 @@ public class User {
         return  sessionMap;
     }
 
-    //This method returns a List of films filtered by particular genre
-    public List<Movie> getMovieListFilteredByGenre(List<Movie> films, String genre){
+    //This method returns a List of movies filtered by particular genre
+    default List<Movie> getMovieListFilteredByGenre(List<Movie> films, String genre){
         List<Movie> filteredMovie = new ArrayList<>();
         for(Movie elem: films){
             if(elem.getFilmGenre().equalsIgnoreCase(genre)){
@@ -116,8 +78,8 @@ public class User {
     }
 
     //This method checks if at least one movie in a list corresponds to search by duration
-    public boolean isFilmDurationRespondsToFilter(List<Movie> films, int duration){
-       for(Movie elem: films){
+    default boolean isOneFilmDurationCorrespondsToFilter(List<Movie> films, int duration){
+        for(Movie elem: films){
             if(elem.getDuration() > duration){
                 return true;
             }
@@ -126,7 +88,7 @@ public class User {
     }
 
     //This method checks if all movies in a list corresponds to search by year of release
-    public boolean isReleasesOfAllFilmsRespondToCriteria(List<Movie> films, int yearRelease){
+    default boolean isReleasesOfAllFilmsCorrespondToFilter(List<Movie> films, int yearRelease){
         for(Movie elem: films){
             if(elem.getYearRelease() < yearRelease){
                 return false;
@@ -135,19 +97,22 @@ public class User {
         return true;
     }
 
-    //This method checks if films in a list contain particular words in their names
-    public boolean isNoneOfFilmsRespondsToCriteria(List<Movie> films, String filmName){
+    //This method checks if movies in a list contain particular words in their names
+    default boolean isNamesOfFilmsContainWords(List<Movie> films, String filmName){
         for(Movie elem: films){
-            if(elem.getFilmName().contains(filmName)){
+            if(elem.getFilmName().toLowerCase().contains(filmName.toLowerCase())){
                 return true;
             }
         }
         return false;
     }
 
-    //work in progress......
-    public Set<Movie> getMovieSetWithUniqueGenres(List<Movie> films){
-
-        return new HashSet<>(films);
+    //This method
+    default Set<String> getUniqueGenresSet(List<Movie> films){
+        Set<String> uniqueGenres = new HashSet<>();
+        for(Movie elem: films){
+            uniqueGenres.add(elem.getFilmGenre());
+        }
+        return uniqueGenres;
     }
 }
