@@ -2,11 +2,11 @@ package parking;
 
 public class SecurityStaff extends AbstractEmployees {
 
-    public SecurityStaff() {
+    SecurityStaff() {
         standard();
     }
 
-    public SecurityStaff(String name, int workHours) {
+    SecurityStaff(String name, int workHours) {
         super(name, workHours);
         standard();
     }

@@ -9,7 +9,7 @@ import static parking.VehicleParking.*;
 abstract public class AbstractVehicle {
     private String owner;
     private String number;
-    private String type;
+    private String vehicleType;
     private Date dateIn;
     private Date dateOut;
     private int pricePerHour;
@@ -41,7 +41,7 @@ abstract public class AbstractVehicle {
 
     @Override
     public String toString() {
-        return this.type + " number: " + this.number + ". Owner: " + this.owner + ". Check in: " + this.getDateIn(); //
+        return this.vehicleType + " number: " + this.number + ". Owner: " + this.owner + ". Check in: " + this.getDateIn(); //
     }
 
 
@@ -65,7 +65,7 @@ abstract public class AbstractVehicle {
             vehicleList.remove(vehicle);
             numberVehicleMap.remove(this.number);
         } else
-            System.out.println("Oops, You aren't checked in. You need to do it!");
+            System.out.println(number + " Oops, You aren't checked in. You need to do it!");
     }
 
     private void assignCarToLot(String number) {
@@ -134,12 +134,12 @@ abstract public class AbstractVehicle {
         this.owner = owner;
     }
 
-    String getType() {
-        return type;
+    String getVehicleType() {
+        return vehicleType;
     }
 
-    void setType(String type) {
-        this.type = type;
+    void setVehicleType(String vehicleType) {
+        this.vehicleType = vehicleType;
     }
 
     public int getPrice() {

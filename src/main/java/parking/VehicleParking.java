@@ -2,7 +2,7 @@ package parking;
 
 import java.util.*;
 
-public class VehicleParking {
+class VehicleParking {
 
 
     final static int LOT_COUNT = 100;
@@ -27,7 +27,7 @@ public class VehicleParking {
         }
     }
 
-    static boolean checkIfExistNumber(String template) {
+    static boolean isNumberExist(String template) {
         for (AbstractVehicle vehicle : vehicleList) {
             if (vehicle.getNumber().substring(0, 2).equals(template)) {
                 return true;
@@ -63,7 +63,7 @@ public class VehicleParking {
 
     static boolean isAllTypes(String typeSearch) {
         for (AbstractVehicle vehicle : vehicleList) {
-            if (vehicle.getType().contains(typeSearch)) {
+            if (vehicle.getVehicleType().contains(typeSearch)) {
                 return false;
             }
         }
@@ -72,7 +72,7 @@ public class VehicleParking {
 
     static void checkType(String vehicleType) {
         for (AbstractVehicle vehicle : vehicleList) {
-            if (vehicle.getType().equalsIgnoreCase(vehicleType)) {
+            if (vehicle.getVehicleType().equalsIgnoreCase(vehicleType)) {
                 System.out.println(vehicle);
             }
         }
@@ -96,7 +96,7 @@ public class VehicleParking {
             builder.append(numberVehicleMap.get(key).toString()).append(", ");
         }
         System.out.println(builder.toString());
-        System.out.println(keys);
+        System.out.println(keys); // need to delete late, just for checking
     }
 
 

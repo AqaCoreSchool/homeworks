@@ -7,10 +7,10 @@ public abstract class AbstractEmployees {
     private int ratePerHour;
 
 
-    public AbstractEmployees() {
+    AbstractEmployees() {
     }
 
-    public AbstractEmployees(String name, int workHours) {
+    AbstractEmployees(String name, int workHours) {
         this.name = name;
         this.workHours = workHours;
     }
@@ -21,12 +21,12 @@ public abstract class AbstractEmployees {
         return this.ratePerHour * this.workHours;
     }
 
-    public void setStaff(String name, int workHours) {
+    void setStaff(String name, int workHours) {
         this.name = name;
         this.workHours = workHours;
     }
 
-    public void setRatePerHour(int rate) {
+    void setRatePerHour(int rate) {
         this.ratePerHour = rate;
     }
 
@@ -38,7 +38,7 @@ public abstract class AbstractEmployees {
         return this.position;
     }
 
-    public void setPosition(String position) {
+    void setPosition(String position) {
         this.position = position;
     }
 

@@ -24,12 +24,12 @@ public class Main {
         VehicleParking.waitConsole();
         AbstractVehicle v5 = new Truck("Ostap Vyshny", "ВВ 3333 АК");
         VehicleParking.waitConsole();
-        AbstractVehicle v6 = new Car("Ivan Petrov", "ВІ 4444 КЛ");
+        AbstractVehicle v6 = new Car("Ivan Petrov", "ВІ 44444 КЛ");
         VehicleParking.waitConsole();
         AbstractVehicle v7 = new Truck("Ivan Petrenko", "АА 5555 ОП");
         VehicleParking.waitConsole();
         AbstractVehicle v8 = new Truck("Stephen King", "АА 5556 ТИ");
-        AbstractVehicle v9 = new Truck("George Martin", "АА 5556 ТИ");
+        AbstractVehicle v9 = new Truck("George Martin", "АППА 5556 ТИ");
         AbstractVehicle v10 = new Truck("Joanne Rowling", "АА 5556 ТИ");
         AbstractVehicle v11 = new Truck("Taras Kvas", "АА 5556 ТИ");
         AbstractVehicle v12 = new Truck("Ostap Ivanov", "АВ 5556 ТИ");
@@ -50,7 +50,7 @@ public class Main {
         System.out.println("\n");
         v1.checkOut(v1);
         v2.checkOut(v2);
-        v3.checkOut(v3); //incorrect number
+        v3.checkOut(v3); //incorrect Vehicle number, car wasn't check
 
         System.out.println("\nResult of printing map\n");
         System.out.println(numberVehicleMap.values().toString());
@@ -69,7 +69,7 @@ public class Main {
         String numberForSearch = scanner.nextLine();
         filterByNumber(numberForSearch);
         System.out.println("\nMethod which, checking if at least one vehicle in list corresponds to some search criteria.\n (e.g. vehicle number starts with ‘BC’))\n");
-        System.out.println(checkIfExistNumber(numberForSearch)); // Task #4
+        System.out.println(isNumberExist(numberForSearch)); // Task #4
 
         System.out.println("\nMethod which prints all vehicles, which owners are .... Please enter owner's name");
         String ownerForSearch = scanner.nextLine();
@@ -79,10 +79,10 @@ public class Main {
         System.out.println(isAllOwners(ownerForSearch)); // Task #5 Check if all vehicles correspond to some search criteria (e.g. name of Vehicle owner is Ivan)
 
         System.out.println("\nCheck if none of the vehicles from list corresponds to some search criteria (e.g. vehicle type is motorcycle)\n");
-        scanner.nextLine();
+        typeForSearch = scanner.nextLine();
         System.out.println(isAllTypes(typeForSearch)); // Task #6
 
         System.out.println("\nVehicle list, with unique numbers, sorted alphabetically\n"); // Task #7
-        getCarByUniqueNumber();
+        getCarByUniqueNumber(); // list of all vehicles and list of numbers(just fo checking)
     }
 }
