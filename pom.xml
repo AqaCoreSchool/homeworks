@@ -22,6 +22,7 @@
         </plugins>
     </build>
 
+
     <dependencies>
     <dependency>
         <groupId>com.github.javafaker</groupId>
@@ -29,6 +30,7 @@
         <version>1.0.1</version>
     </dependency>
     </dependencies>
+
 
 
 </project>
