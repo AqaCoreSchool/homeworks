@@ -1,12 +1,14 @@
 package cinema.primary;
 
+import cinema.enums.HallType;
+
 public class Hall {
     private int number;
-    private String type;
+    private HallType type;
     private int capasity;
     private double screenSize;
 
-    public Hall(int number, String type, int capasity, double screenSize) {
+    public Hall(int number, HallType type, int capasity, double screenSize) {
         this.number = number;
         this.type = type;
         this.capasity = capasity;
@@ -21,11 +23,11 @@ public class Hall {
         this.number = number;
     }
 
-    public String getType() {
+    public HallType getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(HallType type) {
         this.type = type;
     }
 
@@ -49,7 +51,7 @@ public class Hall {
     public String toString() {
         return "Hall{" +
                 "number=" + number +
-                ", type='" + type + '\'' +
+                ", type=" + type +
                 ", capasity=" + capasity +
                 ", screenSize=" + screenSize +
                 '}';
