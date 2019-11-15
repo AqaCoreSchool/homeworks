@@ -1,6 +1,6 @@
 package library.typeOfOnlineLibrary.people.stuff;
 
-public class Seller extends People{
+public class Seller extends Human {
 
     @Override
     void doWork() {
@@ -9,17 +9,17 @@ public class Seller extends People{
 
 
     @Override
-    void setSalary() {
-
+    void setSalary(double salary) {
+        super.setSalary( salary );
     }
 
     @Override
     protected void setName(String name) {
-
+        this.name = name;
     }
 
     @Override
-    protected void setSex(boolean sex) {
-
+    protected void setGender(boolean isMale) {
+        this.isMale = isMale;
     }
 }

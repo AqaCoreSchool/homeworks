@@ -1,21 +1,24 @@
 package library.typeOfOnlineLibrary.people.stuff;
 
-public class Admin extends People {
+public class Admin extends Human {
     @Override
     protected void setName(String name) {
-
+        this.name = name;
     }
 
     @Override
-    protected void setSex(boolean sex) {
-
+    protected void setGender(boolean isMale) {
+        this.isMale = isMale;
     }
 
     @Override
     public void doWork(){
 
     }
-
+    @Override
+    void setSalary(double salary) {
+        super.setSalary(salary);
+    }
 
 
     protected  void dowork(Admin admin, Librarian librarian, CleanerMananger cleanerMananger,
