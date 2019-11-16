@@ -2,7 +2,6 @@ package company.employees;
 
 import company.Post;
 import company.Workable;
-import company.employees.Employee;
 
 public class Manager extends Employee implements Workable {
 
