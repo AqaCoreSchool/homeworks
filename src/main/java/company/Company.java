@@ -10,7 +10,7 @@ public class Company {
 
     public Company(List<Employee> employeeList) {
         for (Employee employee : employeeList) {
-            if (isHired()) {
+            if (isHired() || employee instanceof Director) {
                 this.employeeList.add(employee);
             }
         }
