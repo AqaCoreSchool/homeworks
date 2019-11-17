@@ -46,7 +46,7 @@ abstract public class AbstractVehicle {
 
 
     void checkIn(AbstractVehicle vehicle) {
-        if (validateNumber()) {
+        if (isNumberCorrect()) {
             if (freeLots > 0) { //// треба переробити
                 Date dateIn = new Date();
                 freeLots = freeLots - 1;
@@ -104,14 +104,20 @@ abstract public class AbstractVehicle {
         this.dateIn = new Date();
     }
 
-    private boolean validateNumber() {
-        Pattern p = Pattern.compile(pattern);
-        Matcher m = p.matcher(this.number);
-        if (m.matches()) {
-            return true;
-        } else
-            System.out.println(number + " Wrong format of vehicle number ");
-        return false;
+    private boolean isNumberCorrect() {
+        try {
+            Pattern p = Pattern.compile(pattern);
+            Matcher m = p.matcher(this.number);
+            if (m.matches()) {
+                return true;
+            } else {
+                System.out.println(number + " - this is wrong format of vehicle number ");
+                return false;
+            }
+        } catch (NullPointerException e) {
+            System.out.println("Number is empty. You can not add vehicle without number ");
+            return false;
+        }
     }
 
     Date getDateIn() {
