@@ -11,6 +11,7 @@ public class Main {
         employees = work.getStuff();
         System.out.println();
         work.filterBySalary( employees,900 );
-            work.addEmpolee( employees,Stuff.values() );
+         
+       
     }
 }
