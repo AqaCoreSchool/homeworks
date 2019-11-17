@@ -1,7 +1,7 @@
 package com.company.hw.exceptions;
 
-public class NotAnyBooks extends Exception{
-    public NotAnyBooks(String message){
+public class NoSuchBookException extends Exception{
+    public NoSuchBookException(String message){
         super(message);
     }
 }
