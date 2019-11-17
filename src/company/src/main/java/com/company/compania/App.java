@@ -11,18 +11,18 @@ import java.util.Scanner;
 public class App {
     public static void main(String[] args) {
         Faker faker = new Faker();
-            Company CoreValue = new Company();
+            Company coreValue = new Company();
 
             System.out.println("Enter salary, please ->");
             Scanner myInput = new Scanner(System.in);
             int inpSalary = myInput.nextInt();
-            CoreValue.getEmployeesWithSalary(inpSalary);
+            coreValue.getEmployeesWithSalary(inpSalary);
 
             System.out.println("All Employees:");
-            CoreValue.getEmployeesNames();
+            coreValue.getEmployeesNames();
 
             System.out.println("\nAll which Hired:");
-            CoreValue.getHired();
+            coreValue.getHired();
 
             QA qaWorker = new QA("QA", 40000, faker.random().nextBoolean());
             qaWorker.work();
