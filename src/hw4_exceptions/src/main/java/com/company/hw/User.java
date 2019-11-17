@@ -3,7 +3,7 @@ package com.company.hw;
 import com.company.hw.books.Comics;
 import com.company.hw.books.Encyclopedia;
 import com.company.hw.books.Novel;
-import com.company.hw.exceptions.NotAnyBooks;
+import com.company.hw.exceptions.NoSuchBookException;
 import com.company.hw.sort.SortByBook;
 import com.company.hw.sort.SortByYear;
 import com.github.javafaker.Faker;
@@ -44,8 +44,6 @@ public class User {
 
     }
 
-
-
     //1
     void getAvailableBooks() {
         for (Library element : books) {
@@ -56,7 +54,7 @@ public class User {
     }
 
     //2
-    void getFilteredByAuthor(String author) throws NotAnyBooks{
+    void getFilteredByAuthor(String author) {
         List<Library> tempList = new ArrayList<>();
         for (Library element : books) {
             if (element.available && element.getAuthor().contains(author)) {
@@ -65,7 +63,11 @@ public class User {
         }
         System.out.println(tempList);
         if (tempList.isEmpty()) {
-            throw new NotAnyBooks("I throw exception");
+            try {
+                throw new NoSuchBookException("I throw exception");
+            } catch (NoSuchBookException e) {
+                System.out.println("We don't have any Books by this Author");
+            }
         }
     }
 
@@ -78,10 +80,14 @@ public class User {
     }
 
     //4
-    void hasEarlierBooks(int year) throws NotAnyBooks{
+    void hasEarlierBooks(int year) {
         for (Library next : books) {
             if (year < 1604) {
-                throw new NotAnyBooks("I throw exception");
+                try {
+                    throw new NoSuchBookException("I throw exception");
+                } catch (NoSuchBookException e) {
+                    System.out.println("We have books only > 1603");
+                }
             }
             else if(next.getYear() < year){
                 System.out.println(next);
@@ -90,7 +96,7 @@ public class User {
     }
 
     //5
-    void checkGenre(String genre) throws NotAnyBooks{
+    void checkGenre(String genre){
         List<Library> tempList = new ArrayList<>();
         for (Library next : books) {
             if (next.getClass().toString().contains(genre)) {
@@ -100,7 +106,11 @@ public class User {
         System.out.println(tempList);
 
         if (tempList.isEmpty()) {
-            throw new NotAnyBooks("I throw exception");
+            try {
+                throw new NoSuchBookException("I throw exception");
+            } catch (NoSuchBookException e) {
+                System.out.println("We don't have books in this Genre");
+            }
         }
 
     }
@@ -117,7 +127,7 @@ public class User {
     }
 
     //7
-    void filteredByGenre() throws NotAnyBooks {
+    void filteredByGenre() {
         List<Library> listOfNovel = new ArrayList<>();
         List<Library> listOfComics = new ArrayList<>();
         List<Library> listOfEncyclopedia = new ArrayList<>();
@@ -143,13 +153,13 @@ public class User {
             tempList.sort(new SortByBook());
         }
         catch(IndexOutOfBoundsException ex){
-            throw new NotAnyBooks("I throw exception");
+            System.out.println("Hey, we don't have any Books now!");
         }
         String commaDelimitr = String.join(" , ", tempList.get(0).toString(), tempList.get(1).toString(), tempList.get(2).toString());
         System.out.println(commaDelimitr);
     }
 
-    void useMap() throws NotAnyBooks{
+    void useMap(){
         HashMap<StringBuilder, Library> bookMap = new HashMap<>();
         for (int i = 0; i <= 18; i++) {
             Faker faker = new Faker();
@@ -168,9 +178,8 @@ public class User {
             try {
                 bookMap.put(isbn, books.get(i));
             }catch(IndexOutOfBoundsException ex){
-                throw new NotAnyBooks("I throw exception");
+                System.out.println("Hey, we don't have any Books now!");
             }
-
 
         }
         for (Map.Entry<StringBuilder, Library> entry : bookMap.entrySet())
