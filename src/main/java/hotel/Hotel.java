@@ -1,5 +1,6 @@
 package hotel;
 
+import exceptions.EmptyRoomsListException;
 import room.BudgetRoom;
 import room.LuxRoom;
 import room.Room;
@@ -41,8 +42,9 @@ public class Hotel {
                 System.out.println("Room corresponds to your criteria");
                 break;
             } else {
-                System.out.println("There is no rooms that matches your criteria");
+                throw new NoSuchElementException("There is no rooms that matches your criteria");
             }
+
         }
     }
     public void isCorrespondAll() {
@@ -56,6 +58,9 @@ public class Hotel {
     }
     public Set showUniqueRooms (){
         Set<Room> setRooms = new LinkedHashSet<>(listRooms);
+        if(setRooms.isEmpty()) {
+            throw new EmptyRoomsListException("Empty room list ");
+        }
         return setRooms;
     }
 
