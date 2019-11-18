@@ -1,21 +1,21 @@
-package ParkingLot;
+package parking;
 
-public abstract class Employees {
+public abstract class AbstractEmployee {
     private String name;
     private String position;
     private int workHours;
     private int ratePerHour;
 
 
-    public Employees() {
+    public AbstractEmployee() {
     }
 
-    public Employees(String name, int workHours) {
+    public AbstractEmployee(String name, int workHours) {
         this.name = name;
         this.workHours = workHours;
     }
 
-    abstract void standard();
+    public abstract void standard();
 
     public int getSalary() {
         return this.ratePerHour * this.workHours;

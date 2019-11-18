@@ -1,6 +1,6 @@
-package ParkingLot;
+package parking;
 
-public class SecurityStaff extends Employees {
+public class SecurityStaff extends AbstractEmployee {
 
     public SecurityStaff() {
         standard();
@@ -16,5 +16,4 @@ public class SecurityStaff extends Employees {
         this.setPosition("Security");
         this.setRatePerHour(40);
     }
-
 }

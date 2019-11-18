@@ -1,8 +1,8 @@
-package ParkingLot;
+package parking;
 
 import java.util.Date;
 
-public class Truck extends Vehicle {
+public class Truck extends AbstractVehicle {
 
     public Truck() {
         standard();
@@ -14,8 +14,8 @@ public class Truck extends Vehicle {
     }
 
     @Override
-    void standard() {
-        this.setType("Truck");
+    public void standard() {
+        this.setVehicleType("Truck");
         this.setPrice(20);
         this.setDateIn(new Date());
     }
