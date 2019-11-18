@@ -47,7 +47,7 @@ public class Hotel {
     }
     public void isCorrespondAll() {
         for (Room r : listRooms) {
-            if (r.getNameType() == "Budget") {
+            if (r.getNameType().equals("Budget")) {
                 System.out.println("Room "+r.getRoomNumber() + " corresponds to your criteria");
             } else {
                 System.out.println("Room "+r.getRoomNumber()+ " isn't matches your criteria");

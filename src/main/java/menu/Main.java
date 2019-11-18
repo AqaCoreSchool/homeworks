@@ -1,16 +1,6 @@
-package Menu;
+package menu;
 
 import hotel.Hotel;
-import human.Emploee;
-import human.Human;
-import recep.Reception;
-import room.*;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.List;
-import java.util.Set;
 
 public class Main {
     public static void main(String [] args) {
