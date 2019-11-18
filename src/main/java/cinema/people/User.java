@@ -110,7 +110,8 @@ public class User extends Human implements Searchable {
                 }
             }
             if (filteredMovie.isEmpty()){
-                    throw new NoSuchFilmsException("Our collection of films doesn't include films with this genre");
+                    throw new NoSuchFilmsException("Our collection of films doesn't include " +
+                                                    "films with this genre" +"-" + genre);
             }
         return filteredMovie;
     }
