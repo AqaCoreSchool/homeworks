@@ -1,4 +1,4 @@
-package rybka.oop;
+package rybka.entity.object;
 
 import java.util.HashMap;
 import java.util.Map;

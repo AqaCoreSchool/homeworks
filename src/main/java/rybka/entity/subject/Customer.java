@@ -1,4 +1,4 @@
-package rybka.oop;
+package rybka.entity.subject;
 
 public class Customer {
     private String name;
@@ -6,7 +6,7 @@ public class Customer {
     private String filmStart;
     private int customerPlace;
 
-    Customer(String name, String filmTitle, String filmStart, int customerPlace) {
+    public Customer(String name, String filmTitle, String filmStart, int customerPlace) {
         this.name = name;
         this.filmTitle = filmTitle;
         this.filmStart = filmStart;

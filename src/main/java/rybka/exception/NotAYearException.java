@@ -1,4 +1,4 @@
-package rybka.oop2;
+package rybka.exception;
 
 public class NotAYearException extends Exception {
     public NotAYearException(String message) {

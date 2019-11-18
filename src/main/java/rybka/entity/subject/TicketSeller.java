@@ -1,4 +1,9 @@
-package rybka.oop;
+package rybka.entity.subject;
+
+import rybka.cinema.Cinema;
+import rybka.entity.object.Film;
+import rybka.entity.object.Schedule;
+import rybka.entity.object.Ticket;
 
 import java.util.HashSet;
 import java.util.List;

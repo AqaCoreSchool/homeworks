@@ -1,4 +1,4 @@
-package rybka.oop2;
+package rybka.model;
 
 public class Movie {
     private String sessions;
@@ -7,7 +7,7 @@ public class Movie {
     private double duration;
     private int year;
 
-    Movie(String sessions, String title, String genre, double duration, int year) {
+    public Movie(String sessions, String title, String genre, double duration, int year) {
         this.sessions = sessions;
         this.title = title;
         this.genre = genre;
@@ -15,23 +15,23 @@ public class Movie {
         this.year = year;
     }
 
-    String getSessions() {
+    public String getSessions() {
         return sessions;
     }
 
-    String getTitle() {
+    public String getTitle() {
         return title;
     }
 
-    String getGenre() {
+    public String getGenre() {
         return genre;
     }
 
-    double getDuration() {
+    public double getDuration() {
         return duration;
     }
 
-    int getYear() {
+    public int getYear() {
         return year;
     }
 }

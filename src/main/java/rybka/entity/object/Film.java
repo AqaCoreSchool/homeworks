@@ -1,4 +1,6 @@
-package rybka.oop;
+package rybka.entity.object;
+
+import rybka.cinema.Cinema;
 
 public class Film {
     private String title;

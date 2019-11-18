@@ -1,4 +1,4 @@
-package rybka.oop2;
+package rybka.exception;
 
 public class UnsupportedDurationException extends Exception {
     public UnsupportedDurationException(String message) {

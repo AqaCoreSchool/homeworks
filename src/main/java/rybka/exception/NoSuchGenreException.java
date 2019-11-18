@@ -1,4 +1,4 @@
-package rybka.oop2;
+package rybka.exception;
 
 public class NoSuchGenreException extends Exception {
     public NoSuchGenreException(String message) {

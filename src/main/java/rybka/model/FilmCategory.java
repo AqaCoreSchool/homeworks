@@ -1,4 +1,4 @@
-package rybka.oop2;
+package rybka.model;
 
 public enum FilmCategory {
     ACTION,

@@ -1,4 +1,10 @@
-package rybka.oop2;
+package rybka.view;
+
+import rybka.exception.NoSuchGenreException;
+import rybka.exception.NoSuchTitleException;
+import rybka.exception.NotAYearException;
+import rybka.exception.UnsupportedDurationException;
+import rybka.controller.Application;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;

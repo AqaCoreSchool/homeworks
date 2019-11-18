@@ -1,4 +1,7 @@
-package rybka.oop;
+package rybka.entity.object;
+
+import rybka.cinema.Cinema;
+import rybka.entity.subject.Customer;
 
 public class Ticket {
     private Customer customer;

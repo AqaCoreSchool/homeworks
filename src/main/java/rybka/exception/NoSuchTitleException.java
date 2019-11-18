@@ -1,4 +1,4 @@
-package rybka.oop2;
+package rybka.exception;
 
 public class NoSuchTitleException extends RuntimeException {
     public NoSuchTitleException(String message) {

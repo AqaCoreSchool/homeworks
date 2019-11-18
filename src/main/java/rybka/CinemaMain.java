@@ -1,9 +1,18 @@
-package rybka.oop;
+package rybka;
+
+import rybka.cinema.Cinema;
+import rybka.cinema.Cinema2D;
+import rybka.cinema.Cinema3D;
+import rybka.cinema.CinemaIMAX;
+import rybka.entity.object.Film;
+import rybka.entity.object.Schedule;
+import rybka.entity.subject.Customer;
+import rybka.entity.subject.TicketSeller;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Main {
+public class CinemaMain {
     public static void main(String[] args) {
         Cinema cinemaIMAX = new CinemaIMAX(30, 3, 80);
         Cinema cinema3D = new Cinema3D(40, 5, 50);
@@ -17,7 +26,7 @@ public class Main {
         Schedule.setSchedule(film2, "14:00");
         Schedule.setSchedule(film3, "16:00");
 
-        List<Customer> customers = new ArrayList<Customer>();
+        List<Customer> customers = new ArrayList<>();
 
         Customer customer1 = new Customer("Andrii Rybka", "Hellboy", "12:00", 5);
         Customer customer2 = new Customer("Taras Gaydar", "Terminator", "14:00", 12);

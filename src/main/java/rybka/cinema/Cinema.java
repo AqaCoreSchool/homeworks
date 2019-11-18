@@ -1,4 +1,4 @@
-package rybka.oop;
+package rybka.cinema;
 
 public abstract class Cinema {
     private int seatsNumber;

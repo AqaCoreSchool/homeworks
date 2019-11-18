@@ -1,4 +1,11 @@
-package rybka.oop2;
+package rybka.controller;
+
+import rybka.exception.NoSuchGenreException;
+import rybka.exception.NoSuchTitleException;
+import rybka.exception.NotAYearException;
+import rybka.exception.UnsupportedDurationException;
+import rybka.model.FilmCategory;
+import rybka.model.Movie;
 
 import java.io.FileWriter;
 import java.util.ArrayList;
@@ -6,11 +13,11 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-class Application {
+public class Application {
 
     private List<Movie> movies;
 
-    Application() {
+    public Application() {
         movies = new ArrayList<>();
         movies.add(new Movie("10:00, 14:00, 21:00", "Doctor Sleep", FilmCategory.HORROR.getCategoryName(), 2.5, 2019));
         movies.add(new Movie("9:00, 11:00, 14:00", "Terminator: Dark Fate", FilmCategory.ACTION.getCategoryName(), 2.1, 2019));
@@ -29,7 +36,7 @@ class Application {
         movies.add(new Movie("13:43, 15:23, 17:53", "Mega Piranha", FilmCategory.HORROR.getCategoryName(), 1.5, 2010));
     }
 
-    void showSessionList() {
+    public void showSessionList() {
         writeFile("\nMovies list");
         for (Movie movie : movies) {
             System.out.println(movie.getSessions() + "\t" + movie.getTitle());
@@ -37,7 +44,7 @@ class Application {
         }
     }
 
-    void filterByGenre(String genre) throws NoSuchGenreException {
+    public void filterByGenre(String genre) throws NoSuchGenreException {
         writeFile("\nFiltered by genre");
         if (genre.matches("\\d*")) {
             throw new NoSuchGenreException("Not a genre format");
@@ -50,7 +57,7 @@ class Application {
         }
     }
 
-    void sortMovies() {
+    public void sortMovies() {
         writeFile("\nMovies sorting");
         Collections.sort(movies, new Comparator<Movie>() {
             public int compare(Movie movie1, Movie movie2) {
@@ -64,7 +71,7 @@ class Application {
         }
     }
 
-    boolean isAtLeastOneMovie(double duration) throws UnsupportedDurationException {
+    public boolean isAtLeastOneMovie(double duration) throws UnsupportedDurationException {
         writeFile("\nIs there at least one movie with duration of " + duration);
         if (duration <= 0) {
             throw new UnsupportedDurationException("Wrong duration format found!");
@@ -80,7 +87,7 @@ class Application {
         return counter <= 1;
     }
 
-    boolean isAllMovies(int year) throws NotAYearException {
+    public boolean isAllMovies(int year) throws NotAYearException {
         writeFile("\nAre there all movies with year of " + year);
         if (year <= 0 || !String.valueOf(year).matches("\\d{4}")) {
             throw new NotAYearException("Wrong year format found!");
@@ -96,7 +103,7 @@ class Application {
         return counter == movies.size();
     }
 
-    boolean isNoneMovies(String title) throws NoSuchTitleException {
+    public boolean isNoneMovies(String title) throws NoSuchTitleException {
         writeFile("\nAre there none movies with title of " + title);
         if (title.matches("^\\d*$|^\\W")) {
             throw new NoSuchTitleException("Wrong title input!");
@@ -111,7 +118,7 @@ class Application {
         return counter == 0;
     }
 
-    void collectUniqueGenres() {
+    public void collectUniqueGenres() {
         writeFile("\nUnique genres list");
         List<String> genres = new ArrayList<>();
 
