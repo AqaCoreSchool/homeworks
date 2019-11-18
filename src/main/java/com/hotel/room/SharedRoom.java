@@ -1,5 +1,6 @@
 package com.hotel.room;
 
+import com.hotel.exceptions.NotFoundFreePlaceException;
 import com.hotel.user.Customer;
 
 import java.util.LinkedList;
@@ -11,8 +12,8 @@ public class SharedRoom extends Room implements IPlace {
     private int numberOfBookingPlaces;
     private List<Customer> guests = new LinkedList();
 
-    public SharedRoom(int number, int numbOfPlaces, double price, double size, boolean petFriendly) {
-        super(number, price, size, petFriendly);
+    public SharedRoom(int number, int numbOfPlaces, double price, double size, boolean isPetFriendly) {
+        super(number, price, size, isPetFriendly);
         this.numberOfPlaces = numberOfPlaces;
     }
 
@@ -29,11 +30,14 @@ public class SharedRoom extends Room implements IPlace {
         return numberOfPlaces - numberOfBookingPlaces;
     }
 
-    public void addNewBooking(Customer customer) {
+    public void addNewBooking(Customer customer){
         if (!isBooking()) {
             guests.add(customer);
             numberOfBookingPlaces++;
+        } else {
+            throw new NotFoundFreePlaceException("В загальній кімнаті №"+getNumber()+" вільні місця відсутні");
         }
+
         if (numberOfBookingPlaces == numberOfPlaces) setBooking(true);
     }
 

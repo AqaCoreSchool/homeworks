@@ -6,8 +6,8 @@ public class SingleRoom extends Room {
 
     private Customer customer;
 
-    public SingleRoom(int number, double price, double size, boolean petFriendly) {
-        super(number, price, size, petFriendly);
+    public SingleRoom(int number, double price, double size, boolean isPetFriendly) {
+        super(number, price, size, isPetFriendly);
     }
 
     public Customer getCustomer() {

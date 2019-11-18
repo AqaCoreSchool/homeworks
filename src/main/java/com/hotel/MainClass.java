@@ -7,7 +7,6 @@ import com.hotel.room.SingleRoom;
 import com.hotel.user.Customer;
 import com.hotel.user.User;
 
-import java.sql.SQLOutput;
 import java.util.List;
 
 public class MainClass {
@@ -67,11 +66,11 @@ public class MainClass {
 
         user.showCheckingResult(User.getHotelAccount().hasRoomAppropriateToCriterion(rooms, 400));
 
-        user.showCheckingResult(User.getHotelAccount().isAllRoomsAppropriateToCriterion(rooms, 40));
+        user.showCheckingResult(User.getHotelAccount().areAllRoomsAppropriateToCriterion(rooms, 40));
 
         rooms = User.getHotelAccount().getFreeSingleRooms();
 
-        user.showCheckingResult(User.getHotelAccount().isAllRoomsPerFriendly(rooms));
+        user.showCheckingResult(User.getHotelAccount().areAllRoomsPerFriendly(rooms));
 
         showSeparatedRoomName(User.getHotelAccount().getFreeSortedRoomsDown());
     }

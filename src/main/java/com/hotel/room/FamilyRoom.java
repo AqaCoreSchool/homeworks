@@ -8,8 +8,8 @@ public class FamilyRoom extends Room implements IPlace {
     private int numberOfPlaces;
     private Customer familyCustomer;
 
-    public FamilyRoom(int number, double price, double size, int numbOfPlaces, int numbOfRoom, boolean petFriendly) {
-        super(number, price, size, petFriendly);
+    public FamilyRoom(int number, double price, double size, int numbOfPlaces, int numbOfRoom, boolean isPetFriendly) {
+        super(number, price, size, isPetFriendly);
         this.numberOfRoom = numbOfRoom;
         this.numberOfPlaces = numbOfPlaces;
     }

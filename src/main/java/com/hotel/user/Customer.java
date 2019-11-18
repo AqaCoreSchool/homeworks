@@ -1,5 +1,6 @@
 package com.hotel.user;
 
+import com.hotel.exceptions.RoomNotFoundException;
 import com.hotel.room.Room;
 
 import java.util.List;

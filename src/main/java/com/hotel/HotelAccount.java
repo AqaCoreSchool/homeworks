@@ -1,5 +1,6 @@
 package com.hotel;
 
+import com.hotel.exceptions.RoomNotFoundException;
 import com.hotel.room.Room;
 import com.hotel.room.SharedRoom;
 import com.hotel.room.SingleRoom;
@@ -25,6 +26,9 @@ public class HotelAccount {
                 allFreeRooms.add(room);
             }
         }
+        if (allFreeRooms.isEmpty()) {
+                throw new RoomNotFoundException("Вільних кімнат не знайдено");
+        }
         return allFreeRooms;
     }
 
@@ -35,6 +39,9 @@ public class HotelAccount {
             if (room.getPrice() >= from & room.getPrice() <= to & !room.isBooking()) {
                 allFreeRooms.add(room);
             }
+        }
+        if (allFreeRooms.isEmpty()) {
+                throw new RoomNotFoundException("За вашим пошуком кімнат не знайдено");
         }
         return allFreeRooms;
     }
@@ -47,7 +54,9 @@ public class HotelAccount {
                 allFreeRooms.add(room);
             }
         }
-
+        if (allFreeRooms.isEmpty()) {
+                throw new RoomNotFoundException("За вашим пошуком вільних загальних кімнат не знайдено");
+        }
         return allFreeRooms;
     }
 
@@ -72,6 +81,9 @@ public class HotelAccount {
                 allFreeRooms.add(room);
             }
         }
+        if (allFreeRooms.isEmpty()) {
+                throw new RoomNotFoundException("Вільних одиночних кімнат не знайдено");
+        }
         return allFreeRooms;
     }
 
@@ -83,6 +95,9 @@ public class HotelAccount {
             if (room.getPrice() >= from & room.getPrice() <= to) {
                 allFreeRoomsByCustomerSearch.add(room);
             }
+        }
+        if (allFreeRoomsByCustomerSearch.isEmpty()) {
+                throw new RoomNotFoundException("За вашим пошуком вільних кімнат не знайдено");
         }
         return allFreeRoomsByCustomerSearch;
     }
@@ -124,7 +139,7 @@ public class HotelAccount {
     }
 
     //Перевіряємо чи в списку кімнат всі відповідають критерію
-    public boolean isAllRoomsAppropriateToCriterion(List<Room> rooms, double size) {
+    public boolean areAllRoomsAppropriateToCriterion(List<Room> rooms, double size) {
         for (Room room : rooms) {
             if (room.getSize() > size) {
                 return false;
@@ -134,7 +149,7 @@ public class HotelAccount {
     }
 
     //Перевіряємо чи в списку кімнат всі відповідають критерію
-    public boolean isAllRoomsPerFriendly(List<Room> rooms) {
+    public boolean areAllRoomsPerFriendly(List<Room> rooms) {
         for (Room room : rooms) {
             if (!room.isPetFriendly()) {
                 return false;
