@@ -26,5 +26,13 @@ public class SessionFilm extends Film{
         super(name, filmGenre, country, year);
     }
 
+    public float getDuration() {
+        return duaration;
+    }
+
+    public void setCountry(float duaration) {
+        this.duaration = duaration;
+    }
+
 
 }

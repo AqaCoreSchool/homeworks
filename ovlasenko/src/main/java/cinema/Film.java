@@ -14,8 +14,6 @@ public abstract class Film {
         this.name = name;
         this.filmGenre = filmGenre;
         this.country = country;
-//        this.duaration = duaration;
-//        this.category = category;
         this.year = year;
     }
 

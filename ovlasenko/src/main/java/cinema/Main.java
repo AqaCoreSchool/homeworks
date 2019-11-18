@@ -21,10 +21,11 @@ public class Main {
         System.out.println("2. Sort all books.");
         System.out.println("3. Check if at least one book in your list corresponds to release year.");
         System.out.println("4. Are all books correspond genre.");
-        System.out.println("5. Are none of books corresponds to author.");
-        /*System.out.println("6. Collect the oldest book names per each genre, sort them alphabetically and\n" +
+        System.out.println("5. Filtered by alphabetic");
+        System.out.println("6. Are none of books corresponds to author.");
+        /*System.out.println("7. Collect the oldest book names per each genre, sort them alphabetically and\n" +
                 "print them to console using comma as a delimiter");*/
-        System.out.println("6. Map task.");
+        System.out.println("8. Map task.");
         System.out.println("INFO: enter 'exit' to finish");
 
         while (userInput.hasNext()) {
@@ -39,6 +40,15 @@ public class Main {
                 innerString = innerInput.next();
                 double doubleItem = Double.parseDouble(innerString);
                 item.checkOneByYear(doubleItem);
+            }else if(userInput.equals("3")){
+                System.out.println("Enter the time:");
+                innerInput =new Scanner(System.in);
+                innerString = innerInput.next();
+                float floatItem = Float.parseFloat(innerString);
+                item.checkOneByTime(floatItem);
+            }else if(userInput.equals("4")){
+                System.out.println("Sort by alphabetic");
+                item.getAlphabeticFilm();
             }
 
         }

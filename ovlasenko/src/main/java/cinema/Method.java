@@ -4,6 +4,7 @@ import cinema.enumeration.CinemaCategory;
 import cinema.enumeration.FilmCountry;
 import cinema.enumeration.FilmGenre;
 import cinema.enumeration.SeatStatus;
+import com.createsend.models.campaigns.Campaign;
 import com.github.javafaker.Faker;
 import cinema.additional.Random;
 
@@ -46,12 +47,33 @@ public class Method {
 
     boolean checkOneByYear(double year) {
         for (SessionFilm sessionFilm : filmsList) {
-            if (sessionFilm.getYear() < year) {
+            if (sessionFilm.getYear() > year) {
                 return true;
             }
         }
         return false;
     }
+
+    boolean checkOneByTime(float time) {
+        for (SessionFilm sessionFilm : filmsList) {
+            if (sessionFilm.getDuration() < time) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    void getAlphabeticFilm(){
+        filmsList.sort(Comparator.comparing(SessionFilm::getName));
+//        Collections.sort(filmsList, new Comparator<Campaign>() {
+//            @Override
+//            public int compare(final Campaign object1, final Campaign object2) {
+//                return object1.getClass().getName().compareTo(object2.getClass().getName());
+//            }
+//        });
+    }
+
 
 
     List<SessionFilm> getFilmList() {
@@ -70,4 +92,7 @@ public class Method {
         }
         return map;
     }
+
+
+
 }

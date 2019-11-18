@@ -28,6 +28,12 @@
             <artifactId>javafaker</artifactId>
             <version>0.15</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/com.createsend/createsend-java -->
+        <dependency>
+            <groupId>com.createsend</groupId>
+            <artifactId>createsend-java</artifactId>
+            <version>5.1.0</version>
+        </dependency>
     </dependencies>
 
 
