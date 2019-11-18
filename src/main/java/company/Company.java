@@ -35,7 +35,7 @@ public class Company {
         }
     }
 
-    public List<Employee> getEmployeesWithSalaryMoreThen(Integer salary) throws NoEmployeesHiredException {
+    public List<Employee> getEmployeesWithSalaryMoreThen(Integer salary)  {
         List<Employee> filtered = new ArrayList<>();
         if (this.employeeList.size()==0){
             throw new NoEmployeesHiredException("No one is hired - nothing to filter!");

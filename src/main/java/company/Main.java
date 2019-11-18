@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
-    public static void main(String[] args) throws NoEmployeesHiredException {
+    public static void main(String[] args){
         List<Employee> employeesFilteredBySalary = new ArrayList<>();
         int salaryFilter = 1500;
         Company company = new Company("NKsoft");
