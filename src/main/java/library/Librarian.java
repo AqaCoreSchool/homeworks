@@ -30,11 +30,13 @@ public class Librarian extends Profile implements Searchable {
 
     }
 
-    public List<Book> searchBookByTitle(String title) {
+    @Override
+    public List<BookItem> getOldestBookPerGenre(List<BookItem> bookItems) {
         return null;
     }
 
-    public List<Book> searchBookByAuthor(String author) {
+    @Override
+    public List<BookItem> getBooksByAuthor(String author) {
         return null;
     }
 }

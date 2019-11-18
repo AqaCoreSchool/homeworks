@@ -8,6 +8,10 @@ public abstract class Profile {
     private Person person;
     private ProfileStatus profileStatus;
 
+    public Profile() {
+
+    }
+
     public Profile(String id, Person person, ProfileStatus profileStatus) {
         this.id = id;
         this.person = person;

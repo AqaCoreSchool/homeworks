@@ -5,19 +5,21 @@ import library.common.Constant;
 import library.enumeration.BookGenre;
 
 import java.util.Comparator;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Template template = new Template();
+        Member member = new Member();
         Scanner userInput = new Scanner(System.in);
         Scanner innerInput;
         String innerString;
         String lineSeparator = System.lineSeparator();
+        List<BookItem> resultList;
 
         System.out.println("TITLE : AUTHOR : GENRE : RELEASEDATE : LANGUAGE : PAGES");
         System.out.println(lineSeparator);
-        template.getAllBooks();
+        member.getAllBooks();
         System.out.println(lineSeparator);
 
         System.out.println("What do you want to do? Make ur choice by entering a number of operation");
@@ -37,13 +39,13 @@ public class Main {
                     System.out.println("Enter author's name:");
                     innerInput = new Scanner(System.in);
                     innerString = innerInput.next().toUpperCase();
-                    template.getBooksByAuthor(innerString);
+                    member.getBooksByAuthor(innerString);
                     System.out.println(Constant.OPERATION_FINISHED);
                     break;
                 case "2":
                     System.out.println("Sorting books alphabetically...");
-                    template.sortBooks(template.getBooksList());
-                    for (BookItem item : template.getBooksList()) {
+                    member.sortBooks(member.getBooksList());
+                    for (BookItem item : member.getBooksList()) {
                         System.out.println(item.getTitle() + " : " + item.getAuthor());
                     }
                     System.out.println(Constant.OPERATION_FINISHED);
@@ -52,26 +54,26 @@ public class Main {
                     System.out.println("Enter the year to check if at least one book in list corresponds it.");
                     innerInput = new Scanner(System.in);
                     innerString = innerInput.next();
-                    System.out.println(template.isOneByYear(Integer.parseInt(innerString)));
+                    System.out.println(member.isOneByYear(Integer.parseInt(innerString)));
                     System.out.println(Constant.OPERATION_FINISHED);
                     break;
                 case "4":
                     System.out.println("Enter the genre to check if all books in list correspond it.");
                     innerInput = new Scanner(System.in);
                     innerString = innerInput.next();
-                    System.out.println(template.areAllByGenre(BookGenre.valueOf(innerString)));
+                    System.out.println(member.areAllByGenre(BookGenre.valueOf(innerString)));
                     System.out.println(Constant.OPERATION_FINISHED);
                     break;
                 case "5":
                     System.out.println("Enter author's name to check if none of the books from list correspond it");
                     innerInput = new Scanner(System.in);
                     innerString = innerInput.next();
-                    System.out.println(template.areNoneByAuthor(innerString));
+                    System.out.println(member.areNoneByAuthor(innerString));
                     System.out.println(Constant.OPERATION_FINISHED);
                     break;
                 case "6":
-                    template.resultList = template.getOldestBookPerGenre(template.getBooksList());
-                    template.resultList.sort(new Comparator<BookItem>() {
+                    resultList = member.getOldestBookPerGenre(member.getBooksList());
+                    resultList.sort(new Comparator<BookItem>() {
                         @Override
                         public int compare(BookItem bookItem, BookItem t1) {
                             String title1 = bookItem.getTitle();
@@ -79,7 +81,7 @@ public class Main {
                             return title1.compareTo(title2);
                         }
                     });
-                    System.out.println(Common.setCommaAsDelimiter(template.resultList));
+                    System.out.println(Common.setCommaAsDelimiter(resultList));
                     System.out.println("Operation finished! Please, choose the next one!");
                     break;
                 case "exit":

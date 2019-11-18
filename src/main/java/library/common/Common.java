@@ -6,6 +6,11 @@ import java.util.List;
 import java.util.Random;
 
 public class Common {
+
+    private Common() {
+
+    }
+
     public static int getRandomNumberInRange(int min, int max) {
         if (min >= max || min <= 0) {
             throw new IllegalArgumentException("Must be in range 1 and greater");
@@ -15,7 +20,7 @@ public class Common {
     }
 
     public static String setCommaAsDelimiter(List<BookItem> itemList) {
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         for (BookItem item : itemList){
             sb.append(item.getTitle()).append(", ");
         }

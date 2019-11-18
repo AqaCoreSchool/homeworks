@@ -1,10 +1,11 @@
 package library.interfaces;
 
-import library.Book;
+import library.BookItem;
+
 import java.util.List;
 
 public interface Searchable {
-    List<Book> searchBookByTitle(String title);
-    List<Book> searchBookByAuthor(String author);
+    List<BookItem> getOldestBookPerGenre(List<BookItem> bookItems);
+    List<BookItem> getBooksByAuthor(String author);
     //... other methods
 }
