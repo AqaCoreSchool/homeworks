@@ -111,7 +111,7 @@ public class User extends Human implements Searchable {
             }
             if (filteredMovie.isEmpty()){
                     throw new NoSuchFilmsException("Our collection of films doesn't include " +
-                                                    "films with this genre" +"-" + genre);
+                                                    "films with this genre - " + genre);
             }
         return filteredMovie;
     }
@@ -130,15 +130,16 @@ public class User extends Human implements Searchable {
 
     //This method checks if all movies in a List corresponds to search by year of release
     public boolean isReleasesOfAllFilmsCorrespondToFilter(List<Movie> films, int yearRelease){
-        if (yearRelease < 1984) {
-                throw new NoSuchFilmsException("Our collection of films doesn't include such old films");
-        }
 
              for (Movie elem : films) {
                  if (elem.getYearRelease() < yearRelease) {
                      return false;
                  }
              }
+        if (yearRelease < 1984) {
+            throw new NoSuchFilmsException("Our collection of films doesn't include films" +
+                                            " with release in - " + yearRelease + " Try searching after - 1984");
+        }
         return true;
         }
 
