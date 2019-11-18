@@ -33,6 +33,7 @@ public class Sessions extends BaseClass {
 
     public void uniqueGenresSortAlphabetically() {
         Map<String, String> filmDescription = new HashMap<>();
+        checkForEmptyList(filmList);
         for (Film film : filmList) {
             if (filmDescription.put(film.getNameFilm(), film.getGenre()) != null) {
                 throw new IllegalStateException("Duplicate key");
@@ -50,17 +51,20 @@ public class Sessions extends BaseClass {
     }
 
     public void printFilmList() {
+        checkForEmptyList(filmList);
         for (Film film : filmList) {
             System.out.println(film);
         }
     }
 
     public Sessions sortFilmsByGenre(String genre) {
+        checkForEmptyList(filmList);
         filmList.removeIf(a -> (!a.getGenre().equals(genre)));
         return this;
     }
 
     public Sessions sortFilmsByAlphabetically() {
+        checkForEmptyList(filmList);
         Comparator<Film> comparator = Comparator.comparing(Film::getNameFilm);
         filmList.sort(comparator);
         return this;
@@ -100,6 +104,12 @@ public class Sessions extends BaseClass {
             return true;
         } else {
             return false;
+        }
+    }
+
+    private void checkForEmptyList(List<Film> list){
+        if(null == list || list.isEmpty()){
+            throw new IllegalStateException("Film list is empty");
         }
     }
 }
