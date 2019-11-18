@@ -1,16 +1,16 @@
 package ParkingLot;
 
-public abstract class AbstractEmployee {
+public abstract class Employee {
     private String name;
     private String position;
     private int workHours;
     private int ratePerHour;
 
 
-    public AbstractEmployee() {
+    public Employee() {
     }
 
-    public AbstractEmployee(String name, int workHours) {
+    public Employee(String name, int workHours) {
         this.name = name;
         this.workHours = workHours;
     }

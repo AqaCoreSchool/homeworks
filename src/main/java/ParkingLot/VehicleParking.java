@@ -1,6 +1,8 @@
 package ParkingLot;
 
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 class VehicleParking {
 
@@ -24,6 +26,22 @@ class VehicleParking {
             if (vehicle.getNumber().substring(0, 2).equals(template)) {
                 System.out.println(vehicle);
             }
+        }
+    }
+
+    public boolean isNumberCorrect(String number) {
+        try {
+            Pattern p = Pattern.compile(pattern);
+            Matcher m = p.matcher(number);
+            if (m.matches()) {
+                return true;
+            } else {
+                System.out.println(number + " - this is wrong format of vehicle number ");
+                return false;
+            }
+        } catch (NullPointerException e) {
+            System.out.println("Number is empty. You can not add vehicle without number ");
+            return false;
         }
     }
 
@@ -52,7 +70,7 @@ class VehicleParking {
         }
     }
 
-    static boolean isAllOwners(String ownerSearch) {
+    public static boolean isAllOwners(String ownerSearch) {
         for (AbstractVehicle vehicle : vehicleList) {
             if (!vehicle.getOwner().contains(ownerSearch)) {
                 return false;

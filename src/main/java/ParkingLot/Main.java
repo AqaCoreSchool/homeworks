@@ -24,14 +24,14 @@ public class Main {
         VehicleParking.waitConsole();
         AbstractVehicle v5 = new Truck("Ostap Vyshny", "ВВ 3333 АК");
         VehicleParking.waitConsole();
-        AbstractVehicle v6 = new Car();
+        AbstractVehicle v6 = new Car("", "ВІ 44444 КЛ");
         VehicleParking.waitConsole();
         AbstractVehicle v7 = new Truck("Ivan Petrenko", "АА 5555 ОП");
         VehicleParking.waitConsole();
         AbstractVehicle v8 = new Truck("Stephen King", "АА 5556 ТИ");
         AbstractVehicle v9 = new Truck("George Martin", "АППА 5556 ТИ");
         AbstractVehicle v10 = new Truck("Joanne Rowling", "АА 5556 ТИ");
-        AbstractVehicle v11 = new Truck("Taras Kvas", "АА 5556 ТИ");
+        AbstractVehicle v11 = new Truck();
         AbstractVehicle v12 = new Truck("Ostap Ivanov", "АВ 5556 ТИ");
         AbstractVehicle v13 = new Truck("Tim Barton", "АА 5586 ТИ");
         AbstractVehicle v14 = new Truck("Ivan Ivanov", "АА 5556 ТИ");
@@ -47,6 +47,7 @@ public class Main {
         v8.checkIn(v8);
         v9.checkIn(v9);
         v10.checkIn(v10);
+        v11.checkIn(v10);
         v15.checkIn(v15);
         System.out.println("\n");
         v1.checkOut(v1);

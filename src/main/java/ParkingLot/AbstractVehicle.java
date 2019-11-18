@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 
 import static ParkingLot.VehicleParking.*;
 
-public abstract class AbstractVehicle {
+abstract public class AbstractVehicle {
     private String owner;
     private String number;
     private String vehicleType;
@@ -45,7 +45,7 @@ public abstract class AbstractVehicle {
     }
 
 
-   public void checkIn(AbstractVehicle vehicle) {
+    public void checkIn(AbstractVehicle vehicle) {
         if (isNumberCorrect()) {
             if (freeLots > 0) { //// треба переробити
                 Date dateIn = new Date();
