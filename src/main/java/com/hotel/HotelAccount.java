@@ -27,11 +27,7 @@ public class HotelAccount {
             }
         }
         if (allFreeRooms.isEmpty()) {
-            try {
                 throw new RoomNotFoundException("Вільних кімнат не знайдено");
-            } catch (RoomNotFoundException e) {
-                e.printStackTrace();
-            }
         }
         return allFreeRooms;
     }
@@ -45,11 +41,7 @@ public class HotelAccount {
             }
         }
         if (allFreeRooms.isEmpty()) {
-            try {
                 throw new RoomNotFoundException("За вашим пошуком кімнат не знайдено");
-            } catch (RoomNotFoundException e) {
-                e.printStackTrace();
-            }
         }
         return allFreeRooms;
     }
@@ -63,11 +55,7 @@ public class HotelAccount {
             }
         }
         if (allFreeRooms.isEmpty()) {
-            try {
                 throw new RoomNotFoundException("За вашим пошуком вільних загальних кімнат не знайдено");
-            } catch (RoomNotFoundException e) {
-                e.printStackTrace();
-            }
         }
         return allFreeRooms;
     }
@@ -94,11 +82,7 @@ public class HotelAccount {
             }
         }
         if (allFreeRooms.isEmpty()) {
-            try {
                 throw new RoomNotFoundException("Вільних одиночних кімнат не знайдено");
-            } catch (RoomNotFoundException e) {
-                e.printStackTrace();
-            }
         }
         return allFreeRooms;
     }
@@ -113,11 +97,7 @@ public class HotelAccount {
             }
         }
         if (allFreeRoomsByCustomerSearch.isEmpty()) {
-            try {
                 throw new RoomNotFoundException("За вашим пошуком вільних кімнат не знайдено");
-            } catch (RoomNotFoundException e) {
-                e.printStackTrace();
-            }
         }
         return allFreeRoomsByCustomerSearch;
     }

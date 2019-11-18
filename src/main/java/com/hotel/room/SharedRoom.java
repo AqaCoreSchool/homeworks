@@ -30,7 +30,7 @@ public class SharedRoom extends Room implements IPlace {
         return numberOfPlaces - numberOfBookingPlaces;
     }
 
-    public void addNewBooking(Customer customer) throws NotFoundFreePlaceException {
+    public void addNewBooking(Customer customer){
         if (!isBooking()) {
             guests.add(customer);
             numberOfBookingPlaces++;
