@@ -2,7 +2,7 @@ package emploee;
 
 import java.util.Random;
 
-public class Mananger extends Emploee implements Workable{
+public class Mananger extends Emploee implements Workable {
     Mananger(){}
     public Mananger(String name, double salary){
         Random random = new Random(  ) ;

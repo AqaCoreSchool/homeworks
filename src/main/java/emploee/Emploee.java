@@ -1,7 +1,5 @@
 package emploee;
 
-import java.util.Random;
-
 public class Emploee{
     String name;
     double salary;

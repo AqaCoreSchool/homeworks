@@ -1,8 +1,7 @@
-import com.github.javafaker.Faker;
-import emploee.Director;
 import emploee.Emploee;
 
-import java.util.*;
+import java.util.LinkedList;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {

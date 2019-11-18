@@ -1,11 +1,13 @@
 import com.github.javafaker.Faker;
 import emploee.*;
 
-
-import java.util.*;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Random;
+import java.util.Scanner;
 
 public class WorkWithStuff {
-    public List getStuff() {
+    List getStuff() {
         Stuff stuff[] = Stuff.values();
         List<Emploee> employees = new LinkedList();
         Random number = new Random();
@@ -43,11 +45,11 @@ public class WorkWithStuff {
         return employees;
     }
 
-    public List filterBySalary(List stuff, double salary) {
+     List filterBySalary(List stuff, double salary) {
        List <Emploee>employees = stuff;
        Emploee emploee;
         for (int i = 0; i < employees.size() ; i++) {
-            emploee = (Emploee) employees.get( i );
+            emploee = employees.get( i );
             if(emploee.getSalary()<salary) {
                 employees.remove( i );
                 i=-1;
@@ -57,7 +59,7 @@ public class WorkWithStuff {
 printStuff( employees );
         return employees;
     }
-    public void printStuff(List stuff){
+    void printStuff(List stuff){
         StringBuilder sb = new StringBuilder();
         Emploee emploee;
         System.out.println("----------------------------------------------------------------------------");
@@ -70,7 +72,7 @@ printStuff( employees );
         }
 
     }
-    public void addEmpolee(List employees,Stuff stuff[]){
+     void addEmpolee(List employees, Stuff stuff[]){
         Scanner inputData = new Scanner( System.in );
         Scanner inputName = new Scanner( System.in );
         Scanner inputSalary = new Scanner( System.in );
