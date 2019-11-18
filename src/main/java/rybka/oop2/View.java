@@ -1,10 +1,12 @@
 package rybka.oop2;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class View {
     private Application application = new Application();
     private Scanner scanner = new Scanner(System.in);
+    private boolean loop = true;
 
     public void showView() {
         System.out.print("1. Retrieve list of movie sessions\n" +
@@ -16,40 +18,51 @@ public class View {
                 "7.Traverse movie list, collect all unique genres, sort them alphabetically and print " +
                 "them to console using comma as a delimiter\nEnter any other key to exit.");
 
-        boolean loop = true;
         while (loop) {
-            System.out.println("\n\nMake your choise :");
-            byte choice = scanner.nextByte();
+            try {
+                System.out.print("\n\nMake your choise :");
+                byte choise = scanner.nextByte();
+                chooseOption(choise);
 
-            switch (choice) {
-                case 1:
-                    application.showSessionList();
-                    break;
-                case 2:
-                    System.out.print("Input genre: ");
-                    application.filterByGenre(scanner.next());
-                    break;
-                case 3:
-                    application.sortMovies();
-                    break;
-                case 4:
-                    System.out.print("Input duration: ");
-                    System.out.println(application.isAtLeastOneMovie(scanner.nextDouble()));
-                    break;
-                case 5:
-                    System.out.print("Input year: ");
-                    System.out.println(application.isAllMovies(scanner.nextInt()));
-                    break;
-                case 6:
-                    System.out.print("Input title: ");
-                    System.out.println(application.isNoneMovies(scanner.next()));
-                    break;
-                case 7:
-                    application.collectUniqueGenres();
-                    break;
-                default:
-                    loop = false;
+            } catch (InputMismatchException e) {
+                System.out.println("Exception! Cause: " + e.getMessage());
+                break;
+            } catch (NoSuchGenreException | NoSuchTitleException | NotAYearException | UnsupportedDurationException e) {
+                System.out.print("Exception! Cause: " + e.getMessage());
             }
+        }
+    }
+
+    private void chooseOption(final byte choise) throws NoSuchGenreException, NotAYearException, UnsupportedDurationException {
+        switch (choise) {
+            case 1:
+                application.showSessionList();
+                break;
+            case 2:
+                System.out.print("Input genre: ");
+                application.filterByGenre(scanner.next());
+                break;
+            case 3:
+                application.sortMovies();
+                break;
+            case 4:
+                System.out.print("Input duration: ");
+                System.out.println(application.isAtLeastOneMovie(scanner.nextDouble()));
+                break;
+            case 5:
+                System.out.print("Input year: ");
+                System.out.println(application.isAllMovies(scanner.nextInt()));
+                break;
+            case 6:
+                System.out.print("Input title: ");
+                System.out.println(application.isNoneMovies(scanner.next()));
+                break;
+            case 7:
+                application.collectUniqueGenres();
+                break;
+            default:
+                System.out.println("Exiting...");
+                loop = false;
         }
     }
 }

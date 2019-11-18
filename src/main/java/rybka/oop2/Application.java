@@ -1,5 +1,6 @@
 package rybka.oop2;
 
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -29,20 +30,28 @@ class Application {
     }
 
     void showSessionList() {
+        writeFile("\nMovies list");
         for (Movie movie : movies) {
             System.out.println(movie.getSessions() + "\t" + movie.getTitle());
+            writeFile(movie.getSessions() + "\t" + movie.getTitle());
         }
     }
 
-    void filterByGenre(String genre) {
+    void filterByGenre(String genre) throws NoSuchGenreException {
+        writeFile("\nFiltered by genre");
+        if (genre.matches("\\d*")) {
+            throw new NoSuchGenreException("Not a genre format");
+        }
         for (Movie movie : movies) {
             if (movie.getGenre().equalsIgnoreCase(genre)) {
                 System.out.println(movie.getSessions() + "\t" + movie.getTitle());
+                writeFile(movie.getSessions() + "\t" + movie.getTitle());
             }
         }
     }
 
     void sortMovies() {
+        writeFile("\nMovies sorting");
         Collections.sort(movies, new Comparator<Movie>() {
             public int compare(Movie movie1, Movie movie2) {
                 return movie1.getTitle().compareTo(movie2.getTitle());
@@ -51,40 +60,59 @@ class Application {
 
         for (Movie movie : movies) {
             System.out.println(movie.getSessions() + "\t" + movie.getTitle());
+            writeFile(movie.getSessions() + "\t" + movie.getTitle());
         }
     }
 
-    boolean isAtLeastOneMovie(double duration) {
+    boolean isAtLeastOneMovie(double duration) throws UnsupportedDurationException {
+        writeFile("\nIs there at least one movie with duration of " + duration);
+        if (duration <= 0) {
+            throw new UnsupportedDurationException("Wrong duration format found!");
+        }
         byte counter = 0;
         for (Movie movie : movies) {
             if (movie.getDuration() > duration) {
                 counter++;
             }
         }
+        writeFile(String.valueOf(counter <= 1));
+
         return counter <= 1;
     }
 
-    boolean isAllMovies(int year) {
+    boolean isAllMovies(int year) throws NotAYearException {
+        writeFile("\nAre there all movies with year of " + year);
+        if (year <= 0 || !String.valueOf(year).matches("\\d{4}")) {
+            throw new NotAYearException("Wrong year format found!");
+        }
         int counter = 0;
         for (Movie movie : movies) {
             if (movie.getYear() >= year) {
                 counter++;
             }
         }
+        writeFile(String.valueOf(counter == movies.size()));
+
         return counter == movies.size();
     }
 
-    boolean isNoneMovies(String title) {
+    boolean isNoneMovies(String title) throws NoSuchTitleException {
+        writeFile("\nAre there none movies with title of " + title);
+        if (title.matches("^\\d*$|^\\W")) {
+            throw new NoSuchTitleException("Wrong title input!");
+        }
         int counter = 0;
         for (Movie movie : movies) {
             if (movie.getTitle().equals(title) || movie.getTitle().contains(title)) {
                 counter++;
             }
         }
+        writeFile(String.valueOf(counter == 0));
         return counter == 0;
     }
 
     void collectUniqueGenres() {
+        writeFile("\nUnique genres list");
         List<String> genres = new ArrayList<>();
 
         for (Movie movie : movies) {
@@ -95,6 +123,15 @@ class Application {
 
         Collections.sort(genres);
         System.out.println(String.join(", ", genres));
+        writeFile(String.join(", ", genres));
+    }
+
+    private void writeFile(String data) {
+        try (FileWriter writer = new FileWriter("data.txt", true)) {
+            writer.append(data + "\n");
+        } catch (Exception e) {
+            System.out.println("File writing exception. Cause: " + e.getMessage());
+        }
     }
 }
 
