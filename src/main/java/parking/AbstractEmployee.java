@@ -1,4 +1,4 @@
-package ParkingLot;
+package parking;
 
 public abstract class AbstractEmployee {
     private String name;

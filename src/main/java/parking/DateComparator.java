@@ -1,4 +1,4 @@
-package ParkingLot;
+package parking;
 
 import java.util.Comparator;
 

@@ -1,10 +1,10 @@
-package ParkingLot;
+package parking;
 
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-class VehicleParking {
+public class VehicleParking {
 
 
     final static int LOT_COUNT = 100;

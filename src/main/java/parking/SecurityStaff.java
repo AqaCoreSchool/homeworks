@@ -1,4 +1,4 @@
-package ParkingLot;
+package parking;
 
 public class SecurityStaff extends AbstractEmployee {
 

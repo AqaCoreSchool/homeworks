@@ -1,8 +1,8 @@
-package ParkingLot;
+package parking;
 
 import java.util.Scanner;
 
-import static ParkingLot.VehicleParking.*;
+import static parking.VehicleParking.*;
 
 public class Main {
     public static void main(String[] args) {

@@ -1,10 +1,10 @@
-package ParkingLot;
+package parking;
 
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static ParkingLot.VehicleParking.*;
+import static parking.VehicleParking.*;
 
 public abstract class AbstractVehicle {
     private String owner;

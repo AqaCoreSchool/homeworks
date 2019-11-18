@@ -1,4 +1,4 @@
-package ParkingLot;
+package parking;
 
 public class Admin extends AbstractEmployee {
 
