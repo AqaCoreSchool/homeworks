@@ -27,34 +27,34 @@ public class Main {
         while(flow) {
             System.out.println("Input option:");
             System.out.println("1 - show available dishes(menu), 2 - filter dish by type, " +
-                    "3 - sort dishes by price, 4 - check is one of by criteria, \n" +
-                    "5 - check is all by criteria, 6 - check is none by criteria, " +
+                    "3 - sort dishes by price, 4 - is any food price bigger then, \n" +
+                    "5 - check is all food calories lower then, 6 - check is none food size equals to, " +
                     "7 - cheapest item Name-Price per type, 8 - show map [FoodType : items amount], " +
                     "0 - exit");
             String option = scanner.next();
             switch(option){
                 case "1":{
-                    daymenu.display(daymenu.getProductList());
+                    daymenu.showMenu(daymenu.getProductList());
                     break;
                 }
                 case "2":{
                     System.out.println("Input type: " +
                             "0 - burgers, 1 - beverages, 2 - coffee, 3 - fried food, 4 - salads");
                     int filterOption = scanner.nextInt();
-                    daymenu.filter(filterOption);
-                    daymenu.display(daymenu.getFilteredList());
+                    daymenu.filterMenuByFoodType(filterOption);
+                    daymenu.showMenu(daymenu.getFilteredList());
                     break;
                 }
                 case "3":{
                     daymenu.sortByPrice();
-                    daymenu.display(daymenu.getProductList());
+                    daymenu.showMenu(daymenu.getProductList());
                     break;
                 }
                 case "4":{
                     System.out.println("Check if at least one food item price is bigger than criteria");
                     System.out.println("Input double price criteria:");
                     double priceCriteria = scanner.nextDouble();
-                    System.out.format("Result: %b\n", daymenu.isOneOfBigger(priceCriteria));
+                    System.out.format("Result: %b\n", daymenu.isAnyFoodPriceBiggerThan(priceCriteria));
                     System.out.println();
                     break;
                 }
@@ -62,7 +62,7 @@ public class Main {
                     System.out.println("Check if all food items calories are lower than criteria");
                     System.out.println("Input int calories criteria:");
                     int caloriesCriteria = scanner.nextInt();
-                    System.out.format("Result: %b\n", daymenu.isAllLower(caloriesCriteria));
+                    System.out.format("Result: %b\n", daymenu.isAllFoodCaloriesLowerThen(caloriesCriteria));
                     System.out.println();
                     break;
                 }
@@ -70,7 +70,7 @@ public class Main {
                     System.out.println("Check if none food items size equals to criteria");
                     System.out.println("Input string size criteria:");
                     String sizeCriteria = scanner.next();
-                    System.out.format("Result: %b\n", daymenu.isNone(sizeCriteria));
+                    System.out.format("Result: %b\n", daymenu.isNoneFoodSizeEqualsTo(sizeCriteria));
                     System.out.println();
                     break;
                 }

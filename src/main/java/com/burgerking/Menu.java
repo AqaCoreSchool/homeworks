@@ -77,7 +77,7 @@ public class Menu {
         this.productList.sort(compareByName);
     }
 
-    public void display(List<Food> list){
+    public void showMenu(List<Food> list){
         int printIdCounter = 0;
         for(Food food: list){
             printIdCounter++;
@@ -88,7 +88,7 @@ public class Menu {
         System.out.println();
     }
 
-    public void filter(int filterOption) {
+    public void filterMenuByFoodType(int filterOption) {
         List<Food> filtered = new ArrayList<>();
         for(Food food: this.getProductList()){
             if(food.getType().ordinal()==filterOption){
@@ -98,7 +98,7 @@ public class Menu {
         this.setFilteredList(filtered);
     }
 
-    public boolean isOneOfBigger(Double price) {
+    public boolean isAnyFoodPriceBiggerThan(Double price) {
         for (Food food : this.getProductList()) {
             if (food.getPrice() > price) {
                 return true;
@@ -107,71 +107,7 @@ public class Menu {
         return false;
     }
 
-    public boolean isOneOfLower(Double price) {
-        for (Food food : this.getProductList()) {
-            if (food.getPrice() < price) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-
-    public boolean isOneOfBigger(Integer calories){
-        for(Food food: this.getProductList()){
-            if(food.getCalories()>calories){
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public boolean isOneOfLower(Integer calories){
-        for(Food food: this.getProductList()){
-            if(food.getCalories()<calories){
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public boolean isOneOf(String size){
-        for(Food food: this.getProductList()){
-            if(food.getSize().equalsIgnoreCase(size)){
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public boolean isAllBigger(Double price) {
-        for (Food food : this.getProductList()) {
-            if (food.getPrice() < price) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    public boolean isAllLower(Double price) {
-        for (Food food : this.getProductList()) {
-            if (food.getPrice() > price) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    public boolean isAllBigger(Integer calories){
-        for(Food food: this.getProductList()){
-            if(food.getCalories() < calories){
-                return false;
-            }
-        }
-        return true;
-    }
-
-    public boolean isAllLower(Integer calories){
+    public boolean isAllFoodCaloriesLowerThen(Integer calories){
         for(Food food: this.getProductList()){
             if(food.getCalories() > calories){
                 return false;
@@ -180,52 +116,7 @@ public class Menu {
         return true;
     }
 
-    public boolean isAll(String size){
-        for(Food food: this.getProductList()){
-            if(!food.getSize().equalsIgnoreCase(size)){
-                return false;
-            }
-        }
-        return true;
-    }
-
-    public boolean isNoneBigger(Double price) {
-        for (Food food : this.getProductList()) {
-            if (food.getPrice() > price) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    public boolean isNoneLower(Double price) {
-        for (Food food : this.getProductList()) {
-            if (food.getPrice() < price) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    public boolean isNoneBigger(Integer calories){
-        for(Food food: this.getProductList()){
-            if(food.getCalories() > calories){
-                return false;
-            }
-        }
-        return true;
-    }
-
-    public boolean isNoneLower(Integer calories){
-        for(Food food: this.getProductList()){
-            if(food.getCalories() < calories){
-                return false;
-            }
-        }
-        return true;
-    }
-
-    public boolean isNone(String size){
+    public boolean isNoneFoodSizeEqualsTo(String size){
         for(Food food: this.getProductList()){
             if(food.getSize().equalsIgnoreCase(size)){
                 return false;
