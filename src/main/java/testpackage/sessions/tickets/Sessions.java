@@ -66,7 +66,7 @@ public class Sessions extends BaseClass {
         return this;
     }
 
-    private int isHas(String str) {
+    private int numberOfFilmsForIntendedCriterion(String str) {
         int k = 0;
         for (Film film : filmList) {
             if (film.toString().contains(str)) {
@@ -77,7 +77,7 @@ public class Sessions extends BaseClass {
     }
 
     public boolean haveAllMovieCriteria(String criteria) {
-        if (isHas(criteria) == filmList.size()) {
+        if (numberOfFilmsForIntendedCriterion(criteria) == filmList.size()) {
             System.out.println("All movies in your list corresponds to your criteria");
             return true;
         } else {
@@ -86,7 +86,7 @@ public class Sessions extends BaseClass {
     }
 
     public boolean hasOneMovieCriteria(String criteria) {
-        if (isHas(criteria) > 0) {
+        if (numberOfFilmsForIntendedCriterion(criteria) > 0) {
             System.out.println("One movie in your list corresponds to your criteria");
             return true;
         } else {
@@ -95,7 +95,7 @@ public class Sessions extends BaseClass {
     }
 
     public boolean hasNoOneMovieCriteria(String criteria) {
-        if (isHas(criteria) == 0) {
+        if (numberOfFilmsForIntendedCriterion(criteria) == 0) {
             System.out.println("Not one movie on your list matches your criteria");
             return true;
         } else {
