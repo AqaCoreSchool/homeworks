@@ -3,21 +3,22 @@ package parkinglot;
 public abstract class AbstractVehicle {
 
     private String licensePlate;
+    private String ownerName;
 
-    AbstractVehicle(String licensePlate) {
+    AbstractVehicle(String licensePlate, String ownerName) {
         this.licensePlate = licensePlate;
+        this.ownerName = ownerName;
     }
 
-    public String getLicensePlate() {
+    public String getLicensePlates() {
         return licensePlate;
     }
 
-    public void setLicensePlate() {
-        this.licensePlate = "";
+    public String getOwnerName() {
+        return ownerName;
     }
 
     public abstract String getVehicleType();
 
-    public abstract void setVehicleType();
-
+    public abstract int getVehicleSize();
 }

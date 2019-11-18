@@ -1,8 +1,11 @@
 package parkinglot;
 
-import java.util.Date;
+import parkinglot.Enums.PaymentStatus;
 
-public class ParkingTicket {
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+public class ParkingTicket  {//implements Comparable {
 
     private String parkingTicketNumber;
     private String paymentStatus;
@@ -12,20 +15,24 @@ public class ParkingTicket {
     private static int ticketNumber = 0;
 
     ParkingTicket() {
+
         this.paymentStatus = PaymentStatus.UNPAYED.toString();
         this.entranceTime = getCurrentTime();
         this.parkingTicketNumber = generateParkingTicketNumber();
         this.exitTime = "";
     }
 
-    private String getCurrentTime() {
-        Date date = new Date();
-        return date.toString();
+    public static String getCurrentTime() {
+
+        LocalDateTime dateTime = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        return dateTime.format(formatter);
     }
 
     private String generateParkingTicketNumber() {
+
         ticketNumber++;
-        return String.format("%06d",ticketNumber);
+        return String.format("%06d", ticketNumber);
     }
 
     public String getParkingTicketNumber() {
@@ -44,15 +51,17 @@ public class ParkingTicket {
     }
 
     public void setPaymentStatus(String paymentStatus) {
+
         this.paymentStatus = paymentStatus;
     }
 
     public void setExitTime() {
-        this.exitTime = getCurrentTime();
+
+        exitTime = getCurrentTime();
     }
 
     public String getExitTime() {
+
         return exitTime;
     }
-
 }
