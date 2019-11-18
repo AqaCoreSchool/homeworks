@@ -1,5 +1,8 @@
 package com.burgerking;
 
+import com.burgerking.exception.FilteredListIsEmptyException;
+import com.burgerking.exception.FoodTypeNotFoundException;
+
 import java.util.*;
 
 public class Menu {
@@ -89,11 +92,17 @@ public class Menu {
     }
 
     public void filterMenuByFoodType(int filterOption) {
+        if(filterOption < 0 || filterOption > FoodType.values().length){
+            throw new FoodTypeNotFoundException("There is no such food type in menu!");
+        }
         List<Food> filtered = new ArrayList<>();
         for(Food food: this.getProductList()){
             if(food.getType().ordinal()==filterOption){
                 filtered.add(food);
             }
+        }
+        if(filtered.isEmpty()){
+            throw new FilteredListIsEmptyException("No food of this type in menu - nothing to filter!");
         }
         this.setFilteredList(filtered);
     }
