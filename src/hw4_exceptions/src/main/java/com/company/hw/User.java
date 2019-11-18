@@ -76,14 +76,10 @@ public class User {
     }
 
     //4
-    void hasEarlierBooks(int year) {
+    void findEarlierBooks(int year) {
         for (Library next : books) {
             if (year < 1604) {
-                try {
-                    throw new NoSuchBookException("I throw exception");
-                } catch (NoSuchBookException e) {
-                    System.out.println("We have books only > 1603");
-                }
+                throw new NoSuchBookException("We have books only > 1603");
             }
             else if(next.getYear() < year){
                 System.out.println(next);
