@@ -61,7 +61,7 @@ public class Main {
                     System.out.println("Enter the genre to check if all books in list correspond it.");
                     innerInput = new Scanner(System.in);
                     innerString = innerInput.next();
-                    System.out.println(member.areAllByGenre(BookGenre.valueOf(innerString)));
+                    System.out.println(member.areAllByGenre(innerString));
                     System.out.println(Constant.OPERATION_FINISHED);
                     break;
                 case "5":
