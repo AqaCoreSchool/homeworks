@@ -94,7 +94,7 @@ public class User extends Human implements Searchable {
                     sessionMap.put(elem.getFilmName(), elem.getSessions());
             }
         if (sessionMap.isEmpty()) {
-            throw new NoSuchFilmsException("Our collection of films don't include any films with sessions");
+            throw new NoSuchFilmsException("Our collection of films doesn't include any films with sessions");
         }
         return  sessionMap;
     }
@@ -110,7 +110,7 @@ public class User extends Human implements Searchable {
                 }
             }
             if (filteredMovie.isEmpty()){
-                    throw new NoSuchFilmsException("Our collection of films don't include films with this genre");
+                    throw new NoSuchFilmsException("Our collection of films doesn't include films with this genre");
             }
         return filteredMovie;
     }
@@ -130,7 +130,7 @@ public class User extends Human implements Searchable {
     //This method checks if all movies in a List corresponds to search by year of release
     public boolean isReleasesOfAllFilmsCorrespondToFilter(List<Movie> films, int yearRelease){
         if (yearRelease < 1984) {
-                throw new NoSuchFilmsException("Our collection of films don't include such old films");
+                throw new NoSuchFilmsException("Our collection of films doesn't include such old films");
         }
 
              for (Movie elem : films) {
@@ -167,7 +167,7 @@ public class User extends Human implements Searchable {
             uniqueGenres.add(elem.getFilmGenre().toString());
         }
         if (uniqueGenres.isEmpty()) {
-            throw new NoSuchFilmsException("Our collection of films don't include any films with unique genres");
+            throw new NoSuchFilmsException("Our collection of films doesn't include any films with unique genres");
         }
         return uniqueGenres;
 
