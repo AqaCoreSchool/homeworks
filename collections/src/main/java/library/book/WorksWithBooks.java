@@ -1,19 +1,22 @@
 package library.book;
 
 
+import com.github.javafaker.Faker;
+
 import java.util.*;
 
 public class WorksWithBooks {
 
-    public List createListOfBooks(List catalog){
-     Book books[] = new Book[5];
-     // ADD 10 ITEM
-     books[0] = new Book( "The Hunger Game","Suzanne Collins","ADWENTURE", 2008);
-     books[1] = new Book( "The Great Gatsby","F. Scott Fitzgerald","HistoricalFiction".toUpperCase(), 1925);
-     books[2] = new Book( "The Grapes of Wrath","John Steinbeck","HistoricalFiction".toUpperCase(), 1939);
-     books[3] = new Book( "Nineteen Eighty-Four","George Orwell","ScienceFiction".toUpperCase(), 1949);
-     books[3] = new Book( "Nineteen Eighty-Four","George Orwell","ScienceFiction".toUpperCase(), 1948);
-     books[4] = new Book( "Ulysses","James Joyce","Ireland".toUpperCase(), 1949);
+    public List createListOfBooks(List catalog,int size, GenreOfBooks genreOfBooks[]){
+     Book books[] = new Book[size];
+     Faker faker = new Faker();
+     Random random = new Random(  );
+
+        for (int i = 0; i <size ; i++) {
+
+            books[i] = new Book(faker.book().title(),faker.book().author(),
+                    genreOfBooks[random.nextInt(4)].toString(), random.nextInt(2019-2000+1)+2000);
+        }
 
        // replace on 15
         for (int i = 0; i < books.length; i++) {
@@ -25,7 +28,7 @@ public class WorksWithBooks {
         Book book;
         for (int i = 0; i <catalog.size() ; i++) {
             book = (Book) catalog.get( i );
-            System.out.println(book.getName()+" "+book.getYear()+",");
+            System.out.println(book.getName()+"| "+book.getAuthor()+" "+book.getYear()+" "+book.getGenre()+",");
         }
     return catalog;
     }
@@ -48,17 +51,26 @@ public class WorksWithBooks {
         }
 
       //  });
-        getAvailablebooks( listByAuthor );
+        try {
+            if (!listByAuthor.isEmpty()) {
+                getAvailablebooks( listByAuthor );
+            } else {
+                throw new WorkWithBookException( "Library doesn't have books with this author :" +
+                        author + " , try again" );
+            }
+        }
+        catch (WorkWithBookException exp){
+            exp.printStackTrace();
+        }
        return listByAuthor;
     }
 
-    public List sortAllbooksAlphabeticaly(List catalog,boolean order){
+    public List sortAllbooksAlphabeticaly(List catalog){
                 Collections.sort(catalog, new Comparator<Book>() {
 
             @Override
             public int compare(Book o1, Book o2) {
-                return compareTwoArraysOfChar( o1.getName().toCharArray(),o2.getName().toCharArray(),order )
-                        ? -1 : o1.getName().equals( o2.getName() ) ? 0 : 1;
+                return o1.getName().compareToIgnoreCase(o2.getName());
             }
                 });
 
@@ -162,7 +174,9 @@ public class WorksWithBooks {
 
             }
         }
-        getAvailablebooks( olderestBookByGenre );
+
+
+        sortAllbooksAlphabeticaly(olderestBookByGenre);
      return olderestBookByGenre;
     }
 

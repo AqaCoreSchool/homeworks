@@ -1,5 +1,9 @@
 package library.book;
 
 public enum GenreOfBooks {
-    ADWENTURE,SCIENCEFICTION,HISTORICALFICTION,IRELAND
+    ADWENTURE(0),SCIENCEFICTION(1),HISTORICALFICTION(2),IRELAND(3);
+    private int index;
+    GenreOfBooks(int index){
+        this.index = index;
+    }
 }
