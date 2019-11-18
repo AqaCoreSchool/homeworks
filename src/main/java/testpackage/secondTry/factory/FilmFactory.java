@@ -6,7 +6,7 @@ import testpackage.secondTry.entity.Film;
 
 public class FilmFactory extends BaseClass {
 
-    public static Film buildListFilm(Movie.Films films){
+    public static Film buildListFilm(Movie films){
           Film film = Film.builder()
                 .nameFilm(films.getNameFilm())
                 .description(films.getDescription())

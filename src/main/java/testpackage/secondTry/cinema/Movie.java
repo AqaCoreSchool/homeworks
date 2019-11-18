@@ -1,7 +1,6 @@
 package testpackage.secondTry.cinema;
 
-public class Movie {
-    public enum Films {
+    public enum Movie {
 
         JOKER ("Joker",
                 "The origin tale of the Joker (Joaquin Phoenix) " +
@@ -133,7 +132,7 @@ public class Movie {
         private String format;
         private int ageLimit;
 
-          Films(String nameFilm, String description, String genre, String[] session,
+          Movie(String nameFilm, String description, String genre, String[] session,
                 String voiceLanguage, String format, int ageLimit) {
               this.nameFilm = nameFilm;
               this.description = description;
@@ -172,4 +171,3 @@ public class Movie {
             return ageLimit;
         }
     }
-}

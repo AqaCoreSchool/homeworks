@@ -15,21 +15,21 @@ public class Sessions extends BaseClass {
     List<Film> filmList = getDefaultFilmList() ;
 
     public  List<Film>  getDefaultFilmList(){
-        List<Film> filmList = Stream.of(FilmFactory.buildListFilm(Movie.Films.JOKER),
-               FilmFactory.buildListFilm(Movie.Films.SHOPLIFTERS),
-               FilmFactory.buildListFilm(Movie.Films.ROCKETMAN),
-               FilmFactory.buildListFilm(Movie.Films.SHAZAM),
-               FilmFactory.buildListFilm(Movie.Films.US),
-               FilmFactory.buildListFilm(Movie.Films.MIDWAY),
-               FilmFactory.buildListFilm(Movie.Films.PARASITE),
-               FilmFactory.buildListFilm(Movie.Films.LIGHTHOUSE),
-               FilmFactory.buildListFilm(Movie.Films.ABOMINABLE),
-               FilmFactory.buildListFilm(Movie.Films.HUSTLERS),
-               FilmFactory.buildListFilm(Movie.Films.JUDY),
-               FilmFactory.buildListFilm(Movie.Films.TERMINATOR),
-               FilmFactory.buildListFilm(Movie.Films.MALEFICENT),
-               FilmFactory.buildListFilm(Movie.Films.HARRIET),
-               FilmFactory.buildListFilm(Movie.Films.COUNTDOWN)).collect(Collectors.toList());
+        List<Film> filmList = Stream.of(FilmFactory.buildListFilm(Movie.JOKER),
+               FilmFactory.buildListFilm(Movie.SHOPLIFTERS),
+               FilmFactory.buildListFilm(Movie.ROCKETMAN),
+               FilmFactory.buildListFilm(Movie.SHAZAM),
+               FilmFactory.buildListFilm(Movie.US),
+               FilmFactory.buildListFilm(Movie.MIDWAY),
+               FilmFactory.buildListFilm(Movie.PARASITE),
+               FilmFactory.buildListFilm(Movie.LIGHTHOUSE),
+               FilmFactory.buildListFilm(Movie.ABOMINABLE),
+               FilmFactory.buildListFilm(Movie.HUSTLERS),
+               FilmFactory.buildListFilm(Movie.JUDY),
+               FilmFactory.buildListFilm(Movie.TERMINATOR),
+               FilmFactory.buildListFilm(Movie.MALEFICENT),
+               FilmFactory.buildListFilm(Movie.HARRIET),
+               FilmFactory.buildListFilm(Movie.COUNTDOWN)).collect(Collectors.toList());
         return filmList;
         
     }
