@@ -1,12 +1,19 @@
 package parkinglot;
 
+import parkinglot.Exceptions.ParkingLotIsFullException;
+import parkinglot.Exceptions.ParkingTicketNumberNotFoundException;
+import parkinglot.Exceptions.VehicleNotFoundOnParkingLotException;
+
 import java.util.concurrent.TimeUnit;
 
 public class ParkingLotTest {
 
     public static void main(String[] args) throws InterruptedException {
 
-        ParkingLot parkingLot = new ParkingLot("Lviv1","Rynok square, 1", 10);
+        ParkingLot parkingLot = new ParkingLot("Lviv1", "Rynok square, 1", 4);
+
+        // uncomment for exception test
+        //ParkingLot parkingLot = new ParkingLot("Lviv1", "Rynok square, 1", 4);
 
         // initialization of vehicles
 
@@ -22,45 +29,118 @@ public class ParkingLotTest {
 
         int timeout = 2; // timeout for delay between parking/unparking of new vehicle
 
-        System.out.println(parkingLot.parkVehicleOnParkingLot(car1));
+        // park vehicle
+        try {
+            System.out.println(parkingLot.parkVehicleOnParkingLot(car1));
+        } catch (ParkingLotIsFullException e) {
+            System.out.println(e.getMessage());
+        }
         TimeUnit.SECONDS.sleep(timeout);
-        System.out.println(parkingLot.parkVehicleOnParkingLot(car2));
+
+        // park vehicle
+        try {
+            System.out.println(parkingLot.parkVehicleOnParkingLot(car2));
+        } catch (ParkingLotIsFullException e) {
+            System.out.println(e.getMessage());
+        }
         TimeUnit.SECONDS.sleep(timeout);
+
+        String parkingTicketNumber = null;
 
         // unpark vehicle
-        String parkingTicketNumber = parkingLot.getParkingTicketNumber(car1);
-        System.out.println(parkingLot.unparkVehicleFromParkingLot(car1, parkingTicketNumber));
+        try {
+            parkingTicketNumber = parkingLot.getParkingTicketNumber(car1);
+            try {
+                System.out.println(parkingLot.unparkVehicleFromParkingLot(car1, parkingTicketNumber));
+            } catch (VehicleNotFoundOnParkingLotException e) {
+                System.out.println(e.getMessage());
+            }
+        } catch (VehicleNotFoundOnParkingLotException | ParkingTicketNumberNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
 
-
-        System.out.println(parkingLot.parkVehicleOnParkingLot(car3));
-        TimeUnit.SECONDS.sleep(timeout);
-
-        System.out.println(parkingLot.parkVehicleOnParkingLot(motorcycle1));
-        TimeUnit.SECONDS.sleep(timeout);
-
-        System.out.println(parkingLot.parkVehicleOnParkingLot(bus3));
-        TimeUnit.SECONDS.sleep(timeout);
         // unpark vehicle
-        parkingTicketNumber = parkingLot.getParkingTicketNumber(motorcycle1);
-        System.out.println(parkingLot.unparkVehicleFromParkingLot(motorcycle1, parkingTicketNumber));
+        try {
+            parkingTicketNumber = parkingLot.getParkingTicketNumber(car1);
+            try {
+                System.out.println(parkingLot.unparkVehicleFromParkingLot(car1, parkingTicketNumber));
+            } catch (VehicleNotFoundOnParkingLotException e) {
+                System.out.println(e.getMessage());
+            }
+        } catch (VehicleNotFoundOnParkingLotException | ParkingTicketNumberNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+
+        // park vehicle
+        try {
+            System.out.println(parkingLot.parkVehicleOnParkingLot(car3));
+        } catch (ParkingLotIsFullException e) {
+            System.out.println(e.getMessage());
+        }
         TimeUnit.SECONDS.sleep(timeout);
 
-        System.out.println(parkingLot.parkVehicleOnParkingLot(motorcycle1));
+        // park vehicle
+        try {
+            System.out.println(parkingLot.parkVehicleOnParkingLot(motorcycle1));
+        } catch (ParkingLotIsFullException e) {
+            System.out.println(e.getMessage());
+        }
+        TimeUnit.SECONDS.sleep(timeout);
+
+
+        // park vehicle
+        try {
+            System.out.println(parkingLot.parkVehicleOnParkingLot(bus3));
+        } catch (ParkingLotIsFullException e) {
+            System.out.println(e.getMessage());
+        }
+        TimeUnit.SECONDS.sleep(timeout);
+
+
+        // unpark vehicle
+        try {
+            parkingTicketNumber = parkingLot.getParkingTicketNumber(motorcycle1);
+            try {
+                System.out.println(parkingLot.unparkVehicleFromParkingLot(motorcycle1, parkingTicketNumber));
+            } catch (VehicleNotFoundOnParkingLotException e) {
+                System.out.println(e.getMessage());
+            }
+        } catch (VehicleNotFoundOnParkingLotException | ParkingTicketNumberNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+        TimeUnit.SECONDS.sleep(timeout);
+
+        // park vehicle
+        try {
+
+            System.out.println(parkingLot.parkVehicleOnParkingLot(motorcycle1));
+        } catch (ParkingLotIsFullException e) {
+            System.out.println(e.getMessage());
+        }
+        TimeUnit.SECONDS.sleep(timeout);
+
+        try {
+            parkingTicketNumber = "000100";
+            try {
+                System.out.println(parkingLot.unparkVehicleFromParkingLot(null, parkingTicketNumber));
+            } catch (VehicleNotFoundOnParkingLotException e) {
+                System.out.println(e.getMessage());
+            }
+        } catch (VehicleNotFoundOnParkingLotException | ParkingTicketNumberNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
         TimeUnit.SECONDS.sleep(timeout);
 
         System.out.println("List of parked vehicles");
         System.out.println(parkingLot.getListOfVehicles());
 
-        System.out.println("\n");
 
         String type = "car";
-        System.out.println("List of parked vehicles by type: " + type);
+        System.out.println("\nList of parked vehicles by type: " + type);
         System.out.println(parkingLot.getListOfVehicles(type));
 
-        System.out.println("\n");
-
         String searchCriteria;
-        System.out.println("Check parked vehicles by search criteria");
+        System.out.println("\nCheck parked vehicles by search criteria");
 
         searchCriteria = "t*car";
         System.out.println(searchCriteria + ": " + parkingLot.checkVehicle(searchCriteria)); // returns true if all <*> parked vehicles are of type <t> "car"
@@ -74,14 +154,11 @@ public class ParkingLotTest {
         searchCriteria = "o+Ivan";
         System.out.println(searchCriteria + ": " + parkingLot.checkVehicle(searchCriteria)); // returns true if at least one <+> Ivan of parked vehicle owners <o>
 
-        System.out.println("\n");
 
-        System.out.println("Print sorted unique license plates of parked vehicles");
-        parkingLot.printSortedLicensePlates();
+        System.out.println("\nPrint sorted unique license plates of parked vehicles");
+        System.out.println(parkingLot.getSortedLicensePlates());
 
-        System.out.println("\n");
-
-        System.out.println("Print vehicles list according to duration staying on a parking lot");
+        System.out.println("\nPrint vehicles list according to duration staying on a parking lot");
         System.out.println(parkingLot.sortAccordingToDuration());
 
     }

@@ -2,6 +2,10 @@ package parkinglot;
 
 import parkinglot.Enums.PaymentStatus;
 import parkinglot.Enums.SpotStatus;
+import parkinglot.Exceptions.ParkingLotIsEmptyException;
+import parkinglot.Exceptions.ParkingLotIsFullException;
+import parkinglot.Exceptions.ParkingTicketNumberNotFoundException;
+import parkinglot.Exceptions.VehicleNotFoundOnParkingLotException;
 
 import java.util.*;
 import java.util.regex.Pattern;
@@ -15,7 +19,7 @@ public class ParkingLot {
 
     private List<ParkingSpot> parkingSpots;
     private List<AbstractVehicle> vehicles;
-    private Map <String, ParkingTicket> parkingSpotsTicketsMap;
+    private Map<String, ParkingTicket> parkingSpotsTicketsMap;
 
     // initiate Parking Lot
     ParkingLot(String name, String address, int capacity) {
@@ -42,15 +46,22 @@ public class ParkingLot {
         }
     }
 
-    private boolean isFull () {
+    private boolean isFull() {
         return freeSpots == 0;
     }
 
     public String parkVehicleOnParkingLot(AbstractVehicle vehicle) {
 
+
+
         if (isFull()) {
-            return "Sorry, but parking spot is full. Try again later.";
+            throw new ParkingLotIsFullException("Unfortunately, parking lot is full. Try again later.\n");
         } else {
+
+            System.out.printf("--- Parking vehicle of type %s with license plates %s ---\n",
+                    vehicle.getVehicleType(),
+                    vehicle.getLicensePlates());
+
             freeSpots--;
 
             int freeSpot = checkFirstFreeParkingSpot();
@@ -61,74 +72,105 @@ public class ParkingLot {
 
             parkingSpotsTicketsMap.put(Integer.toString(parkingSpots.get(freeSpot).getSpotNumber()), new ParkingTicket());
 
-            return  display("Park", freeSpot);
+            return displayTicket("Park", freeSpot);
         }
     }
 
     public String unparkVehicleFromParkingLot(AbstractVehicle vehicle, String parkingTicketNumber) {
 
-        freeSpots++;
-        int spotToClean = -1;
+        boolean ticketFound = false;
+        boolean vehicleFound = false;
+        int spotToClean = 0;
 
         for (int i = 0; i < capacity; i++) {
-
-            spotToClean = i;
-            if (parkingSpotsTicketsMap.get(Integer.toString(spotToClean)).getParkingTicketNumber()
-                    .equalsIgnoreCase(parkingTicketNumber)) {
-
-                parkingSpots.get(spotToClean).unparkVehicleFromParkingSpot(vehicle);
-                vehicles.set(spotToClean, null);
-
-                parkingSpotsTicketsMap.get(Integer.toString(spotToClean)).setPaymentStatus(
-                        PaymentStatus.PAYED.toString());
-                parkingSpotsTicketsMap.get(Integer.toString(spotToClean)).setExitTime();
-
+            if (vehicles.contains(vehicle)) {
+                vehicleFound = true;
                 break;
             }
         }
 
-        String parkingInfo = display("Unpark", spotToClean);
+        for (int i = 0; i < capacity; i++) {
+            if (parkingSpotsTicketsMap.get(Integer.toString(i)).getParkingTicketNumber()
+                    .equalsIgnoreCase(parkingTicketNumber)) {
+
+                spotToClean = i;
+                ticketFound = true;
+                break;
+            }
+        }
+
+        if (!ticketFound) {
+            throw new ParkingTicketNumberNotFoundException("Ticket number has not been found.\n");
+        } else {
+
+            System.out.printf("--- Unparking vehicle of type %s with license plates %s ---\n",
+                    vehicle.getVehicleType(),
+                    vehicle.getLicensePlates());
+
+            freeSpots++;
+
+            parkingSpots.get(spotToClean).unparkVehicleFromParkingSpot(vehicle);
+            vehicles.set(spotToClean, null);
+
+            parkingSpotsTicketsMap.get(Integer.toString(spotToClean)).setPaymentStatus(
+                    PaymentStatus.PAYED.toString());
+            parkingSpotsTicketsMap.get(Integer.toString(spotToClean)).setExitTime();
+        }
+
+        String parkingInfo = displayTicket("Unpark", spotToClean);
 
         parkingSpotsTicketsMap.put(Integer.toString(parkingSpots.get(spotToClean).getSpotNumber()), null);
 
-        return  parkingInfo;
+        return parkingInfo;
     }
 
     private int checkFirstFreeParkingSpot() {
+
+        int freeSpot = -1;
+
         for (int i = 0; i < capacity; i++) {
             if (parkingSpots.get(i).getSpotStatus().equals(SpotStatus.FREE.toString())) {
-                return i;
+                freeSpot = i;
+                break;
             }
         }
-        return -1;
+
+        return freeSpot;
     }
 
-    public String getParkingTicketNumber(AbstractVehicle vehicle) {
+    public String getParkingTicketNumber(AbstractVehicle vehicle) throws VehicleNotFoundOnParkingLotException {
+
+        System.out.printf("--- Searching parking ticket number for %s with license plates %s ---\n",
+                vehicle.getVehicleType(),
+                vehicle.getLicensePlates());
+
+        if (parkingSpotsTicketsMap.entrySet().isEmpty()) {
+            throw new ParkingLotIsEmptyException("There are no vehicles on parking lot.\n");
+        }
+
+        if(!vehicles.contains(vehicle)) {
+            throw new VehicleNotFoundOnParkingLotException("Vehicle has not been found on parking lot.\n");
+        }
 
         Iterator iterator = parkingSpotsTicketsMap.entrySet().iterator();
 
         int i = 0;
-        while (iterator.hasNext()) {
+        while (i < parkingSpotsTicketsMap.entrySet().size()) {
+
             if (parkingSpotsTicketsMap.get(Integer.toString(parkingSpots.get(i).getSpotNumber())) != null) {
                 if (vehicles.get(i).getLicensePlates().equals(vehicle.getLicensePlates())) {
+                    System.out.println("Ticket has been found.\n");
                     return parkingSpotsTicketsMap.get(Integer.toString(i)).getParkingTicketNumber();
                 }
-                i++;
             }
+            i++;
         }
-        return "";
+        throw new ParkingTicketNumberNotFoundException("Ticket has not been found.\n");
     }
 
-    private String display(String action, int spot) {
+    private String displayTicket(String action, int spot) {
 
-        String tmp = "";
-
-        if (action.equals("Park")) {
-            tmp += "--- Parking of vehicle ---\n";
-        }
-        else {
-            tmp += "--- Unparking of vehicle ---\n";
-        }
+        String tmp = "*** Parking ticket ***\n";
 
         tmp += "Parking spot: " +
                 parkingSpots.get(spot).getSpotNumber() +
@@ -149,7 +191,7 @@ public class ParkingLot {
                     "\n";
         }
 
-        tmp +=  "Status: " +
+        tmp += "Status: " +
                 parkingSpotsTicketsMap.get(Integer.toString(spot)).getPaymentStatus() +
                 "\n";
 
@@ -158,9 +200,9 @@ public class ParkingLot {
                     vehicles.get(spot).getLicensePlates() +
                     "\n" +
                     "Vehicle type: " +
-                    vehicles.get(spot).getVehicleType();
+                    vehicles.get(spot).getVehicleType() +
+                    "\n" ;
         }
-        tmp += "\n";
         return tmp;
     }
 
@@ -173,30 +215,32 @@ public class ParkingLot {
     }
 
     // retrieve list of vehicles on a parking lot
-    public ArrayList<String> getListOfVehicles() {
-        ArrayList<String> list = new ArrayList<String>();
+    public String getListOfVehicles() {
+        ArrayList<String> vehiclesList = new ArrayList<String>();
         for (int i = 0; i < capacity; i++) {
             if (vehicles.get(i) != null) {
-                list.add(vehicles.get(i).getLicensePlates());
+                vehiclesList.add(vehicles.get(i).getLicensePlates());
             }
         }
-        return list;
+
+        return String.join(", ", vehiclesList);
     }
 
     // retrieve list of vehicles filtered by type (e.g. car, bike, lorry etc)
-    public ArrayList<String> getListOfVehicles(String type) {
-        ArrayList<String> list = new ArrayList<String>();
+    public String getListOfVehicles(String type) {
+        ArrayList<String> vehiclesList = new ArrayList<String>();
 
         for (int i = 0; i < capacity; i++) {
             if ((vehicles.get(i) != null) && (vehicles.get(i).getVehicleType().equalsIgnoreCase(type))) {
-                list.add(vehicles.get(i).getLicensePlates());
+                vehiclesList.add(vehicles.get(i).getLicensePlates());
             }
         }
-        return list;
+
+        return String.join(", ", vehiclesList);
     }
 
     // Sort vehicles list according to duration it is staying on a parking lot
-    public List<String> sortAccordingToDuration() {
+    public String sortAccordingToDuration() {
 
         Map<String, String> spotsEntranceTimeMap = new HashMap<>(); // hashmap <spotNumber, entrance time>
         List<String> licensePlatesList = new ArrayList<>(); // list of license plates sorted according to entrance time
@@ -227,7 +271,7 @@ public class ParkingLot {
             licensePlatesList.add(vehicles.get(Integer.parseInt(spotNumber)).getLicensePlates());
         }
 
-        return licensePlatesList;
+        return String.join(", ", licensePlatesList);
     }
 
     public static <K, V> K getKey(Map<K, V> map, V value) {
@@ -318,7 +362,7 @@ public class ParkingLot {
 
     //Traverse vehicle list, collect all unique registration numbers,
     // sort them alphabetically and print them to console using comma as a delimiter
-    public void printSortedLicensePlates() {
+    public String getSortedLicensePlates() {
 
         Set<String> uniqueLicensePlates = new TreeSet<String>();
 
@@ -329,8 +373,6 @@ public class ParkingLot {
             }
         }
 
-        String str = String.join(", ", uniqueLicensePlates);
-
-        System.out.println(str);
+        return String.join(", ", uniqueLicensePlates);
     }
 }
