@@ -88,48 +88,32 @@ public class User extends Human implements Searchable {
     @Override
     public Map<String, List<Session>> getAllSessionsOfAllMovies(List<Movie> films){
         if (films.isEmpty()) {
-            try {
-                throw new NoSuchFilmsException("Empty list");
-            } catch (NoSuchFilmsException e) {
-                System.out.println("We don't have any films now");
-            }
+            throw new NoSuchFilmsException("We don't have any films now");
         }
         Map<String, List<Session>> sessionMap = new HashMap<>();
-                
+
         for(Movie elem: films) {
                     sessionMap.put(elem.getFilmName(), elem.getSessions());
             }
-
         return  sessionMap;
     }
 
     //This method returns a List of movies filtered by particular genre
     @Override
     public List<Movie> getMovieListFilteredByGenre(List<Movie> films, String genre){
-        List<Movie> filteredMovie = new ArrayList<>();
         if (films.isEmpty()) {
-            try {
-                throw new NoSuchFilmsException("Empty list");
-            } catch (NoSuchFilmsException e) {
-                System.out.println("We don't have any films now");
-            }
+            throw new NoSuchFilmsException("We don't have any films now");
         }
 
+        List<Movie> filteredMovie = new ArrayList<>();
             for (Movie elem : films) {
-
                 if (elem.getFilmGenre().toString().equalsIgnoreCase(genre)) {
                     filteredMovie.add(elem);
                 }
             }
             if (filteredMovie.isEmpty()){
-                try{
-                    throw new NoSuchFilmsException("Empty list");
-                }catch (NoSuchFilmsException e){
-                    System.out.println("Our collection of films don't include films with this genre");
-                }
+                    throw new NoSuchFilmsException("Our collection of films don't include films with this genre");
             }
-
-
         return filteredMovie;
     }
 
@@ -137,11 +121,7 @@ public class User extends Human implements Searchable {
     @Override
     public boolean isOneFilmDurationCorrespondsToFilter(List<Movie> films, int duration){
         if (films.isEmpty()) {
-            try {
-                throw new NoSuchFilmsException("Empty list");
-            } catch (NoSuchFilmsException e) {
-                System.out.println("We don't have any films now");
-            }
+                throw new NoSuchFilmsException("We don't have any films now");
         }
         for (Movie elem : films) {
                 if (elem.getDuration() > duration) {
@@ -154,27 +134,16 @@ public class User extends Human implements Searchable {
     //This method checks if all movies in a List corresponds to search by year of release
     public boolean isReleasesOfAllFilmsCorrespondToFilter(List<Movie> films, int yearRelease){
         if (yearRelease < 1984) {
-            try{
-                throw new NoSuchFilmsException("No matches found");
-            } catch(NoSuchFilmsException e) {
-                System.out.println("Our collection of films don't include such old films");
-            }
+                throw new NoSuchFilmsException("Our collection of films don't include such old films");
         }
         if (films.isEmpty()) {
-            try {
-                throw new NoSuchFilmsException("Empty list");
-            } catch (NoSuchFilmsException e) {
-                System.out.println("We don't have any films now");
-            }
+            throw new NoSuchFilmsException("We don't have any films now");
         }
-
              for (Movie elem : films) {
                  if (elem.getYearRelease() < yearRelease) {
                      return false;
                  }
              }
-
-
         return true;
         }
 
@@ -183,13 +152,8 @@ public class User extends Human implements Searchable {
     @Override
     public boolean isNamesOfFilmsContainWords(List<Movie> films, String filmName){
         if (films.isEmpty()) {
-            try {
-                throw new NoSuchFilmsException("Empty list");
-            } catch (NoSuchFilmsException e) {
-                System.out.println("We don't have any films now");
-            }
+            throw new NoSuchFilmsException("We don't have any films now");
         }
-
             for (Movie elem : films) {
                 if (elem.getFilmName().toLowerCase().contains(filmName.toLowerCase())) {
                     return true;
@@ -205,18 +169,13 @@ public class User extends Human implements Searchable {
     @Override
     public Set<String> getAllUniqueGenresSet(List<Movie> films){
         if (films.isEmpty()) {
-            try {
-                throw new NoSuchFilmsException("Empty list");
-            } catch (NoSuchFilmsException e) {
-                System.out.println("We don't have any films now");
-            }
+            throw new NoSuchFilmsException("We don't have any films now");
         }
 
         Set<String> uniqueGenres = new HashSet<>();
         for(Movie elem: films){
             uniqueGenres.add(elem.getFilmGenre().toString());
         }
-
         return uniqueGenres;
 
     }

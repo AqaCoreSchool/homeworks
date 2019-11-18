@@ -1,7 +1,8 @@
 package cinema.exception;
 
-public class NoSuchFilmsException extends Exception{
-    public NoSuchFilmsException(String message){
+
+public class NoSuchFilmsException extends RuntimeException {
+    public NoSuchFilmsException(String message) {
         super(message);
     }
 }
