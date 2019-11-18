@@ -33,7 +33,7 @@ public class Main {
                         System.out.print("[4] Enter the year->");
                         Scanner input4 = new Scanner(System.in);
                         int inpYear = input4.nextInt();
-                        olya.hasEarlierBooks(inpYear);
+                        olya.findEarlierBooks(inpYear);
                         break;
                     case 5:
                         System.out.print("[5] Enter Genre ->");
