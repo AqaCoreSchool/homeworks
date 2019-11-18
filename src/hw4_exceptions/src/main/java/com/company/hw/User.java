@@ -4,8 +4,8 @@ import com.company.hw.books.Comics;
 import com.company.hw.books.Encyclopedia;
 import com.company.hw.books.Novel;
 import com.company.hw.exceptions.NoSuchBookException;
-import com.company.hw.sort.SortByBook;
-import com.company.hw.sort.SortByYear;
+import com.company.hw.sort.BookComparator;
+import com.company.hw.sort.YearComparator;
 import com.github.javafaker.Faker;
 
 import java.util.*;
@@ -63,17 +63,13 @@ public class User {
         }
         System.out.println(tempList);
         if (tempList.isEmpty()) {
-            try {
-                throw new NoSuchBookException("I throw exception");
-            } catch (NoSuchBookException e) {
-                System.out.println("We don't have any Books by this Author");
-            }
+            throw new NoSuchBookException("We don't have any Books by this Author");
         }
     }
 
     //3
     void sortAlpabetically() {
-        books.sort(new SortByBook());
+        books.sort(new BookComparator());
         for (Library element : books) {
             System.out.println(element);
         }
@@ -106,11 +102,7 @@ public class User {
         System.out.println(tempList);
 
         if (tempList.isEmpty()) {
-            try {
-                throw new NoSuchBookException("I throw exception");
-            } catch (NoSuchBookException e) {
-                System.out.println("We don't have books in this Genre");
-            }
+            throw new NoSuchBookException("We don't have books in this Genre");
         }
 
     }
@@ -135,22 +127,22 @@ public class User {
         for (Library element : books) {
             if (element.getClass().equals(novelExample.getClass())) {
                 listOfNovel.add(element);
-                listOfNovel.sort(new SortByYear());
+                listOfNovel.sort(new YearComparator());
 
             } else if (element.getClass().equals(comicsExample.getClass())) {
                 listOfComics.add(element);
-                listOfComics.sort(new SortByYear());
+                listOfComics.sort(new YearComparator());
 
             } else if (element.getClass().equals(encyclopediaExample.getClass())) {
                 listOfEncyclopedia.add(element);
-                listOfEncyclopedia.sort(new SortByYear());
+                listOfEncyclopedia.sort(new YearComparator());
             }
         }
         try {
             tempList.add(listOfNovel.get(0));
             tempList.add(listOfComics.get(0));
             tempList.add(listOfEncyclopedia.get(0));
-            tempList.sort(new SortByBook());
+            tempList.sort(new BookComparator());
         }
         catch(IndexOutOfBoundsException ex){
             System.out.println("Hey, we don't have any Books now!");
@@ -185,5 +177,4 @@ public class User {
         for (Map.Entry<StringBuilder, Library> entry : bookMap.entrySet())
             System.out.println(entry.getKey() + " = " + entry.getValue());
     }
-
 }
