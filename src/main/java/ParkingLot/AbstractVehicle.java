@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 
 import static ParkingLot.VehicleParking.*;
 
-abstract public class AbstractVehicle {
+public abstract class AbstractVehicle {
     private String owner;
     private String number;
     private String vehicleType;
