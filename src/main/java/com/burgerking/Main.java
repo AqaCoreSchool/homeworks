@@ -8,7 +8,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         Menu daymenu = new Menu("Everyday many");
         daymenu.addProduct(new Food("Cheeseburger", FoodType.BURGER, 350, 77.00, "regular"));
-        daymenu.addProduct(new Food("Big Mac", FoodType.BURGER, 550, 110.00, "big"));;
+        daymenu.addProduct(new Food("Big Mac", FoodType.BURGER, 550, 110.00, "big"));
         daymenu.addProduct(new Food("Fries", FoodType.FRIED, 400, 70.00, "small"));
         daymenu.addProduct(new Food("Hamburger", FoodType.BURGER, 320, 58.01, "regular"));
         daymenu.addProduct(new Food("Americano", FoodType.COFFEE, 80, 29.00, "medium"));
