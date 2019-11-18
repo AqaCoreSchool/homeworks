@@ -52,8 +52,8 @@ public abstract class User {
 
     }
 
-    public void showCheckingResult(boolean result) {
-        if (result) {
+    public void showCheckingResult(boolean isSuccessful) {
+        if ( isSuccessful) {
             System.out.println("Checking successful");
         } else {
             System.out.println("Checking unsuccessful");

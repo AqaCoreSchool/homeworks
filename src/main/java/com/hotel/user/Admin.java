@@ -32,7 +32,8 @@ public class Admin extends User {
 
     @Override
     public Room chooseRoom(List<Room> rooms) {
-        return null;
+       //for example
+        return getHotelAccount().getFreeSharedRooms().get(1);
     }
 
     public void checkBookingRequest(Customer customer) {

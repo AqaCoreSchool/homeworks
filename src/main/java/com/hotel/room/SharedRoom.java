@@ -12,8 +12,8 @@ public class SharedRoom extends Room implements IPlace {
     private int numberOfBookingPlaces;
     private List<Customer> guests = new LinkedList();
 
-    public SharedRoom(int number, int numbOfPlaces, double price, double size, boolean petFriendly) {
-        super(number, price, size, petFriendly);
+    public SharedRoom(int number, int numbOfPlaces, double price, double size, boolean isPetFriendly) {
+        super(number, price, size, isPetFriendly);
         this.numberOfPlaces = numberOfPlaces;
     }
 

@@ -6,13 +6,13 @@ public abstract class Room {
     private double price;
     private boolean booking;
     private double size;
-    private boolean petFriendly;
+    private boolean isPetFriendly;
 
-    public Room(int number, double price, double size, boolean petFriendly) {
+    public Room(int number, double price, double size, boolean isPetFriendly) {
         this.number = number;
         this.price = price;
         this.size = size;
-        this.petFriendly = petFriendly;
+        this.isPetFriendly = isPetFriendly;
     }
 
     public int getNumber() {
@@ -44,7 +44,7 @@ public abstract class Room {
     }
 
     public boolean isPetFriendly() {
-        return petFriendly;
+        return isPetFriendly;
     }
 
     @Override

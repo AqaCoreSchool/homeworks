@@ -139,7 +139,7 @@ public class HotelAccount {
     }
 
     //Перевіряємо чи в списку кімнат всі відповідають критерію
-    public boolean isAllRoomsAppropriateToCriterion(List<Room> rooms, double size) {
+    public boolean areAllRoomsAppropriateToCriterion(List<Room> rooms, double size) {
         for (Room room : rooms) {
             if (room.getSize() > size) {
                 return false;
@@ -149,7 +149,7 @@ public class HotelAccount {
     }
 
     //Перевіряємо чи в списку кімнат всі відповідають критерію
-    public boolean isAllRoomsPerFriendly(List<Room> rooms) {
+    public boolean areAllRoomsPerFriendly(List<Room> rooms) {
         for (Room room : rooms) {
             if (!room.isPetFriendly()) {
                 return false;
