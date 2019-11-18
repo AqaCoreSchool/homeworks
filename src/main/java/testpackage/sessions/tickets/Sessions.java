@@ -89,7 +89,7 @@ public class Sessions extends BaseClass {
         }
     }
 
-    public boolean hasOneMovieCriteria(String criteria) {
+    public boolean hasNoMovieCriteria(String criteria) {
         if (numberOfFilmsForIntendedCriterion(criteria) > 0) {
             System.out.println("One movie in your list corresponds to your criteria");
             return true;

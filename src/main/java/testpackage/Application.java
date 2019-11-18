@@ -13,7 +13,7 @@ public class Application {
         user.getDefaultFilmList();
         user.sortFilmsByAlphabetically().printFilmList();
         System.out.println("\n");
-        user.hasOneMovieCriteria("Horror");
+        user.hasNoMovieCriteria("Horror");
         System.out.println("\n");
         user.sortFilmsByGenre("Horror").printFilmList();
     }
