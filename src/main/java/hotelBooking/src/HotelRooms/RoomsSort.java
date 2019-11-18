@@ -6,26 +6,66 @@ import java.util.List;
 
 public class RoomsSort {
 
-    TypesHotelRooms singleRoom = new TypesHotelRooms("Single room",100, 1, 1, 15);
-    TypesHotelRooms doubleRoom = new TypesHotelRooms("Double room", 200, 2, 1, 30);
-    TypesHotelRooms twoRoomsNumber = new TypesHotelRooms("Two rooms number", 400, 4, 2, 50);
-    TypesHotelRooms vipRoom = new TypesHotelRooms("Vip room", 800, 4, 2, 80);
+    public List<TypesHotelRooms> rooms = new ArrayList<>();
 
     public RoomsSort() {
-        List<TypesHotelRooms> rooms = new ArrayList<>();
-        rooms.add(singleRoom);
-        rooms.add(doubleRoom);
-        rooms.add(twoRoomsNumber);
-        rooms.add(vipRoom);
 
-        Collections.sort(rooms, new RoomsComparator());
+        rooms.add(new TypesHotelRooms("Single room", 100, 1, 1, 15, true));
+        rooms.add(new TypesHotelRooms("Single room", 100, 1, 1, 15, false));
+        rooms.add(new TypesHotelRooms("Single room", 150, 1, 1, 20, true));
+        rooms.add(new TypesHotelRooms("Single room", 150, 1, 1, 20, true));
 
-        for (TypesHotelRooms room: rooms){
-            System.out.println("Hotel rooms :" + room.getCategory() + "cost: " + room.getCost()
-                    + "capacity: " + room.getCapacity() + "number of rooms: " + room.getNumberOfRooms()
-                    + "area: " + room.getArea());
+        rooms.add(new TypesHotelRooms("Double room", 200, 2, 1, 30, false));
+        rooms.add(new TypesHotelRooms("Double room", 200, 2, 1, 30, true));
+        rooms.add(new TypesHotelRooms("Double room", 250, 2, 1, 35, true));
+
+        rooms.add(new TypesHotelRooms("Two rooms number", 400, 4, 2, 50, false));
+        rooms.add(new TypesHotelRooms("Two rooms number", 400, 4, 2, 50, true));
+
+        rooms.add(new TypesHotelRooms("Vip room", 800, 4, 2, 80, false));
+        rooms.add(new TypesHotelRooms("Vip room", 800, 4, 3, 80, true));
+
+    }
+
+    public void getByCost() {
+        Collections.sort(rooms, new CostComparator());
+        for (TypesHotelRooms room : rooms) {
+            System.out.println(room);
         }
+    }
 
+    public void getByCategory() {
+        rooms.sort(new CategoryComparator());
+        for (TypesHotelRooms element : rooms) {
+            System.out.println(element);
+        }
+    }
+
+    boolean hasCapacity(int capacity) {
+        for (TypesHotelRooms next : rooms) {
+            if (next.getCapacity() < capacity) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    void hasEmpty(boolean presence) {
+        List<TypesHotelRooms> existence = new ArrayList<>();
+        for (TypesHotelRooms next : rooms) {
+            if (true) {
+                existence.add(next);
+                System.out.println(existence);
+            }
+
+        }
 
     }
 }
+
+
+
+/*System.out.println("Hotel rooms :" + room.getCategory() + "cost: " + room.getCost()
+        + "capacity: " + room.getCapacity() + "number of rooms: " + room.getNumberOfRooms()
+        + "area: " + room.getArea());*/
+

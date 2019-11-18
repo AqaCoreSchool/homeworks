@@ -2,18 +2,20 @@ package hotelRooms;
 
 public class TypesHotelRooms {
 
-    protected String category;
-    protected int cost;
-    protected int capacity;
-    protected int numberOfRooms;
-    protected int area;
+    private String category;
+    private int cost;
+    private int capacity;
+    private int numberOfRooms;
+    private int area;
+    boolean presence;
 
-    public TypesHotelRooms(String category, int cost, int capacity, int numberOfRooms, int area) {
+    public TypesHotelRooms(String category, int cost, int capacity, int numberOfRooms, int area, boolean presence) {
         this.category = category;
         this.cost = cost;
         this.capacity = capacity;
         this.numberOfRooms = numberOfRooms;
         this.area = area;
+        this.presence = presence;
     }
 
     public String getCategory() { return category; }

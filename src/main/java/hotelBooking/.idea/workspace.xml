@@ -8,6 +8,9 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="CodeInsightWorkspaceSettings">
+    <option name="optimizeImportsOnTheFly" value="true" />
+  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -78,7 +81,8 @@
       <workItem from="1573665749344" duration="2780000" />
       <workItem from="1573723901333" duration="2073000" />
       <workItem from="1573731095730" duration="861000" />
-      <workItem from="1573739130373" duration="41616000" />
+      <workItem from="1573739130373" duration="42801000" />
+      <workItem from="1573888764495" duration="21032000" />
     </task>
     <servers />
   </component>
