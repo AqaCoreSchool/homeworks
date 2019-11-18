@@ -7,6 +7,8 @@ import library.enumeration.BookAuthor;
 import library.enumeration.BookGenre;
 import library.enumeration.BookLanguage;
 import library.enumeration.ProfileStatus;
+import library.exception.BookNotFoundException;
+import library.exception.GenreNotFoundException;
 import library.interfaces.Searchable;
 import library.model.Person;
 
@@ -57,6 +59,13 @@ public class Member extends Profile implements Searchable {
                 System.out.println(item.getTitle() + " : " + item.getAuthor());
             }
         }
+        if (booksList.isEmpty()) {
+            try {
+                throw new BookNotFoundException("Book list is empty!");
+            } catch (BookNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
         return tempList;
     }
 
@@ -77,6 +86,13 @@ public class Member extends Profile implements Searchable {
                 return true;
             }
         }
+        if (booksList.isEmpty()) {
+            try {
+                throw new BookNotFoundException("Book list is empty!");
+            } catch (BookNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
         return false;
     }
 
@@ -87,6 +103,13 @@ public class Member extends Profile implements Searchable {
                 tempList.add(book);
             }
         }
+        if (tempList.isEmpty()) {
+            try {
+                throw new GenreNotFoundException("Genre not found!");
+            } catch (GenreNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
         return booksList.size() == tempList.size();
     }
 
@@ -95,6 +118,13 @@ public class Member extends Profile implements Searchable {
         for (BookItem book : booksList) {
             if (!book.getAuthor().toString().contains(author)) {
                 tempList.add(book);
+            }
+        }
+        if (booksList.isEmpty()) {
+            try {
+                throw new BookNotFoundException("Book list is empty!");
+            } catch (BookNotFoundException e) {
+                e.printStackTrace();
             }
         }
         return booksList.size() == tempList.size();
@@ -112,6 +142,13 @@ public class Member extends Profile implements Searchable {
             oldestBookByGenre.putIfAbsent(bookItem.getBookGenre().toString(), bookItem);
             if (bookItem.getReleaseDate() < oldestBookByGenre.get(bookItem.getBookGenre().toString()).getReleaseDate()) {
                 oldestBookByGenre.put(bookItem.getBookGenre().toString(), bookItem);
+            }
+        }
+        if (booksList.isEmpty()) {
+            try {
+                throw new BookNotFoundException("Book list is empty!");
+            } catch (BookNotFoundException e) {
+                e.printStackTrace();
             }
         }
         return new ArrayList<>(oldestBookByGenre.values());
