@@ -6,20 +6,20 @@ class VehicleParking {
 
 
     final static int LOT_COUNT = 100;
-    static int freeLots = 100;
-    static String pattern = "([А-Я][А-Я](\\s)[0-9][0-9][0-9][0-9](\\s)[А-Я][А-Я])";
-    static List<String> lotsList = new ArrayList();
-    static List<AbstractVehicle> uniqueNumbersList = new ArrayList();
-    static List<AbstractVehicle> vehicleList = new ArrayList();
-    static List<String> sortedVehicleList = new ArrayList();
-    static Map<String, AbstractVehicle> numberVehicleMap = new HashMap<>();
-    static Map<String, AbstractVehicle> sortedMap = new HashMap<>();
+    public static int freeLots = 100;
+    public static String pattern = "([А-Я][А-Я](\\s)[0-9][0-9][0-9][0-9](\\s)[А-Я][А-Я])";
+    public static List<String> lotsList = new ArrayList();
+    public static List<AbstractVehicle> uniqueNumbersList = new ArrayList();
+    public static List<AbstractVehicle> vehicleList = new ArrayList();
+    public static List<String> sortedVehicleList = new ArrayList();
+    public static Map<String, AbstractVehicle> numberVehicleMap = new HashMap<>();
+    public static Map<String, AbstractVehicle> sortedMap = new HashMap<>();
 
-    static void printVehicleList(List list) {
+    public static void printVehicleList(List list) {
         list.stream().forEach(System.out::println);
     }
 
-    static void filterByNumber(String template) {
+    public static void filterByNumber(String template) {
         for (AbstractVehicle vehicle : vehicleList) {
             if (vehicle.getNumber().substring(0, 2).equals(template)) {
                 System.out.println(vehicle);
@@ -27,7 +27,7 @@ class VehicleParking {
         }
     }
 
-    static boolean isNumberExist(String template) {
+    public static boolean isNumberExist(String template) {
         for (AbstractVehicle vehicle : vehicleList) {
             if (vehicle.getNumber().substring(0, 2).equals(template)) {
                 return true;
@@ -36,7 +36,7 @@ class VehicleParking {
         return false;
     }
 
-    static void waitConsole() {
+    public static void waitConsole() {
         try {
             Thread.sleep(1000);
         } catch (InterruptedException ex) {
@@ -44,7 +44,7 @@ class VehicleParking {
         }
     }
 
-    static void filterByOwner(String ownerSearch) {
+    public static void filterByOwner(String ownerSearch) {
         for (AbstractVehicle vehicle : vehicleList) {
             if (vehicle.getOwner().contains(ownerSearch)) {
                 System.out.println(vehicle);
@@ -61,7 +61,7 @@ class VehicleParking {
         return true;
     }
 
-    static boolean isAllTypes(String typeSearch) {
+    public static boolean isAllTypes(String typeSearch) {
         for (AbstractVehicle vehicle : vehicleList) {
             if (vehicle.getVehicleType().contains(typeSearch)) {
                 return false;
@@ -70,7 +70,7 @@ class VehicleParking {
         return true;
     }
 
-    static void checkType(String vehicleType) {
+    public static void checkType(String vehicleType) {
         for (AbstractVehicle vehicle : vehicleList) {
             if (vehicle.getVehicleType().equalsIgnoreCase(vehicleType)) {
                 System.out.println(vehicle);
@@ -78,18 +78,18 @@ class VehicleParking {
         }
     }
 
-    static void sortByDurations() {
+    public static void sortByDurations() {
         Collections.sort(vehicleList, new DateComparator());
         Collections.reverse(vehicleList);
         printVehicleList(vehicleList);
     }
 
 
-    static void addCarToMap(String number, AbstractVehicle vehicle) {
+    public static void addCarToMap(String number, AbstractVehicle vehicle) {
         numberVehicleMap.put(number, vehicle);
     }
 
-    static void getCarByUniqueNumber() {
+    public static void getCarByUniqueNumber() {
         SortedSet<String> keys = new TreeSet<>(numberVehicleMap.keySet());
         StringBuilder builder = new StringBuilder();
         for (String key : keys) {
@@ -98,8 +98,6 @@ class VehicleParking {
         System.out.println(builder.toString());
         System.out.println(keys); // need to delete late, just for checking
     }
-
-
 }
 
 

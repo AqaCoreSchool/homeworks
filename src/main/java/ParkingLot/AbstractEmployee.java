@@ -1,16 +1,16 @@
 package ParkingLot;
 
-public abstract class AbstractEmployees {
+public abstract class AbstractEmployee {
     private String name;
     private String position;
     private int workHours;
     private int ratePerHour;
 
 
-    AbstractEmployees() {
+    public AbstractEmployee() {
     }
 
-    AbstractEmployees(String name, int workHours) {
+    public AbstractEmployee(String name, int workHours) {
         this.name = name;
         this.workHours = workHours;
     }
@@ -21,12 +21,12 @@ public abstract class AbstractEmployees {
         return this.ratePerHour * this.workHours;
     }
 
-    void setStaff(String name, int workHours) {
+    public void setStaff(String name, int workHours) {
         this.name = name;
         this.workHours = workHours;
     }
 
-    void setRatePerHour(int rate) {
+    public void setRatePerHour(int rate) {
         this.ratePerHour = rate;
     }
 
@@ -38,7 +38,7 @@ public abstract class AbstractEmployees {
         return this.position;
     }
 
-    void setPosition(String position) {
+    public void setPosition(String position) {
         this.position = position;
     }
 

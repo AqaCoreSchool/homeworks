@@ -8,13 +8,13 @@ public class Truck extends AbstractVehicle {
         standard();
     }
 
-    Truck(String owner, String number) {
+    public Truck(String owner, String number) {
         super(owner, number);
         standard();
     }
 
     @Override
-    void standard() {
+    public void standard() {
         this.setVehicleType("Truck");
         this.setPrice(20);
         this.setDateIn(new Date());

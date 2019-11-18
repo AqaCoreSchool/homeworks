@@ -14,7 +14,7 @@ public class Car extends AbstractVehicle {
     }
 
     @Override
-    void standard() {
+    public void standard() {
         this.setVehicleType("Car");
         this.setPrice(10);
         this.setDateIn(new Date());

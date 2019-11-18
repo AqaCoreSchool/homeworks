@@ -1,12 +1,12 @@
 package ParkingLot;
 
-public class SecurityStaff extends AbstractEmployees {
+public class SecurityStaff extends AbstractEmployee {
 
-    SecurityStaff() {
+    public SecurityStaff() {
         standard();
     }
 
-    SecurityStaff(String name, int workHours) {
+    public SecurityStaff(String name, int workHours) {
         super(name, workHours);
         standard();
     }
@@ -16,5 +16,4 @@ public class SecurityStaff extends AbstractEmployees {
         this.setPosition("Security");
         this.setRatePerHour(40);
     }
-
 }

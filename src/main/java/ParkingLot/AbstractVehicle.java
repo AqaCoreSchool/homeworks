@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 
 import static ParkingLot.VehicleParking.*;
 
-abstract public class AbstractVehicle {
+public abstract class AbstractVehicle {
     private String owner;
     private String number;
     private String vehicleType;
@@ -17,12 +17,12 @@ abstract public class AbstractVehicle {
     private int duration;
     private int lotNumber;
 
-    AbstractVehicle() {
+    public AbstractVehicle() {
         this.dateIn = new Date();
         this.dateOut = new Date();
     }
 
-    AbstractVehicle(String owner, String number) {
+    public AbstractVehicle(String owner, String number) {
         this.owner = owner;
         this.number = number;
         this.dateIn = new Date();
@@ -37,7 +37,7 @@ abstract public class AbstractVehicle {
         this.lotNumber = lotNumber;
     }
 
-    abstract void standard();
+    public abstract void standard();
 
     @Override
     public String toString() {
@@ -45,7 +45,7 @@ abstract public class AbstractVehicle {
     }
 
 
-    void checkIn(AbstractVehicle vehicle) {
+   public void checkIn(AbstractVehicle vehicle) {
         if (isNumberCorrect()) {
             if (freeLots > 0) { //// треба переробити
                 Date dateIn = new Date();
@@ -58,7 +58,7 @@ abstract public class AbstractVehicle {
         }
     }
 
-    void checkOut(AbstractVehicle vehicle) {
+    public void checkOut(AbstractVehicle vehicle) {
         if ((freeLots < VehicleParking.LOT_COUNT) && (isCarInLot(this.number))) {
             freeLots = freeLots + 1;
             this.dateOut = new Date();
@@ -88,7 +88,7 @@ abstract public class AbstractVehicle {
 
     private int getDuration() {
         if (dateOut.after(dateIn)) {
-            duration = (int) ((dateOut.getTime() - dateIn.getTime())); // need add "/3600000" now without this, just for testing
+            duration = (int) (dateOut.getTime() - dateIn.getTime()); // need add "/3600000" now without this, just for testing
             return duration;
         } else
             return 0;
@@ -120,19 +120,19 @@ abstract public class AbstractVehicle {
         }
     }
 
-    Date getDateIn() {
+    public Date getDateIn() {
         return dateIn;
     }
 
-    void setDateIn(Date dateIn) {
+    public void setDateIn(Date dateIn) {
         this.dateIn = new Date();
     }
 
-    Date getDateOut() {
+    public Date getDateOut() {
         return this.dateOut;
     }
 
-    String getOwner() {
+    public String getOwner() {
         return this.owner;
     }
 
@@ -140,11 +140,11 @@ abstract public class AbstractVehicle {
         this.owner = owner;
     }
 
-    String getVehicleType() {
+    public String getVehicleType() {
         return vehicleType;
     }
 
-    void setVehicleType(String vehicleType) {
+    public void setVehicleType(String vehicleType) {
         this.vehicleType = vehicleType;
     }
 
@@ -152,11 +152,11 @@ abstract public class AbstractVehicle {
         return pricePerHour;
     }
 
-    void setPrice(int pricePerHour) {
+    public void setPrice(int pricePerHour) {
         this.pricePerHour = pricePerHour;
     }
 
-    String getNumber() {
+    public String getNumber() {
         return this.number;
     }
 

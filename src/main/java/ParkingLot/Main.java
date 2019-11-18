@@ -8,10 +8,10 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        AbstractEmployees s1 = new SecurityStaff();
+        AbstractEmployee s1 = new SecurityStaff();
         s1.setStaff("Ivan", 250);
         System.out.println(s1.toString());
-        AbstractEmployees admin1 = new Admin("Petro", 80);
+        AbstractEmployee admin1 = new Admin("Petro", 80);
         System.out.println(admin1.toString());
 
         AbstractVehicle v1 = new Truck("Ivan Franko", "АА 6789 КА");
@@ -20,11 +20,11 @@ public class Main {
         VehicleParking.waitConsole();
         AbstractVehicle v3 = new Truck("Lesya Ukrainka", "АТ 1122211 ТИ");
         VehicleParking.waitConsole();
-        AbstractVehicle v4 = new Car("Grigoriy Scovoroda", "ВС 2222 АВ");
+        AbstractVehicle v4 = new Car("Grigoriy Scovoroda", "ВСC 2222 АВ");
         VehicleParking.waitConsole();
         AbstractVehicle v5 = new Truck("Ostap Vyshny", "ВВ 3333 АК");
         VehicleParking.waitConsole();
-        AbstractVehicle v6 = new Car("Ivan Petrov", "ВІ 44444 КЛ");
+        AbstractVehicle v6 = new Car();
         VehicleParking.waitConsole();
         AbstractVehicle v7 = new Truck("Ivan Petrenko", "АА 5555 ОП");
         VehicleParking.waitConsole();
@@ -35,7 +35,7 @@ public class Main {
         AbstractVehicle v12 = new Truck("Ostap Ivanov", "АВ 5556 ТИ");
         AbstractVehicle v13 = new Truck("Tim Barton", "АА 5586 ТИ");
         AbstractVehicle v14 = new Truck("Ivan Ivanov", "АА 5556 ТИ");
-        AbstractVehicle v15 = new Truck("Ivan Ivanov", "АА 5556 ТИ");
+        AbstractVehicle v15 = new Truck("Ivan Ivanov", "А");
         System.out.println("Results of method CheckIn/CheckOut");
         v1.checkIn(v1);
         v2.checkIn(v2);
@@ -47,6 +47,7 @@ public class Main {
         v8.checkIn(v8);
         v9.checkIn(v9);
         v10.checkIn(v10);
+        v15.checkIn(v15);
         System.out.println("\n");
         v1.checkOut(v1);
         v2.checkOut(v2);
@@ -67,7 +68,7 @@ public class Main {
 
         System.out.println("\nMethod which prints, vehicles with numbers, like ВС **** **. Please, enter first 2 letters of vehicle number\n");
         String numberForSearch = scanner.nextLine();
-        filterByNumber(numberForSearch);
+        filterByNumber(numberForSearch+" ");
         System.out.println("\nMethod which, checking if at least one vehicle in list corresponds to some search criteria.\n (e.g. vehicle number starts with ‘BC’))\n");
         System.out.println(isNumberExist(numberForSearch)); // Task #4
 
