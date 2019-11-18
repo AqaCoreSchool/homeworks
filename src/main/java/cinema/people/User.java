@@ -3,6 +3,7 @@ package cinema.people;
 import cinema.Searchable;
 import cinema.enums.Genre;
 import cinema.enums.HallType;
+import cinema.exception.NoSuchFilmsException;
 import cinema.primary.Hall;
 import cinema.primary.Movie;
 import cinema.primary.Session;
@@ -35,6 +36,7 @@ public class User extends Human implements Searchable {
     public List<Movie> getAllMoviesList(){
         List<Movie> movies = new ArrayList<>();
 
+
         Hall hallOne = new Hall(1, HallType.IMAX, 60, 15.4);
         Hall hallTwo = new Hall(2, HallType.THREE_D, 80, 12.6);
         Hall hallThree = new Hall(3, HallType.TWO_D, 120, 10.7);
@@ -44,6 +46,7 @@ public class User extends Human implements Searchable {
         Session secondSession = new Session(hallTwo, 80.00, 16.00);
         Session thirdSession = new Session(hallThree, 65.50, 18.00);
         Session fourSession = new Session(hallFour, 150.00, 20.00);
+
 
         movies.add(new Movie("Forrest Gump", Genre.DRAMA,
                 1984, 108, 12, Arrays.asList(firstSession, secondSession)));
@@ -84,9 +87,14 @@ public class User extends Human implements Searchable {
     //This method returns a Map with pairs: Movie - his Sessions
     @Override
     public Map<String, List<Session>> getAllSessionsOfAllMovies(List<Movie> films){
+
         Map<String, List<Session>> sessionMap = new HashMap<>();
-        for(Movie elem: films){
-            sessionMap.put(elem.getFilmName(),elem.getSessions());
+
+        for(Movie elem: films) {
+                    sessionMap.put(elem.getFilmName(), elem.getSessions());
+            }
+        if (sessionMap.isEmpty()) {
+            throw new NoSuchFilmsException("Our collection of films doesn't include any films with sessions");
         }
         return  sessionMap;
     }
@@ -94,54 +102,77 @@ public class User extends Human implements Searchable {
     //This method returns a List of movies filtered by particular genre
     @Override
     public List<Movie> getMovieListFilteredByGenre(List<Movie> films, String genre){
+
         List<Movie> filteredMovie = new ArrayList<>();
-        for(Movie elem: films){
-            if(elem.getFilmGenre().toString().equalsIgnoreCase(genre)){
-                filteredMovie.add(elem);
+            for (Movie elem : films) {
+                if (elem.getFilmGenre().toString().equalsIgnoreCase(genre)) {
+                    filteredMovie.add(elem);
+                }
             }
-        }
+            if (filteredMovie.isEmpty()){
+                    throw new NoSuchFilmsException("Our collection of films doesn't include " +
+                                                    "films with this genre - " + genre);
+            }
         return filteredMovie;
     }
 
     //This method checks if at least one movie in a List corresponds to search by duration
     @Override
     public boolean isOneFilmDurationCorrespondsToFilter(List<Movie> films, int duration){
-        for(Movie elem: films){
-            if(elem.getDuration() > duration){
-                return true;
-            }
+
+        for (Movie elem : films) {
+                if (elem.getDuration() > duration) {
+                    return true;
+                }
         }
         return false;
     }
 
     //This method checks if all movies in a List corresponds to search by year of release
     public boolean isReleasesOfAllFilmsCorrespondToFilter(List<Movie> films, int yearRelease){
-        for(Movie elem: films){
-            if(elem.getYearRelease() < yearRelease){
-                return false;
-            }
+
+             for (Movie elem : films) {
+                 if (elem.getYearRelease() < yearRelease) {
+                     return false;
+                 }
+             }
+        if (yearRelease < 1984) {
+            throw new NoSuchFilmsException("Our collection of films doesn't include films" +
+                                            " with release in - " + yearRelease + " Try searching after - 1984");
         }
         return true;
-    }
+        }
+
 
     //This method checks if movies in a List contain particular words in their names
     @Override
     public boolean isNamesOfFilmsContainWords(List<Movie> films, String filmName){
-        for(Movie elem: films){
-            if(elem.getFilmName().toLowerCase().contains(filmName.toLowerCase())){
-                return true;
+
+            for (Movie elem : films) {
+                if (elem.getFilmName().toLowerCase().contains(filmName.toLowerCase())) {
+                    return true;
+                }
             }
-        }
         return false;
-    }
+        }
+
+
+
 
     //This method returns Set of filtered unique genres
     @Override
     public Set<String> getAllUniqueGenresSet(List<Movie> films){
+
+
         Set<String> uniqueGenres = new HashSet<>();
         for(Movie elem: films){
             uniqueGenres.add(elem.getFilmGenre().toString());
         }
+        if (uniqueGenres.isEmpty()) {
+            throw new NoSuchFilmsException("Our collection of films doesn't include any films with unique genres");
+        }
         return uniqueGenres;
+
     }
 }
+
