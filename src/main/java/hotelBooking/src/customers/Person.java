@@ -1,13 +1,12 @@
 package customers;
 
-public abstract class Person {
+public class Person {
 
-    protected int pay;
-    protected int age;
+    private String person;
+    private int privilegeCost;
 
-    public Person(int age, int pay) {
-        this.pay = pay;
-        this.age = age;
+    public Person (String person, int privilegeCost) {
+        this.person = person;
+        this.privilegeCost = privilegeCost;
     }
-
 }

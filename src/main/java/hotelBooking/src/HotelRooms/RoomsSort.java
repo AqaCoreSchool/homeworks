@@ -38,6 +38,10 @@ public class RoomsSort {
         rooms.sort(new CategoryComparator());
         for (TypesHotelRooms element : rooms) {
             System.out.println(element);
+
+         if (element.isEmpty()) {
+            throw new NoSuchRoomException("We don't have that category");
+         }
         }
     }
 
@@ -53,12 +57,12 @@ public class RoomsSort {
     void hasEmpty(boolean presence) {
         List<TypesHotelRooms> existence = new ArrayList<>();
         for (TypesHotelRooms next : rooms) {
-            if (true) {
+            if (presence) {
                 existence.add(next);
                 System.out.println(existence);
             }
-
         }
+
 
     }
 }

@@ -34,6 +34,11 @@
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="hotelRooms" />
+    </key>
+  </component>
   <component name="RunDashboard">
     <option name="ruleStates">
       <list>
@@ -82,7 +87,8 @@
       <workItem from="1573723901333" duration="2073000" />
       <workItem from="1573731095730" duration="861000" />
       <workItem from="1573739130373" duration="42801000" />
-      <workItem from="1573888764495" duration="21032000" />
+      <workItem from="1573888764495" duration="24048000" />
+      <workItem from="1574110452748" duration="19323000" />
     </task>
     <servers />
   </component>

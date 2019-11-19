@@ -28,12 +28,7 @@ public class TypesHotelRooms {
         return capacity;
     }
 
-    public int getNumberOfRooms() {
-        return numberOfRooms;
+    public boolean isEmpty() {
+        return false;
     }
-
-    public int getArea() {
-        return area;
-    }
-
 }
