@@ -37,11 +37,11 @@ public abstract class AbstractVehicle {
         this.lotNumber = lotNumber;
     }
 
-    public abstract void standard();
+    public abstract void setDefaultValues();
 
     @Override
     public String toString() {
-        return this.vehicleType + " number: " + this.number + ". Owner: " + this.owner + ". Check in: " + this.getDateIn(); //
+        return String.format("%-5s%-10s%-15s%-10s%-20s%-10s%tc", this.vehicleType,  "Number:", this.number, "Owner:", this.owner, "Check in:", this.getDateIn());
     }
 
 

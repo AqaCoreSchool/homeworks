@@ -15,7 +15,7 @@ public abstract class AbstractEmployee {
         this.workHours = workHours;
     }
 
-    public abstract void standard();
+    public abstract void setDefaultValuesEmployee();
 
     public int getSalary() {
         return this.ratePerHour * this.workHours;
@@ -48,7 +48,7 @@ public abstract class AbstractEmployee {
 
     @Override
     public String toString() {
-        return this.name + " " + position + ". Salary: " + this.getSalary();
+      return String.format("%-15s%-10s%-10s%-10d",name, position, "Salary:",this.getSalary());
     }
 
 

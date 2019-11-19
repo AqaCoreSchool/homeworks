@@ -5,16 +5,16 @@ import java.util.Date;
 public class Car extends AbstractVehicle {
 
     public Car() {
-        standard();
+        setDefaultValues();
     }
 
     public Car(String owner, String number) {
         super(owner, number);
-        standard();
+        setDefaultValues();
     }
 
     @Override
-    public void standard() {
+    public void setDefaultValues() {
         this.setVehicleType("Car");
         this.setPrice(10);
         this.setDateIn(new Date());

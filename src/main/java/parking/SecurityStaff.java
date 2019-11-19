@@ -3,16 +3,16 @@ package parking;
 public class SecurityStaff extends AbstractEmployee {
 
     public SecurityStaff() {
-        standard();
+        setDefaultValuesEmployee();
     }
 
     public SecurityStaff(String name, int workHours) {
         super(name, workHours);
-        standard();
+        setDefaultValuesEmployee();
     }
 
     @Override
-    public void standard() {
+    public void setDefaultValuesEmployee() {
         this.setPosition("Security");
         this.setRatePerHour(40);
     }
