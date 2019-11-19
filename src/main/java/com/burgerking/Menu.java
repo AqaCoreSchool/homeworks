@@ -3,19 +3,25 @@ package com.burgerking;
 import com.burgerking.exception.FilteredListIsEmptyException;
 import com.burgerking.exception.FoodTypeNotFoundException;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.TextStyle;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Menu {
     private String name;
     private List<Food> productList;
     private List<Food> filteredList;
-    private Map<FoodType, Integer> amountTypeMap;
+    private Map<FoodType, Integer> amountPerTypeMap;
+    private LocalDateTime menuCreationDateTime;
 
     public Menu(String name) {
         this.name = name;
         this.productList = new ArrayList<>();
         this.filteredList = new ArrayList<>();
-        this.amountTypeMap = new HashMap<>();
+        this.amountPerTypeMap = new HashMap<>();
+        this.menuCreationDateTime = LocalDateTime.now();
     }
 
     public String getName() {
@@ -42,12 +48,20 @@ public class Menu {
         this.filteredList = filteredList;
     }
 
-    public Map<FoodType, Integer> getAmountTypeMap() {
-        return amountTypeMap;
+    public Map<FoodType, Integer> getAmountPerTypeMap() {
+        return amountPerTypeMap;
     }
 
-    public void setAmountTypeMap(Map<FoodType, Integer> amountPerType) {
-        this.amountTypeMap = amountPerType;
+    public void setAmountPerTypeMap(Map<FoodType, Integer> amountPerType) {
+        this.amountPerTypeMap = amountPerType;
+    }
+
+    public LocalDateTime getMenuCreationDateTime() {
+        return menuCreationDateTime;
+    }
+
+    public void setMenuCreationDateTime(LocalDateTime menuCreationDateTime) {
+        this.menuCreationDateTime = menuCreationDateTime;
     }
 
     public void addProduct(Food food){
@@ -82,6 +96,7 @@ public class Menu {
 
     public void showMenu(List<Food> list){
         int printIdCounter = 0;
+        System.out.printf("Menu for %s:\n", this.menuCreationDateTime.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.ROOT));
         for(Food food: list){
             printIdCounter++;
             System.out.format("%3s %8s %18s %7.2f$ %5d Cal. %8s",
@@ -95,12 +110,8 @@ public class Menu {
         if(filterOption < 0 || filterOption > FoodType.values().length){
             throw new FoodTypeNotFoundException("There is no such food type in menu!");
         }
-        List<Food> filtered = new ArrayList<>();
-        for(Food food: this.getProductList()){
-            if(food.getType().ordinal()==filterOption){
-                filtered.add(food);
-            }
-        }
+        List<Food> filtered = this.productList.stream()
+                .filter(food -> food.getType().ordinal()==filterOption).collect(Collectors.toList());
         if(filtered.isEmpty()){
             throw new FilteredListIsEmptyException("No food of this type in menu - nothing to filter!");
         }
@@ -108,65 +119,42 @@ public class Menu {
     }
 
     public boolean isAnyFoodPriceBiggerThan(Double price) {
-        for (Food food : this.getProductList()) {
-            if (food.getPrice() > price) {
-                return true;
-            }
-        }
-        return false;
+        return this.productList.stream().anyMatch(food -> food.getPrice()>price);
     }
 
     public boolean isAllFoodCaloriesLowerThen(Integer calories){
-        for(Food food: this.getProductList()){
-            if(food.getCalories() > calories){
-                return false;
-            }
-        }
-        return true;
+        return this.productList.stream().allMatch(food -> food.getCalories()<calories);
     }
 
     public boolean isNoneFoodSizeEqualsTo(String size){
-        for(Food food: this.getProductList()){
-            if(food.getSize().equalsIgnoreCase(size)){
-                return false;
-            }
-        }
-        return true;
+        return this.productList.stream().noneMatch(food -> food.getSize().equalsIgnoreCase(size));
     }
 
-    public List<Food> getLowestPriceByType(){
+    public void getLowestPriceByType(){
         List<Food> typesList = new ArrayList<>();
-        List<Food> returnList = new ArrayList<>();
         for(int i=0;i<FoodType.values().length;i++){
-            for(Food food: this.getProductList()) {
-                if (food.getType().ordinal() == i) {
-                    typesList.add(food);
-                }
-            }
-            if (typesList.size()>0) {
-                typesList.sort(compareByPrice);
-                returnList.add(typesList.get(0));
-            }
-            typesList.clear();
+            int filterOption = i;
+            typesList.add(this.productList.stream().sorted(compareByPrice)
+                    .filter(food -> food.getType().ordinal()==filterOption).findFirst().orElse(null));
         }
-        returnList.sort(compareByName);
-        return returnList;
+        String pairsNamePrice = typesList.stream()
+                .filter(Objects::nonNull).sorted(compareByName).distinct()
+                .map(Food::getNamePricePairFormatted).collect(Collectors.joining(", "));
+        System.out.println(pairsNamePrice);
     }
 
-    public int getAmountPerType(FoodType foodType){
-        int counter = 0;
-        for(Food food: this.getProductList()){
-            if(food.getType().equals(foodType)){
-                counter++;
-            }
+    public void fillAmountPerTypeMap(){
+        for(int i=0;i<FoodType.values().length;i++){
+            int foodType = i;
+            this.amountPerTypeMap.put(FoodType.values()[foodType], (int) this.productList.stream().
+                    filter(food -> food.getType().ordinal()== foodType).count());
         }
-        return counter;
     }
 
-    public void fillAmountTypeMap(){
-        for(int i=0;i<FoodType.values().length;i++){
-            this.amountTypeMap.put(FoodType.values()[i], getAmountPerType(FoodType.values()[i]));
-        }
+    public void showAmountPerTypeMap(){
+        String currentDateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        System.out.printf("Amount of items per Type at this moment %s:\n", currentDateTime);
+        System.out.println(this.amountPerTypeMap.entrySet());
     }
 
     @Override
@@ -175,7 +163,7 @@ public class Menu {
                 "name='" + name + '\'' +
                 ", productList=" + productList +
                 ", filteredList=" + filteredList +
-                ", amountPerType=" + amountTypeMap +
+                ", amountPerType=" + amountPerTypeMap +
                 ", compareByPrice=" + compareByPrice +
                 ", compareByName=" + compareByName +
                 '}';

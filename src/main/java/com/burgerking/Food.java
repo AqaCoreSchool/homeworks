@@ -95,4 +95,8 @@ public class Food implements Cookable {
         }
 
     }
+
+    public String getNamePricePairFormatted(){
+        return String.format("%s - %3.2f$", this.name, this.price);
+    }
 }
