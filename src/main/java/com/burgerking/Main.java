@@ -1,6 +1,5 @@
 package com.burgerking;
 
-import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -21,7 +20,7 @@ public class Main {
         daymenu.addProduct(new Food("Marshmallow Latte", FoodType.COFFEE, 123, 56.00, "big"));
         daymenu.addProduct(new Food("Cola", FoodType.BEVERAGE, 57, 16.90, "regular"));
         daymenu.addProduct(new Food("Double Cola", FoodType.BEVERAGE, 78, 49.99, "big"));
-        daymenu.addProduct(new Food("Water", FoodType.BEVERAGE, 12, 23.99, "regular"));
+        daymenu.addProduct(new Food("Cappuchino", FoodType.COFFEE, 70, 23.99, "regular"));
         daymenu.addProduct(new Food("Chickenburger", FoodType.BURGER, 99, 67.87, "regular"));
         boolean flow = true;
         while(flow) {
@@ -29,7 +28,7 @@ public class Main {
             System.out.println("1 - show available dishes(menu), 2 - filter dish by type, " +
                     "3 - sort dishes by price, 4 - is any food price bigger then, \n" +
                     "5 - check is all food calories lower then, 6 - check is none food size equals to, " +
-                    "7 - cheapest item Name-Price per type, 8 - show map [FoodType : items amount], " +
+                    "7 - cheapest item Name-Price per type, 8 - show map [FoodType = items amount], " +
                     "0 - exit");
             String option = scanner.next();
             switch(option){
@@ -76,13 +75,12 @@ public class Main {
                 }
                 case "7":{
                     System.out.println("Pairs Name - Price of lowest item prices from every type, sorted by name:");
-                    printNamePrice(daymenu.getLowestPriceByType());
+                    daymenu.getLowestPriceByType();
                     break;
                 }
                 case "8":{
-                    System.out.println("Example map [FoodType = Amount of items in menu]");
-                    daymenu.fillAmountTypeMap();
-                    System.out.println(daymenu.getAmountTypeMap().entrySet());
+                    daymenu.fillAmountPerTypeMap();
+                    daymenu.showAmountPerTypeMap();
                     break;
                 }
                 default:
@@ -91,13 +89,5 @@ public class Main {
                     break;
             }
         }
-    }
-
-    public static void printNamePrice(List<Food> list){
-        StringBuffer namePrice = new StringBuffer();
-        for(Food food: list) {
-            namePrice.append(String.format("%s - %3.2f$, ", food.getName(), food.getPrice()));
-        }
-        System.out.println(namePrice.deleteCharAt(namePrice.length()-2));
     }
 }
