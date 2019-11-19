@@ -1,6 +1,10 @@
 package parking;
 
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.time.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -41,9 +45,23 @@ public abstract class AbstractVehicle {
 
     @Override
     public String toString() {
-        return String.format("%-5s%-10s%-15s%-10s%-20s%-10s%tc", this.vehicleType,  "Number:", this.number, "Owner:", this.owner, "Check in:", this.getDateIn());
+        return String.format("%-10s%-10s%-15s%-10s%-20s%-10s%tc", this.vehicleType,  "Number:", this.number, "Owner:", this.owner, "Check in:", this.getDateIn());
     }
 
+    public String toShortString() {
+
+        return String.format("* %-10s * %s %s %s.  %s %-2tD %-2tR", this.number, this.vehicleType,
+                "Owner:", this.owner, "Check in:", this.getDateIn(),this.getDateIn());
+    }
+
+    private void getTicket(){
+        LocalDateTime timeInTicket = LocalDateTime.now();
+        LocalDateTime finalTime = timeInTicket.plus(Duration.ofDays(1));
+        String ticket = String.format("* %-10s * %s %tT. %s %-2tD %-2tR", this.getNumber(),
+                                        "You were checked in", timeInTicket,
+                                        "Your ticket is valid till", finalTime, finalTime);
+        ticketsList.add(ticket);
+    }
 
     public void checkIn(AbstractVehicle vehicle) {
         if (isNumberCorrect()) {
@@ -53,14 +71,16 @@ public abstract class AbstractVehicle {
                 assignCarToLot(this.number);
                 vehicleList.add(vehicle);
                 addCarToMap(vehicle.getNumber(), vehicle);
+                getTicket();
             } else
                 throw new ParkingLotNotFoundException("You can not add Vehicle, there are not available lots");
         }
     }
+
     private void assignCarToLot(String number) {            //переробити логіку
-        if ((!VehicleParking.lotsList.isEmpty()) && (VehicleParking.lotsList.size() < VehicleParking.LOT_COUNT)) {
+        if (VehicleParking.lotsList.size() < VehicleParking.LOT_COUNT) {
             VehicleParking.lotsList.add(number);
-            System.out.println(number + " You have place №:" + (VehicleParking.lotsList.indexOf(number) + 1));
+         //   System.out.println(number + " You have place №:" + (VehicleParking.lotsList.indexOf(number) + 1));
         } else {
             throw new ParkingLotNotFoundException("You can not add Vehicle, there are not available lots");
         }

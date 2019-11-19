@@ -48,7 +48,7 @@ public abstract class AbstractEmployee {
 
     @Override
     public String toString() {
-      return String.format("%-15s%-10s%-10s%-10d",name, position, "Salary:",this.getSalary());
+        return String.format("%-15s%-13s%-5s%-10d", name, position, "Salary:", this.getSalary());
     }
 
 
