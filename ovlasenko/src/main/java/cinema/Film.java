@@ -45,21 +45,6 @@ public abstract class Film {
         this.country = country;
     }
 
-//    public float getDuaration() {
-//        return duaration;
-//    }
-//
-//    public void setDuaration(int duaration) {
-//        this.duaration = duaration;
-//    }
-//
-//    public CinemaCategory getCategory() {
-//        return category;
-//    }
-//
-//    public void setCategory(CinemaCategory category) {
-//        this.category = category;
-//    }
 
     public void setYear(int year) { this.year = year; }
 

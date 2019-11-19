@@ -6,7 +6,7 @@ public enum FilmGenre {
     COMEDY,
     DRAMA,
     FANTASY,
-    HORRO,
+    HORROR,
     THRILLER;
 
     public static FilmGenre randomFilmGenre() {

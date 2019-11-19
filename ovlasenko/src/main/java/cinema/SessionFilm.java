@@ -6,7 +6,7 @@ import cinema.enumeration.FilmGenre;
 
 public class SessionFilm extends Film{
 
-    private float duaration;
+    private float duration;
     private CinemaCategory category;
     private float price;
 
@@ -16,7 +16,7 @@ public class SessionFilm extends Film{
     public SessionFilm(String name, FilmGenre filmGenre, FilmCountry country,
                        int year, float duaration, CinemaCategory category, float price ) {
         super(name, filmGenre, country, year);
-        this.duaration = duaration;
+        this.duration = duaration;
         this.category = category;
         this.price = price;
     }
@@ -27,11 +27,11 @@ public class SessionFilm extends Film{
     }
 
     public float getDuration() {
-        return duaration;
+        return duration;
     }
 
-    public void setCountry(float duaration) {
-        this.duaration = duaration;
+    public void setDuration(float duaration) {
+        this.duration = duaration;
     }
 
 

@@ -3,12 +3,11 @@ package cinema;
 import cinema.enumeration.CinemaCategory;
 import cinema.enumeration.FilmCountry;
 import cinema.enumeration.FilmGenre;
-import cinema.enumeration.SeatStatus;
-import com.createsend.models.campaigns.Campaign;
 import com.github.javafaker.Faker;
 import cinema.additional.Random;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Method {
     private List<SessionFilm> filmsList;
@@ -16,9 +15,9 @@ public class Method {
 
     Method() {
         filmsList = new ArrayList<>();
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 10; i++) {
             Faker faker = new Faker();
-            String name = faker.company().name();
+            String name = faker.book().title();
             FilmGenre genre = FilmGenre.randomFilmGenre();
             FilmCountry country = FilmCountry.randomFilmCountry();
             double year = Random.getRandomNumber(1998, 2019);
@@ -45,6 +44,8 @@ public class Method {
         return tempList;
     }
 
+
+
     boolean checkOneByYear(double year) {
         for (SessionFilm sessionFilm : filmsList) {
             if (sessionFilm.getYear() > year) {
@@ -66,15 +67,7 @@ public class Method {
 
     void getAlphabeticFilm(){
         filmsList.sort(Comparator.comparing(SessionFilm::getName));
-//        Collections.sort(filmsList, new Comparator<Campaign>() {
-//            @Override
-//            public int compare(final Campaign object1, final Campaign object2) {
-//                return object1.getClass().getName().compareTo(object2.getClass().getName());
-//            }
-//        });
     }
-
-
 
     List<SessionFilm> getFilmList() {
         return filmsList;
