@@ -52,8 +52,6 @@ public class ParkingLot {
 
     public String parkVehicleOnParkingLot(AbstractVehicle vehicle) {
 
-
-
         if (isFull()) {
             throw new ParkingLotIsFullException("Unfortunately, parking lot is full. Try again later.\n");
         } else {
@@ -78,16 +76,20 @@ public class ParkingLot {
 
     public String unparkVehicleFromParkingLot(AbstractVehicle vehicle, String parkingTicketNumber) {
 
-        boolean ticketFound = false;
-        boolean vehicleFound = false;
-        int spotToClean = 0;
+        System.out.printf("--- Unparking vehicle of type %s with license plates %s ---\n",
+                vehicle.getVehicleType(),
+                vehicle.getLicensePlates());
 
-        for (int i = 0; i < capacity; i++) {
-            if (vehicles.contains(vehicle)) {
-                vehicleFound = true;
-                break;
-            }
+        if (vehicles.isEmpty()) {
+            throw new ParkingLotIsEmptyException("Parking lot is empty. No vehicles to unpark.");
         }
+
+        if (!vehicles.contains(vehicle)) {
+            throw new VehicleNotFoundOnParkingLotException("Vehicle has not been found on parking lot.\n");
+        }
+
+        boolean ticketFound = false;
+        int spotToClean = 0;
 
         for (int i = 0; i < capacity; i++) {
             if (parkingSpotsTicketsMap.get(Integer.toString(i)).getParkingTicketNumber()
@@ -103,9 +105,7 @@ public class ParkingLot {
             throw new ParkingTicketNumberNotFoundException("Ticket number has not been found.\n");
         } else {
 
-            System.out.printf("--- Unparking vehicle of type %s with license plates %s ---\n",
-                    vehicle.getVehicleType(),
-                    vehicle.getLicensePlates());
+
 
             freeSpots++;
 
@@ -148,7 +148,7 @@ public class ParkingLot {
             throw new ParkingLotIsEmptyException("There are no vehicles on parking lot.\n");
         }
 
-        if(!vehicles.contains(vehicle)) {
+        if (!vehicles.contains(vehicle)) {
             throw new VehicleNotFoundOnParkingLotException("Vehicle has not been found on parking lot.\n");
         }
 
@@ -159,13 +159,13 @@ public class ParkingLot {
 
             if (parkingSpotsTicketsMap.get(Integer.toString(parkingSpots.get(i).getSpotNumber())) != null) {
                 if (vehicles.get(i).getLicensePlates().equals(vehicle.getLicensePlates())) {
-                    System.out.println("Ticket has been found.\n");
+                    System.out.println("Ticket number has been found.\n");
                     return parkingSpotsTicketsMap.get(Integer.toString(i)).getParkingTicketNumber();
                 }
             }
             i++;
         }
-        throw new ParkingTicketNumberNotFoundException("Ticket has not been found.\n");
+        throw new ParkingTicketNumberNotFoundException("Ticket number has not been found.\n");
     }
 
     private String displayTicket(String action, int spot) {
@@ -201,7 +201,7 @@ public class ParkingLot {
                     "\n" +
                     "Vehicle type: " +
                     vehicles.get(spot).getVehicleType() +
-                    "\n" ;
+                    "\n";
         }
         return tmp;
     }
