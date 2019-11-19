@@ -1,6 +1,7 @@
 package hotel;
 
 import exceptions.EmptyRoomsListException;
+import exceptions.NoSuchRoomException;
 import room.BudgetRoom;
 import room.LuxRoom;
 import room.Room;
@@ -42,7 +43,7 @@ public class Hotel {
                 System.out.println("Room corresponds to your criteria");
                 break;
             } else {
-                throw new NoSuchElementException("There is no rooms that matches your criteria");
+                throw new NoSuchRoomException("There is no rooms that matches your criteria");
             }
 
         }
