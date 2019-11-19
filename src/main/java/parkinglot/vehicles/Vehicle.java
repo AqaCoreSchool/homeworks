@@ -1,6 +1,6 @@
-package parkinglot;
+package parkinglot.vehicles;
 
-abstract class Vehicle {
+public abstract class Vehicle {
 
     private String form;
     private int countOfWheels;

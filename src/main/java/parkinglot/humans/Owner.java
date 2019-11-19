@@ -1,4 +1,4 @@
-package parkinglot;
+package parkinglot.humans;
 
 public class Owner extends Human {
 

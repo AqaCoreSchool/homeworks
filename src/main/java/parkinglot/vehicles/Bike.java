@@ -1,4 +1,6 @@
-package parkinglot;
+package parkinglot.vehicles;
+
+import parkinglot.interfaces.Movable;
 
 public class Bike extends Vehicle implements Movable {
     private String stateNumber;
@@ -9,7 +11,7 @@ public class Bike extends Vehicle implements Movable {
     private String owner;
 
 
-    Bike(String form, int countOfWheels, int parkingPlace, String stateNumber, int stayOnParking, String owner) {
+    public Bike(String form, int countOfWheels, int parkingPlace, String stateNumber, int stayOnParking, String owner) {
 
         super(form, countOfWheels);
         this.parkingPlace = parkingPlace;

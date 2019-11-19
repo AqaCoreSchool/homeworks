@@ -1,5 +1,10 @@
 package parkinglot;
 
+import parkinglot.vehicles.Bike;
+import parkinglot.vehicles.Lorry;
+import parkinglot.vehicles.SportCar;
+import parkinglot.vehicles.Vehicle;
+
 import java.util.*;
 
 import static java.lang.System.*;
@@ -8,6 +13,7 @@ public class Parking {
 
     public static void main(String[] args) {
         List<Vehicle> vehicles = new ArrayList<>();
+        Parking parking = new Parking();
 
 
         vehicles.add(new Lorry("man - lorry", 6, 1, "BC1256TH", 10, "Ivan"));
@@ -21,35 +27,39 @@ public class Parking {
         vehicles.add(new Bike("MT - bike", 2, 9, "AM4585HH", 96, "Natalya"));
 
 
-        getVehiclesAtTheParking(vehicles); //1.  list of parking lot
+        parking.getVehiclesFormAtTheParking(vehicles); // 2. get list of vechicles
         out.println();
-        getVehiclesFilteredByType(vehicles, "Lorry"); //2. create new list, filtered by type "Lorry"
+        parking.getVehiclesFilteredByType(vehicles, "Lorry");//3. create new list, filtered by type "Lorry"
         out.println();
-        sortAccordingToDurationStaying(vehicles); //3. Sorting according to duration staying on parking
+        parking.sortAccordingToDurationStaying(vehicles); //4. Sorting according to duration staying on parking
         out.println();
-        checkIfAtLeastOneFromLviv(vehicles);  //4. check at least one vehicle from Lviv
+        parking.checkIfAtLeastOneFromLviv(vehicles);  //5. check at least one vehicle from Lviv
         out.println();
-        checkOwner(vehicles, "Ivan"); //5. Sort all "Ivans" vecicles
+        parking.getListOfCarsByOwner(vehicles, "Ivan"); //6. Return all "Ivans" vecicles
         out.println();
-        getVehiclesFilteredByType(vehicles, "motorcycle"); //6 Check none "motorcycle" vehicles
+        parking.getVehiclesFilteredByType(vehicles, "motorcycle"); //7 Check none "motorcycle" vehicles
         out.println();
-        sortCarsByRegistrationNumber(vehicles); //7. Sort alphabetically by registration num.
+        parking.sortCarsByRegistrationNumber(vehicles); //8. Sort alphabetically by registration num.
 
 
     }
 
-    private static void getVehiclesAtTheParking(List<Vehicle> veh) {
-        for (Vehicle v : veh)
-            out.print(v.getStateNumber() + ", ");
+    private List<String> getVehiclesFormAtTheParking(List<Vehicle> veh) {
+        List<String> formOfVehiclesOnParking = new ArrayList<>();
+        for (Vehicle vehicle : veh) {
+            formOfVehiclesOnParking.add(vehicle.getForm() + " with number: " + vehicle.getStateNumber());
+        }
+        return formOfVehiclesOnParking;
     }
 
-    private static void getVehiclesFilteredByType(List<Vehicle> veh, String type) {
+    private List<Vehicle> getVehiclesFilteredByType(List<Vehicle> veh, String type) {
         List<Vehicle> filteredVehicles = new ArrayList<>();
         for (Vehicle vehicle : veh) {
             if ((vehicle.getForm().equalsIgnoreCase(type))) {
                 filteredVehicles.add(vehicle);
             }
         }
+        return filteredVehicles;
 
     }
 
@@ -61,37 +71,44 @@ public class Parking {
         }
     }
 
-    private static void sortAccordingToDurationStaying(List<Vehicle> veh) {
+    private List<Vehicle> sortAccordingToDurationStaying(List<Vehicle> veh) {
+        List<Vehicle> sortedVehicles = new ArrayList<>();
         Collections.sort(veh, new SortByDurationStaying());
         for (Vehicle v : veh)
-            out.print(v.getStayOnParking() + ", ");
+            sortedVehicles.add(v);
+        return sortedVehicles;
     }
 
-    private static void checkIfAtLeastOneFromLviv(List<Vehicle> veh) {
+    private boolean checkIfAtLeastOneFromLviv(List<Vehicle> veh) {
         for (Vehicle v : veh) {
             if (v.getStateNumber().startsWith("BC")) {
                 out.println("at least one Vehicle from Lviv exist");
-                break;
+                return true;
             }
         }
+        return false;
+
 
     }
 
-    private static void checkOwner(List<Vehicle> veh, String owner) {
+    private  List<Vehicle> getListOfCarsByOwner(List<Vehicle> veh, String owner) {
+        List<Vehicle> filteredVehicles = new ArrayList<>();
         for (Vehicle v : veh) {
             if (v.getOwner().equals(owner)) {
-                out.println("owner " + v.getForm() + " " + v.getStateNumber() + " " + owner);
+                filteredVehicles.add(v);
             }
+            out.println("owner " + v.getForm() + " " + v.getStateNumber() + " " + owner);
         }
+        return filteredVehicles;
     }
 
-    private static void sortCarsByRegistrationNumber(List<Vehicle> veh) {
+
+    private  Set<String> sortCarsByRegistrationNumber(List<Vehicle> veh) {
         Collections.sort(veh, sortByRegistrationNumber);
-        Set<Vehicle> vehicleSet = new HashSet<>();
-        vehicleSet.addAll(veh);
-        for (Vehicle v : vehicleSet) out.print(v.getStateNumber() + ", ");
+        Set<String> vehicleSet = new HashSet<>();
+        vehicleSet.add(veh.get(1).getStateNumber());
+        return vehicleSet;
     }
-
 
     static Comparator<Vehicle> sortByRegistrationNumber = new Comparator<Vehicle>() {
 
@@ -99,7 +116,6 @@ public class Parking {
         public int compare(Vehicle a, Vehicle b) {
             return a.getStateNumber().compareTo(b.getStateNumber());
         }
-
 
     };
 

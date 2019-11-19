@@ -49,6 +49,8 @@ public enum DaysOfWeek {
 
     DaysOfWeek() {
     }
-
     abstract DaysOfWeek nextDay();
+    public String toString(){
+        return super.toString();
+    }
 }

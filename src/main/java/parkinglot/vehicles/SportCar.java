@@ -1,17 +1,17 @@
+package parkinglot.vehicles;
 
-package parkinglot;
+import parkinglot.interfaces.Movable;
 
-public class Lorry extends Vehicle implements Movable {
-
+public class SportCar extends Vehicle implements Movable {
 
     private String stateNumber;
-    private String form = "lorry";
-    private int countOfWheels = 16;
+    private String form = "Sportcar";
+    private int countOfWheels = 4;
     private int parkingPlace;
     private int stayOnParking;
     private String owner;
 
-    Lorry(String form, int countOfWheels, int parkingPlace, String stateNumber, int stayOnParking, String owner) {
+    public SportCar(String form, int countOfWheels, int parkingPlace, String stateNumber, int stayOnParking, String owner) {
 
         super(form, countOfWheels);
         this.parkingPlace = parkingPlace;
@@ -20,7 +20,6 @@ public class Lorry extends Vehicle implements Movable {
         this.owner = owner;
 
     }
-
 
     public String getForm() {
         return form;
@@ -74,6 +73,6 @@ public class Lorry extends Vehicle implements Movable {
 
     @Override
     public String move() {
-        return "slow";
+        return "fast";
     }
 }
