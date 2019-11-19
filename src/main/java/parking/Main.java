@@ -58,7 +58,7 @@ public class Main {
         //Task #2 Add possibility for user to retrieve list of vehicles filtered by type (e.g. car, bike, lorry etc)
         System.out.println("\nMethod which prints all vehicles, which type are ... Please enter type: Car or Truck\n");
         String typeForSearch = scanner.nextLine();
-        checkType(typeForSearch);
+        filterByType(typeForSearch);
 
         // Task #3 Sort vehicles list according to duration it is staying on a parking lot
         System.out.println("\nRevers sorting by durations\n");
