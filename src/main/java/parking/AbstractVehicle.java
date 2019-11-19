@@ -58,7 +58,7 @@ public abstract class AbstractVehicle {
         }
     }
     private void assignCarToLot(String number) {            //переробити логіку
-        if ((VehicleParking.lotsList.size() < VehicleParking.LOT_COUNT)) {
+        if ((!VehicleParking.lotsList.isEmpty()) && (VehicleParking.lotsList.size() < VehicleParking.LOT_COUNT)) {
             VehicleParking.lotsList.add(number);
             System.out.println(number + " You have place №:" + (VehicleParking.lotsList.indexOf(number) + 1));
         } else {
