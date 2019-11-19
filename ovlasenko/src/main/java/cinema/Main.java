@@ -31,7 +31,7 @@ public class Main {
                     System.out.println("Enter genre:");
                     innerInput = new Scanner(System.in);
                     innerString = innerInput.next();
-                    item.getFilmByGenreStream(innerString);
+                    item.getFilmsByGenre(innerString);
                     break;
                 case "3":
                     System.out.println("Sort by alphabetic");
