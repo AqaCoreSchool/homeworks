@@ -2,20 +2,21 @@ package library;
 
 import library.common.Common;
 import library.common.Constant;
-import library.enumeration.BookGenre;
 
 import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) { ;
         Member member = new Member();
+        member.getLibraryWorkingTime();
         Scanner userInput = new Scanner(System.in);
         Scanner innerInput;
         String innerString;
         String lineSeparator = System.lineSeparator();
-        List<BookItem> resultList;
+        List<BookItem> tempList;
 
         System.out.println("TITLE : AUTHOR : GENRE : RELEASEDATE : LANGUAGE : PAGES");
         System.out.println(lineSeparator);
@@ -45,9 +46,6 @@ public class Main {
                 case "2":
                     System.out.println("Sorting books alphabetically...");
                     member.sortBooks(member.getBooksList());
-                    for (BookItem item : member.getBooksList()) {
-                        System.out.println(item.getTitle() + " : " + item.getAuthor());
-                    }
                     System.out.println(Constant.OPERATION_FINISHED);
                     break;
                 case "3":
@@ -61,26 +59,21 @@ public class Main {
                     System.out.println("Enter the genre to check if all books in list correspond it.");
                     innerInput = new Scanner(System.in);
                     innerString = innerInput.next();
-                    System.out.println(member.areAllByGenre(innerString));
+                    System.out.println(member.areAllByGenre(innerString.toUpperCase()));
                     System.out.println(Constant.OPERATION_FINISHED);
                     break;
                 case "5":
                     System.out.println("Enter author's name to check if none of the books from list correspond it");
                     innerInput = new Scanner(System.in);
                     innerString = innerInput.next();
-                    System.out.println(member.areNoneByAuthor(innerString));
+                    System.out.println(member.areNoneByAuthor(innerString.toUpperCase()));
                     System.out.println(Constant.OPERATION_FINISHED);
                     break;
                 case "6":
-                    resultList = member.getOldestBookPerGenre(member.getBooksList());
-                    resultList.sort(new Comparator<BookItem>() {
-                        @Override
-                        public int compare(BookItem bookItem, BookItem t1) {
-                            String title1 = bookItem.getTitle();
-                            String title2 = t1.getTitle();
-                            return title1.compareTo(title2);
-                        }
-                    });
+                    tempList = member.getOldestBookPerGenre(member.getBooksList());
+                    List<BookItem> resultList = tempList.stream()
+                            .sorted(Comparator.comparing(BookItem::getTitle))
+                            .collect(Collectors.toList());
                     System.out.println(Common.setCommaAsDelimiter(resultList));
                     System.out.println("Operation finished! Please, choose the next one!");
                     break;
