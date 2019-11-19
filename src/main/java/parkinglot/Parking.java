@@ -1,5 +1,6 @@
 package parkinglot;
 
+import parkinglot.exception.VehicleNotFoundException;
 import parkinglot.vehicles.Bike;
 import parkinglot.vehicles.Lorry;
 import parkinglot.vehicles.SportCar;
@@ -16,17 +17,18 @@ public class Parking {
         Parking parking = new Parking();
 
 
-        vehicles.add(new Lorry("man - lorry", 6, 1, "BC1256TH", 10, "Ivan"));
-        vehicles.add(new Lorry("volvo - lorry", 10, 2, "AA2566AO", 200, "Ivan"));
-        vehicles.add(new Lorry("kamaz - lorry", 16, 3, "AB2525CH", 8, "Fedir"));
-        vehicles.add(new Bike("kawasaki - bike", 2, 4, "AA4585TH", 6, "Vasyl"));
-        vehicles.add(new SportCar("ferrari - sportar", 4, 5, "AK2569OH", 54, "Nazar"));
-        vehicles.add(new SportCar("lamborghini - sportcar", 4, 6, "BC2569TH", 12, "Stepan"));
-        vehicles.add(new Bike("BMW - bike", 2, 7, "OP4585TH", 12, "Fedir"));
-        vehicles.add(new Bike("Yamaha - bike", 2, 8, "PO4585TH", 56, "Siroga"));
-        vehicles.add(new Bike("MT - bike", 2, 9, "AM4585HH", 96, "Natalya"));
+//        vehicles.add(new Lorry("man - lorry", 6, 1, "BC1256TH", 10, "Ivan"));
+//        vehicles.add(new Lorry("volvo - lorry", 10, 2, "AA2566AO", 200, "Ivan"));
+//        vehicles.add(new Lorry("kamaz - lorry", 16, 3, "AB2525CH", 8, "Fedir"));
+//        vehicles.add(new Bike("kawasaki - bike", 2, 4, "AA4585TH", 6, "Vasyl"));
+//        vehicles.add(new SportCar("ferrari - sportar", 4, 5, "AK2569OH", 54, "Nazar"));
+//        vehicles.add(new SportCar("lamborghini - sportcar", 4, 6, "BC2569TH", 12, "Stepan"));
+//        vehicles.add(new Bike("BMW - bike", 2, 7, "OP4585TH", 12, "Fedir"));
+//        vehicles.add(new Bike("Yamaha - bike", 2, 8, "PO4585TH", 56, "Siroga"));
+//        vehicles.add(new Bike("MT - bike", 2, 9, "AM4585HH", 96, "Natalya"));
 
-
+        parking.verifyVehiclesListNotEmpty(vehicles); // 1. verify list of vehicles is not empty
+        out.println();
         parking.getVehiclesFormAtTheParking(vehicles); // 2. get list of vechicles
         out.println();
         parking.getVehiclesFilteredByType(vehicles, "Lorry");//3. create new list, filtered by type "Lorry"
@@ -40,8 +42,6 @@ public class Parking {
         parking.getVehiclesFilteredByType(vehicles, "motorcycle"); //7 Check none "motorcycle" vehicles
         out.println();
         parking.sortCarsByRegistrationNumber(vehicles); //8. Sort alphabetically by registration num.
-
-
     }
 
     private List<String> getVehiclesFormAtTheParking(List<Vehicle> veh) {
@@ -87,11 +87,9 @@ public class Parking {
             }
         }
         return false;
-
-
     }
 
-    private  List<Vehicle> getListOfCarsByOwner(List<Vehicle> veh, String owner) {
+    private List<Vehicle> getListOfCarsByOwner(List<Vehicle> veh, String owner) {
         List<Vehicle> filteredVehicles = new ArrayList<>();
         for (Vehicle v : veh) {
             if (v.getOwner().equals(owner)) {
@@ -103,7 +101,7 @@ public class Parking {
     }
 
 
-    private  Set<String> sortCarsByRegistrationNumber(List<Vehicle> veh) {
+    private Set<String> sortCarsByRegistrationNumber(List<Vehicle> veh) {
         Collections.sort(veh, sortByRegistrationNumber);
         Set<String> vehicleSet = new HashSet<>();
         vehicleSet.add(veh.get(1).getStateNumber());
@@ -118,5 +116,11 @@ public class Parking {
         }
 
     };
+
+    private void verifyVehiclesListNotEmpty(List<Vehicle> list) {
+        if (list.isEmpty()) {
+            throw new VehicleNotFoundException("List of vehicles is empty, nothing to execute");
+        }
+    }
 
 }
