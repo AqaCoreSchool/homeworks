@@ -19,7 +19,7 @@ public interface Searchable {
 
     boolean isReleasesOfAllFilmsCorrespondToFilter(List<Movie> films, int yearRelease);
 
-    boolean isNamesOfFilmsContainWords(List<Movie> films, String filmName);
+    boolean isNoneOfFilmsContainWords(List<Movie> films, String filmName);
 
     Set<String> getAllUniqueGenresSet(List<Movie> films);
 }

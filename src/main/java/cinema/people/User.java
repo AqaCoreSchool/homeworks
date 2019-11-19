@@ -10,6 +10,8 @@ import cinema.primary.Session;
 import com.github.javafaker.Faker;
 
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class User extends Human implements Searchable {
 
@@ -86,33 +88,29 @@ public class User extends Human implements Searchable {
 
     //This method returns a Map with pairs: Movie - his Sessions
     @Override
-    public Map<String, List<Session>> getAllSessionsOfAllMovies(List<Movie> films){
+    public Map<String, List<Session>> getAllSessionsOfAllMovies(List<Movie> films) {
 
-        Map<String, List<Session>> sessionMap = new HashMap<>();
-
-        for(Movie elem: films) {
-                    sessionMap.put(elem.getFilmName(), elem.getSessions());
-            }
+        Map<String, List<Session>> sessionMap = films.stream()
+                .collect(Collectors.toMap(p->p.getFilmName(), t->t.getSessions()));
         if (sessionMap.isEmpty()) {
             throw new NoSuchFilmsException("Our collection of films doesn't include any films with sessions");
         }
-        return  sessionMap;
+        return sessionMap;
     }
+
+
 
     //This method returns a List of movies filtered by particular genre
     @Override
-    public List<Movie> getMovieListFilteredByGenre(List<Movie> films, String genre){
+    public List<Movie> getMovieListFilteredByGenre(List<Movie> films, String genre) {
 
-        List<Movie> filteredMovie = new ArrayList<>();
-            for (Movie elem : films) {
-                if (elem.getFilmGenre().toString().equalsIgnoreCase(genre)) {
-                    filteredMovie.add(elem);
-                }
-            }
-            if (filteredMovie.isEmpty()){
-                    throw new NoSuchFilmsException("Our collection of films doesn't include " +
-                                                    "films with this genre - " + genre);
-            }
+        List<Movie> filteredMovie = films.stream()
+                .filter(p -> p.getFilmGenre().toString().equalsIgnoreCase(genre))
+                .collect(Collectors.toList());
+        if (filteredMovie.isEmpty()){
+            throw new NoSuchFilmsException("Our collection of films doesn't include " +
+                    "films with this genre - " + genre);
+        }
         return filteredMovie;
     }
 
@@ -120,59 +118,38 @@ public class User extends Human implements Searchable {
     @Override
     public boolean isOneFilmDurationCorrespondsToFilter(List<Movie> films, int duration){
 
-        for (Movie elem : films) {
-                if (elem.getDuration() > duration) {
-                    return true;
-                }
-        }
-        return false;
+        return (films.stream()
+                .anyMatch(s->s.getDuration()>duration));
     }
 
     //This method checks if all movies in a List corresponds to search by year of release
-    public boolean isReleasesOfAllFilmsCorrespondToFilter(List<Movie> films, int yearRelease){
-
-             for (Movie elem : films) {
-                 if (elem.getYearRelease() < yearRelease) {
-                     return false;
-                 }
-             }
+    public boolean isReleasesOfAllFilmsCorrespondToFilter(List<Movie> films, int yearRelease) {
         if (yearRelease < 1984) {
             throw new NoSuchFilmsException("Our collection of films doesn't include films" +
-                                            " with release in - " + yearRelease + " Try searching after - 1984");
+                    " with release in - " + yearRelease + " Try searching after - 1984");
         }
-        return true;
-        }
+        return (films.stream()
+                .allMatch(s -> s.getDuration() < yearRelease));
 
-
+    }
     //This method checks if movies in a List contain particular words in their names
     @Override
-    public boolean isNamesOfFilmsContainWords(List<Movie> films, String filmName){
+    public boolean isNoneOfFilmsContainWords(List<Movie> films, String filmName){
 
-            for (Movie elem : films) {
-                if (elem.getFilmName().toLowerCase().contains(filmName.toLowerCase())) {
-                    return true;
-                }
-            }
-        return false;
-        }
-
-
-
+        return (films.stream()
+                .noneMatch(s->s.getFilmName().toLowerCase().contains(filmName.toLowerCase())));
+    }
 
     //This method returns Set of filtered unique genres
     @Override
     public Set<String> getAllUniqueGenresSet(List<Movie> films){
-
-
-        Set<String> uniqueGenres = new HashSet<>();
-        for(Movie elem: films){
-            uniqueGenres.add(elem.getFilmGenre().toString());
-        }
+        Set<String> uniqueGenres = films.stream()
+                .map(p->p.getFilmGenre().toString())
+                .collect(Collectors.toSet());
         if (uniqueGenres.isEmpty()) {
             throw new NoSuchFilmsException("Our collection of films doesn't include any films with unique genres");
         }
         return uniqueGenres;
-
     }
 }
 
