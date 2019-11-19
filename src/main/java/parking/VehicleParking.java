@@ -39,8 +39,7 @@ public class VehicleParking {
                 System.out.println(number + " - this is wrong format of vehicle number ");
                 return false;
             }
-        } catch (NullPointerException e) {
-            System.out.println("Number is empty. You can not add vehicle without number ");
+        } catch (NumberNullPointerException e) {
             return false;
         }
     }
