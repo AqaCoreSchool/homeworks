@@ -54,7 +54,15 @@ public abstract class AbstractVehicle {
                 vehicleList.add(vehicle);
                 addCarToMap(vehicle.getNumber(), vehicle);
             } else
-                System.out.println("There aren't available lots");
+                throw new ParkingLotNotFoundException("You can not add Vehicle, there are not available lots");
+        }
+    }
+    private void assignCarToLot(String number) {            //переробити логіку
+        if ((VehicleParking.lotsList.size() < VehicleParking.LOT_COUNT)) {
+            VehicleParking.lotsList.add(number);
+            System.out.println(number + " You have place №:" + (VehicleParking.lotsList.indexOf(number) + 1));
+        } else {
+            throw new ParkingLotNotFoundException("You can not add Vehicle, there are not available lots");
         }
     }
 
@@ -66,15 +74,6 @@ public abstract class AbstractVehicle {
             numberVehicleMap.remove(this.number);
         } else
             System.out.println(number + " Oops, You aren't checked in. You need to do it!");
-    }
-
-    private void assignCarToLot(String number) {
-        if ((VehicleParking.lotsList.size() < VehicleParking.LOT_COUNT)) {
-            VehicleParking.lotsList.add(number);
-            System.out.println(number + " You have place №:" + (VehicleParking.lotsList.indexOf(number) + 1));
-        } else {
-            System.out.println("Sorry, there's no lots available.");
-        }
     }
 
     private boolean isCarInLot(String number) {
