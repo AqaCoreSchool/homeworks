@@ -1,8 +1,7 @@
 package parking;
 
 import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
 
 public class VehicleParking {
 
@@ -29,21 +28,6 @@ public class VehicleParking {
         }
     }
 
-    public boolean isNumberCorrect(String number) {
-        try {
-            Pattern p = Pattern.compile(pattern);
-            Matcher m = p.matcher(number);
-            if (m.matches()) {
-                return true;
-            } else {
-                System.out.println(number + " - this is wrong format of vehicle number ");
-                return false;
-            }
-        } catch (NullPointerException e) {
-            System.out.println("Number is empty. You can not add vehicle without number ");
-            return false;
-        }
-    }
 
     public static boolean isNumberExist(String template) {
         for (AbstractVehicle vehicle : vehicleList) {
@@ -101,7 +85,6 @@ public class VehicleParking {
         Collections.reverse(vehicleList);
         printVehicleList(vehicleList);
     }
-
 
     public static void addCarToMap(String number, AbstractVehicle vehicle) {
         numberVehicleMap.put(number, vehicle);
