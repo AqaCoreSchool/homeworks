@@ -1,4 +1,7 @@
 package exceptions;
 
-public class NoSuchRoomException     {
+public class NoSuchRoomException extends RuntimeException  {
+    public NoSuchRoomException(String m){
+        super(m);
+    }
 }
