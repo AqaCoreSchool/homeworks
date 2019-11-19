@@ -60,18 +60,19 @@ public class User {
                 DateTimeFormatter.ofPattern("dd.MM.yyyy");
 
         String formatedDateTime = lastDay.format(format);
-
-        books.stream().forEach(element -> {
-            if (element.available)
-                System.out.println(String.format("%s available till %s", element, formatedDateTime));
-        });
+        books.stream()
+                .filter(element -> element.available)
+                .forEach(element -> System.out.println(String.format("%s available till %s", element, formatedDateTime)));
     }
 
 
     //2
     void getFilteredByAuthor(String author) {
         List<Library> tempList = new ArrayList<>();
-        books.stream().forEach(element -> { if (element.available && element.getAuthor().contains(author)) tempList.add(element); });
+        books.stream()
+                .filter(element-> element.available && element.getAuthor().contains(author))
+                .forEach(element -> tempList.add(element));
+
         tempList.stream().forEach(element -> System.out.println(element));
         if (tempList.isEmpty()) {
             throw new NoSuchBookException("We don't have any Books by this Author");
