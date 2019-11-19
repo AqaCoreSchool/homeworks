@@ -17,15 +17,15 @@ public class Parking {
         Parking parking = new Parking();
 
 
-//        vehicles.add(new Lorry("man - lorry", 6, 1, "BC1256TH", 10, "Ivan"));
-//        vehicles.add(new Lorry("volvo - lorry", 10, 2, "AA2566AO", 200, "Ivan"));
-//        vehicles.add(new Lorry("kamaz - lorry", 16, 3, "AB2525CH", 8, "Fedir"));
-//        vehicles.add(new Bike("kawasaki - bike", 2, 4, "AA4585TH", 6, "Vasyl"));
-//        vehicles.add(new SportCar("ferrari - sportar", 4, 5, "AK2569OH", 54, "Nazar"));
-//        vehicles.add(new SportCar("lamborghini - sportcar", 4, 6, "BC2569TH", 12, "Stepan"));
-//        vehicles.add(new Bike("BMW - bike", 2, 7, "OP4585TH", 12, "Fedir"));
-//        vehicles.add(new Bike("Yamaha - bike", 2, 8, "PO4585TH", 56, "Siroga"));
-//        vehicles.add(new Bike("MT - bike", 2, 9, "AM4585HH", 96, "Natalya"));
+        vehicles.add(new Lorry("man - lorry", 6, 1, "BC1256TH", 10, "Ivan"));
+        vehicles.add(new Lorry("volvo - lorry", 10, 2, "AA2566AO", 200, "Ivan"));
+        vehicles.add(new Lorry("kamaz - lorry", 16, 3, "AB2525CH", 8, "Fedir"));
+        vehicles.add(new Bike("kawasaki - bike", 2, 4, "AA4585TH", 6, "Vasyl"));
+        vehicles.add(new SportCar("ferrari - sportar", 4, 5, "AK2569OH", 54, "Nazar"));
+        vehicles.add(new SportCar("lamborghini - sportcar", 4, 6, "BC2569TH", 12, "Stepan"));
+        vehicles.add(new Bike("BMW - bike", 2, 7, "OP4585TH", 12, "Fedir"));
+        vehicles.add(new Bike("Yamaha - bike", 2, 8, "PO4585TH", 56, "Siroga"));
+        vehicles.add(new Bike("MT - bike", 2, 9, "AM4585HH", 96, "Natalya"));
 
         parking.verifyVehiclesListNotEmpty(vehicles); // 1. verify list of vehicles is not empty
         out.println();
