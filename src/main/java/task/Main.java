@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Main {
 
@@ -11,8 +12,14 @@ public class Main {
 
     public static void main(String[] args) {
         List<Person> people = DataGenerator.generatePeople();
-
         List<Person> peopleWithSuspiciousBankAccounts = new ArrayList<>();
+
+        people.stream()
+                .filter(person -> person.getBankAccount().isActive()
+                        && person.getBankAccount().getBalance() > person.getSalary())
+                .filter(person -> getIncomeSinceAccountStartDate(person) > person.getBankAccount().getBalance())
+                .forEach(peopleWithSuspiciousBankAccounts::add);
+
         for (int i = 0; i < people.size(); i++) {
             Person person = people.get(i);
             if (person.getBankAccount().isActive() && person.getBankAccount().getBalance() > person.getSalary()) {
@@ -23,14 +30,21 @@ public class Main {
                 }
             }
         }
-        String result = "";
-        for (Person person : peopleWithSuspiciousBankAccounts) {
-            result = result + fillInTemplateRow(person);
-            result += "\n";
-        }
-        result = result.replaceAll("\\n$", "");
 
+        String result = "";
+        result = peopleWithSuspiciousBankAccounts.stream().map(Main::fillInTemplateRow).peek(result::concat)
+                .collect(Collectors.joining("\n"));
         System.out.println(result);
+
+        String result1 = "";
+        for (Person person : peopleWithSuspiciousBankAccounts) {
+            result1 = result1 + fillInTemplateRow(person);
+            result1 += "\n";
+        }
+        result1 = result1.replaceAll("\\n$", "");
+        System.out.println("====================================");
+        System.out.println(result1);
+        System.out.println("Is equal: " + result1.equals(result));
 
     }
 
