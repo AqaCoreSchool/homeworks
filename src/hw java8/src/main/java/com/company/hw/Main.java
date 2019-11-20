@@ -16,13 +16,13 @@ public class Main {
                 switch (task) {
                     case 1:
                         System.out.println("[1] All available: ");
-                        olya.getAvailableBooks();
+                        olya.printAvailableBooks();
                         break;
                     case 2:
                         System.out.print("[2] Enter author's Surname: Shevchenko or Bronte ->");
                         Scanner input = new Scanner(System.in);
                         String inpAuthor = input.next();
-                        olya.getFilteredByAuthor(inpAuthor);
+                        olya.filterBooksByAuthor(inpAuthor);
                         break;
                     case 3:
                         System.out.println("[3] All books alphabetically by Book Name: ");
@@ -45,11 +45,11 @@ public class Main {
                         System.out.print("[6] Enter Author ->");
                         Scanner input6 = new Scanner(System.in);
                         String inpString = input6.next();
-                        System.out.println(olya.hasNotBooksByAuthor(inpString));
+                        System.out.println(olya.hasNoneBooksByAuthor(inpString));
                         break;
                     case 7:
                         System.out.println("[7] Complicated Task:");
-                        olya.filteredByGenre();
+                        olya.printFilteredBooksByGenre();
                         break;
                     case 8:
                         System.out.println("[8] Map:");
