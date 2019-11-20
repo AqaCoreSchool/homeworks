@@ -113,7 +113,7 @@ public class Member extends Profile implements Searchable {
         return new ArrayList<>(map.values());
     }
 
-    public void getLibraryWorkingTime() {
+    public void printLibraryWorkingTime() {
         ZoneId zone = ZoneId.systemDefault();
         LocalDate today = LocalDate.now(zone);
         LocalTime tenAM = LocalTime.of(10,0);

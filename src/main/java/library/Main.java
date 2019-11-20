@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 public class Main {
     public static void main(String[] args) {
         Member member = new Member();
-        member.getLibraryWorkingTime();
+        member.printLibraryWorkingTime();
         Scanner userInput = new Scanner(System.in);
         Scanner innerInput;
         String innerString;
