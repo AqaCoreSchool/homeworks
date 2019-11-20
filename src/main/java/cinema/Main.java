@@ -15,6 +15,7 @@ public class Main {
         User aUser = new User();
         aUser.setName("Andrew");
         aUser.setAge(25);
+        aUser.setDiscount(10);
 
         List<Movie> films = aUser.getAllMoviesList();
         System.out.println(films);
