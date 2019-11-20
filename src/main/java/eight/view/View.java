@@ -1,10 +1,10 @@
-package rybka.view;
+package eight.view;
 
-import rybka.controller.Application;
-import rybka.exception.NoSuchGenreException;
-import rybka.exception.NoSuchTitleException;
-import rybka.exception.NotAYearException;
-import rybka.exception.UnsupportedDurationException;
+import eight.controller.Application;
+import eight.exception.NoSuchGenreException;
+import eight.exception.NoSuchTitleException;
+import eight.exception.NotAYearException;
+import eight.exception.UnsupportedDurationException;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;

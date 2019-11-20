@@ -1,4 +1,4 @@
-package rybka.model;
+package eight.model;
 
 import java.time.LocalTime;
 

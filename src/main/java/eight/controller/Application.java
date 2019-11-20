@@ -1,15 +1,18 @@
-package rybka.controller;
+package eight.controller;
 
 import com.github.javafaker.Faker;
-import rybka.exception.NoSuchGenreException;
-import rybka.exception.NoSuchTitleException;
-import rybka.exception.NotAYearException;
-import rybka.exception.UnsupportedDurationException;
-import rybka.model.FilmCategory;
-import rybka.model.Movie;
+import eight.exception.NoSuchGenreException;
+import eight.exception.NoSuchTitleException;
+import eight.exception.NotAYearException;
+import eight.exception.UnsupportedDurationException;
+import eight.model.FilmCategory;
+import eight.model.Movie;
 
 import java.time.LocalTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 public class Application {
@@ -71,17 +74,6 @@ public class Application {
     }
 
     public void collectUniqueGenres() {
-        List<String> genres = new ArrayList<>();
-
-        for (Movie movie : movies) {
-            if (!genres.contains(movie.getGenre())) {
-                genres.add(movie.getGenre());
-            }
-        }
-
-        Collections.sort(genres);
-        System.out.println(String.join(", ", genres));
-
         System.out.println(movies.stream().map(Movie::getGenre).distinct().sorted()
                 .collect(Collectors.joining(", ")));
     }

@@ -1,6 +1,6 @@
-package rybka;
+package eight;
 
-import rybka.view.View;
+import eight.view.View;
 
 public class MovieMain {
     public static void main(String[] args) {
