@@ -7,20 +7,21 @@ import library.enumeration.BookAuthor;
 import library.enumeration.BookGenre;
 import library.enumeration.BookLanguage;
 import library.enumeration.ProfileStatus;
-import library.exception.AuthorNotFoundException;
 import library.exception.BookNotFoundException;
-import library.exception.GenreNotFoundException;
 import library.interfaces.Searchable;
 import library.model.Person;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.*;
 
 public class Member extends Profile implements Searchable {
     private int totalBorrowedBooks;
-    private List<BookItem> booksList;
+    private List<BookItem> booksList = new ArrayList<>();
 
     public Member() {
-        booksList = new ArrayList<>();
         for (int i = 0; i < 25; i++) {
             Faker faker = new Faker();
             String title = faker.book().title();
@@ -52,76 +53,45 @@ public class Member extends Profile implements Searchable {
     }
 
     @Override
-    public List<BookItem> getBooksByAuthor(String author) {
+    public void printBooksByAuthor(String author) {
         List<BookItem> tempList = new ArrayList<>();
-        for (BookItem item : booksList) {
-            if (item.getAuthor().toString().contains(author)) {
-                tempList.add(item);
-                System.out.println(item.getTitle() + " : " + item.getAuthor());
-            }
-            else {
-                throw new AuthorNotFoundException("Author not found!");
-            }
-        }
         if (booksList.isEmpty()) {
             throw new BookNotFoundException("Book list is empty!");
         }
-        return tempList;
+        booksList.stream()
+                .filter(name -> name.getAuthor().toString().contains(author))
+                .forEach(tempList::add);
+        tempList.forEach(bookItem -> System.out.format("%s : %s%n", bookItem.getTitle(), bookItem.getAuthor()));
     }
 
     public void sortBooks(List<BookItem> items) {
-        Collections.sort(items, new Comparator<BookItem>() {
-            @Override
-            public int compare(BookItem bookItem, BookItem t1) {
-                String title1 = bookItem.getTitle();
-                String title2 = t1.getTitle();
-                return title1.compareTo(title2);
-            }
-        });
+        items.stream()
+                .sorted(Comparator.comparing(Book::getTitle))
+                .forEach(bookItem -> System.out.println(bookItem.getTitle()));
     }
 
     public boolean isOneByYear(int year) {
-        for (BookItem bookItem : booksList) {
-            if (bookItem.getReleaseDate() < year) {
-                return true;
-            }
-        }
         if (booksList.isEmpty()) {
             throw new BookNotFoundException("Book list is empty!");
         }
-        return false;
+        return booksList.stream()
+                .anyMatch(bookItem -> bookItem.getReleaseDate() < year);
     }
 
     public boolean areAllByGenre(String genre) {
-        List<BookItem> tempList = new ArrayList<>();
-        for (BookItem book : booksList) {
-            if (book.getBookGenre().toString().contains(genre)) {
-                tempList.add(book);
-            }
-            else {
-                throw new GenreNotFoundException("Genre not found!");
-            }
-        }
-        if (tempList.isEmpty()) {
-            throw new BookNotFoundException("Book list is empty!");
-        }
-        return booksList.size() == tempList.size();
-    }
-
-    public boolean areNoneByAuthor(String author) {
-        List<BookItem> tempList = new ArrayList<>();
-        for (BookItem book : booksList) {
-            if (!book.getAuthor().toString().contains(author)) {
-                tempList.add(book);
-            }
-            else {
-                throw new AuthorNotFoundException("Author not found!");
-            }
-        }
         if (booksList.isEmpty()) {
             throw new BookNotFoundException("Book list is empty!");
         }
-        return booksList.size() == tempList.size();
+        return booksList.stream()
+                .allMatch(bookItem -> bookItem.getBookGenre().toString().contains(genre));
+    }
+
+    public boolean areNoneByAuthor(String author) {
+        if (booksList.isEmpty()) {
+            throw new BookNotFoundException("Book list is empty!");
+        }
+        return booksList.stream()
+                .noneMatch(bookItem -> bookItem.getAuthor().toString().contains(author));
     }
 
     List<BookItem> getBooksList() {
@@ -130,17 +100,35 @@ public class Member extends Profile implements Searchable {
 
     @Override
     public List<BookItem> getOldestBookPerGenre(List<BookItem> bookItems) {
-        Map<String, BookItem> oldestBookByGenre = new HashMap<>();
-
-        for (BookItem bookItem : bookItems) {
-            oldestBookByGenre.putIfAbsent(bookItem.getBookGenre().toString(), bookItem);
-            if (bookItem.getReleaseDate() < oldestBookByGenre.get(bookItem.getBookGenre().toString()).getReleaseDate()) {
-                oldestBookByGenre.put(bookItem.getBookGenre().toString(), bookItem);
-            }
-        }
+        Map<String, BookItem> map = new HashMap<>();
         if (booksList.isEmpty()) {
             throw new BookNotFoundException("Book list is empty!");
         }
-        return new ArrayList<>(oldestBookByGenre.values());
+        for (BookItem bookItem : bookItems) {
+            map.putIfAbsent(bookItem.getBookGenre().toString(), bookItem);
+            if (bookItem.getReleaseDate() < map.get(bookItem.getBookGenre().toString()).getReleaseDate()) {
+                map.put(bookItem.getBookGenre().toString(), bookItem);
+            }
+        }
+        return new ArrayList<>(map.values());
+    }
+
+    public void printLibraryWorkingTime() {
+        ZoneId zone = ZoneId.systemDefault();
+        LocalDate today = LocalDate.now(zone);
+        LocalTime tenAM = LocalTime.of(10,0);
+        LocalTime nineteenPM = LocalTime.of(19,0);
+        ZonedDateTime startWorking = today.atTime(tenAM).atZone(zone);
+        ZonedDateTime finishWorking = today.atTime(nineteenPM).atZone(zone);
+        String currentTime = LocalTime.now(zone).toString();
+        System.out.format("The time is: %s%n", currentTime);
+        ZonedDateTime timeDifference = today.atTime(LocalTime.parse(currentTime)).atZone(zone);
+        if (startWorking.isAfter(timeDifference) || finishWorking.isBefore(timeDifference)) {
+            System.out.println("Library is currently closed. Working hours: 10:00 - 19:00");
+        }
+        else {
+            System.out.println("Library is currently opened");
+        }
+
     }
 }

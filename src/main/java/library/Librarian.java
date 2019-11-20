@@ -36,7 +36,7 @@ public class Librarian extends Profile implements Searchable {
     }
 
     @Override
-    public List<BookItem> getBooksByAuthor(String author) {
-        return null;
+    public void printBooksByAuthor(String author) {
+
     }
 }

@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface Searchable {
     List<BookItem> getOldestBookPerGenre(List<BookItem> bookItems);
-    List<BookItem> getBooksByAuthor(String author);
+    void printBooksByAuthor(String author);
     //... other methods
 }
