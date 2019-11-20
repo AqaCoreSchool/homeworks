@@ -7,7 +7,11 @@ import com.hotel.room.SingleRoom;
 import com.hotel.user.Customer;
 import com.hotel.user.User;
 
+import java.time.Duration;
+import java.time.LocalDate;
 import java.util.List;
+
+import static java.time.temporal.ChronoUnit.DAYS;
 
 public class MainClass {
 
@@ -46,6 +50,8 @@ public class MainClass {
 
         rooms = User.getHotelAccount().getFreeRooms();
 
+        user.showChooseRooms(HotelAccount.getAllRooms());
+
         user.showChooseRooms(User.getHotelAccount().getFreeRooms());
 
         user.showChooseRooms(User.getHotelAccount().getFreeSharedRooms());
@@ -60,9 +66,9 @@ public class MainClass {
 
         user.showChooseRooms(User.getHotelAccount().getFreeRooms(100, 400));
 
-        user.showChooseRooms(User.getHotelAccount().getFreeSortedRoomsUp());
+        user.showChooseRooms(User.getHotelAccount().getFreeSortedRoomsByPriceUp());
 
-        user.showChooseRooms(User.getHotelAccount().getFreeSortedRoomsDown());
+        user.showChooseRooms(User.getHotelAccount().getFreeSortedRoomsByPriceDown());
 
         user.showCheckingResult(User.getHotelAccount().hasRoomAppropriateToCriterion(rooms, 400));
 
@@ -71,14 +77,5 @@ public class MainClass {
         rooms = User.getHotelAccount().getFreeSingleRooms();
 
         user.showCheckingResult(User.getHotelAccount().areAllRoomsPerFriendly(rooms));
-
-        showSeparatedRoomName(User.getHotelAccount().getFreeSortedRoomsDown());
-    }
-
-    //Show room type with number sorted for price
-    private static void showSeparatedRoomName(List<Room> rooms) {
-        for (Room room : rooms) {
-            System.out.print(room.getClass().getSimpleName() + " №" + room.getNumber() + " / ");
-        }
     }
 }

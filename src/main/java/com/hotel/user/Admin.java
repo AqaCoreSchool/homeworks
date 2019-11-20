@@ -1,5 +1,6 @@
 package com.hotel.user;
 
+import com.hotel.BookingOrder;
 import com.hotel.room.Room;
 
 import java.util.List;
@@ -31,19 +32,20 @@ public class Admin extends User {
     }
 
     @Override
-    public Room chooseRoom(List<Room> rooms) {
+    public void chooseRoom(List<Room> rooms) {
        //for example
-        return getHotelAccount().getFreeSharedRooms().get(1);
     }
 
-    public void checkBookingRequest(Customer customer) {
-        if (customer.getAge() > 20 & !customer.getRoom().isBooking()) bookingRoom(customer.getRoom(), customer);
+    public boolean checkBookingRequest(Customer customer) {
+        //Verification logic must be added, and after that
+        return bookingRoom(customer.getOrder());
     }
 
-
-
-    private void bookingRoom(Room room, Customer customer) {
-        room.setBooking(true);
-        //Set customer for room, after create room type check
+    private boolean bookingRoom(BookingOrder order) {
+       order.getRoom().setBooking(true);
+       order.getRoom().setBookingDataFrom(order.getBookingDateFrom());
+       order.getRoom().setBookingDays(order.getBookingDays());
+       return order.getRoom().isBooking();
     }
+
 }
