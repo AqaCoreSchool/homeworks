@@ -33,7 +33,7 @@ public class HotelAccount {
 
     //Returns all free shared rooms
     public List<Room> getFreeSharedRooms() {
-        return getAllRoomsByCondition(room -> SharedRoom.class.isInstance(room) & !room.isBooking());
+        return getAllRoomsByCondition(room -> room instanceof SharedRoom & !room.isBooking());
     }
 
     //Returns all free shared rooms in price range
@@ -44,7 +44,7 @@ public class HotelAccount {
 
     //Returns all free single rooms
     public List<Room> getFreeSingleRooms() {
-        return getAllRoomsByCondition(room -> SingleRoom.class.isInstance(room) & !room.isBooking());
+        return getAllRoomsByCondition(room -> room instanceof SingleRoom & !room.isBooking());
     }
 
     //Returns all free single rooms in price range
