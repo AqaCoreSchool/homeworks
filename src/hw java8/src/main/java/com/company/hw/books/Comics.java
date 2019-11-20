@@ -10,8 +10,8 @@ public class Comics extends Library implements Artistic {
     }
 
     @Override
-    public void typing(boolean type) {
-        if (!type) {
+    public void isArtisticType(boolean isArtistic) {
+        if (!isArtistic) {
             System.out.println("Our comics must be artistic! You need to change type");
         } else {
             System.out.println("Our comics is artistic!");
