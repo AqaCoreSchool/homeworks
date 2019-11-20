@@ -22,9 +22,6 @@ public abstract class Library {
         return bookYear;
     }
 
-    public void setBookAuthor(String bookAuthor) {
-        this.bookAuthor = bookAuthor;
-    }
 
     public String toString(){
         return String.format("%s <%s> |%d|", bookAuthor, bookName, bookYear);
