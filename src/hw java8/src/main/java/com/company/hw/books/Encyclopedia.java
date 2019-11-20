@@ -10,8 +10,8 @@ public class Encyclopedia  extends Library implements NotArtistic {
     }
 
     @Override
-    public void noTyping(boolean type) {
-        if (!type) {
+    public void isNotArtisticType(boolean isArtistic) {
+        if (!isArtistic) {
             System.out.println("Our Encyclopedia must be artistic! You need to change type");
         } else {
             System.out.println("Our Encyclopedia isn't artistic! You are right");
