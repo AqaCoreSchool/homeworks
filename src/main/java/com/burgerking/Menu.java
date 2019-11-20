@@ -132,10 +132,9 @@ public class Menu {
 
     public String getLowestPriceByType(){
         List<Food> typesList = new ArrayList<>();
-        for(int i=0;i<FoodType.values().length;i++){
-            int filterOption = i;
+        for(FoodType type : FoodType.values()){
             typesList.add(this.productList.stream().sorted(compareByPrice)
-                    .filter(food -> food.getType().ordinal()==filterOption).findFirst().orElse(null));
+                    .filter(food -> food.getType().equals(type)).findFirst().orElse(null));
         }
         return typesList.stream()
                 .filter(Objects::nonNull).sorted(compareByName).distinct()
@@ -143,10 +142,9 @@ public class Menu {
     }
 
     public void fillAmountPerTypeMap(){
-        for(int i=0;i<FoodType.values().length;i++){
-            int foodType = i;
-            this.amountPerTypeMap.put(FoodType.values()[foodType], (int) this.productList.stream().
-                    filter(food -> food.getType().ordinal()== foodType).count());
+        for(FoodType type : FoodType.values()){
+            this.amountPerTypeMap.put(type, (int) this.productList.stream().
+                    filter(food -> food.getType().equals(type)).count());
         }
     }
 
