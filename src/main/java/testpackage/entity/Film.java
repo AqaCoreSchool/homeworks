@@ -27,5 +27,4 @@ public  class Film {
 
    private LocalDate date;
 
-
 }

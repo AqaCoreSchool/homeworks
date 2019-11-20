@@ -5,6 +5,7 @@ import java.util.Random;
 
 public enum Movie {
 
+
         JOKER ("Joker",
                 "The origin tale of the Joker (Joaquin Phoenix) " +
                         "– one of the most iconic villains in comic book history.",
@@ -134,6 +135,7 @@ public enum Movie {
         private String voiceLanguage;
         private String format;
         private int ageLimit;
+
         private Random random = new Random();
 
           Movie(String nameFilm, String description, String genre, String[] session,

@@ -3,6 +3,8 @@ package testpackage.factory;
 import testpackage.base.BaseClass;
 import testpackage.cinema.Movie;
 import testpackage.entity.Film;
+import testpackage.entity.Film;
+import testpackage.cinema.Movie;
 
 public class FilmFactory extends BaseClass {
 

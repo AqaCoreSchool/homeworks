@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import java.util.*;
 
 public class Sessions extends BaseClass {
 
@@ -74,10 +75,9 @@ public class Sessions extends BaseClass {
     public boolean hasNoMovieCriteria(String criteria) {
         return filmList.stream().noneMatch(film -> film.toString().contains(criteria));
     }
-
+  
     private void checkForEmptyList(List<Film> list){
         if(null == list || list.isEmpty()){
             throw new IllegalStateException("Film list is empty");
         }
     }
-}
