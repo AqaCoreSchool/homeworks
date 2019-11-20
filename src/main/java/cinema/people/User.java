@@ -35,6 +35,10 @@ public class User extends Human implements Searchable {
                 '}';
     }
 
+    public int getRandomValue(int x, int y){
+        Faker faker = new Faker();
+        return faker.random().nextInt(x,y);
+    }
 
     //This method creates and returns a List of all movies
     @Override
@@ -53,20 +57,17 @@ public class User extends Human implements Searchable {
                 new Session(hallFour, 150.00, LocalTime.of(21,30), LocalDate.now()));
 
         List<String> movieNames = new ArrayList<>(Arrays.asList("Forrest Gump", "Titanic", "Terminator",
-                "Untouchable", "Rogue One", "The LOtR", "Schindler`s List", "Green Mile", "Godfather",
+                "Untouchable", "Rogue One", "The LOtR", "Schindlers List", "Green Mile", "Godfather",
                 "Dark Knight", "Matrix", "Back to the Future", "Gladiator", "Avatar", "Aliens"));
 
         List<Movie> movies =movieNames.stream()
-                .map(p->new Movie(p, Genre.values()[faker.random().nextInt(0,5)], faker.random().nextInt(1984,2019),
-                        faker.random().nextInt(85, 200), faker.random().nextInt(12,18),
-                        sessions.subList(faker.random().nextInt(0,2),faker.random().nextInt(2,4))))
+                .map(p->new Movie(p, Genre.values()[getRandomValue(0,5)], getRandomValue(1984, 2019),
+                        getRandomValue(85, 200), getRandomValue(12, 18),
+                        sessions.subList(getRandomValue(0, 2),getRandomValue(2,4))))
                 .sorted()
                 .collect(Collectors.toList());
         return movies;
     }
-
-
-
 
     //This method returns a Map with pairs: Movie - his Sessions
     @Override
@@ -76,7 +77,8 @@ public class User extends Human implements Searchable {
                 .filter(m -> m.getFilmName().equalsIgnoreCase(filmName))
                 .collect(Collectors.toMap(Movie::getFilmName, Movie::getSessions));
         if (sessionMap.isEmpty()) {
-            throw new NoSuchFilmsException("Our collection of films doesn't include entered film");
+            throw new NoSuchFilmsException("Our collection of films doesn't include entered film. " +
+                                            "Check your spelling or try another.");
         }
         return sessionMap;
     }
