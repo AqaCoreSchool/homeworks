@@ -11,7 +11,7 @@ public interface Searchable {
 
     List<Movie> getAllMoviesList();
 
-    Map<String, List<Session>> getAllSessionsOfAllMovies(List<Movie> films);
+    Map<String, List<Session>> getAllSessionsOfEnteredMovies(List<Movie> films, String filmName);
 
     List<Movie> getMovieListFilteredByGenre(List<Movie> films, String genre);
 

@@ -9,6 +9,8 @@ import cinema.primary.Movie;
 import cinema.primary.Session;
 import com.github.javafaker.Faker;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -33,6 +35,7 @@ public class User extends Human implements Searchable {
                 '}';
     }
 
+
     //This method creates and returns a List of all movies
     @Override
     public List<Movie> getAllMoviesList(){
@@ -43,17 +46,18 @@ public class User extends Human implements Searchable {
         Hall hallThree = new Hall(3, HallType.TWO_D, 120, 10.7);
         Hall hallFour = new Hall(4, HallType.FIVE_D, 40, 16.3);
 
-        List<Session> sessions = Arrays.asList(new Session(hallOne, 120.50, 12.00),
-                new Session(hallTwo, 80.00, 16.00),
-                new Session(hallThree, 65.50, 18.00),
-                new Session(hallFour, 150.00, 20.00));
+        List<Session> sessions;
+        sessions = Arrays.asList(new Session(hallOne, 120.50, LocalTime.of(12, 15), LocalDate.now()),
+                new Session(hallTwo, 80.00, LocalTime.of(15, 45), LocalDate.now()),
+                new Session(hallThree, 65.50, LocalTime.of(18, 00), LocalDate.now()),
+                new Session(hallFour, 150.00, LocalTime.of(21,30), LocalDate.now()));
 
         List<String> movieNames = new ArrayList<>(Arrays.asList("Forrest Gump", "Titanic", "Terminator",
                 "Untouchable", "Rogue One", "The LOtR", "Schindler`s List", "Green Mile", "Godfather",
                 "Dark Knight", "Matrix", "Back to the Future", "Gladiator", "Avatar", "Aliens"));
 
         List<Movie> movies =movieNames.stream()
-                .map(p->new Movie(p, Genre.values()[faker.random().nextInt(0,5)], faker.random().nextInt(1985,2019),
+                .map(p->new Movie(p, Genre.values()[faker.random().nextInt(0,5)], faker.random().nextInt(1984,2019),
                         faker.random().nextInt(85, 200), faker.random().nextInt(12,18),
                         sessions.subList(faker.random().nextInt(0,2),faker.random().nextInt(2,4))))
                 .sorted()
@@ -62,14 +66,17 @@ public class User extends Human implements Searchable {
     }
 
 
+
+
     //This method returns a Map with pairs: Movie - his Sessions
     @Override
-    public Map<String, List<Session>> getAllSessionsOfAllMovies(List<Movie> films) {
+    public Map<String, List<Session>> getAllSessionsOfEnteredMovies(List<Movie> films, String filmName) {
 
         Map<String, List<Session>> sessionMap = films.stream()
+                .filter(m -> m.getFilmName().equalsIgnoreCase(filmName))
                 .collect(Collectors.toMap(Movie::getFilmName, Movie::getSessions));
         if (sessionMap.isEmpty()) {
-            throw new NoSuchFilmsException("Our collection of films doesn't include any films with sessions");
+            throw new NoSuchFilmsException("Our collection of films doesn't include entered film");
         }
         return sessionMap;
     }

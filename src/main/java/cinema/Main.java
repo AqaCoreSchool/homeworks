@@ -18,7 +18,7 @@ public class Main {
 
         List<Movie> films = aUser.getAllMoviesList();
         System.out.println(films);
-        System.out.println(aUser.getAllSessionsOfAllMovies(films));
+        System.out.println(aUser.getAllSessionsOfEnteredMovies(films, "terminator"));
         System.out.println(aUser.getMovieListFilteredByGenre(films,"drama"));
         System.out.println(aUser.isOneFilmDurationCorrespondsToFilter(films, 120));
         System.out.println(aUser.isReleasesOfAllFilmsCorrespondToFilter(films, 2008));
