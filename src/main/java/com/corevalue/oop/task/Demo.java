@@ -1,6 +1,7 @@
 package com.corevalue.oop.task;
 
 import com.corevalue.oop.task.enums.Category;
+import com.corevalue.oop.task.models.Dish;
 import com.corevalue.oop.task.models.Order;
 import com.corevalue.oop.task.models.beverages.CocaCola;
 import com.corevalue.oop.task.models.beverages.DrPepper;
@@ -20,30 +21,30 @@ import com.corevalue.oop.task.models.salads.GardenSideSalad;
 
 public class Demo {
     public static void main(String[] args) {
-        CocaCola cocaCola = new CocaCola(Category.Beverages);
-        DrPepper drPepper = new DrPepper(Category.Beverages);
-        Sprite sprite = new Sprite(Category.Beverages);
+        CocaCola cocaCola = new CocaCola(Category.BEVERAGES);
+        DrPepper drPepper = new DrPepper(Category.BEVERAGES);
+        Sprite sprite = new Sprite(Category.BEVERAGES);
 
-        FullyLoadedBiscuit fully_loaded_biscuit = new FullyLoadedBiscuit(Category.Breakfast);
-        PancakePlatter pancake_platter = new PancakePlatter(Category.Breakfast);
+        FullyLoadedBiscuit fully_loaded_biscuit = new FullyLoadedBiscuit(Category.BREAKFAST);
+        PancakePlatter pancake_platter = new PancakePlatter(Category.BREAKFAST);
 
-        BaconCheeseburger bacon_cheeseburger = new BaconCheeseburger(Category.Burgers);
-        DoublePretzelBaconKing double_pretzel_bacon_king = new DoublePretzelBaconKing(Category.Burgers);
-        Hamburger hamburger = new Hamburger(Category.Burgers);
-        SinglePretzelBaconKing single_pretzel_bacon_king = new SinglePretzelBaconKing(Category.Burgers);
-        TripleStackerKing triple_stacker_king = new TripleStackerKing(Category.Burgers);
+        BaconCheeseburger bacon_cheeseburger = new BaconCheeseburger(Category.BURGERS);
+        DoublePretzelBaconKing double_pretzel_bacon_king = new DoublePretzelBaconKing(Category.BURGERS);
+        Hamburger hamburger = new Hamburger(Category.BURGERS);
+        SinglePretzelBaconKing single_pretzel_bacon_king = new SinglePretzelBaconKing(Category.BURGERS);
+        TripleStackerKing triple_stacker_king = new TripleStackerKing(Category.BURGERS);
 
-        ChickenNuggets chicken_nuggets = new ChickenNuggets(Category.Chicken_and_More);
-        CrispyTaco crispy_taco = new CrispyTaco(Category.Chicken_and_More);
-        OriginalChicken original_chicken = new OriginalChicken(Category.Chicken_and_More);
-        SpicyChickenCaesarSandwich spicy_chicken_caesar_sandwich = new SpicyChickenCaesarSandwich(Category.Chicken_and_More);
+        ChickenNuggets chicken_nuggets = new ChickenNuggets(Category.CHICKEN_AND_MORE);
+        CrispyTaco crispy_taco = new CrispyTaco(Category.CHICKEN_AND_MORE);
+        OriginalChicken original_chicken = new OriginalChicken(Category.CHICKEN_AND_MORE);
+        SpicyChickenCaesarSandwich spicy_chicken_caesar_sandwich = new SpicyChickenCaesarSandwich(Category.CHICKEN_AND_MORE);
 
-        CafeCaramelFrappe cafe_caramel_frappe = new CafeCaramelFrappe(Category.Coffee);
-        CafeCoffee cafe_coffee = new CafeCoffee(Category.Coffee);
+        CafeCaramelFrappe cafe_caramel_frappe = new CafeCaramelFrappe(Category.COFFEE);
+        CafeCoffee cafe_coffee = new CafeCoffee(Category.COFFEE);
 
-        ChickenClubSalad chicken_club_salad = new ChickenClubSalad(Category.Salads_and_Veggies);
-        ChickenGardenSalad chicken_garden_salad = new ChickenGardenSalad(Category.Salads_and_Veggies);
-        GardenSideSalad garden_side_salad = new GardenSideSalad(Category.Salads_and_Veggies);
+        ChickenClubSalad chicken_club_salad = new ChickenClubSalad(Category.SALADS_AND_VEGGIES);
+        ChickenGardenSalad chicken_garden_salad = new ChickenGardenSalad(Category.SALADS_AND_VEGGIES);
+        GardenSideSalad garden_side_salad = new GardenSideSalad(Category.SALADS_AND_VEGGIES);
 
         Order order = new Order();
 

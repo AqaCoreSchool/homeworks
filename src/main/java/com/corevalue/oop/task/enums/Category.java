@@ -1,5 +1,5 @@
 package com.corevalue.oop.task.enums;
 
 public enum Category {
-    Burgers, Chicken_and_More, Salads_and_Veggies, Breakfast, Beverages, Coffee
+    BURGERS, CHICKEN_AND_MORE, SALADS_AND_VEGGIES, BREAKFAST, BEVERAGES, COFFEE
 }
