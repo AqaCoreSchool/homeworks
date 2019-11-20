@@ -75,7 +75,7 @@ public class Main {
                 }
                 case "7":{
                     System.out.println("Pairs Name - Price of lowest item prices from every type, sorted by name:");
-                    daymenu.getLowestPriceByType();
+                    System.out.println(daymenu.getLowestPriceByType());
                     break;
                 }
                 case "8":{
