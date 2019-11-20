@@ -44,7 +44,7 @@ public class VehicleParking {
      search criteria (e.g. vehicle is registered in Lviv (plate number starts with ‘BC’))
      */
     public static boolean isNumberExist(String number) {
-        return vehicleList.stream().filter(o -> o.getNumber().substring(0, 2).equals(number)).findFirst().isPresent();
+        return vehicleList.stream().anyMatch((o -> o.getNumber().substring(0, 2).equals(number)));
     }
 
     // Task #5    Check if all vehicles correspond to some search criteria (e.g. name of Vehicle owner is Ivan)
@@ -61,8 +61,7 @@ public class VehicleParking {
     sort them alphabetically and print them to console using comma as a delimiter
      */
     public static String getCarByUniqueNumber() {
-
-        sortedNumbersList = vehicleList.stream().map(vehicleList -> vehicleList.getNumber()).distinct().sorted().collect(Collectors.toList());
+        sortedNumbersList = vehicleList.stream().map(AbstractVehicle::getNumber).distinct().sorted().collect(Collectors.toList());
         StringBuilder builder = new StringBuilder();
         for (String key : sortedNumbersList) {
             builder.append(numberVehicleMap.get(key).toShortString()).append(", ");
