@@ -2,7 +2,7 @@ package com.company.hw.interfaces;
 
 public interface NotArtistic {
 
-    void noTyping(boolean type);
+    void isNotArtisticType(boolean isArtistic);
     int getNumberOfPages(int pages);
 
 }
