@@ -43,10 +43,10 @@ public class User extends Human implements Searchable {
         Hall hallThree = new Hall(3, HallType.TWO_D, 120, 10.7);
         Hall hallFour = new Hall(4, HallType.FIVE_D, 40, 16.3);
 
-        Session firstSession = new Session(hallOne, 120.50, 12.00);
-        Session secondSession = new Session(hallTwo, 80.00, 16.00);
-        Session thirdSession = new Session(hallThree, 65.50, 18.00);
-        Session fourSession = new Session(hallFour, 150.00, 20.00);
+        List<Session> sessions = Arrays.asList(new Session(hallOne, 120.50, 12.00),
+                new Session(hallTwo, 80.00, 16.00),
+                new Session(hallThree, 65.50, 18.00),
+                new Session(hallFour, 150.00, 20.00));
 
         List<String> movieNames = new ArrayList<>(Arrays.asList("Forrest Gump", "Titanic", "Terminator",
                 "Untouchable", "Rogue One", "The LOtR", "Schindler`s List", "Green Mile", "Godfather",
@@ -55,7 +55,7 @@ public class User extends Human implements Searchable {
         List<Movie> movies =movieNames.stream()
                 .map(p->new Movie(p, Genre.values()[faker.random().nextInt(0,5)], faker.random().nextInt(1985,2019),
                         faker.random().nextInt(85, 200), faker.random().nextInt(12,18),
-                        Arrays.asList(firstSession, secondSession)))
+                        sessions.subList(faker.random().nextInt(0,2),faker.random().nextInt(2,4))))
                 .sorted()
                 .collect(Collectors.toList());
         return movies;
