@@ -6,7 +6,7 @@ public class ParkingLotTest {
 
     public static void main(String[] args) throws InterruptedException {
 
-        ParkingLot parkingLot = new ParkingLot("Lviv1", "Rynok square, 1", 5);
+        ParkingLot parkingLot = new ParkingLot("Lviv1", "Rynok square, 1", 10);
 
         // uncomment for exception test
         //ParkingLot parkingLot = new ParkingLot("Lviv1", "Rynok square, 1", 2);
@@ -14,20 +14,30 @@ public class ParkingLotTest {
         // initialization of vehicles
 
         AbstractVehicle car1 = new Car("AA0001AA", "Max");
-        AbstractVehicle car2 = new Car("BC0001AC", "Ivan");
-        AbstractVehicle car3 = new Car("BX5678XX", "Petro");
+        AbstractVehicle car2 = new Car("AA0001AC", "Ivan");
+        AbstractVehicle car3 = new Car("AA5678XX", "Petro");
         AbstractVehicle motorcycle1 = new Motorcycle("AC1112CC", "John");
         AbstractVehicle motorcycle2 = new Motorcycle("AC1155AA", "Kevin");
-        AbstractVehicle bus1 = new Bus("BC0088XX", "Andy");
-        AbstractVehicle bus2 = new Bus("BC2222OA", "Ivan");
-        AbstractVehicle bus3 = new Bus("AA0088XX", "Ivan");
-        AbstractVehicle bus4 = new Bus("BI5678HX", "Vasyl");
+        AbstractVehicle bus1 = new Van("BC0088XX", "Andy");
+        AbstractVehicle bus2 = new Van("BC2222OA", "Ivan");
+        AbstractVehicle bus3 = new Van("BC0088AX", "Ivan");
 
-        int timeout = 2; // timeout for delay between parking/unparking of new vehicle
+        int timeout = 1; // timeout for delay between parking/unparking of new vehicle
         String parkingTicketNumber = null;
 
         String stringFiller = "-----------------------------------------------------------------";
 
+//        // park vehicle bus1
+//        parkingLot.parkVehicleOnParkingLot(bus1);
+//        TimeUnit.SECONDS.sleep(timeout);
+//
+//        System.out.println(stringFiller);
+//
+//        // park vehicle bus2
+//        parkingLot.parkVehicleOnParkingLot(bus2);
+//        TimeUnit.SECONDS.sleep(timeout);
+//
+//        System.out.println(stringFiller);
 
         // unpark vehicle car1
         parkingTicketNumber = parkingLot.getParkingTicketNumber(car1);
@@ -67,6 +77,12 @@ public class ParkingLotTest {
 
         // park vehicle motorcycle1
         parkingLot.parkVehicleOnParkingLot(motorcycle1);
+        TimeUnit.SECONDS.sleep(timeout);
+
+        System.out.println(stringFiller);
+
+        // park vehicle motorcycle2
+        parkingLot.parkVehicleOnParkingLot(motorcycle2);
         TimeUnit.SECONDS.sleep(timeout);
 
         System.out.println(stringFiller);
@@ -121,13 +137,24 @@ public class ParkingLotTest {
 
         System.out.println(stringFiller);
 
-        System.out.println("List of parked vehicles");
-        System.out.println(parkingLot.getListOfVehicles());
+//        System.out.println("List of parked vehicles");
+//        System.out.println(parkingLot.getListOfVehicles());
+//
+//        System.out.println(stringFiller);
+
+        System.out.println("Java8: List of parked vehicles");
+        System.out.println(parkingLot.getListOfVehiclesJava8());
 
         System.out.println(stringFiller);
 
         String type = "car";
-        System.out.println("List of parked vehicles by type: " + type);
+//        System.out.println("List of parked vehicles by type: " + type);
+//        System.out.println(parkingLot.getListOfVehicles(type));
+//
+//        System.out.println(stringFiller);
+//
+//        type = "bus";
+        System.out.println("Java 8: List of parked vehicles by type: " + type);
         System.out.println(parkingLot.getListOfVehicles(type));
 
         System.out.println(stringFiller);
@@ -149,13 +176,24 @@ public class ParkingLotTest {
 
         System.out.println(stringFiller);
 
-        System.out.println("Sorted list os unique license plates of parked vehicles");
-        System.out.println(parkingLot.getSortedLicensePlates());
+//        System.out.println("Sorted list os unique license plates of parked vehicles");
+//        System.out.println(parkingLot.getListOfSortedLicensePlates());
+//
+//        System.out.println(stringFiller);
+
+        System.out.println("Java8: Sorted list os unique license plates of parked vehicles");
+        System.out.println(parkingLot.getListOfSortedLicensePlatesJava8());
 
         System.out.println(stringFiller);
 
-        System.out.println("Vehicles list according to duration staying on a parking lot");
-        System.out.println(parkingLot.sortAccordingToDuration());
+
+//        System.out.println("Vehicles list according to duration staying on a parking lot");
+//        System.out.println(parkingLot.getSortedListAccordingToDuration());
+//
+//        System.out.println(stringFiller);
+
+        System.out.println("Java8: Vehicles list according to duration staying on a parking lot");
+        System.out.println(parkingLot.getSortedListAccordingToDurationJava8());
 
     }
 }

@@ -8,6 +8,7 @@ import parkinglot.Exceptions.VehicleNotFoundOnParkingLotException;
 
 import java.util.*;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class ParkingLot {
 
@@ -150,18 +151,29 @@ public class ParkingLot {
     }
 
 
+//    private int checkFirstFreeParkingSpot() {
+//
+//        int freeSpot = -1;
+//
+//        for (int i = 0; i < capacity; i++) {
+//            if (parkingSpots.get(i).getSpotStatus().equals(SpotStatus.FREE.toString())) {
+//                freeSpot = i;
+//                break;
+//            }
+//        }
+//
+//        return freeSpot;
+//    }
+
+    // Java8
     private int checkFirstFreeParkingSpot() {
 
-        int freeSpot = -1;
+        ParkingSpot freeSpot = parkingSpots.stream()
+                .filter(ps -> ps.getSpotStatus().equalsIgnoreCase(SpotStatus.FREE.toString()))
+                .findFirst()
+                .get();
 
-        for (int i = 0; i < capacity; i++) {
-            if (parkingSpots.get(i).getSpotStatus().equals(SpotStatus.FREE.toString())) {
-                freeSpot = i;
-                break;
-            }
-        }
-
-        return freeSpot;
+        return freeSpot.getSpotNumber();
     }
 
     public String getParkingTicketNumber(AbstractVehicle vehicle) {
@@ -241,7 +253,7 @@ public class ParkingLot {
 
     // retrieve list of vehicles on a parking lot
     public String getListOfVehicles() {
-        ArrayList<String> vehiclesList = new ArrayList<String>();
+        List<String> vehiclesList = new ArrayList<String>();
         for (int i = 0; i < capacity; i++) {
             if (vehicles.get(i) != null) {
                 vehiclesList.add(vehicles.get(i).getLicensePlates());
@@ -251,9 +263,20 @@ public class ParkingLot {
         return String.join(", ", vehiclesList);
     }
 
+    // java8 - Method Reference
+    public String getListOfVehiclesJava8() {
+
+        List<String> vehiclesList = vehicles.stream()
+                .filter(Objects::nonNull)
+                .map(AbstractVehicle::getLicensePlates)
+                .collect(Collectors.toList());
+
+        return String.join(", ", vehiclesList);
+    }
+
     // retrieve list of vehicles filtered by type (e.g. car, bike, lorry etc)
     public String getListOfVehicles(String type) {
-        ArrayList<String> vehiclesList = new ArrayList<String>();
+        List<String> vehiclesList = new ArrayList<>();
 
         for (int i = 0; i < capacity; i++) {
             if ((vehicles.get(i) != null) && (vehicles.get(i).getVehicleType().equalsIgnoreCase(type))) {
@@ -264,8 +287,19 @@ public class ParkingLot {
         return String.join(", ", vehiclesList);
     }
 
+    // java8
+    public String getListOfVehiclesJava8(String type) {
+        List<String> vehiclesList = vehicles.stream()
+                .filter(vehicle -> vehicle != null)
+                .filter(vehicle -> vehicle.getVehicleType().equalsIgnoreCase(type))
+                .map(vehicle -> vehicle.getLicensePlates())
+                .collect(Collectors.toList());
+
+        return String.join(", ", vehiclesList);
+    }
+
     // Sort vehicles list according to duration it is staying on a parking lot
-    public String sortAccordingToDuration() {
+    public String getSortedListAccordingToDuration() {
 
         Map<String, String> spotsEntranceTimeMap = new HashMap<>(); // hashmap <spotNumber, entrance time>
         List<String> licensePlatesList = new ArrayList<>(); // list of license plates sorted according to entrance time
@@ -306,6 +340,43 @@ public class ParkingLot {
             }
         }
         return null;
+    }
+
+    // java8
+    public String getSortedListAccordingToDurationJava8() {
+
+        Map<String, String> spotsEntranceTimeMap; // hashmap <spotNumber, entrance time>
+        List<String> sortedEntranceTimesList;
+        List<String> sortedSpotsList;
+        List<String> sortedLicensePlatesList;
+
+        List<Integer> spots = parkingSpots.stream().
+                map(parkingSpot -> parkingSpot.getSpotNumber())
+                .collect(Collectors.toList());
+
+        //System.out.println(spots);
+
+        spotsEntranceTimeMap = spots.stream()
+                .filter(spot -> parkingSpotsTicketsMap.get(Integer.toString(spot)) != null)
+                .collect(Collectors.toMap(spot -> Integer.toString(spot),
+                        spot -> parkingSpotsTicketsMap.get(Integer.toString(spot)).getEntranceTime()));
+
+        // gei list of sorted entrance times
+        sortedEntranceTimesList = spotsEntranceTimeMap.values().stream()
+                .distinct()
+                .collect(Collectors.toList());
+
+        Collections.sort(sortedEntranceTimesList, (t1, t2) -> t1.compareTo(t2));
+
+        sortedSpotsList =  sortedEntranceTimesList.stream()
+                .map(plate -> getKey(spotsEntranceTimeMap, plate))
+                .collect(Collectors.toList());
+
+        sortedLicensePlatesList = sortedSpotsList.stream()
+                .map(spot -> vehicles.get(Integer.parseInt(spot)).getLicensePlates())
+                .collect(Collectors.toList());
+
+        return String.join(", ", sortedLicensePlatesList);
     }
 
     // Check if at least one vehicle in your list corresponds to some search criteria
@@ -387,7 +458,7 @@ public class ParkingLot {
 
     //Traverse vehicle list, collect all unique registration numbers,
     // sort them alphabetically and print them to console using comma as a delimiter
-    public String getSortedLicensePlates() {
+    public String getListOfSortedLicensePlates() {
 
         Set<String> uniqueLicensePlates = new TreeSet<String>();
 
@@ -399,5 +470,20 @@ public class ParkingLot {
         }
 
         return String.join(", ", uniqueLicensePlates);
+    }
+
+    // java8
+    public String getListOfSortedLicensePlatesJava8() {
+
+        List<String> sortedPlatesList = vehicles.stream()
+                .filter(vehicle -> vehicle != null)
+                .map(vehicle -> vehicle.getLicensePlates())
+                .distinct()
+                .collect(Collectors.toList());
+
+        Collections.sort(sortedPlatesList, (lp1, lp2) -> lp1.compareTo(lp2));
+
+        return String.join(", ", sortedPlatesList);
+
     }
 }
