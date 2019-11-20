@@ -53,7 +53,7 @@ public class User {
     }
 
     //1
-    void getAvailableBooks() {
+    void printAvailableBooks() {
         LocalDate lastDay =
                 date.with(TemporalAdjusters.lastDayOfMonth());
         DateTimeFormatter format =
@@ -67,7 +67,7 @@ public class User {
 
 
     //2
-    void getFilteredByAuthor(String author) {
+    void filterBooksByAuthor(String author) {
         List<Library> tempList = new ArrayList<>();
         books.stream()
                 .filter(element-> element.available && element.getAuthor().contains(author))
@@ -112,7 +112,7 @@ public class User {
 
 
     //6
-    boolean hasNotBooksByAuthor(String author) {
+    boolean hasNoneBooksByAuthor(String author) {
         final Optional<Library> optionalBook = books.stream()
                 .filter(element -> element.getAuthor().contains(author))
                 .findFirst();
@@ -120,7 +120,7 @@ public class User {
     }
 
     //7
-    void filteredByGenre() {
+    void printFilteredBooksByGenre() {
         List<Library> listOfNovel = new ArrayList<>();
         List<Library> listOfComics = new ArrayList<>();
         List<Library> listOfEncyclopedia = new ArrayList<>();
