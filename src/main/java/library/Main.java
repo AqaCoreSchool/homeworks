@@ -40,7 +40,7 @@ public class Main {
                     System.out.println("Enter author's name:");
                     innerInput = new Scanner(System.in);
                     innerString = innerInput.next().toUpperCase();
-                    member.getBooksByAuthor(innerString);
+                    member.printBooksByAuthor(innerString);
                     System.out.println(Constant.OPERATION_FINISHED);
                     break;
                 case "2":

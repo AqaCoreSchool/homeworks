@@ -19,10 +19,9 @@ import java.util.*;
 
 public class Member extends Profile implements Searchable {
     private int totalBorrowedBooks;
-    private List<BookItem> booksList;
+    private List<BookItem> booksList = new ArrayList<>();
 
     public Member() {
-        booksList = new ArrayList<>();
         for (int i = 0; i < 25; i++) {
             Faker faker = new Faker();
             String title = faker.book().title();
@@ -54,14 +53,15 @@ public class Member extends Profile implements Searchable {
     }
 
     @Override
-    public List<BookItem> getBooksByAuthor(String author) {
+    public void printBooksByAuthor(String author) {
+        List<BookItem> tempList = new ArrayList<>();
         if (booksList.isEmpty()) {
             throw new BookNotFoundException("Book list is empty!");
         }
         booksList.stream()
                 .filter(name -> name.getAuthor().toString().contains(author))
-                .forEach(bookItem -> System.out.format("%s : %s%n", bookItem.getTitle(), bookItem.getAuthor()));
-        return booksList;
+                .forEach(tempList::add);
+        tempList.forEach(bookItem -> System.out.format("%s : %s%n", bookItem.getTitle(), bookItem.getAuthor()));
     }
 
     public void sortBooks(List<BookItem> items) {
