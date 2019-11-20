@@ -36,8 +36,7 @@ public class User extends Human implements Searchable {
     //This method creates and returns a List of all movies
     @Override
     public List<Movie> getAllMoviesList(){
-        List<Movie> movies = new ArrayList<>();
-
+        Faker faker = new Faker();
 
         Hall hallOne = new Hall(1, HallType.IMAX, 60, 15.4);
         Hall hallTwo = new Hall(2, HallType.THREE_D, 80, 12.6);
@@ -49,39 +48,16 @@ public class User extends Human implements Searchable {
         Session thirdSession = new Session(hallThree, 65.50, 18.00);
         Session fourSession = new Session(hallFour, 150.00, 20.00);
 
+        List<String> movieNames = new ArrayList<>(Arrays.asList("Forrest Gump", "Titanic", "Terminator",
+                "Untouchable", "Rogue One", "The LOtR", "Schindler`s List", "Green Mile", "Godfather",
+                "Dark Knight", "Matrix", "Back to the Future", "Gladiator", "Avatar", "Aliens"));
 
-        movies.add(new Movie("Forrest Gump", Genre.DRAMA,
-                1984, 108, 12, Arrays.asList(firstSession, secondSession)));
-        movies.add(new Movie("Titanic", Genre.DRAMA,
-                1995, 180, 12, Arrays.asList(firstSession, secondSession)));
-        movies.add(new Movie("Terminator", Genre.ACTION,
-                2002, 99, 16, Arrays.asList(secondSession, fourSession)));
-        movies.add(new Movie("Untouchable", Genre.COMEDY,
-                2011, 98, 12, Arrays.asList(secondSession, fourSession)));
-        movies.add(new Movie("Rogue One", Genre.FANTASY,
-                2017, 116, 16, Arrays.asList(secondSession, fourSession)));
-        movies.add(new Movie("The LOtR", Genre.FANTASY,
-                2006, 168, 12, Arrays.asList(firstSession, secondSession, thirdSession)));
-        movies.add(new Movie("Schindler`s List", Genre.CRIMINAL,
-                2002, 100, 16, Arrays.asList(firstSession, secondSession, thirdSession)));
-        movies.add(new Movie("The Green Mile", Genre.DRAMA,
-                2008, 92, 16, Arrays.asList(firstSession, secondSession, thirdSession)));
-        movies.add(new Movie("The Godfather", Genre.CRIMINAL,
-                1997, 145, 18, Arrays.asList(secondSession, thirdSession)));
-        movies.add(new Movie("The Dark Knight", Genre.THRILLER,
-                2015, 106, 16, Arrays.asList(secondSession, thirdSession)));
-        movies.add(new Movie("The Matrix", Genre.FANTASY,
-                2004, 121, 16, Arrays.asList(secondSession, thirdSession, fourSession)));
-        movies.add(new Movie("Back to the Future", Genre.FANTASY,
-                1995, 111, 12, Arrays.asList(secondSession, thirdSession, fourSession)));
-        movies.add(new Movie("Gladiator", Genre.ACTION,
-                2006, 86, 16, Arrays.asList(thirdSession, fourSession)));
-        movies.add(new Movie("Avatar", Genre.FANTASY,
-                2009, 140, 12, Arrays.asList(thirdSession, fourSession)));
-        movies.add(new Movie("Aliens", Genre.FANTASY,
-                1989, 98, 16, Arrays.asList(thirdSession, fourSession)));
-        Collections.sort(movies);
-
+        List<Movie> movies =movieNames.stream()
+                .map(p->new Movie(p, Genre.values()[faker.random().nextInt(0,5)], faker.random().nextInt(1985,2019),
+                        faker.random().nextInt(85, 200), faker.random().nextInt(12,18),
+                        Arrays.asList(firstSession, secondSession)))
+                .sorted()
+                .collect(Collectors.toList());
         return movies;
     }
 
@@ -91,7 +67,7 @@ public class User extends Human implements Searchable {
     public Map<String, List<Session>> getAllSessionsOfAllMovies(List<Movie> films) {
 
         Map<String, List<Session>> sessionMap = films.stream()
-                .collect(Collectors.toMap(p->p.getFilmName(), t->t.getSessions()));
+                .collect(Collectors.toMap(Movie::getFilmName, Movie::getSessions));
         if (sessionMap.isEmpty()) {
             throw new NoSuchFilmsException("Our collection of films doesn't include any films with sessions");
         }

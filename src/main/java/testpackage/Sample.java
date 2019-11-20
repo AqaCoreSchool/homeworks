@@ -1,7 +1,7 @@
 package testpackage;
 
 
-public class Sample{
+public class Sample {
 
 
 }
