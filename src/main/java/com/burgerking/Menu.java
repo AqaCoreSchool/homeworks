@@ -130,17 +130,16 @@ public class Menu {
         return this.productList.stream().noneMatch(food -> food.getSize().equalsIgnoreCase(size));
     }
 
-    public void getLowestPriceByType(){
+    public String getLowestPriceByType(){
         List<Food> typesList = new ArrayList<>();
         for(int i=0;i<FoodType.values().length;i++){
             int filterOption = i;
             typesList.add(this.productList.stream().sorted(compareByPrice)
                     .filter(food -> food.getType().ordinal()==filterOption).findFirst().orElse(null));
         }
-        String pairsNamePrice = typesList.stream()
+        return typesList.stream()
                 .filter(Objects::nonNull).sorted(compareByName).distinct()
                 .map(Food::getNamePricePairFormatted).collect(Collectors.joining(", "));
-        System.out.println(pairsNamePrice);
     }
 
     public void fillAmountPerTypeMap(){
