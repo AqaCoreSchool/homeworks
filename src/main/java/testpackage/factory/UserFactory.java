@@ -1,8 +1,8 @@
-package testpackage.secondTry.factory;
+package testpackage.factory;
 
-import testpackage.secondTry.base.BaseClass;
-import testpackage.secondTry.entity.User;
-import testpackage.secondTry.sessions.tickets.Sessions;
+import testpackage.entity.User;
+import testpackage.base.BaseClass;
+import testpackage.sessions.tickets.Sessions;
 
 public class UserFactory extends BaseClass {
     public static Sessions createNewUser(String firstName, String lastName, String birthDate,

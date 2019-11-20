@@ -1,8 +1,8 @@
-package testpackage.secondTry.factory;
+package testpackage.factory;
 
-import testpackage.secondTry.base.BaseClass;
-import testpackage.secondTry.cinema.Movie;
-import testpackage.secondTry.entity.Film;
+import testpackage.base.BaseClass;
+import testpackage.cinema.Movie;
+import testpackage.entity.Film;
 
 public class FilmFactory extends BaseClass {
 
@@ -15,6 +15,7 @@ public class FilmFactory extends BaseClass {
                 .voiceLanguage(films.getVoiceLanguage())
                 .format(films.getFormat())
                 .ageLimit(films.getAgeLimit())
+                  .date(films.getDate())
                 .build();
           return film;
     }

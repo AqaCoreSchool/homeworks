@@ -1,8 +1,7 @@
-package testpackage.secondTry.entity;
+package testpackage.entity;
 
 import lombok.*;
 
-import java.util.Date;
 
 @Data
 @Builder

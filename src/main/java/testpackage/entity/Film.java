@@ -1,6 +1,8 @@
-package testpackage.secondTry.entity;
+package testpackage.entity;
 
 import lombok.*;
+
+import java.time.LocalDate;
 
 @Builder
 @Data
@@ -22,6 +24,8 @@ public  class Film {
    private  String[] session;
 
    private  int ageLimit;
+
+   private LocalDate date;
 
 
 }

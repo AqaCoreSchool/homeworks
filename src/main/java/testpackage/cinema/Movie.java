@@ -1,6 +1,9 @@
-package testpackage.secondTry.cinema;
+package testpackage.cinema;
 
-    public enum Movie {
+import java.time.LocalDate;
+import java.util.Random;
+
+public enum Movie {
 
         JOKER ("Joker",
                 "The origin tale of the Joker (Joaquin Phoenix) " +
@@ -131,6 +134,7 @@ package testpackage.secondTry.cinema;
         private String voiceLanguage;
         private String format;
         private int ageLimit;
+        private Random random = new Random();
 
           Movie(String nameFilm, String description, String genre, String[] session,
                 String voiceLanguage, String format, int ageLimit) {
@@ -141,6 +145,14 @@ package testpackage.secondTry.cinema;
               this.voiceLanguage = voiceLanguage;
               this.format = format;
               this.ageLimit = ageLimit;
+        }
+
+        public LocalDate getDate(){
+            int minDay = (int) LocalDate.of(2019, 11, 1).toEpochDay();
+            int maxDay = (int) LocalDate.of(2019, 11, 30).toEpochDay();
+            long randomDay = minDay + random.nextInt(maxDay - minDay);
+            LocalDate Date = LocalDate.ofEpochDay(randomDay);
+            return  Date;
         }
 
         public String getNameFilm() {

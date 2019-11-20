@@ -1,6 +1,6 @@
-package testpackage.secondTry.shop;
+package testpackage.shop;
 
-import testpackage.secondTry.base.BaseClass;
+import testpackage.base.BaseClass;
 
 public class ShopProducts extends BaseClass {
 
