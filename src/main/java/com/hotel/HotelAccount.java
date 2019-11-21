@@ -6,95 +6,155 @@ import com.hotel.room.SharedRoom;
 import com.hotel.room.SingleRoom;
 
 import java.util.*;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 public class HotelAccount {
 
     private static List<Room> allRooms = new ArrayList<Room>();
+    private List<Room> allFreeRooms = new ArrayList<Room>();
+    private List<Room> allFreeRoomsByCustomerSearch = new ArrayList<Room>();
 
-    public static List<Room> getAllRooms() {
-        return allRooms;
-    }
 
     public void addNewRoom(Room room) {
         allRooms.add(room);
     }
 
-    //Returns all free rooms
+    //Повертає всі вільні кімнати
     public List<Room> getFreeRooms() {
-        return getAllRoomsByCondition(room -> !room.isBooking());
-    }
-
-    //Returns all free rooms in price range
-    public List<Room> getFreeRooms(double from, double to) {
-        return getAllRoomsByCondition((room) -> room.getPrice() >= from & room.getPrice() <= to);
-    }
-
-    //Returns all free shared rooms
-    public List<Room> getFreeSharedRooms() {
-        return getAllRoomsByCondition(room -> room instanceof SharedRoom & !room.isBooking());
-    }
-
-    //Returns all free shared rooms in price range
-    public List<Room> getFreeSharedRooms(double from, double to) {
-        return getAllRoomsByCondition(room -> SharedRoom.class.isInstance(room) &
-                !room.isBooking() & room.getPrice() >= from & room.getPrice() <= to);
-    }
-
-    //Returns all free single rooms
-    public List<Room> getFreeSingleRooms() {
-        return getAllRoomsByCondition(room -> room instanceof SingleRoom & !room.isBooking());
-    }
-
-    //Returns all free single rooms in price range
-    public List<Room> getFreeSingleRooms(double from, double to) {
-        return getAllRoomsByCondition(room -> SingleRoom.class.isInstance(room) &
-                !room.isBooking() & room.getPrice() >= from & room.getPrice() <= to);
-    }
-
-    //Returns all free rooms sorted by increase prise
-    public List<Room> getFreeSortedRoomsByPriceUp() {
-        return getFreeSortedRooms((room1, room2) -> (int) (room1.getPrice() - room2.getPrice()));
-    }
-
-    //Returns all free rooms sorted by decrease prise
-    public List<Room> getFreeSortedRoomsByPriceDown() {
-        return getFreeSortedRooms((room1, room2) -> (int) (room2.getPrice() - room1.getPrice()));
-    }
-
-    //Selects room by condition
-    public List<Room> getAllRoomsByCondition(Predicate<Room> condition) {
-        List<Room> allFreeRooms = allRooms.stream().
-                filter(condition).collect(Collectors.toList());
+        allFreeRooms.clear();
+        for (Room room : allRooms) {
+            if (!room.isBooking()) {
+                allFreeRooms.add(room);
+            }
+        }
         if (allFreeRooms.isEmpty()) {
-            throw new RoomNotFoundException("No rooms found for your search");
+                throw new RoomNotFoundException("Вільних кімнат не знайдено");
         }
         return allFreeRooms;
     }
 
-    //Sorts room by criterion
-    public List<Room> getFreeSortedRooms(Comparator<Room> roomComparator) {
-
-        List<Room> sortedRooms = getFreeRooms().stream().sorted(roomComparator).collect(Collectors.toList());
-        if (sortedRooms.isEmpty()) {
-            throw new RoomNotFoundException("No rooms found for your search");
+    //Повертає вільні кімнати в ціновому діапазоні
+    public List<Room> getFreeRooms(double from, double to) {
+        allFreeRooms.clear();
+        for (Room room : allRooms) {
+            if (room.getPrice() >= from & room.getPrice() <= to & !room.isBooking()) {
+                allFreeRooms.add(room);
+            }
         }
-        return sortedRooms;
+        if (allFreeRooms.isEmpty()) {
+                throw new RoomNotFoundException("За вашим пошуком кімнат не знайдено");
+        }
+        return allFreeRooms;
     }
 
-    //Check if at least one property in room list corresponds to criteria
+    //Повертає всі вільні загальні кімнати
+    public List<Room> getFreeSharedRooms() {
+        allFreeRooms.clear();
+        for (Room room : allRooms) {
+            if (SharedRoom.class.isInstance(room) & !room.isBooking()) {
+                allFreeRooms.add(room);
+            }
+        }
+        if (allFreeRooms.isEmpty()) {
+                throw new RoomNotFoundException("За вашим пошуком вільних загальних кімнат не знайдено");
+        }
+        return allFreeRooms;
+    }
+
+    //Повертає вільні загальні кімнати в ціновому діапазоні
+    public List<Room> getFreeSharedRooms(double from, double to) {
+        allFreeRooms.clear();
+        allFreeRoomsByCustomerSearch.clear();
+
+        for (Room room : getFreeSharedRooms()) {
+            if (room.getPrice() >= from & room.getPrice() <= to) {
+                allFreeRoomsByCustomerSearch.add(room);
+            }
+        }
+        return allFreeRoomsByCustomerSearch;
+    }
+
+    //Повертає всі вільні одиночні кімнати
+    public List<Room> getFreeSingleRooms() {
+        allFreeRooms.clear();
+        for (Room room : allRooms) {
+            if (SingleRoom.class.isInstance(room) & !room.isBooking()) {
+                allFreeRooms.add(room);
+            }
+        }
+        if (allFreeRooms.isEmpty()) {
+                throw new RoomNotFoundException("Вільних одиночних кімнат не знайдено");
+        }
+        return allFreeRooms;
+    }
+
+    //Повертає вільні загальні кімнати в ціновому діапазоні
+    public List<Room> getFreeSingleRooms(double from, double to) {
+        allFreeRooms.clear();
+        allFreeRoomsByCustomerSearch.clear();
+        for (Room room : getFreeSingleRooms()) {
+            if (room.getPrice() >= from & room.getPrice() <= to) {
+                allFreeRoomsByCustomerSearch.add(room);
+            }
+        }
+        if (allFreeRoomsByCustomerSearch.isEmpty()) {
+                throw new RoomNotFoundException("За вашим пошуком вільних кімнат не знайдено");
+        }
+        return allFreeRoomsByCustomerSearch;
+    }
+
+    //Повертаємо всі вільні кімнати відсортовані по ціні вверх
+    public List<Room> getFreeSortedRoomsUp() {
+        allFreeRoomsByCustomerSearch.clear();
+        allFreeRoomsByCustomerSearch.addAll(getFreeRooms());
+        Collections.sort(allFreeRoomsByCustomerSearch, new Comparator<Room>() {
+            @Override
+            public int compare(Room room1, Room room2) {
+                return (int) (room1.getPrice() - room2.getPrice());
+            }
+        });
+        return allFreeRoomsByCustomerSearch;
+    }
+
+    //Повертаємо всі вільні кімнати відсортовані по ціні вниз
+    public List<Room> getFreeSortedRoomsDown() {
+        allFreeRoomsByCustomerSearch.clear();
+        allFreeRoomsByCustomerSearch.addAll(getFreeRooms());
+        Collections.sort(allFreeRoomsByCustomerSearch, new Comparator<Room>() {
+            @Override
+            public int compare(Room room1, Room room2) {
+                return (int) (room2.getPrice() - room1.getPrice());
+            }
+        });
+        return allFreeRoomsByCustomerSearch;
+    }
+
+    //Перевіряє чи в списку кімнат є хоча б одна, що відповідає критерію
     public boolean hasRoomAppropriateToCriterion(List<Room> rooms, double price) {
-        return rooms.stream().anyMatch(room -> room.getPrice() > price);
+        for (Room room : rooms) {
+            if (room.getPrice() < price) {
+                return true;
+            }
+        }
+        return false;
     }
 
-    //Check if all room in room list corresponds to criteria
+    //Перевіряємо чи в списку кімнат всі відповідають критерію
     public boolean areAllRoomsAppropriateToCriterion(List<Room> rooms, double size) {
-        return rooms.stream().allMatch(room -> room.getSize() > size);
+        for (Room room : rooms) {
+            if (room.getSize() > size) {
+                return false;
+            }
+        }
+        return true;
     }
 
-    //Check if at none of the rooms in room list corresponds to criteria
+    //Перевіряємо чи в списку кімнат всі відповідають критерію
     public boolean areAllRoomsPerFriendly(List<Room> rooms) {
-        return rooms.stream().noneMatch(room -> room.isPetFriendly());
+        for (Room room : rooms) {
+            if (!room.isPetFriendly()) {
+                return false;
+            }
+        }
+        return true;
     }
 }

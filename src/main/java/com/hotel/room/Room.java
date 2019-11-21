@@ -1,7 +1,5 @@
 package com.hotel.room;
 
-import java.time.LocalDate;
-
 public abstract class Room {
 
     private int number;
@@ -9,8 +7,6 @@ public abstract class Room {
     private boolean booking;
     private double size;
     private boolean isPetFriendly;
-    private LocalDate bookingDateFrom;
-    private int bookingDays;
 
     public Room(int number, double price, double size, boolean isPetFriendly) {
         this.number = number;
@@ -37,7 +33,6 @@ public abstract class Room {
 
     public void setBooking(boolean booking) {
         this.booking = booking;
-        if(!booking)bookingDays=0;
     }
 
     public void setNumber(int number) {
@@ -51,27 +46,6 @@ public abstract class Room {
     public boolean isPetFriendly() {
         return isPetFriendly;
     }
-
-    public LocalDate getBookingDateFrom() {
-        return bookingDateFrom;
-    }
-
-    public void setBookingDataFrom(LocalDate bookingDateFrom) {
-        this.bookingDateFrom = bookingDateFrom;
-    }
-
-    public int getBookingDays() {
-        return bookingDays;
-    }
-
-    public void setBookingDays(int bookingDays) {
-        this.bookingDays = bookingDays;
-    }
-
-    public LocalDate getBookingDateTo() {
-        return bookingDateFrom.plusDays(bookingDays);
-    }
-
 
     @Override
     public String toString() {

@@ -1,25 +1,15 @@
 package com.hotel.user;
 
-import com.hotel.BookingOrder;
 import com.hotel.exceptions.RoomNotFoundException;
 import com.hotel.room.Room;
 
-import java.time.LocalDate;
 import java.util.List;
 
 public class Customer extends User {
 
     private int age;
     private String email;
-    private BookingOrder order;
-
-    public BookingOrder getOrder() {
-        return order;
-    }
-
-    public void setOrder(Room room, LocalDate bookingDateFrom, int bookingDays, int numberOfMembers) {
-        this.order = new BookingOrder(room, bookingDateFrom, bookingDays, numberOfMembers);
-    }
+    private Room room;
 
     public Customer(String name, int age, String email) {
         super(name);
@@ -35,8 +25,17 @@ public class Customer extends User {
         return email;
     }
 
+    public Room getRoom() {
+        return room;
+    }
+
+    public void setRoom(Room room) {
+        this.room = room;
+    }
+
+
     @Override
-    public void chooseRoom(List<Room> rooms) {
+    public Room chooseRoom(List<Room> rooms) {
         //Some code where Customer choose room from
         //For example
         Room myRoom = null;
@@ -47,15 +46,17 @@ public class Customer extends User {
         for (Room room : freeRooms) {
             if (room.getPrice() < 1000) myRoom = room;
         }
-        createBookingRequest(myRoom);
+        return myRoom;
     }
 
     public void createBookingRequest(Room myRoom) {
+        setRoom(myRoom);
+        //Запит адміну на підтвердження бронювання
         System.out.println("Your booking request has been sent to the administrator");
-        setOrder(myRoom, LocalDate.of(2019, 12, 5), 7, 2);
     }
 
     public void cancelBooking() {
-        order.getRoom().setBooking(false);
+        if (getRoom() != null) getRoom().setBooking(false);
+
     }
 }
