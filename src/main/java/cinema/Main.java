@@ -19,11 +19,14 @@ public class Main {
 
         List<Movie> films = aUser.getAllMoviesList();
         System.out.println(films);
-        System.out.println(aUser.getAllSessionsOfAllMovies(films));
-        System.out.println(aUser.getMovieListFilteredByGenre(films,"action"));
+        System.out.println(aUser.getAllSessionsOfEnteredMovies(films, "avatar"));
+        System.out.println(aUser.getMovieListFilteredByGenre(films,"drama"));
         System.out.println(aUser.isOneFilmDurationCorrespondsToFilter(films, 120));
-        System.out.println(aUser.isReleasesOfAllFilmsCorrespondToFilter(films, 1950));
-        System.out.println(aUser.isNamesOfFilmsContainWords(films, "mile"));
+        System.out.println(aUser.isReleasesOfAllFilmsCorrespondToFilter(films, 2008));
+        System.out.println(aUser.isNoneOfFilmsContainWords(films, "Dog"));
         System.out.println(join(", ", new TreeSet<>(aUser.getAllUniqueGenresSet(films))));
+
+
+
     }
 }

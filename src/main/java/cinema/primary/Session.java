@@ -1,15 +1,20 @@
 package cinema.primary;
 
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 public class Session {
     private Hall hall;
     private double price;
-    private double startSession;
+    private LocalTime startSession;
+    private LocalDate startDate;
 
-    public Session(Hall hall, double price, double startSession) {
+    public Session(Hall hall, double price, LocalTime startSession, LocalDate startDate) {
         this.hall = hall;
         this.price = price;
         this.startSession = startSession;
+        this.startDate = startDate;
     }
 
     public Hall getHall() {
@@ -28,12 +33,20 @@ public class Session {
         this.price = price;
     }
 
-    public double getStartSession() {
+    public LocalTime getStartSession() {
         return startSession;
     }
 
-    public void setStartSession(double startSession) {
+    public void setStartSession(LocalTime startSession) {
         this.startSession = startSession;
+    }
+
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
     }
 
     @Override
@@ -42,6 +55,7 @@ public class Session {
                 "hall=" + hall +
                 ", price=" + price +
                 ", startSession=" + startSession +
+                ", startDate=" + startDate +
                 '}';
     }
 }

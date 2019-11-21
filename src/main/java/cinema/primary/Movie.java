@@ -96,19 +96,19 @@ public class Movie implements Comparable<Movie>{
         if (yearRelease != movie.yearRelease) return false;
         if (duration != movie.duration) return false;
         if (ageRating != movie.ageRating) return false;
-        if (filmName != null ? !filmName.equals(movie.filmName) : movie.filmName != null) return false;
-        if (filmGenre != null ? !filmGenre.equals(movie.filmGenre) : movie.filmGenre != null) return false;
-        return sessions != null ? sessions.equals(movie.sessions) : movie.sessions == null;
+        if (!filmName.equals(movie.filmName)) return false;
+        if (filmGenre != movie.filmGenre) return false;
+        return sessions.equals(movie.sessions);
     }
 
     @Override
     public int hashCode() {
-        int result = filmName != null ? filmName.hashCode() : 0;
-        result = 31 * result + (filmGenre != null ? filmGenre.hashCode() : 0);
+        int result = filmName.hashCode();
+        result = 31 * result + filmGenre.hashCode();
         result = 31 * result + yearRelease;
         result = 31 * result + duration;
         result = 31 * result + ageRating;
-        result = 31 * result + (sessions != null ? sessions.hashCode() : 0);
+        result = 31 * result + sessions.hashCode();
         return result;
     }
 }
