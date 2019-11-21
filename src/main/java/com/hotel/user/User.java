@@ -1,8 +1,7 @@
 package com.hotel.user;
 
-import com.hotel.HotelAccount;
+import com.hotel.account.HotelAccount;
 import com.hotel.room.Room;
-import com.sun.deploy.util.StringUtils;
 
 import java.util.List;
 

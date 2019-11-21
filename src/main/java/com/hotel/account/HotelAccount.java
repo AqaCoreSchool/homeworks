@@ -1,4 +1,4 @@
-package com.hotel;
+package com.hotel.account;
 
 import com.hotel.exceptions.RoomNotFoundException;
 import com.hotel.room.Room;

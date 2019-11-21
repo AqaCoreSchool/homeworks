@@ -1,5 +1,6 @@
 package com.hotel;
 
+import com.hotel.account.HotelAccount;
 import com.hotel.room.FamilyRoom;
 import com.hotel.room.Room;
 import com.hotel.room.SharedRoom;
@@ -7,11 +8,7 @@ import com.hotel.room.SingleRoom;
 import com.hotel.user.Customer;
 import com.hotel.user.User;
 
-import java.time.Duration;
-import java.time.LocalDate;
 import java.util.List;
-
-import static java.time.temporal.ChronoUnit.DAYS;
 
 public class MainClass {
 

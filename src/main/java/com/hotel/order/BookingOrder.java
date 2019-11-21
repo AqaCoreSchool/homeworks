@@ -1,4 +1,4 @@
-package com.hotel;
+package com.hotel.order;
 
 import com.hotel.exceptions.IncorrectInputDateException;
 import com.hotel.exceptions.IncorrectInputNumberOfMembersException;

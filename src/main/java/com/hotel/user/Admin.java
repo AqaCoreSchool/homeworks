@@ -1,6 +1,6 @@
 package com.hotel.user;
 
-import com.hotel.BookingOrder;
+import com.hotel.order.BookingOrder;
 import com.hotel.room.Room;
 
 import java.util.List;

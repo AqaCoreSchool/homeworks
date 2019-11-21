@@ -1,7 +1,6 @@
 package com.hotel.user;
 
-import com.hotel.BookingOrder;
-import com.hotel.exceptions.RoomNotFoundException;
+import com.hotel.order.BookingOrder;
 import com.hotel.room.Room;
 
 import java.time.LocalDate;
