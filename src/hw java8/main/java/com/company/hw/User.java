@@ -15,19 +15,19 @@ import java.time.temporal.TemporalAdjusters;
 import java.util.*;
 import java.util.stream.Collectors;
 
+
 public class User {
 
-    private List<Library> books;
-    LocalDate date = LocalDate.now();
+    private List < Library > books;
+    private LocalDate date = LocalDate.now();
 
-    Novel novelExample = new Novel("Example", "Example", 2019, 3, false);
-    Comics comicsExample = new Comics("Example", "Example", 2019, true);
-    Encyclopedia encyclopediaExample = new Encyclopedia("Example", "Example", 2012, true);
-
+    private Novel novelExample = new Novel("Example", "Example", 2019, 3, false);
+    private Comics comicsExample = new Comics("Example", "Example", 2019, true);
+    private Encyclopedia encyclopediaExample = new Encyclopedia("Example", "Example", 2012, true);
 
 
     User() {
-        books = new ArrayList<>();
+        books = new ArrayList < > ();
         books.add(new Novel("N. Pidmogylnuy", "City", 1920, 3, false));
         books.add(new Novel("M. Zerov", "Incognito", 1918, 3, false));
         books.add(new Novel("B. Voronnuy", "Infanta", 1904, 3, true));
@@ -52,6 +52,8 @@ public class User {
 
     }
 
+
+
     //1
     void printAvailableBooks() {
         LocalDate lastDay =
@@ -68,12 +70,13 @@ public class User {
 
     //2
     void filterBooksByAuthor(String author) {
-        List<Library> tempList = new ArrayList<>();
+        List < Library > tempList = new ArrayList < > ();
         books.stream()
-                .filter(element-> element.available && element.getAuthor().contains(author))
+                .filter(element -> element.available && element.getAuthor().contains(author))
                 .forEach(element -> tempList.add(element));
 
         tempList.stream().forEach(element -> System.out.println(element));
+
         if (tempList.isEmpty()) {
             throw new NoSuchBookException("We don't have any Books by this Author");
         }
@@ -94,12 +97,12 @@ public class User {
                 DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
         String formatedDate = specificDate.format(format);
-        books.stream().filter(element -> element.getYear() < year).forEach(book -> System.out.println(String.format("Library get %s in %s", book ,formatedDate)));
+        books.stream().filter(element -> element.getYear() < year).forEach(book -> System.out.println(String.format("Library get %s in %s", book, formatedDate)));
     }
 
     //5
     void checkGenre(String genre) {
-        List<Library> tempList = new ArrayList<>();
+        List < Library > tempList = new ArrayList < > ();
         books.stream().filter(element -> element.getClass().toString().contains(genre)).forEach(tempList::add);
         System.out.println(tempList);
 
@@ -113,7 +116,7 @@ public class User {
 
     //6
     boolean hasNoneBooksByAuthor(String author) {
-        final Optional<Library> optionalBook = books.stream()
+        final Optional < Library > optionalBook = books.stream()
                 .filter(element -> element.getAuthor().contains(author))
                 .findFirst();
         return !optionalBook.isPresent();
@@ -121,11 +124,11 @@ public class User {
 
     //7
     void printFilteredBooksByGenre() {
-        List<Library> listOfNovel = new ArrayList<>();
-        List<Library> listOfComics = new ArrayList<>();
-        List<Library> listOfEncyclopedia = new ArrayList<>();
-        List<Library> tempList = new ArrayList<>();
-        for (Library element : books) {
+        List < Library > listOfNovel = new ArrayList < > ();
+        List < Library > listOfComics = new ArrayList < > ();
+        List < Library > listOfEncyclopedia = new ArrayList < > ();
+        List < Library > tempList = new ArrayList < > ();
+        for (Library element: books) {
             if (element.getClass().equals(novelExample.getClass())) {
                 listOfNovel.add(element);
                 listOfNovel.sort(new YearComparator());
@@ -144,8 +147,7 @@ public class User {
             tempList.add(listOfComics.stream().skip(0).findFirst().get());
             tempList.add(listOfEncyclopedia.stream().skip(0).findFirst().get());
             tempList.sort(new BookComparator());
-        }
-        catch(IndexOutOfBoundsException ex){
+        } catch (IndexOutOfBoundsException ex) {
             System.out.println("Hey, we don't have any Books now!");
         }
 
@@ -156,8 +158,8 @@ public class User {
 
     }
 
-    void useMap(){
-        HashMap<StringBuilder, Library> bookMap = new HashMap<>();
+    void useMap() {
+        HashMap < StringBuilder, Library > bookMap = new HashMap < > ();
         for (int i = 0; i <= 18; i++) {
             Faker faker = new Faker();
             final StringBuilder isbn = new StringBuilder()
@@ -174,11 +176,14 @@ public class User {
 
             try {
                 bookMap.put(isbn, books.get(i));
-            }catch(IndexOutOfBoundsException ex){
+            } catch (IndexOutOfBoundsException ex) {
                 System.out.println("Hey, we don't have any Books now!");
             }
         }
 
         bookMap.entrySet().stream().map(entry -> entry.getKey() + " = " + entry.getValue()).forEach(System.out::println);
     }
+
+
+
 }
