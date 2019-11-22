@@ -283,8 +283,6 @@ public class ParkingLot {
                 map(parkingSpot -> parkingSpot.getSpotNumber())
                 .collect(Collectors.toList());
 
-        //System.out.println(spots);
-
         spotsEntranceTimeMap = spots.stream()
                 .filter(spot -> parkingSpotsTicketsMap.get(Integer.toString(spot)) != null)
                 .collect(Collectors.toMap(spot -> Integer.toString(spot),
