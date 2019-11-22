@@ -60,7 +60,7 @@ public class User extends Human implements Searchable {
                 "Untouchable", "Rogue One", "The LOtR", "Schindlers List", "Green Mile", "Godfather",
                 "Dark Knight", "Matrix", "Back to the Future", "Gladiator", "Avatar", "Aliens"));
 
-        List<Movie> movies =movieNames.stream()
+        List<Movie> movies = movieNames.stream()
                 .map(p->new Movie(p, Genre.values()[getRandomValue(0,5)], getRandomValue(1984, 2019),
                         getRandomValue(85, 200), getRandomValue(12, 18),
                         sessions.subList(getRandomValue(0, 2),getRandomValue(2,4))))
@@ -127,10 +127,12 @@ public class User extends Human implements Searchable {
 
     //This method returns Set of filtered unique genres
     @Override
-    public Set<String> getAllUniqueGenresSet(List<Movie> films){
-        Set<String> uniqueGenres = films.stream()
-                .map(p->p.getFilmGenre().toString())
-                .collect(Collectors.toSet());
+    public List<String> getAllUniqueGenresSet(List<Movie> films){
+        List<String> uniqueGenres = films.stream()
+                .map(movie -> movie.getFilmGenre().toString())
+                .distinct()
+                .sorted()
+                .collect(Collectors.toList());
         if (uniqueGenres.isEmpty()) {
             throw new NoSuchFilmsException("Our collection of films doesn't include any films with unique genres");
         }

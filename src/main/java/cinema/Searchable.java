@@ -21,5 +21,5 @@ public interface Searchable {
 
     boolean isNoneOfFilmsContainWords(List<Movie> films, String filmName);
 
-    Set<String> getAllUniqueGenresSet(List<Movie> films);
+    List<String> getAllUniqueGenresSet(List<Movie> films);
 }
