@@ -13,15 +13,14 @@ public abstract class Library {
         available = avail;
     }
 
-
     public String getAuthor() {
         return bookAuthor;
     }
     public String getBookName(){return bookName;}
-
     public int getYear() {
         return bookYear;
     }
+
 
     public String toString(){
         return String.format("%s <%s> |%d|", bookAuthor, bookName, bookYear);
