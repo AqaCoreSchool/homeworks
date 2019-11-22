@@ -1,9 +1,9 @@
 package com.company.hw.books;
 
 import com.company.hw.Library;
-import com.company.hw.interfaces.Artistic;
+import com.company.hw.interfaces.Artisticable;
 
-public class Novel extends Library implements Artistic {
+public class Novel extends Library implements Artisticable {
     private int chapter;
 
     public Novel(String author, String name, int year, int novelChapter, boolean avail) {
