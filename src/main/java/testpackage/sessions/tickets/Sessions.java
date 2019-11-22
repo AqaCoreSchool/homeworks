@@ -33,8 +33,8 @@ public class Sessions extends BaseClass {
     }
 
     public void uniqueGenresSortAlphabetically() {
-        Map<String, String> filmDescription = filmList.stream().collect(
-                Collectors.toMap(Film::getNameFilm, Film::getGenre));
+        Map<String, String> filmDescription = filmList.stream()
+                .collect(Collectors.toMap(Film::getNameFilm, Film::getGenre));
         TreeMap<String, String> reversedTreeMap = filmDescription.keySet().stream()
                 .collect(Collectors.toMap(filmDescription::get, i -> i, (a, b) -> b, TreeMap::new));
         reversedTreeMap.forEach((key, value) -> System.out.print(key + " - " + value + ", "));
@@ -45,10 +45,11 @@ public class Sessions extends BaseClass {
         list.forEach(System.out::println);
     }
 
-    public void printFilmsByGenre(String genre) {
+    public List<Film> filterFilmsByGenre(String genre) {
         checkForEmptyList(filmList);
-        filmList.stream().filter(film -> film.getGenre().equalsIgnoreCase(genre))
-                .forEach(movie -> System.out.println(movie.getNameFilm() + " - " + movie.getGenre()));
+       return filmList.stream()
+               .filter(film -> film.getGenre().equalsIgnoreCase(genre))
+                .collect(Collectors.toList());
     }
 
     public void printFilmsByDate() {
@@ -60,7 +61,10 @@ public class Sessions extends BaseClass {
 
     public void printFilmsByAlphabetically() {
         checkForEmptyList(filmList);
-        filmList.stream().map(Film::getNameFilm).sorted().forEach(System.out::println);
+        filmList.stream()
+                .map(Film::getNameFilm)
+                .sorted()
+                .forEach(System.out::println);
     }
 
     public boolean haveAllMovieCriteria(String criteria) {

@@ -14,7 +14,7 @@ public class Application {
         System.out.println("\n");
         user.haveAllMovieCriteria("genre");
         System.out.println("\n");
-        user.printFilmsByGenre("Horror");
+        user.printFilmList(user.filterFilmsByGenre("Horror"));
         System.out.println("\n");
         user.printFilmsByAlphabetically();
         System.out.println("\n");
