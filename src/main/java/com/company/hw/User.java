@@ -97,13 +97,17 @@ public class User {
                 DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
         String formatedDate = specificDate.format(format);
-        books.stream().filter(element -> element.getYear() < year).forEach(book -> System.out.println(String.format("Library get %s in %s", book, formatedDate)));
+        books.stream()
+                .filter(element -> element.getYear() < year)
+                .forEach(book -> System.out.println(String.format("Library get %s in %s", book, formatedDate)));
     }
 
     //5
     void checkGenre(String genre) {
         List < Library > tempList = new ArrayList < > ();
-        books.stream().filter(element -> element.getClass().toString().contains(genre)).forEach(tempList::add);
+        books.stream()
+                .filter(element -> element.getClass().toString().contains(genre))
+                .forEach(tempList::add);
         System.out.println(tempList);
 
         if (tempList.isEmpty()) {
@@ -158,7 +162,7 @@ public class User {
 
     }
 
-    void useMap() {
+    void isbnMap() {
         HashMap < StringBuilder, Library > bookMap = new HashMap < > ();
         for (int i = 0; i <= 18; i++) {
             Faker faker = new Faker();
@@ -181,7 +185,9 @@ public class User {
             }
         }
 
-        bookMap.entrySet().stream().map(entry -> entry.getKey() + " = " + entry.getValue()).forEach(System.out::println);
+        bookMap.entrySet().stream()
+                .map(entry -> entry.getKey() + " = " + entry.getValue())
+                .forEach(System.out::println);
     }
 
 
