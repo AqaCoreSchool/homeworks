@@ -1,7 +1,9 @@
 package parkinglot;
 
+import com.sun.source.tree.UsesTree;
 import parkinglot.Enums.PaymentStatus;
 import parkinglot.Enums.SpotStatus;
+import parkinglot.Enums.VehicleType;
 import parkinglot.Exceptions.ParkingLotIsFullException;
 import parkinglot.Exceptions.ParkingTicketNumberNotFoundException;
 import parkinglot.Exceptions.VehicleNotFoundOnParkingLotException;
@@ -150,21 +152,6 @@ public class ParkingLot {
         }
     }
 
-
-//    private int checkFirstFreeParkingSpot() {
-//
-//        int freeSpot = -1;
-//
-//        for (int i = 0; i < capacity; i++) {
-//            if (parkingSpots.get(i).getSpotStatus().equals(SpotStatus.FREE.toString())) {
-//                freeSpot = i;
-//                break;
-//            }
-//        }
-//
-//        return freeSpot;
-//    }
-
     // Java8
     private int checkFirstFreeParkingSpot() {
 
@@ -252,17 +239,6 @@ public class ParkingLot {
     }
 
     // retrieve list of vehicles on a parking lot
-    public String getListOfVehicles() {
-        List<String> vehiclesList = new ArrayList<String>();
-        for (int i = 0; i < capacity; i++) {
-            if (vehicles.get(i) != null) {
-                vehiclesList.add(vehicles.get(i).getLicensePlates());
-            }
-        }
-
-        return String.join(", ", vehiclesList);
-    }
-
     // java8 - Method Reference
     public String getListOfVehiclesJava8() {
 
@@ -275,18 +251,6 @@ public class ParkingLot {
     }
 
     // retrieve list of vehicles filtered by type (e.g. car, bike, lorry etc)
-    public String getListOfVehicles(String type) {
-        List<String> vehiclesList = new ArrayList<>();
-
-        for (int i = 0; i < capacity; i++) {
-            if ((vehicles.get(i) != null) && (vehicles.get(i).getVehicleType().equalsIgnoreCase(type))) {
-                vehiclesList.add(vehicles.get(i).getLicensePlates());
-            }
-        }
-
-        return String.join(", ", vehiclesList);
-    }
-
     // java8
     public String getListOfVehiclesJava8(String type) {
         List<String> vehiclesList = vehicles.stream()
@@ -296,41 +260,6 @@ public class ParkingLot {
                 .collect(Collectors.toList());
 
         return String.join(", ", vehiclesList);
-    }
-
-    // Sort vehicles list according to duration it is staying on a parking lot
-    public String getSortedListAccordingToDuration() {
-
-        Map<String, String> spotsEntranceTimeMap = new HashMap<>(); // hashmap <spotNumber, entrance time>
-        List<String> licensePlatesList = new ArrayList<>(); // list of license plates sorted according to entrance time
-        List<String> entranceTimeSortedList;
-        Iterator<String> iterator;
-        String spotNumber;
-
-        for (int i = 0; i < capacity; i++) {
-            spotNumber = Integer.toString(parkingSpots.get(i).getSpotNumber());
-
-            if (parkingSpotsTicketsMap.get(spotNumber) != null) {
-
-                spotsEntranceTimeMap.put(spotNumber, parkingSpotsTicketsMap.get(spotNumber).getEntranceTime());
-            }
-        }
-
-        entranceTimeSortedList = new ArrayList<>(spotsEntranceTimeMap.values()); // Entrance time values' list
-
-        Collections.sort(entranceTimeSortedList); // entrance time values' list sorted in ascending order
-
-        iterator = entranceTimeSortedList.iterator();
-
-        while (iterator.hasNext()) {
-            // get parking spot number from vehicles list by spot number <key> taken from spotsEntranceTimeMap
-            // according to entrance time <value>
-            spotNumber = getKey(spotsEntranceTimeMap, iterator.next());
-
-            licensePlatesList.add(vehicles.get(Integer.parseInt(spotNumber)).getLicensePlates());
-        }
-
-        return String.join(", ", licensePlatesList);
     }
 
     public static <K, V> K getKey(Map<K, V> map, V value) {
@@ -381,97 +310,23 @@ public class ParkingLot {
 
     // Check if at least one vehicle in your list corresponds to some search criteria
     // (e.g. vehicle is registered in Lviv (plate number starts with ‘BC’))
+    //java8
+    public boolean isOneVehicleRegistered(String searchCriteria) {
+        return vehicles.stream().anyMatch(vehicle -> vehicle.getLicensePlates().startsWith(searchCriteria));
+    }
     // Check if all vehicles correspond to some search criteria (e.g. name of Vehicle owner is Ivan)
+    //java8
+    public boolean areAllVehiclesOwners(String searchCriteria) {
+        return vehicles.stream().allMatch(vehicle -> vehicle.getOwnerName().contains(searchCriteria));
+    }
     // Check if none of the vehicles from list corresponds to some search criteria (e.g. vehicle type is motorcycle)
-    public boolean checkVehicle(String searchCriteria) {
-
-        // 1st symbol: t - type, o - owner, p - plates
-        // 2nd symbol: ! - none of, * - all of, + - at least one of
-
-        String searchByTypePattern = "^t.+$";
-        String searchByOwnerPattern = "^o.+$";
-        String searchByPlatesPattern = "^p.+$";
-
-
-        String searchOnePattern = "^.\\+.+$";
-        String searchAllPattern = "^.\\*.+$";
-        String searchNonePattern = "^.!.+$";
-
-        int numberOfBusyParkingSpots = 0; // all busy parking spots
-        int numberOfBusyParkingSpotsCrspndToSearchCriteria = 0; // all busy parking spots corresponding to search criteria
-
-        String searchCriteriaPattern;
-
-        if (Pattern.matches(searchByTypePattern, searchCriteria.toLowerCase())) {
-            for (int i = 0; i < capacity; i++) {
-                if (vehicles.get(i) != null) {
-                    numberOfBusyParkingSpots++;
-                    searchCriteriaPattern = "^" + searchCriteria.substring(2) + "$";
-                    if (Pattern.matches(searchCriteriaPattern.toLowerCase(),
-                            vehicles.get(i).getVehicleType().toLowerCase())) {
-                        numberOfBusyParkingSpotsCrspndToSearchCriteria++;
-                    }
-                }
-            }
-        }
-
-        if (Pattern.matches(searchByOwnerPattern, searchCriteria.toLowerCase())) {
-            for (int i = 0; i < capacity; i++) {
-                if (vehicles.get(i) != null) {
-                    numberOfBusyParkingSpots++;
-                    searchCriteriaPattern = "^" + searchCriteria.substring(2) + "$";
-                    if (Pattern.matches(searchCriteriaPattern.toLowerCase(),
-                            vehicles.get(i).getOwnerName().toLowerCase())) {
-                        numberOfBusyParkingSpotsCrspndToSearchCriteria++;
-                    }
-                }
-            }
-        }
-
-        if (Pattern.matches(searchByPlatesPattern, searchCriteria.toLowerCase())) {
-            for (int i = 0; i < capacity; i++) {
-                if (vehicles.get(i) != null) {
-                    numberOfBusyParkingSpots++;
-                    searchCriteriaPattern = "^" + searchCriteria.substring(2) + ".+$";
-                    if (Pattern.matches(searchCriteriaPattern.toLowerCase(),
-                            vehicles.get(i).getLicensePlates().toLowerCase())) {
-                        numberOfBusyParkingSpotsCrspndToSearchCriteria++;
-                    }
-                }
-            }
-        }
-
-        if (Pattern.matches(searchAllPattern, searchCriteria)) {
-            return numberOfBusyParkingSpots == numberOfBusyParkingSpotsCrspndToSearchCriteria;
-        }
-
-        if (Pattern.matches(searchOnePattern, searchCriteria)) {
-            return numberOfBusyParkingSpotsCrspndToSearchCriteria > 0;
-        }
-
-        if (Pattern.matches(searchNonePattern, searchCriteria)) {
-            return numberOfBusyParkingSpotsCrspndToSearchCriteria == 0;
-        }
-
-        return false;
+    //java8
+    public boolean areNoneVehiclesTypes(String searchCriteria) {
+        return vehicles.stream().noneMatch(vehicle -> vehicle.getVehicleType().equalsIgnoreCase(searchCriteria));
     }
 
     //Traverse vehicle list, collect all unique registration numbers,
     // sort them alphabetically and print them to console using comma as a delimiter
-    public String getListOfSortedLicensePlates() {
-
-        Set<String> uniqueLicensePlates = new TreeSet<String>();
-
-        // fill sorted set of unique license plates
-        for (int i = 0; i < capacity; i++) {
-            if (vehicles.get(i) != null) {
-                uniqueLicensePlates.add(vehicles.get(i).getLicensePlates());
-            }
-        }
-
-        return String.join(", ", uniqueLicensePlates);
-    }
-
     // java8
     public String getListOfSortedLicensePlatesJava8() {
 
