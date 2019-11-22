@@ -1,6 +1,6 @@
 package com.company.hw.interfaces;
 
-public interface Artistic {
+public interface Artisticable {
 
     void isArtisticType(boolean isArtistic);
 
