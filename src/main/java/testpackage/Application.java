@@ -10,11 +10,15 @@ public class Application {
                 "kapdpadp@gmail.com","English");
         user.uniqueGenresSortAlphabetically();
         System.out.println("\n");
-        user.getDefaultFilmList();
-        user.sortFilmsByAlphabetically().printFilmList();
+        user.printFilmList(user.getDefaultFilmList());
         System.out.println("\n");
-        user.hasNoMovieCriteria("Horror");
+        user.haveAllMovieCriteria("genre");
         System.out.println("\n");
-        user.sortFilmsByGenre("Horror").printFilmList();
+        user.printFilmsByGenre("Horror");
+        System.out.println("\n");
+        user.printFilmsByAlphabetically();
+        System.out.println("\n");
+        user.printFilmsByDate();
+
     }
 }

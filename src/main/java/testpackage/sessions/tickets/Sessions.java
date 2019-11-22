@@ -5,6 +5,10 @@ import testpackage.cinema.Movie;
 import testpackage.entity.Film;
 import testpackage.factory.FilmFactory;
 
+import java.time.LocalDate;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import java.util.*;
 
 public class Sessions extends BaseClass {
@@ -12,8 +16,7 @@ public class Sessions extends BaseClass {
     private List<Film> filmList = getDefaultFilmList();
 
     public List<Film> getDefaultFilmList() {
-        List<Film> list = new ArrayList<>();
-        list.addAll(Arrays.asList(FilmFactory.buildListFilm(Movie.JOKER),
+        return Stream.of(FilmFactory.buildListFilm(Movie.JOKER),
                 FilmFactory.buildListFilm(Movie.SHOPLIFTERS),
                 FilmFactory.buildListFilm(Movie.ROCKETMAN),
                 FilmFactory.buildListFilm(Movie.SHAZAM),
@@ -27,89 +30,54 @@ public class Sessions extends BaseClass {
                 FilmFactory.buildListFilm(Movie.TERMINATOR),
                 FilmFactory.buildListFilm(Movie.MALEFICENT),
                 FilmFactory.buildListFilm(Movie.HARRIET),
-                FilmFactory.buildListFilm(Movie.COUNTDOWN)));
-        return list;
+                FilmFactory.buildListFilm(Movie.COUNTDOWN)).collect(Collectors.toList());
     }
 
     public void uniqueGenresSortAlphabetically() {
-        Map<String, String> filmDescription = new HashMap<>();
-        checkForEmptyList(filmList);
-        for (Film film : filmList) {
-            if (filmDescription.put(film.getNameFilm(), film.getGenre()) != null) {
-                throw new IllegalStateException("Duplicate key");
-            }
-        }
-        TreeMap<String, String> reversedTreeMap = new TreeMap<>();
-
-        for (String i : filmDescription.keySet()) {
-            reversedTreeMap.put(filmDescription.get(i), i);
-        }
-        for (Map.Entry<String, String> item : reversedTreeMap.entrySet()) {
-
-            System.out.print(item.getKey() + " = " + item.getValue() + ", ");
-        }
+        Map<String, String> filmDescription = filmList.stream().collect(
+                Collectors.toMap(Film::getNameFilm, Film::getGenre));
+        TreeMap<String, String> reversedTreeMap = filmDescription.keySet().stream()
+                .collect(Collectors.toMap(filmDescription::get, i -> i, (a, b) -> b, TreeMap::new));
+        reversedTreeMap.forEach((key, value) -> System.out.print(key + " - " + value + ", "));
     }
 
-    public void printFilmList() {
-        checkForEmptyList(filmList);
-        for (Film film : filmList) {
-            System.out.println(film);
-        }
+    public void printFilmList(List<Film> list) {
+        checkForEmptyList(list);
+        list.forEach(System.out::println);
     }
 
-    public Sessions sortFilmsByGenre(String genre) {
+    public void printFilmsByGenre(String genre) {
         checkForEmptyList(filmList);
-        filmList.removeIf(a -> (!a.getGenre().equals(genre)));
-        return this;
+        filmList.stream().filter(film -> film.getGenre().equalsIgnoreCase(genre))
+                .forEach(movie -> System.out.println(movie.getNameFilm() + " - " + movie.getGenre()));
     }
 
-    public Sessions sortFilmsByAlphabetically() {
+    public void printFilmsByDate() {
         checkForEmptyList(filmList);
-        Comparator<Film> comparator = Comparator.comparing(Film::getNameFilm);
-        filmList.sort(comparator);
-        return this;
+        Map<String, LocalDate> filmDescription = filmList.stream().collect(
+                Collectors.toMap(Film::getNameFilm, Film::getDate));
+        filmDescription.forEach((key, value) -> System.out.print(key + " - " + value + "\n "));
     }
 
-    private int numberOfFilmsForIntendedCriterion(String str) {
-        int k = 0;
-        for (Film film : filmList) {
-            if (film.toString().contains(str)) {
-                k++;
-            }
-        }
-        return k;
+    public void printFilmsByAlphabetically() {
+        checkForEmptyList(filmList);
+        filmList.stream().map(Film::getNameFilm).sorted().forEach(System.out::println);
     }
 
     public boolean haveAllMovieCriteria(String criteria) {
-        if (numberOfFilmsForIntendedCriterion(criteria) == filmList.size()) {
-            System.out.println("All movies in your list corresponds to your criteria");
-            return true;
-        } else {
-            return false;
-        }
+        return filmList.stream().allMatch(film -> film.toString().contains(criteria));
     }
+
+    public boolean hasOneMovieCriteria(String criteria){
+            return filmList.stream().anyMatch(film -> film.toString().contains(criteria));
+        }
 
     public boolean hasNoMovieCriteria(String criteria) {
-        if (numberOfFilmsForIntendedCriterion(criteria) > 0) {
-            System.out.println("One movie in your list corresponds to your criteria");
-            return true;
-        } else {
-            return false;
-        }
+        return filmList.stream().noneMatch(film -> film.toString().contains(criteria));
     }
-
-    public boolean hasNoOneMovieCriteria(String criteria) {
-        if (numberOfFilmsForIntendedCriterion(criteria) == 0) {
-            System.out.println("Not one movie on your list matches your criteria");
-            return true;
-        } else {
-            return false;
-        }
-    }
-
+  
     private void checkForEmptyList(List<Film> list){
         if(null == list || list.isEmpty()){
             throw new IllegalStateException("Film list is empty");
         }
     }
-}

@@ -2,6 +2,8 @@ package testpackage.entity;
 
 import lombok.*;
 
+import java.time.LocalDate;
+
 @Builder
 @Data
 @AllArgsConstructor
@@ -23,5 +25,6 @@ public  class Film {
 
    private  int ageLimit;
 
+   private LocalDate date;
 
 }
