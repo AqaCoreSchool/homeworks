@@ -1,9 +1,9 @@
 package com.company.hw.books;
 
 import com.company.hw.Library;
-import com.company.hw.interfaces.Artistic;
+import com.company.hw.interfaces.Artisticable;
 
-public class Comics extends Library implements Artistic {
+public class Comics extends Library implements Artisticable {
 
     public Comics(String author, String name, int year, boolean avail) {
         super(author, name, year, avail);
