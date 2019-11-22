@@ -10,8 +10,7 @@ public class Main {
         Scanner myInput = new Scanner(System.in);
         System.out.println("Here are 1-8 commands. \tEnter 0 to EXIT \nEnter Number of task:");
         while (myInput.hasNextInt()) {
-            int task = myInput.nextInt();
-            {
+            int task = myInput.nextInt(); {
                 switch (task) {
                     case 1:
                         System.out.println("[1] All available: ");
