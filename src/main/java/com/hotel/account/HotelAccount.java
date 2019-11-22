@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 public class HotelAccount {
 
-    private static List<Room> allRooms = new ArrayList<Room>();
+    private static List<Room> allRooms = new ArrayList<>();
 
     public static List<Room> getAllRooms() {
         return allRooms;
@@ -28,29 +28,29 @@ public class HotelAccount {
 
     //Returns all free rooms in price range
     public List<Room> getFreeRooms(double from, double to) {
-        return getAllRoomsByCondition((room) -> room.getPrice() >= from & room.getPrice() <= to);
+        return getAllRoomsByCondition((room) -> room.getPrice() >= from && room.getPrice() <= to);
     }
 
     //Returns all free shared rooms
     public List<Room> getFreeSharedRooms() {
-        return getAllRoomsByCondition(room -> room instanceof SharedRoom & !room.isBooking());
+        return getAllRoomsByCondition(room -> room instanceof SharedRoom && !room.isBooking());
     }
 
     //Returns all free shared rooms in price range
     public List<Room> getFreeSharedRooms(double from, double to) {
-        return getAllRoomsByCondition(room -> SharedRoom.class.isInstance(room) &
-                !room.isBooking() & room.getPrice() >= from & room.getPrice() <= to);
+        return getAllRoomsByCondition(room -> SharedRoom.class.isInstance(room) &&
+                !room.isBooking() && room.getPrice() >= from && room.getPrice() <= to);
     }
 
     //Returns all free single rooms
     public List<Room> getFreeSingleRooms() {
-        return getAllRoomsByCondition(room -> room instanceof SingleRoom & !room.isBooking());
+        return getAllRoomsByCondition(room -> room instanceof SingleRoom && !room.isBooking());
     }
 
     //Returns all free single rooms in price range
     public List<Room> getFreeSingleRooms(double from, double to) {
-        return getAllRoomsByCondition(room -> SingleRoom.class.isInstance(room) &
-                !room.isBooking() & room.getPrice() >= from & room.getPrice() <= to);
+        return getAllRoomsByCondition(room -> SingleRoom.class.isInstance(room) &&
+                !room.isBooking() && room.getPrice() >= from && room.getPrice() <= to);
     }
 
     //Returns all free rooms sorted by increase prise
