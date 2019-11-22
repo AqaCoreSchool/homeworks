@@ -4,7 +4,7 @@ public abstract class Library {
     private String bookAuthor;
     private int bookYear;
     private String bookName;
-    boolean available;
+    public boolean available;
 
     public Library(String author, String name, int year, boolean avail){
         bookAuthor = author;
@@ -12,7 +12,6 @@ public abstract class Library {
         bookYear = year;
         available = avail;
     }
-
 
     public String getAuthor() {
         return bookAuthor;
