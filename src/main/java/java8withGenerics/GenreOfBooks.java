@@ -1,4 +1,4 @@
-package java8;
+package java8withGenerics;
 
 public enum GenreOfBooks {
     ADWENTURE(0),SCIENCEFICTION(1),HISTORICALFICTION(2),IRELAND(3);

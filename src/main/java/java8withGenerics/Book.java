@@ -1,4 +1,4 @@
-package java8;
+package java8withGenerics;
 
 public class Book {
    final private String name;

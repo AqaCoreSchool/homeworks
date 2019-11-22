@@ -1,4 +1,4 @@
-package java8;
+package java8withGenerics;
 
 public enum VereficatiionCriteria {
     GENRE(0),AUTHOR(1),YEAR(2);

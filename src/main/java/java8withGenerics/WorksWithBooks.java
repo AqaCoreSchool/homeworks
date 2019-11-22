@@ -1,4 +1,4 @@
-package java8;
+package java8withGenerics;
 import com.github.javafaker.Faker;
 
 import java.util.*;

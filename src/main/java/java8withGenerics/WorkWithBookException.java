@@ -1,4 +1,4 @@
-package java8;
+package java8withGenerics;
 
 public class WorkWithBookException extends Exception {
     public WorkWithBookException() {
