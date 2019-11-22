@@ -6,7 +6,7 @@ import com.company.hw.interfaces.Artistic;
 public class Novel extends Library implements Artistic {
     private int chapter;
 
-    public Novel(String author, String name, int year, int novelChapter, boolean avail) {
+    public Novel(String author, String name, int year, int novelChapter, boolean avail){
         super(author, name, year, avail);
         chapter = novelChapter;
     }

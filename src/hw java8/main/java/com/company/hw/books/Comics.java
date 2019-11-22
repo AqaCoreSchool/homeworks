@@ -5,7 +5,7 @@ import com.company.hw.interfaces.Artistic;
 
 public class Comics extends Library implements Artistic {
 
-    public Comics(String author, String name, int year, boolean avail) {
+    public Comics(String author, String name, int year, boolean avail){
         super(author, name, year, avail);
     }
 
