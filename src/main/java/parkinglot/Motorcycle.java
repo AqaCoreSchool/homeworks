@@ -2,7 +2,7 @@ package parkinglot;
 
 import parkinglot.Enums.VehicleType;
 
-public class Motorcycle extends AbstractVehicle {
+public class Motorcycle extends AbstractVehicle{
 
     private final String type = VehicleType.MOTORCYCLE.toString();
     private final int size = VehicleType.MOTORCYCLE.getSize();
@@ -18,4 +18,5 @@ public class Motorcycle extends AbstractVehicle {
     public int getVehicleSize() {
         return size;
     }
+
 }

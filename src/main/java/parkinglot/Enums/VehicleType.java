@@ -11,9 +11,9 @@ public enum VehicleType {
             return 1;
         }
     },
-    BUS {
+    VAN {
         public int getSize() {
-            return 5;
+            return 1;
         }
     };
 

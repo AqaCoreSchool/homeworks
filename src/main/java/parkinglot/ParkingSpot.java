@@ -7,8 +7,6 @@ public class ParkingSpot {
     private final int spotNumber;
     private String spotStatus;
 
-    // add subSpot1 and subSpot2
-
     ParkingSpot(int spotNumber) {
         //System.out.println("Initialization of new parking spot: " + spotNumber);
         this.spotNumber = spotNumber;
@@ -31,5 +29,4 @@ public class ParkingSpot {
         return spotNumber;
     }
 
-    // add subSpots methods
 }
