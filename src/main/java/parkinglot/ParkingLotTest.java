@@ -125,36 +125,35 @@ public class ParkingLotTest {
 
         System.out.println(stringFiller);
 
-        System.out.println("Java8: List of parked vehicles");
-        System.out.println(parkingLot.getListOfVehiclesJava8());
+        System.out.println("List of parked vehicles");
+        System.out.println(parkingLot.getListOfVehicles());
 
         System.out.println(stringFiller);
 
         String type = "car";
         System.out.println("Java 8: List of parked vehicles by type: " + type);
-        System.out.println(parkingLot.getListOfVehiclesJava8(type));
+
+        System.out.println(parkingLot.getListOfVehicles(type));
 
         System.out.println(stringFiller);
 
         //java8
-        String searchCriteria = "BC";
-        System.out.printf("Java8: Is at least one vehicle's license plates start from %s: %b\n", searchCriteria, parkingLot.isOneVehicleRegistered(searchCriteria));
+
+        System.out.printf("Is at least one vehicle's license plates start from %s: %b\n", "BC", parkingLot.isOneVehiclesPlatesNumberStartFrom("BC"));
         System.out.println();
-        searchCriteria = "Ivan";
-        System.out.printf("Java8: Are all vehicles' owners' equal to names '%s': %b\n", searchCriteria, parkingLot.areAllVehiclesOwners(searchCriteria));
+        System.out.printf("Are all vehicles' owners' equal to names '%s': %b\n", "Ivan", parkingLot.haveAllVehiclesOwnersTheSameName("Ivan"));
         System.out.println();
-        searchCriteria = "motorcycle";
-        System.out.printf("Java8: Are all vehicles' type equal to '%s': %b\n", searchCriteria, parkingLot.areNoneVehiclesTypes(searchCriteria));
+        System.out.printf("Are all vehicles' type equal to '%s': %b\n", "car", parkingLot.areNoVehiclesOfType("car"));
 
         System.out.println(stringFiller);
 
-        System.out.println("Java8: Sorted list os unique license plates of parked vehicles");
-        System.out.println(parkingLot.getListOfSortedLicensePlatesJava8());
+        System.out.println("Sorted list os unique license plates of parked vehicles");
+        System.out.println(parkingLot.getListOfSortedLicensePlates());
 
         System.out.println(stringFiller);
 
-        System.out.println("Java8: Vehicles list according to duration staying on a parking lot");
-        System.out.println(parkingLot.getSortedListAccordingToDurationJava8());
+        System.out.println("Vehicles list according to duration staying on a parking lot");
+        System.out.println(parkingLot.getSortedListAccordingToDuration());
 
     }
 }
