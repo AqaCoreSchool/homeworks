@@ -9,7 +9,11 @@ import java.util.Arrays;
 import java.util.List;
 
 public class InputFileReader {
-    public static List<String> data = new ArrayList<>();
+    private static List<String> data = new ArrayList<>();
+
+    public List<String> getData() {
+        return data;
+    }
 
     public void readInputFile() {
         String row;

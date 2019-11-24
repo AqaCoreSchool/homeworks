@@ -11,13 +11,14 @@ import java.io.IOException;
 public class OutputFileWriter {
 
     public void writeOutputFile() {
+
+        InputFileReader reader = new InputFileReader();
         Workbook workbook = new XSSFWorkbook();
         Sheet sheet = workbook.createSheet("Output");
 
-
         int rowNum = 0;
 
-        for (String value : InputFileReader.data) {
+        for (String value : reader.getData()) {
             Row row = sheet.createRow(rowNum++);
 
             String[] splittedData = value.split(",");
@@ -26,7 +27,7 @@ public class OutputFileWriter {
             }
         }
 
-        for (int i = 0; i < InputFileReader.data.size(); i++) {
+        for (int i = 0; i < reader.getData().size(); i++) {
             sheet.autoSizeColumn(i);
         }
 
