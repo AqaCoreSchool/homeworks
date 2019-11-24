@@ -32,8 +32,14 @@ public class Application {
     }
 
     public void showSessionList() {
-        movies.forEach(movie -> System.out.println(movie.getSession() + "\t" + movie.getTitle() + "\t" +
-                movie.getGenre() + "\t" + movie.getDuration() + "\t" + movie.getYear()));
+        // movies.forEach(movie -> System.out.println(movie.getSession() + "\t" + movie.getTitle() + "\t" +
+        //        movie.getGenre() + "\t" + movie.getDuration() + "\t" + movie.getYear()));
+        String result = movies
+                .stream()
+                .map(movie -> String.join("\t", movie.getSession().toString(), movie.getTitle(), movie.getGenre(),
+                        Double.toString(movie.getDuration()), Integer.toString(movie.getYear())))
+                .collect(Collectors.joining("\n"));
+        System.out.println(result);
     }
 
     public void filterByGenre(String genre) throws NoSuchGenreException {
@@ -49,7 +55,7 @@ public class Application {
         movies.stream().map(Movie::getTitle).sorted().forEach(System.out::println);
     }
 
-    public boolean isAtLeastOneMovie(double duration) throws UnsupportedDurationException {
+    public boolean hasDurationMoreThen(double duration) throws UnsupportedDurationException {
         if (duration <= 0) {
             throw new UnsupportedDurationException("Wrong duration format found!");
         }
@@ -57,7 +63,7 @@ public class Application {
         return movies.stream().anyMatch(movie -> movie.getDuration() > duration);
     }
 
-    public boolean isAllMovies(int year) throws NotAYearException {
+    public boolean hasYearMoreThan(int year) throws NotAYearException {
         if (year <= 0 || !String.valueOf(year).matches("\\d{4}")) {
             throw new NotAYearException("Wrong year format found!");
         }
@@ -65,7 +71,7 @@ public class Application {
         return movies.stream().allMatch(movie -> movie.getYear() >= year);
     }
 
-    public boolean isNoneMovies(String title) throws NoSuchTitleException {
+    public boolean hasTitleLike(String title) throws NoSuchTitleException {
         if (title.matches("^\\d*$|^\\W")) {
             throw new NoSuchTitleException("Wrong title input!");
         }

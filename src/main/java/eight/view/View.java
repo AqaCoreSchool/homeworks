@@ -53,15 +53,15 @@ public class View {
                 break;
             case 4:
                 System.out.print("Input duration: ");
-                System.out.println(application.isAtLeastOneMovie(scanner.nextDouble()));
+                System.out.println(application.hasDurationMoreThen(scanner.nextDouble()));
                 break;
             case 5:
                 System.out.print("Input year: ");
-                System.out.println(application.isAllMovies(scanner.nextInt()));
+                System.out.println(application.hasYearMoreThan(scanner.nextInt()));
                 break;
             case 6:
                 System.out.print("Input title: ");
-                System.out.println(application.isNoneMovies(scanner.next()));
+                System.out.println(application.hasTitleLike(scanner.next()));
                 break;
             case 7:
                 application.collectUniqueGenres();
