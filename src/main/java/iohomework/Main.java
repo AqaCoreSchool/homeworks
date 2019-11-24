@@ -41,9 +41,9 @@ public class Main {
             FileReader dataSource = new FileReader(localDir + File.separator
                     + "src" + File.separator + "main" + File.separator
                     + "resources" + File.separator +"source.csv");
-            BufferedReader bufferProd = new BufferedReader(dataSource);
+            BufferedReader reader = new BufferedReader(dataSource);
             while(true){
-                String line = bufferProd.readLine();
+                String line = reader.readLine();
                 if(line == null){
                     break;
                 }
