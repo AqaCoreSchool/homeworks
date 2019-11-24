@@ -33,12 +33,15 @@ public class Main {
         wb.setPrintArea(0, "$A$1:$C$2");
         sheet.setZoom(140);
         sheet.autoSizeColumn(0);
-        for (int i = 0; i <= 10; i++) {
+
+        readCSV.useDelimiter(",");
+        while(readCSV.hasNext()){
+            namesArray.add(readCSV.next());
+        }
+
+        for(int i=0; i < namesArray.size(); i++) {
             Row row = sheet.createRow(i);
             Cell cell = row.createCell(0);
-
-            readCSV.useDelimiter(",");
-            namesArray.add(readCSV.next());
 
             cell.setCellValue(namesArray.get(i));
             cell.setCellStyle(styles.get("color"));
