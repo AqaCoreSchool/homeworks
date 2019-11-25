@@ -32,9 +32,9 @@ public class Operations {
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line = "";
             while ((line = br.readLine()) != null) {
-                String[] cities = line.split(",");
-                for (int i = 0; i < cities.length; i++) {
-                    list.add(cities[i]);
+                String[] words = line.split(",");
+                for (int i = 0; i < words.length; i++) {
+                    list.add(words[i]);
                 }
             }
             System.out.println(list);
