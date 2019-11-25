@@ -33,8 +33,7 @@ public class Writer {
         return new XSSFColor(new java.awt.Color((int) (random() * 255), (int) (random() * 255), (int) (random() * 255)));
     }
 
-    public static void writeIntoExcel(List<String> records, String path) throws IOException {
-
+    public static void writeIntoExcel(List<String> records, String path) {
         try (Workbook book = new XSSFWorkbook()) {
             Sheet sheet = book.createSheet("result");
             XSSFCellStyle myStyle = (XSSFCellStyle) book.createCellStyle();
@@ -63,6 +62,8 @@ public class Writer {
             }
             System.out.println("Data from csv file was wrote to xlsx file");
             book.write(new FileOutputStream(path));
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
