@@ -75,8 +75,11 @@ public class Operations {
 
         HSSFCellStyle style = workbook.createCellStyle();
         style.setFont(font);
-        style.setDataFormat(HSSFDataFormat.getBuiltinFormat("text"));
         style.setAlignment(HorizontalAlignment.CENTER);
+        style.setBorderBottom(BorderStyle.THICK);
+        style.setBorderTop(BorderStyle.THICK);
+        style.setBorderLeft(BorderStyle.THICK);
+        style.setBorderRight(BorderStyle.THICK);
 
         return style;
     }
