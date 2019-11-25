@@ -4,13 +4,16 @@ import java.io.*;
 
 public class Main {
 
-    private static String fileName = "src\\main\\resources\\CSVFile.csv";
-    private static String fileName2 = "src\\main\\resources\\XLSFile.xls";
+    private static final String PATH = System.getProperty("user.dir") + File.separator
+            + "src" + File.separator + "main" + File.separator + "resources" + File.separator;
+
+    private static String fileNameCSV = PATH + "CSVFile.csv";
+    private static String fileNameXLS = PATH + "XLSFile.xls";
 
     public static void main(String[] args) throws IOException {
         IO io = new IO();
-        io.writeCSV(fileName);
-        io.writeExcelFile(io.readFileToList(fileName),fileName2);
+        io.writeCSV(fileNameCSV);
+        io.writeExcelFile(io.readFileToList(fileNameCSV), fileNameXLS);
     }
 }
 
