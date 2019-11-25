@@ -42,13 +42,11 @@ public class Main {
                     + "src" + File.separator + "main" + File.separator
                     + "resources" + File.separator +"source.csv");
             BufferedReader reader = new BufferedReader(dataSource);
-            while(true){
-                String line = reader.readLine();
-                if(line == null){
-                    break;
-                }
+            String line = reader.readLine();
+            while(line!=null){
                 String[] lineObjects = line.split(",");
                 extractedData.addAll(Arrays.asList(lineObjects));
+                line = reader.readLine();
             }
             dataSource.close();
         } catch (IOException e) {
