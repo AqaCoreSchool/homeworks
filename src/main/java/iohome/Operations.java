@@ -1,10 +1,13 @@
 package iohome;
 
 import com.github.javafaker.Faker;
+import org.apache.poi.hssf.usermodel.HSSFCellStyle;
+import org.apache.poi.hssf.usermodel.HSSFFont;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.Row;
 
 import java.io.*;
@@ -52,10 +55,12 @@ public class Operations {
         int rowNum = 0;
         Row row;
         Cell cell;
+        HSSFCellStyle style = getSampleStyle(wb);
         for (String elem : list) {
             row = sheet.createRow(rowNum++);
             cell = row.createCell(0, CellType.STRING);
             cell.setCellValue(elem);
+            cell.setCellStyle(style);
             sheet.autoSizeColumn(0);
         }
 
@@ -65,5 +70,18 @@ public class Operations {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    public HSSFCellStyle getSampleStyle(HSSFWorkbook workbook) {
+        HSSFFont font = workbook.createFont();
+        font.setBold(true);
+        font.setItalic(true);
+
+        font.setFontHeightInPoints((short) 18);
+        font.setColor(IndexedColors.BRIGHT_GREEN.index);
+
+        HSSFCellStyle style = workbook.createCellStyle();
+        style.setFont(font);
+
+        return style;
     }
 }
