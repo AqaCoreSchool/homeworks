@@ -1,14 +1,8 @@
 package iohome;
 
 import com.github.javafaker.Faker;
-import org.apache.poi.hssf.usermodel.HSSFCellStyle;
-import org.apache.poi.hssf.usermodel.HSSFFont;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellType;
-import org.apache.poi.ss.usermodel.IndexedColors;
-import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.hssf.usermodel.*;
+import org.apache.poi.ss.usermodel.*;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -75,12 +69,14 @@ public class Operations {
         HSSFFont font = workbook.createFont();
         font.setBold(true);
         font.setItalic(true);
-
         font.setFontHeightInPoints((short) 18);
-        font.setColor(IndexedColors.BRIGHT_GREEN.index);
+        font.setFontName("TimesNewRoman");
+        font.setColor(IndexedColors.GREEN.index);
 
         HSSFCellStyle style = workbook.createCellStyle();
         style.setFont(font);
+        style.setDataFormat(HSSFDataFormat.getBuiltinFormat("text"));
+        style.setAlignment(HorizontalAlignment.CENTER);
 
         return style;
     }
