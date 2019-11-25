@@ -1,8 +1,7 @@
 package io.writer;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.*;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -14,10 +13,21 @@ public class XMLWriter {
         Workbook coursesWorkbook = new HSSFWorkbook();
 
         Sheet membersSheet = coursesWorkbook.createSheet("Members");
-        membersSheet.createRow(1).createCell(1).setCellValue("Name");
+        Cell headCell = membersSheet.createRow(1).createCell(1);
+        headCell.setCellValue("Name");
+
+        Font headCellFontStyle = coursesWorkbook.createFont();
+        headCellFontStyle.setBold(true);
+        headCellFontStyle.setItalic(true);
+
+        CellStyle headCellStyle = coursesWorkbook.createCellStyle();
+        headCellStyle.setFont( headCellFontStyle);
+        headCell.setCellStyle(headCellStyle);
+
 
         for (int i = 0; i < values.length; i++) {
-            membersSheet.createRow(i + 2).createCell(1).setCellValue(values[i]);
+            Cell currentCell = membersSheet.createRow(i + 2).createCell(headCell.getColumnIndex());
+            currentCell.setCellValue(values[i]);
         }
 
         try (FileOutputStream outputStream = new FileOutputStream(filePath)) {
