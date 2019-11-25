@@ -58,7 +58,7 @@ class Main {
                 HSSFCell cell = row.createCell(0);
                 cell.setCellValue(data[i]);
             });
-            try (FileOutputStream fileOut = new FileOutputStream(path + File.separator + "file.xlsx")) {
+            try (FileOutputStream fileOut = new FileOutputStream(path + File.separator + "file.xls")) {
                 workbook.write(fileOut);
             }
         }
