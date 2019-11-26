@@ -13,6 +13,7 @@ import java.util.Random;
 public class Automation {
 
     private WebDriver driver;
+    private final String url = "http://test.biz.ua";
 
     public Automation() {
         System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
@@ -25,7 +26,7 @@ public class Automation {
     }
 
     public void login() {
-        driver.get("http://test.biz.ua");
+        driver.get(url);
 
         WebElement userNameElement = driver.findElement(By.cssSelector("#txtUsername"));
         userNameElement.sendKeys("TestUser01");
@@ -79,6 +80,6 @@ public class Automation {
         WebElement punchInNOte = driver.findElement(By.xpath("//*[text()[contains(.,'" + labelDate + "')]]"));
         WebElement next = punchInNOte.findElement(By.xpath("following-sibling::*"));
 
-        System.out.println("Punch " + message + " exists: " + (next.getText().equals(message)));
+        System.out.printf("Punch '%s' from '%s' exists: %b", message, labelDate, (next.getText().equals(message)));
     }
 }
