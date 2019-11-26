@@ -10,7 +10,7 @@ public class Main {
     private static String fileNameCSV = PATH + "CSVFile.csv";
     private static String fileNameXLS = PATH + "XLSFile.xls";
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args){
         IO io = new IO();
         io.writeCSV(fileNameCSV);
         io.writeExcelFile(io.readFileToList(fileNameCSV), fileNameXLS);
