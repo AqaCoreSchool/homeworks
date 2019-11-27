@@ -14,9 +14,6 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
-import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.assertTrue;
-
 public class OrangeTest {
     public static final String PATH = Paths.get("src", "main", "resources", "chromedriver.exe").toString();
     public static final String NOTE_IN = "I am a good worker :-)";
@@ -105,7 +102,6 @@ public class OrangeTest {
         driver.findElement(By.linkText("Attendance")).click();
         driver.findElement(By.xpath("//a[@id='menu_attendance_viewMyAttendanceRecord']")).click();
         driver.findElement(By.xpath("//img[@class='ui-datepicker-trigger']")).click();
-        dateForChecking = dateDay;
         LocalDate previousDate = LocalDate.now().minusDays(7);
         int day = previousDate.getDayOfMonth();
         driver.findElement(By.linkText(String.valueOf(day))).click();
