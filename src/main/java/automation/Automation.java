@@ -89,12 +89,13 @@ public class Automation {
         int i = 0;
         for (WebElement element : punchInDate) {
             if (element.findElement(By.xpath("following-sibling::*")).getText().equals(message)) {
-                System.out.printf("Punch '%s' from '%s' exists.", message, labelDate);
+                System.out.printf("Punch '%s' from '%s' exists. ", message, labelDate);
                 i++;
             }
             if (i == 0) {
                 System.out.println("There is no such note!");
             }
         }
+        driver.close();
     }
 }
