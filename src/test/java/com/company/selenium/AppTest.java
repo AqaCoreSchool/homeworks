@@ -1,4 +1,4 @@
-package com.company.hw;
+package com.company.selenium;
 
 import static org.junit.Assert.assertTrue;
 
