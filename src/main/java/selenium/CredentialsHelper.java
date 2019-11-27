@@ -1,15 +1,10 @@
 package selenium;
 
 import java.io.*;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Properties;
-
 
 public final class CredentialsHelper {
 
-    String sep = File.separator;
-    String credFilePath = "src" + sep + "main" + sep + "resourses" + sep + "cred.properties";
     private String login;
     private String password;
     private static CredentialsHelper credentialsHelper;
@@ -21,7 +16,6 @@ public final class CredentialsHelper {
         return credentialsHelper;
     }
 
-
     private CredentialsHelper() {
         credProperties();
     }
@@ -29,7 +23,7 @@ public final class CredentialsHelper {
     private void credProperties() {
         Properties properties = new Properties();
         try {
-            properties.load(new BufferedReader(new FileReader(credFilePath)));
+            properties.load(CredentialsHelper.class.getResourceAsStream("/cred.properties"));
         } catch (IOException e) {
             e.printStackTrace();
         }
