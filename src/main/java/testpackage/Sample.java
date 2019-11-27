@@ -5,9 +5,7 @@ public class Sample {
         System.out.println("jijlo");
     }
 
-public void test(){
 
-}
 
 }
 

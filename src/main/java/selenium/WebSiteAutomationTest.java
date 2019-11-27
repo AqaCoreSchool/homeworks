@@ -58,12 +58,12 @@ public class WebSiteAutomationTest {
         punchIn.click();
         WebElement noteIn = driver.findElement(By.xpath("//textarea[@id='note']"));
         noteIn.sendKeys(NOTE_IN);
-        WebElement buttonIn = driver.findElement(By.id("btnPunch"));
-        buttonIn.click();
-        WebElement noteOut = driver.findElement(By.xpath("//textarea[@id='note']"));
-        noteOut.sendKeys(NOTE_OUT);
-        WebElement buttonOut = driver.findElement(By.id("btnPunch"));
-        buttonOut.click();
+//        WebElement buttonIn = driver.findElement(By.id("btnPunch"));
+//        buttonIn.click();
+//        WebElement noteOut = driver.findElement(By.xpath("//textarea[@id='note']"));
+//        noteOut.sendKeys(NOTE_OUT);
+//        WebElement buttonOut = driver.findElement(By.id("btnPunch"));
+//        buttonOut.click();
     }
 
     @Test(dependsOnMethods = {"login"}, groups = {"1", "2"}, priority = 1)
