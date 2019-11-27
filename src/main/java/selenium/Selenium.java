@@ -12,11 +12,11 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class Selenium {
-    static final String username = "TestUser01";
-    static final String password = "Vfylhfujhf!1";
-    static final String startMessage = "Start work!";
-    static final String endMessage = "Stop work!";
-    static final String todayDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+    static final String USERNAME = "TestUser01";
+    static final String PASSWORD = "Vfylhfujhf!1";
+    static final String START_MESSAGE = "Start work!";
+    static final String END_MESSAGE = "Stop work!";
+    static final String TODAY_DATE = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 
     public static void main(String[] args){
         System.setProperty("webdriver.chrome.driver", "chromedriver");
@@ -24,9 +24,9 @@ public class Selenium {
         driver.manage().window().maximize();
         driver.get("http://test.biz.ua");
         WebElement usernameField = driver.findElement(By.id("txtUsername"));
-        usernameField.sendKeys(username);
+        usernameField.sendKeys(USERNAME);
         WebElement passwordField = driver.findElement(By.id("txtPassword"));
-        passwordField.sendKeys(password);
+        passwordField.sendKeys(PASSWORD);
         WebElement loginButton = driver.findElement(By.id("btnLogin"));
         loginButton.click();
         WebElement timeSection = driver.findElement(By.id("menu_time_viewTimeModule"));
@@ -39,7 +39,7 @@ public class Selenium {
         WebElement startTime = driver.findElement(By.id("currentTime"));
         String punchInDateTime = String.format("%s %s:00 GMT 2", startDate.getText(), startTime.getText());
         WebElement inTextArea = driver.findElement(By.xpath("//textarea[@id='note']"));
-        inTextArea.sendKeys(startMessage);
+        inTextArea.sendKeys(START_MESSAGE);
         WebElement buttonPunchIn = driver.findElement(By.id("btnPunch"));
         buttonPunchIn.click();
         driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
@@ -47,7 +47,7 @@ public class Selenium {
         WebElement endTime = driver.findElement(By.id("currentTime"));
         String punchOutDateTime = String.format("%s %s:00 GMT 2", endDate.getText(), endTime.getText());
         WebElement outTextArea = driver.findElement(By.xpath("//textarea[@id='note']"));
-        outTextArea.sendKeys(endMessage);
+        outTextArea.sendKeys(END_MESSAGE);
         WebElement buttonPunchOut = driver.findElement(By.id("btnPunch"));
         buttonPunchOut.click();
         attendanceMenu =  driver.findElement(By.id("menu_attendance_Attendance"));
@@ -56,7 +56,7 @@ public class Selenium {
         myRecords.click();
         WebElement dateField =  driver.findElement(By.id("attendance_date"));
         dateField.clear();
-        dateField.sendKeys(todayDate + Keys.ENTER);
+        dateField.sendKeys(TODAY_DATE + Keys.ENTER);
         driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         List<WebElement> tableRows = driver.findElements(By.xpath(
                 "//form[@id='employeeRecordsForm']/table/tbody/tr[@class='odd' or @class='even']"));
@@ -72,11 +72,11 @@ public class Selenium {
         System.out.println(recordPunchOutNote);
         if(!punchInDateTime.equals(recordStartDateTime)){
             System.out.println("Test failed - record Punch In datetime is different then actual Punch In datetime!");
-        } else if(!startMessage.equals(recordPunchInNote)){
+        } else if(!START_MESSAGE.equals(recordPunchInNote)){
             System.out.println("Test failed - record Punch In note is different then actual Punch In note!");
         } else if(!punchOutDateTime.equals(recordEndDateTime)){
             System.out.println("Test failed - record Punch Out datetime is different then actual Punch Out datetime!");
-        } else if(!endMessage.equals(recordPunchOutNote)){
+        } else if(!END_MESSAGE.equals(recordPunchOutNote)){
             System.out.println("Test failed - record Punch Out note is different then actual Punch Out note!");
         } else {
             System.out.println("All data matched correctly - test passed!");

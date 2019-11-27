@@ -15,11 +15,11 @@ import java.util.concurrent.TimeUnit;
 
 public class SeleniumTest {
     private WebDriver driver;
-    private final String username = "TestUser01";
-    private final String password = "Vfylhfujhf!1";
-    private final String startMessage = "Start work TEST!";
-    private final String endMessage = "Stop work TEST!";
-    private final String todayDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+    private final String USERNAME = "TestUser01";
+    private final String PASSWORD = "Vfylhfujhf!1";
+    private final String START_MESSAGE = "Start work TEST!";
+    private final String END_MESSAGE = "Stop work TEST!";
+    private final String TODAY_DATE = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 
     @BeforeMethod
     public void setUp(){
@@ -37,9 +37,9 @@ public class SeleniumTest {
     public void createPunchAndCheckRecordDataTest(){
         driver.get("http://test.biz.ua");
         WebElement usernameField = driver.findElement(By.id("txtUsername"));
-        usernameField.sendKeys(username);
+        usernameField.sendKeys(USERNAME);
         WebElement passwordField = driver.findElement(By.id("txtPassword"));
-        passwordField.sendKeys(password);
+        passwordField.sendKeys(PASSWORD);
         WebElement loginButton = driver.findElement(By.id("btnLogin"));
         loginButton.click();
         WebElement timeSection = driver.findElement(By.id("menu_time_viewTimeModule"));
@@ -52,7 +52,7 @@ public class SeleniumTest {
         WebElement startTime = driver.findElement(By.id("currentTime"));
         String punchInDateTime = String.format("%s %s:00 GMT 2", startDate.getText(), startTime.getText());
         WebElement inTextArea = driver.findElement(By.xpath("//textarea[@id='note']"));
-        inTextArea.sendKeys(startMessage);
+        inTextArea.sendKeys(START_MESSAGE);
         WebElement buttonPunchIn = driver.findElement(By.id("btnPunch"));
         buttonPunchIn.click();
         driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
@@ -60,7 +60,7 @@ public class SeleniumTest {
         WebElement endTime = driver.findElement(By.id("currentTime"));
         String punchOutDateTime = String.format("%s %s:00 GMT 2", endDate.getText(), endTime.getText());
         WebElement outTextArea = driver.findElement(By.xpath("//textarea[@id='note']"));
-        outTextArea.sendKeys(endMessage);
+        outTextArea.sendKeys(END_MESSAGE);
         WebElement buttonPunchOut = driver.findElement(By.id("btnPunch"));
         buttonPunchOut.click();
         attendanceMenu =  driver.findElement(By.id("menu_attendance_Attendance"));
@@ -69,7 +69,7 @@ public class SeleniumTest {
         myRecords.click();
         WebElement dateField =  driver.findElement(By.id("attendance_date"));
         dateField.clear();
-        dateField.sendKeys(todayDate + Keys.ENTER);
+        dateField.sendKeys(TODAY_DATE + Keys.ENTER);
         driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         List<WebElement> tableRows = driver.findElements(By.xpath(
                 "//form[@id='employeeRecordsForm']/table/tbody/tr[@class='odd' or @class='even']"));
@@ -80,9 +80,9 @@ public class SeleniumTest {
         String recordEndDateTime = latestRecordBody.get(3).getText();
         String recordPunchOutNote = latestRecordBody.get(4).getText();
         Assert.assertEquals(recordStartDateTime, punchInDateTime, "record Punch In datetime is different then actual Punch In datetime!");
-        Assert.assertEquals(recordPunchInNote, startMessage, "record Punch In note is different then actual Punch In note!");
+        Assert.assertEquals(recordPunchInNote, START_MESSAGE, "record Punch In note is different then actual Punch In note!");
         Assert.assertEquals(recordEndDateTime, punchOutDateTime, "record Punch Out datetime is different then actual Punch Out datetime!");
-        Assert.assertEquals(recordPunchOutNote, endMessage, "record Punch Out datetime is different then actual Punch Out datetime!");
+        Assert.assertEquals(recordPunchOutNote, END_MESSAGE, "record Punch Out datetime is different then actual Punch Out datetime!");
     }
 
 }
