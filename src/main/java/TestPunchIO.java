@@ -4,13 +4,17 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import static org.assertj.core.api.Assertions.*;
 
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class TestPunchIO {
 
@@ -20,9 +24,6 @@ public class TestPunchIO {
     private String input = "Test start";
     private String output = "Test finish";
     private Actions action ;
-//    private WebElement userNameInput = driver.findElement(By.cssSelector("#txtUsername"));
-//    private WebElement userPasswordInput = driver.findElement(By.cssSelector("#txtPassword"));
-//    private WebElement singInButton = driver.findElement(By.cssSelector("#btnLogin"));
 
     @BeforeMethod
     public void setup() {
@@ -37,7 +38,6 @@ public class TestPunchIO {
         driver.findElement(By.cssSelector("#txtUsername")).sendKeys(name);
         driver.findElement(By.cssSelector("#txtPassword")).sendKeys(password);
         driver.findElement(By.cssSelector("#btnLogin")).click();
-
 
         action = new Actions(driver);
         action.moveToElement(driver.findElement(By.xpath("//a[@id='menu_time_viewTimeModule']")));
@@ -64,21 +64,16 @@ public class TestPunchIO {
         driver.findElement(By.linkText("My Records")).click();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.findElement(By.xpath("//img[@class='ui-datepicker-trigger']")).click();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.findElement(By.linkText("27")).click();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         List<WebElement> tableRows = driver.findElements(By.xpath(
                 "//form[@id='employeeRecordsForm']/table/tbody/tr[@class='odd' or @class='even']"));
-       boolean workInDate = tableRows.stream()
+        String workInDate = tableRows.stream()
                 .map(WebElement::getText)
-                .anyMatch(e->e.contains(date)&e.contains(date2)
+                .filter(e->e.contains(date)&e.contains(date2)
                         &e.contains(time)&e.contains(time2)
-                        &e.contains(input)&e.contains(output));
-        if(workInDate=true){
-            System.out.println("Test finished!!!");
-        }else {
-            throw new IllegalStateException("This day you haven't working hours");
-        }
+                        &e.contains(input)&e.contains(output)).collect(Collectors.joining(" "));
+        System.out.println(workInDate);
+        assertThat(workInDate).isNotEmpty();
     }
 
     @Test
@@ -98,12 +93,8 @@ public class TestPunchIO {
         driver.findElement(By.xpath("//img[@class='ui-datepicker-trigger']")).click();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.findElement(By.linkText("20")).click();
-        try {
-            WebElement message =driver.findElement(By.xpath("//td[@id='noRecordsColumn']"));
-            message.isDisplayed();
-        }catch (NoSuchElementException e){
-            throw new IllegalStateException("This day you have working hours");
-        }
+        WebElement message =driver.findElement(By.xpath("//td[@id='noRecordsColumn']"));
+        Assert.assertTrue(message.isDisplayed());
 
 
         driver.findElement(By.xpath("//img[@class='ui-datepicker-trigger']")).click();
@@ -112,11 +103,7 @@ public class TestPunchIO {
         driver.findElement(By.xpath("//option[contains(text(),'Dec')]")).click();
         driver.findElement(By.linkText("4")).click();
         WebElement message2 =driver.findElement(By.xpath("//td[@id='noRecordsColumn']"));
-        try {
-            message2.isDisplayed();
-        }catch (NoSuchElementException e){
-            throw new IllegalStateException("This day you have working hours");
-        }
+        Assert.assertTrue(message2.isDisplayed());
     }
 
     @AfterMethod
