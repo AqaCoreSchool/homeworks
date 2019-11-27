@@ -36,7 +36,7 @@ public class WebSiteAutomationTest {
         driver.manage().window().maximize();
     }
 
-    @Test
+
     public void login() {
         driver.get(URL);
         WebElement username = driver.findElement(By.cssSelector("#txtUsername"));
@@ -47,8 +47,17 @@ public class WebSiteAutomationTest {
         submitButton.submit();
     }
 
-    @Test(dependsOnMethods = {"login"}, groups = {"1"})
-    public void punchInOut() {
+    public void wait(int milisec){
+        try {
+            sleep(milisec);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test(groups = {"1"})
+    public void primaryTest() {
+        login();
         WebElement time = driver.findElement(By.xpath("//b[contains(text(),'Time')]"));
         action.moveToElement(time).perform();
         WebElement attendance = driver.findElement(By.xpath("//a[@id='menu_attendance_Attendance']"));
@@ -58,25 +67,17 @@ public class WebSiteAutomationTest {
         punchIn.click();
         WebElement noteIn = driver.findElement(By.xpath("//textarea[@id='note']"));
         noteIn.sendKeys(NOTE_IN);
-//        WebElement buttonIn = driver.findElement(By.id("btnPunch"));
-//        buttonIn.click();
-//        WebElement noteOut = driver.findElement(By.xpath("//textarea[@id='note']"));
-//        noteOut.sendKeys(NOTE_OUT);
-//        WebElement buttonOut = driver.findElement(By.id("btnPunch"));
-//        buttonOut.click();
-    }
-
-    @Test(dependsOnMethods = {"login"}, groups = {"1", "2"}, priority = 1)
-    public void checkActualRecords() {
+        WebElement buttonIn = driver.findElement(By.id("btnPunch"));
+        buttonIn.click();
+        WebElement noteOut = driver.findElement(By.xpath("//textarea[@id='note']"));
+        noteOut.sendKeys(NOTE_OUT);
+        WebElement buttonOut = driver.findElement(By.id("btnPunch"));
+        buttonOut.click();
         chooseDateOfRecords();
         WebElement date = driver.findElement(By.xpath("//input[@id='attendance_date']"));
         date.clear();
         date.sendKeys(LocalDate.now().toString(), Keys.ENTER);
-        try {
-            sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        wait(2000);
         List<WebElement> cells = driver.findElements(By.tagName("td"));
         String cellPunchIn = getStringForVerification(cells, NOTE_IN);
         String cellPunchOut = getStringForVerification(cells, NOTE_OUT);
@@ -85,34 +86,26 @@ public class WebSiteAutomationTest {
         Assert.assertEquals(cellPunchOut, NOTE_OUT);
     }
 
-    @Test(dependsOnMethods = {"login"}, groups = {"1", "3"}, priority = 2)
+    @Test(dependsOnMethods = {"primaryTest"}, groups = {"2"}, priority = 1)
     public void checkPreviousWeek() {
         chooseDateOfRecords();
         WebElement date = driver.findElement(By.xpath("//input[@id='attendance_date']"));
         date.clear();
         date.sendKeys(LocalDate.now().minusWeeks(1).toString(), Keys.ENTER);
-        try {
-            sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        wait(2000);
         List<WebElement> rows = driver.findElements(By.tagName("tr"));
         String recordRow = getStringForVerification(rows, NO_RECORDS);
 
         Assert.assertEquals(recordRow, NO_RECORDS);
     }
 
-    @Test(dependsOnMethods = {"login"}, groups = {"1", "3"}, priority = 2)
+    @Test(dependsOnMethods = {"primaryTest"}, groups = {"1"}, priority = 1)
     public void checkNextWeek() {
         chooseDateOfRecords();
         WebElement date = driver.findElement(By.xpath("//input[@id='attendance_date']"));
         date.clear();
         date.sendKeys(LocalDate.now().plusWeeks(1).toString(), Keys.ENTER);
-        try {
-            sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        wait(2000);
         List<WebElement> rows = driver.findElements(By.tagName("tr"));
         String recordRow = getStringForVerification(rows, NO_RECORDS);
 
