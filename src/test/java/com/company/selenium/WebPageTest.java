@@ -45,7 +45,7 @@ public class WebPageTest {
         attendance.click();
         WebElement punch = driver.findElement(By.id("menu_attendance_punchIn"));
         punch.click();
-        WebElement noteIn = driver.findElement(By.cssSelector("#note"));
+        WebElement noteIn = driver.findElement(By.xpath("//textarea[@id='note']"));
         noteIn.click();
         noteIn.sendKeys("START");
         WebElement buttonIn = driver.findElement(By.cssSelector("#btnPunch"));
