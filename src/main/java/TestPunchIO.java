@@ -20,6 +20,9 @@ public class TestPunchIO {
     private String input = "Test start";
     private String output = "Test finish";
     private Actions action ;
+//    private WebElement userNameInput = driver.findElement(By.cssSelector("#txtUsername"));
+//    private WebElement userPasswordInput = driver.findElement(By.cssSelector("#txtPassword"));
+//    private WebElement singInButton = driver.findElement(By.cssSelector("#btnLogin"));
 
     @BeforeMethod
     public void setup() {
@@ -34,6 +37,7 @@ public class TestPunchIO {
         driver.findElement(By.cssSelector("#txtUsername")).sendKeys(name);
         driver.findElement(By.cssSelector("#txtPassword")).sendKeys(password);
         driver.findElement(By.cssSelector("#btnLogin")).click();
+
 
         action = new Actions(driver);
         action.moveToElement(driver.findElement(By.xpath("//a[@id='menu_time_viewTimeModule']")));
@@ -94,8 +98,8 @@ public class TestPunchIO {
         driver.findElement(By.xpath("//img[@class='ui-datepicker-trigger']")).click();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.findElement(By.linkText("20")).click();
-        WebElement message =driver.findElement(By.xpath("//td[@id='noRecordsColumn']"));
         try {
+            WebElement message =driver.findElement(By.xpath("//td[@id='noRecordsColumn']"));
             message.isDisplayed();
         }catch (NoSuchElementException e){
             throw new IllegalStateException("This day you have working hours");
