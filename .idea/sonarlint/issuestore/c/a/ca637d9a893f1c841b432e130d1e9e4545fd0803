@@ -1,0 +1,7 @@
+
+ssquid:S3252%"UUse static access with "io.github.bonigarcia.wdm.WebDriverManager" for "getInstance".(ô÷Õ¹8íž¦¡ê-
+rsquid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ô÷«Ç
+~squid:S00115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(ƒšÙ¬ûÿÿÿÿ8¦¾ïàê-
+ssquid:S3252>"UUse static access with "io.github.bonigarcia.wdm.WebDriverManager" for "getInstance".(„è©¬8ƒ°©¡ê-
+isquid:CommentedOutCodeLine."<This block of commented-out lines of code should be removed.(Îê»Ý8¥Í«áê-
+ssquid:S32526"UUse static access with "io.github.bonigarcia.wdm.WebDriverManager" for "getInstance".(„Øäª8ƒ°©¡ê-
