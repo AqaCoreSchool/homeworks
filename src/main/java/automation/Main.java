@@ -4,13 +4,13 @@ public class Main {
     public static void main(String[] args) {
         Automation automation = new Automation();
 
-        String message = automation.generateMessage();
+        automation.generateMessage();
 
         automation.login();
         automation.navigate();
 
-        automation.writeNote(message);
-        automation.writeNote(message);
-        automation.checkRecord(message);
+        automation.writeNote();
+        automation.writeNote();
+        automation.checkRecord();
     }
 }

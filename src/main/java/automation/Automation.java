@@ -13,25 +13,29 @@ import java.util.Random;
 public class Automation {
 
     private WebDriver driver;
-    private final String url = "http://test.biz.ua";
+    private static final String URL = "http://test.biz.ua";
+    private static final String USER_NAME = "TestUser01";
+    private static final String PASSWORD = "Vfylhfujhf!1";
+    private static Random random;
+    private String message;
 
     public Automation() {
         System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
         driver = new ChromeDriver();
+        random = new Random();
     }
 
-    public String generateMessage() {
-        Random random = new Random();
-        return "Andrii" + random.nextInt();
+    public void generateMessage() {
+        message = "Andrii" + random.nextInt();
     }
 
     public void login() {
-        driver.get(url);
+        driver.get(URL);
 
         WebElement userNameElement = driver.findElement(By.cssSelector("#txtUsername"));
-        userNameElement.sendKeys("TestUser01");
+        userNameElement.sendKeys(USER_NAME);
         WebElement passwordElement = driver.findElement(By.cssSelector("#txtPassword"));
-        passwordElement.sendKeys("Vfylhfujhf!1");
+        passwordElement.sendKeys(PASSWORD);
 
         WebElement submitButton = driver.findElement(By.cssSelector("#btnLogin"));
         submitButton.submit();
@@ -50,7 +54,7 @@ public class Automation {
         itemFromNavigationSubMenu.click();
     }
 
-    public void writeNote(String message) {
+    public void writeNote() {
         WebElement noteField = driver.findElement(By.cssSelector("#note"));
         noteField.sendKeys(message);
 
@@ -60,7 +64,7 @@ public class Automation {
         System.out.println("Punch was written successfully!");
     }
 
-    public void checkRecord(String message) {
+    public void checkRecord() {
         WebElement itemFromNavigationMenu = driver.findElement(By.cssSelector("#menu_attendance_Attendance"));
         itemFromNavigationMenu.click();
 
@@ -77,9 +81,9 @@ public class Automation {
         calendarIcon.sendKeys(LocalDate.now().toString());
         calendarIcon.submit();
 
-        WebElement punchInNOte = driver.findElement(By.xpath("//*[text()[contains(.,'" + labelDate + "')]]"));
-        WebElement next = punchInNOte.findElement(By.xpath("following-sibling::*"));
+        WebElement punchInDate = driver.findElement(By.xpath("//*[text()[contains(.,'" + labelDate + "')]]"));
+        WebElement punchInNote = punchInDate.findElement(By.xpath("following-sibling::*"));
 
-        System.out.printf("Punch '%s' from '%s' exists: %b", message, labelDate, (next.getText().equals(message)));
+        System.out.printf("Punch '%s' from '%s' exists: %b", message, labelDate, (punchInNote.getText().equals(message)));
     }
 }
