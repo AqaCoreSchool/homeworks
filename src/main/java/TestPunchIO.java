@@ -11,10 +11,8 @@ import org.testng.annotations.Test;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class TestPunchIO {
 
