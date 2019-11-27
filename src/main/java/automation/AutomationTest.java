@@ -30,8 +30,9 @@ public class AutomationTest {
         Path path = Paths.get(userDir, "src", "main", "resources");
         if (OS.contains("win")) {
             System.setProperty("webdriver.chrome.driver", path + File.separator + "chromedriver.exe");
+        } else {
+            System.setProperty("webdriver.chrome.driver", path + File.separator + "chromedriver");
         }
-        System.setProperty("webdriver.chrome.driver", path + File.separator + "chromedriver");
         driver = new ChromeDriver();
         driver.get("http://test.biz.ua");
         driver.manage().window().maximize();
