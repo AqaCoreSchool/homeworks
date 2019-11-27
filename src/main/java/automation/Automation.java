@@ -8,6 +8,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Random;
 
 public class Automation {
@@ -18,6 +19,7 @@ public class Automation {
     private static final String PASSWORD = "Vfylhfujhf!1";
     private static Random random;
     private String message;
+    private LocalDateTime dateTime;
 
     public Automation() {
         System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
@@ -52,6 +54,8 @@ public class Automation {
 
         WebElement itemFromNavigationSubMenu = driver.findElement(By.cssSelector("#menu_attendance_punchIn"));
         itemFromNavigationSubMenu.click();
+
+        dateTime = LocalDateTime.now();
     }
 
     public void writeNote() {
@@ -74,16 +78,23 @@ public class Automation {
         WebElement calendarIcon = driver.findElement(By.cssSelector("#attendance_date"));
         calendarIcon.clear();
 
-        LocalDateTime dateTime = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         String labelDate = dateTime.format(formatter);
 
         calendarIcon.sendKeys(LocalDate.now().toString());
         calendarIcon.submit();
 
-        WebElement punchInDate = driver.findElement(By.xpath("//*[text()[contains(.,'" + labelDate + "')]]"));
-        WebElement punchInNote = punchInDate.findElement(By.xpath("following-sibling::*"));
+        List<WebElement> punchInDate = driver.findElements(By.xpath("//*[text()[contains(.,'" + labelDate + "')]]"));
 
-        System.out.printf("Punch '%s' from '%s' exists: %b", message, labelDate, (punchInNote.getText().equals(message)));
+        int i = 0;
+        for (WebElement element : punchInDate) {
+            if (element.findElement(By.xpath("following-sibling::*")).getText().equals(message)) {
+                System.out.printf("Punch '%s' from '%s' exists.", message, labelDate);
+                i++;
+            }
+            if (i == 0) {
+                System.out.println("There is no such note!");
+            }
+        }
     }
 }
