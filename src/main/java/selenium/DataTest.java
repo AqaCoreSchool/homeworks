@@ -8,6 +8,9 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
+import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +40,8 @@ public abstract class DataTest {
 
     @BeforeClass
     public void initDriver() {
-        System.setProperty("webdriver.chrome.driver", "src\\main\\resourses\\chromedriver.exe"); //Separator
+        Path driverPath = Paths.get("src", "main", "resources");
+        System.setProperty("webdriver.chrome.driver", driverPath + File.separator + "chromedriver.exe");
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
