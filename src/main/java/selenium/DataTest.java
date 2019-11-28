@@ -32,7 +32,6 @@ public abstract class DataTest {
     private final String PUNCH_TIME = "//*[@id=\"currentTime\"]";
     private final String PUNCH_IN_BUTTON = "//*[@id=\"btnPunch\"]";
     private final String DATE_INPUT = "//input[@id='attendance_date']";
-    private final String USER_TABLE = "//table[@class='table']//tbody";
     protected String punchInTime;
     protected String punchOutTime;
     protected String punchInMessage = "Punch IN 9097";
@@ -62,7 +61,6 @@ public abstract class DataTest {
     }
 
     protected List<WebElement> getAllRecordData(LocalDate date) {
-
         driver.findElement(By.xpath(TIME_BUTTON)).click();
         driver.findElement(By.xpath(ATTENDANCE_BUTTON)).click();
         driver.findElement(By.xpath(ATTENDANCE_RECORD_BUTTON)).click();
@@ -71,86 +69,61 @@ public abstract class DataTest {
         dateInputField.click();
         dateInputField.sendKeys(date.toString());
         dateInputField.sendKeys(Keys.ENTER);
-
-        WebElement emploeeRecords = driver.findElement(By.xpath(USER_TABLE));
-        return emploeeRecords.findElements(By.tagName("tr"));
+        return driver.findElements(By.xpath("//form[@id='employeeRecordsForm']//tr[@class='odd' or @class='even']"));
     }
 
     protected String getRecordDataByPunchMessage(String punchMessage, int messageIndex, int timeIndex) {
         String punchDate = "";
         List<WebElement> recordData = getAllRecordData(LocalDate.now());
         List<WebElement> employeeRecord = new ArrayList<>();
+
         for (WebElement employeeData : recordData) {
             employeeRecord = employeeData.findElements(By.tagName("td"));
-            if (employeeRecord.size() > 5 && employeeRecord.get(messageIndex).getText().equals(punchMessage)) {
+            if (employeeRecord.get(messageIndex).getText().equals(punchMessage)) {
                 punchDate = employeeRecord.get(timeIndex).getText();
             }
         }
         return punchDate;
     }
 
-    protected void punchIn() {
+    protected void punchInOut() {
         driver.findElement(By.xpath(TIME_BUTTON)).click();
-        WebElement attendaceButton = driver.findElement(By.xpath(ATTENDANCE_BUTTON));
-        attendaceButton.click();
-
-        WebElement punchSelect = driver.findElement(By.xpath(PUNCH_BUTTON));
-        punchSelect.click();
-
-        WebElement punchNoteField = driver.findElement(By.xpath(PUNCH_NOTE_FIELD));
-        punchNoteField.sendKeys(punchInMessage);
-
-        WebElement punchTime = driver.findElement(By.xpath(PUNCH_TIME));
-        punchInTime = punchTime.getText();
-
-        WebElement punchButton = driver.findElement(By.xpath(PUNCH_IN_BUTTON));
-        punchButton.click();
-
-        //Doesn't work without reinitialization var: punchNoteField,  punchTime, punchButton
-        //I don.t know why
-        punchNoteField = driver.findElement(By.xpath(PUNCH_NOTE_FIELD));
-        punchNoteField.sendKeys(punchOutMessage);
-        punchTime = driver.findElement(By.xpath(PUNCH_TIME));
-        punchOutTime = punchTime.getText();
-        punchButton = driver.findElement(By.xpath(PUNCH_IN_BUTTON));
-        punchButton.click();
+        driver.findElement(By.xpath(ATTENDANCE_BUTTON)).click();
+        driver.findElement(By.xpath(PUNCH_BUTTON)).click();
+        driver.findElement(By.xpath(PUNCH_NOTE_FIELD)).sendKeys(punchInMessage);
+        punchInTime = driver.findElement(By.xpath(PUNCH_TIME)).getText();
+        driver.findElement(By.xpath(PUNCH_IN_BUTTON)).click();
+        driver.findElement(By.xpath(PUNCH_NOTE_FIELD)).sendKeys(punchOutMessage);
+        punchOutTime = driver.findElement(By.xpath(PUNCH_TIME)).getText();
+        driver.findElement(By.xpath(PUNCH_IN_BUTTON)).click();
     }
 
     protected void editEmployeeData() {
-
         openMyInfoPage();
         WebElement firstName = driver.findElement((By.xpath("//input[@id='personal_txtEmpFirstName']")));
         WebElement lastName = driver.findElement((By.xpath("//input[@id='personal_txtEmpLastName']")));
         WebElement id = driver.findElement((By.xpath("//input[@id='personal_txtEmployeeId']")));
         WebElement editButton = driver.findElement((By.xpath("//input[@id='btnSave']")));
-
         editButton.click();
-
         firstName.clear();
         firstName.sendKeys(MY_TEST_EMPLOYEE.getFirstName());
-
         lastName.clear();
         lastName.sendKeys(MY_TEST_EMPLOYEE.getLastName());
-
         editButton.click();
     }
 
     private void openMyInfoPage() {
         WebElement myInfo = driver.findElement(By.xpath("//a[@id='menu_pim_viewMyDetails']"));
-
         myInfo.click();
     }
 
     protected String getUserLastName() {
+        String userLastName = "";
         WebElement pimButton = driver.findElement((By.xpath("//a[@id='menu_pim_viewPimModule']")));
         pimButton.click();
         WebElement emloyeeListButton = driver.findElement((By.xpath("//a[@id='menu_pim_viewEmployeeList']")));
         emloyeeListButton.click();
-        WebElement emploeeDataTable = driver.findElement(By.xpath("//table[@id='resultTable']"));
-
-        String userLastName = "";
-
-        List<WebElement> emloyeeDataList = emploeeDataTable.findElements(By.tagName("tr"));
+        List<WebElement> emloyeeDataList = driver.findElements(By.xpath("//table[@id='resultTable']//tr[@class='odd' or @class='even']"));
         for (WebElement element : emloyeeDataList) {
             List<WebElement> emloyeeData = element.findElements(By.tagName("a"));
             if (emloyeeData.get(0).getText().equals(String.valueOf(MY_TEST_EMPLOYEE.getId()))) {

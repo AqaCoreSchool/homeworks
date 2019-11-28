@@ -13,6 +13,6 @@ public class TomorrowRecordsListTest extends DataTest {
     @Test
     public void testTomorrowRecordsLisr() {
         List<WebElement> recordData = getAllRecordData(LocalDate.now().plusDays(1));
-        Assert.assertTrue(recordData.size() <= 1);
+        Assert.assertTrue(recordData.isEmpty());
     }
 }

@@ -7,7 +7,7 @@ import selenium.DataTest;
 public class PunchOutDateTest extends DataTest {
     @Test
     public void testPunchOutDate() {
-        punchIn();
+        punchInOut();
         Assert.assertTrue(getRecordDataByPunchMessage(punchOutMessage, 4, 3).contains(punchOutTime));
     }
 }
