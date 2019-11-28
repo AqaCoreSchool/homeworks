@@ -32,6 +32,7 @@ public class UserPageTest
         String userDir = System.getProperty("user.home");
         System.setProperty("webdriver.chrome.driver", userDir + "/chromedriver.exe");
         driver = new ChromeDriver();
+        driver.manage().window().maximize();
         driver.get("http://test.biz.ua");
         WebElement userName = driver.findElement(By.xpath("//input[@id='txtUsername']"));
         userName.sendKeys("TestUser07");
@@ -39,6 +40,7 @@ public class UserPageTest
         password.sendKeys("Vfylhfujhf!1", Keys.ENTER);
         WebElement info = driver.findElement(By.xpath("//b[contains(text(),'My Info')]"));
         info.click();
+        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         WebElement edit = driver.findElement(By.xpath("//input[@id='btnSave']"));
         edit.click();
         driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
@@ -60,8 +62,8 @@ public class UserPageTest
         WebElement licenseExpireDate = driver.findElement(By.xpath("//input[@id='personal_txtLicExpDate']"));
         licenseExpireDate.clear();
         licenseExpireDate.sendKeys(expireDate);
-        WebElement radioBtn = driver.findElement(By.id("personal_optGender_2"));
-        radioBtn.click();
+        WebElement radioButton = driver.findElement(By.id("personal_optGender_2"));
+        radioButton.click();
 
         Select nationality = new Select(driver.findElement(By.xpath("//select[@id='personal_cmbNation']")));
         nationality.selectByVisibleText("Ukrainian");
@@ -70,11 +72,12 @@ public class UserPageTest
         WebElement birthDate = driver.findElement(By.xpath("//input[@id='personal_DOB']"));
         birthDate.clear();
         birthDate.sendKeys("2000-08-11",Keys.ENTER);
-        WebElement saveBtn = driver.findElement(By.xpath("//input[@id='btnSave']"));
-        saveBtn.click();
+        WebElement saveButton = driver.findElement(By.xpath("//input[@id='btnSave']"));
+        saveButton.click();
 
         checkTime();
         checkEmployeeRecords();
+        driver.close();
     }
 
     public void checkTime(){
@@ -111,9 +114,9 @@ public class UserPageTest
         chooseDate.click();
         chooseDate.clear();
         chooseDate.sendKeys(formatDate, Keys.ENTER);
-        WebElement viewBtn = driver.findElement(By.xpath("//input[@id='btView']"));
-        viewBtn.click();
-        driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+        WebElement viewButton = driver.findElement(By.xpath("//input[@id='btView']"));
+        viewButton.click();
+        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         List<WebElement> webElementList = driver.findElements(By.xpath("//div[@id='search-results']//div[@class='inner']"));
         String note = webElementList.stream()
                 .map(WebElement::getText)
