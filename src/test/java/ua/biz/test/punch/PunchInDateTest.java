@@ -1,4 +1,4 @@
-package ua.biz.test.punchDate;
+package ua.biz.test.punch;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;

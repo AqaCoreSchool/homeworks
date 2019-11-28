@@ -1,4 +1,4 @@
-package ua.biz.test.punchDate;
+package ua.biz.test.records;
 
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
