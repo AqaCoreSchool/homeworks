@@ -1,6 +1,7 @@
 package orangetest;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -13,14 +14,13 @@ import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-import java.util.stream.Collectors;
 
 public class OrangeTest {
     public static final String PATH = Paths.get("src", "main", "resources", "chromedriver.exe").toString();
     public static final String NOTE_IN = "I am a good worker :-)";
     public static final String NOTE_OUT = "I am already finished my work :-)";
-    public static String dateForChecking = "";
-    public static String dateDay;
+    public static final CharSequence PASSWORD = "Vfylhfujhf!1";
+    public static final CharSequence LOGIN = "TestUser05";
     public String dateOutString;
     public String timeOutString;
     public String timeInString;
@@ -34,15 +34,20 @@ public class OrangeTest {
         driver.get("http://test.biz.ua");
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.manage().window().maximize();
-        WebElement login = driver.findElement(By.xpath("//input[@id='txtUsername']"));
-        login.sendKeys("TestUser01");
-        WebElement password = driver.findElement(By.xpath("//input[@id='txtPassword']"));
-        password.sendKeys("Vfylhfujhf!1");
-        WebElement submitButton = driver.findElement(By.xpath("//input[@id='btnLogin']"));
-        submitButton.click();
     }
 
     @Test(priority = 1)
+    public void login(){
+        WebElement login = driver.findElement(By.xpath("//input[@id='txtUsername']"));
+        login.sendKeys(LOGIN);
+        WebElement password = driver.findElement(By.xpath("//input[@id='txtPassword']"));
+        password.sendKeys(PASSWORD);
+        WebElement submitButton = driver.findElement(By.xpath("//input[@id='btnLogin']"));
+        submitButton.click();
+        Assert.assertTrue((driver.findElements(By.xpath("//a[@id='welcome']")).size() > 0));
+    }
+
+    @Test(priority = 2)
     public void testPunchIn() {
         driver.findElement(By.linkText("Time")).click();
         driver.findElement(By.linkText("Attendance")).click();
@@ -54,12 +59,12 @@ public class OrangeTest {
         System.out.println(timeInString);
         WebElement dateIn = driver.findElement(By.xpath("//span[@id='currentDate']"));
         dateInString = dateIn.getText();
-        dateDay = dateInString.substring(8, 10);
         System.out.println(dateInString);
         driver.findElement(By.xpath("//input[@id='btnPunch']")).click(); /////////////
+        Assert.assertTrue((driver.findElements(By.xpath("//h1[contains(text(),'Punch Out')]")).size() == 1));
     }
 
-    @Test(priority = 2)
+    @Test(priority = 3)
     public void testPunchOut() {
         driver.findElement(By.linkText("Time")).click();
         driver.findElement(By.linkText("Attendance")).click();
@@ -73,39 +78,57 @@ public class OrangeTest {
         dateOutString = dateOut.getText();
         System.out.println(dateOutString);
         driver.findElement(By.xpath("//input[@id='btnPunch']")).click();
+        Assert.assertTrue((driver.findElements(By.xpath("//h1[contains(text(),'Punch In')]")).size() == 1));
     }
 
-    @Test(priority = 3)
+    @Test(priority = 4)
     public void testCheckRecord() {
         driver.findElement(By.linkText("Time")).click();
         driver.findElement(By.linkText("Attendance")).click();
         driver.findElement(By.xpath("//a[@id='menu_attendance_viewMyAttendanceRecord']")).click();
-        driver.findElement(By.xpath("//img[@class='ui-datepicker-trigger']")).click();
-        dateForChecking = dateDay;
-        driver.findElement(By.linkText(dateDay)).click();
+        WebElement fieldForDate = driver.findElement(By.xpath("//input[@id='attendance_date']"));
+        LocalDate date = LocalDate.now();
+        fieldForDate.click();
+        fieldForDate.sendKeys(date.toString());
+        fieldForDate.sendKeys(Keys.ENTER);
         WebElement baseTable = driver.findElement(By.xpath("//table[@class='table']"));
         List<WebElement> tableRows = baseTable.findElements(By.tagName("tr"));
-        String stringSearch = tableRows.stream().map(WebElement::getText)
-                .filter(o -> o.contains(dateInString))
-                .filter(o -> o.contains(timeInString))
-                .filter(o -> o.contains(NOTE_IN))
-                .filter(o -> o.contains(dateOutString))
-                .filter(o -> o.contains(timeOutString))
-                .filter(o -> o.contains(NOTE_OUT))
-                .collect(Collectors.joining("\n"));
-        System.out.println(stringSearch);
-        Assert.assertFalse(stringSearch.equals(""));
+        boolean stringSearch = tableRows.stream().map(WebElement::getText).anyMatch(
+                    o -> o.contains(timeInString)&&
+                        o.contains(NOTE_IN)&&
+                        o.contains(timeOutString)&&
+                        o.contains(NOTE_OUT));
+        Assert.assertTrue(stringSearch);
     }
 
-    @Test(priority = 4)
+    @Test(priority = 5)
     public void checkPreviousWeek() {
         driver.findElement(By.linkText("Time")).click();
         driver.findElement(By.linkText("Attendance")).click();
         driver.findElement(By.xpath("//a[@id='menu_attendance_viewMyAttendanceRecord']")).click();
-        driver.findElement(By.xpath("//img[@class='ui-datepicker-trigger']")).click();
+        WebElement fieldForDate = driver.findElement(By.xpath("//input[@id='attendance_date']"));
         LocalDate previousDate = LocalDate.now().minusDays(7);
-        int day = previousDate.getDayOfMonth();
-        driver.findElement(By.linkText(String.valueOf(day))).click();
+        System.out.println(previousDate.toString());
+        fieldForDate.click();
+        fieldForDate.clear();
+        fieldForDate.sendKeys(previousDate.toString());
+        fieldForDate.sendKeys(Keys.ENTER);
+        //driver.findElement(By.linkText(String.valueOf(day))).click();
+        Assert.assertTrue((driver.findElements(By.xpath("//td[@id='noRecordsColumn']")).size() == 1), "No attendance records to display");
+    }
+    @Test(priority = 6)
+    public void checkNextWeek() {
+        driver.findElement(By.linkText("Time")).click();
+        driver.findElement(By.linkText("Attendance")).click();
+        driver.findElement(By.xpath("//a[@id='menu_attendance_viewMyAttendanceRecord']")).click();
+        // driver.findElement(By.xpath("//img[@class='ui-datepicker-trigger']")).click();
+        WebElement fieldForDate = driver.findElement(By.xpath("//input[@id='attendance_date']"));
+        LocalDate previousDate = LocalDate.now().plusDays(7);
+        System.out.println(previousDate.toString());
+        fieldForDate.click();
+        fieldForDate.clear();
+        fieldForDate.sendKeys(previousDate.toString());
+        fieldForDate.sendKeys(Keys.ENTER);
         Assert.assertTrue((driver.findElements(By.xpath("//td[@id='noRecordsColumn']")).size() == 1), "No attendance records to display");
     }
 
