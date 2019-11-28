@@ -6,9 +6,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
-import org.testng.Assert;
 import org.testng.annotations.*;
-
+import static org.assertj.core.api.Assertions.*;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,15 +17,13 @@ import static java.lang.Thread.sleep;
 public class WebSiteAutomationTest {
 
     private static final String URL = "http://test.biz.ua/";
-    private static final String USERNAME = "TestUser01";
+    private static final String USERNAME = "TestUser02";
     private static final String PASSWORD = "Vfylhfujhf!1";
-    private static final String NOTE_IN = "I am punching in";
-    private static final String NOTE_OUT = "I am punching out";
-    private static final String NO_RECORDS = "No attendance records to display";
+    private static final String NOTE_IN = "Start";
+    private static final String NOTE_OUT = "Stop";
 
     private WebDriver driver;
     private Actions action;
-
 
     @BeforeTest
     public void setUpDriver() {
@@ -36,85 +33,60 @@ public class WebSiteAutomationTest {
         driver.manage().window().maximize();
     }
 
-
+    @Test
     public void login() {
         driver.get(URL);
-        WebElement username = driver.findElement(By.cssSelector("#txtUsername"));
-        WebElement password = driver.findElement(By.cssSelector("#txtPassword"));
-        username.sendKeys(USERNAME);
-        password.sendKeys(PASSWORD);
-        WebElement submitButton = driver.findElement(By.xpath("//input[@id='btnLogin']"));
-        submitButton.submit();
+        driver.findElement(By.xpath("//input[@id='txtUsername']")).sendKeys(USERNAME);
+        driver.findElement(By.xpath("//input[@id='txtPassword']")).sendKeys(PASSWORD);
+        driver.findElement(By.xpath("//input[@id='btnLogin']")).submit();
+
+        assertThat(URL).contains("http://");
     }
 
-    public void wait(int milisec){
+    public void wait(int millisec){
         try {
-            sleep(milisec);
+            sleep(millisec);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
 
-    @Test(groups = {"1"})
-    public void primaryTest() {
-        login();
+    @Test(dependsOnMethods = {"login"})
+    public void testAutomation() {
         WebElement time = driver.findElement(By.xpath("//b[contains(text(),'Time')]"));
         action.moveToElement(time).perform();
         WebElement attendance = driver.findElement(By.xpath("//a[@id='menu_attendance_Attendance']"));
         action.moveToElement(attendance).perform();
-        WebElement punchIn = driver.findElement(By.id("menu_attendance_punchIn"));
-        action.moveToElement(punchIn).perform();
-        punchIn.click();
-        WebElement noteIn = driver.findElement(By.xpath("//textarea[@id='note']"));
-        noteIn.sendKeys(NOTE_IN);
-        WebElement buttonIn = driver.findElement(By.id("btnPunch"));
-        buttonIn.click();
-        WebElement noteOut = driver.findElement(By.xpath("//textarea[@id='note']"));
-        noteOut.sendKeys(NOTE_OUT);
-        WebElement buttonOut = driver.findElement(By.id("btnPunch"));
-        buttonOut.click();
+        WebElement punchInOut = driver.findElement(By.xpath("//a[@id='menu_attendance_punchIn']"));
+        action.moveToElement(punchInOut).perform();
+        punchInOut.click();
+        driver.findElement(By.xpath("//textarea[@id='note']")).sendKeys(NOTE_IN);;
+        String timeIn = driver.findElement(By.xpath("//span[@id='currentTime']")).getText();
+        driver.findElement(By.xpath("//input[@id='btnPunch']")).click();
+        driver.findElement(By.xpath("//textarea[@id='note']")).sendKeys(NOTE_OUT);;
+        String timeOut = driver.findElement(By.xpath("//span[@id='currentTime']")).getText();
+        driver.findElement(By.xpath("//input[@id='btnPunch']")).click();
         chooseDateOfRecords();
         WebElement date = driver.findElement(By.xpath("//input[@id='attendance_date']"));
         date.clear();
         date.sendKeys(LocalDate.now().toString(), Keys.ENTER);
         wait(2000);
-        List<WebElement> cells = driver.findElements(By.tagName("td"));
-        String cellPunchIn = getStringForVerification(cells, NOTE_IN);
-        String cellPunchOut = getStringForVerification(cells, NOTE_OUT);
+        List<WebElement> rows = driver.findElements(By.tagName("tr"));
+        String rowPunch = getStringForVerification(rows, NOTE_IN,NOTE_OUT,timeIn,timeOut);
 
-        Assert.assertEquals(cellPunchIn, NOTE_IN);
-        Assert.assertEquals(cellPunchOut, NOTE_OUT);
+        assertThat(rowPunch).isNotEmpty();
+        assertThat(checkRecordsOfAnotherWeek(LocalDate.now().minusWeeks(1)).isDisplayed());
+        assertThat(checkRecordsOfAnotherWeek(LocalDate.now().plusWeeks(1)).isDisplayed());
     }
 
-    @Test(dependsOnMethods = {"primaryTest"}, groups = {"2"}, priority = 1)
-    public void checkPreviousWeek() {
+    public WebElement checkRecordsOfAnotherWeek(LocalDate dates) {
         chooseDateOfRecords();
         WebElement date = driver.findElement(By.xpath("//input[@id='attendance_date']"));
         date.clear();
-        date.sendKeys(LocalDate.now().minusWeeks(1).toString(), Keys.ENTER);
+        date.sendKeys(dates.toString(), Keys.ENTER);
         wait(2000);
         List<WebElement> rows = driver.findElements(By.tagName("tr"));
-        String recordRow = getStringForVerification(rows, NO_RECORDS);
-
-        Assert.assertEquals(recordRow, NO_RECORDS);
-    }
-
-    @Test(dependsOnMethods = {"primaryTest"}, groups = {"1"}, priority = 1)
-    public void checkNextWeek() {
-        chooseDateOfRecords();
-        WebElement date = driver.findElement(By.xpath("//input[@id='attendance_date']"));
-        date.clear();
-        date.sendKeys(LocalDate.now().plusWeeks(1).toString(), Keys.ENTER);
-        wait(2000);
-        List<WebElement> rows = driver.findElements(By.tagName("tr"));
-        String recordRow = getStringForVerification(rows, NO_RECORDS);
-
-        Assert.assertEquals(recordRow, NO_RECORDS);
-    }
-
-    @AfterTest
-    public void shutDownDriver() {
-        driver.close();
+        return driver.findElement(By.xpath("//td[@id='noRecordsColumn']"));
     }
 
     private void chooseDateOfRecords() {
@@ -127,11 +99,16 @@ public class WebSiteAutomationTest {
         records.click();
     }
 
-    private String getStringForVerification(List<WebElement> elements, String stringNote) {
+    private String getStringForVerification(List<WebElement> elements, String noteIn,
+                                            String noteOut, String timeIn, String timeOut) {
         return elements.stream()
                 .map(WebElement::getText)
-                .filter(s -> s.contains(stringNote))
-                .distinct()
-                .collect(Collectors.joining());
+                .filter(s -> s.contains(noteIn) && s.contains(noteOut) &&
+                        s.contains(timeIn) && s.contains(timeOut))
+                .collect(Collectors.joining(" "));
+    }
+    @AfterTest(alwaysRun = true)
+    public void shutDownDriver() {
+        driver.close();
     }
 }
