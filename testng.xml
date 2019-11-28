@@ -1,0 +1,15 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="OrangeHRM Tests" verbose="1" >
+    <test name="Change user data and check changes in users list">
+        <parameter name="Url" value="http://test.biz.ua"/>
+        <classes>
+            <class name="OrangeUserInfoTest">
+                <parameter name="Username" value="TestUser06"/>
+                <parameter name="Password" value="Vfylhfujhf!1"/>
+                <parameter name="Name" value="Nazariy"/>
+                <parameter name="Surname" value="Kushnir"/>
+            </class>
+        </classes>
+    </test>
+</suite>
