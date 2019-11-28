@@ -120,7 +120,7 @@ public class UserPageTest
         List<WebElement> webElementList = driver.findElements(By.xpath("//div[@id='search-results']//div[@class='inner']"));
         String note = webElementList.stream()
                 .map(WebElement::getText)
-                .filter(s -> s.contains("START") && s.contains("FINISH"))
+                .filter(el -> el.contains("START") && el.contains("FINISH"))
                 .collect(Collectors.joining(" "));
         Assert.assertTrue(note.contains("Olya Bilynska"));
     }
