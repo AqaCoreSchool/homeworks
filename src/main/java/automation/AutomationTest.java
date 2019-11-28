@@ -1,8 +1,14 @@
 package automation;
 
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -11,9 +17,10 @@ import org.testng.annotations.Test;
 import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -22,6 +29,7 @@ public class AutomationTest {
     private String OS = System.getProperty("os.name").toLowerCase();
     private WebDriver driver;
     private Actions actions;
+    private WebDriverWait wait;
     private String inNote = "Punched in ...";
     private String outNote = "Punched out ...";
 
@@ -37,6 +45,7 @@ public class AutomationTest {
         driver = new ChromeDriver();
         driver.get("http://test.biz.ua");
         driver.manage().window().maximize();
+         wait = new WebDriverWait(driver, 10);
         actions = new Actions(driver);
     }
 
@@ -45,16 +54,16 @@ public class AutomationTest {
         WebElement username = driver.findElement(By.id("txtUsername"));
         WebElement password = driver.findElement(By.id("txtPassword"));
         WebElement btnLogin = driver.findElement(By.id("btnLogin"));
-        username.sendKeys("TestUser01");
+        username.sendKeys("TestUser08");
         password.sendKeys("Vfylhfujhf!1");
         btnLogin.click();
         sleep(3);
         WebElement welcomeText = driver.findElement(By.id("welcome"));
 
-        Assert.assertEquals("Welcome User01", welcomeText.getText());
+        Assert.assertEquals("Welcome Pavlo", welcomeText.getText());
     }
 
-    @Test(priority = 2)
+    @Test(priority = 4)
     public void goToPunchIn() {
         WebElement timeOption = driver.findElement(By.id("menu_time_viewTimeModule"));
         actions.moveToElement(timeOption).perform();
@@ -69,7 +78,7 @@ public class AutomationTest {
         Assert.assertEquals(expectationDate, currentDateText.getText());
     }
 
-    @Test(priority = 3)
+    @Test(priority = 5)
     public void performPunchInOutOperations() {
         WebElement noteTextArea = driver.findElement(By.id("note"));
         noteTextArea.sendKeys(inNote);
@@ -84,7 +93,7 @@ public class AutomationTest {
         punchButton.click();
     }
 
-    @Test(priority = 4)
+    @Test(priority = 6)
     public void checkMyRecords() {
         goToAttendanceView();
         WebElement attendanceDate = driver.findElement(By.id("attendance_date"));
@@ -101,7 +110,7 @@ public class AutomationTest {
         Assert.assertEquals(outNote, myLastRecordDetails.get(4).getText());
     }
 
-    @Test(priority = 5)
+    @Test(priority = 7)
     public void checkWeekAgoRecords() {
         goToAttendanceView();
         WebElement attendanceDate = driver.findElement(By.id("attendance_date"));
@@ -113,6 +122,63 @@ public class AutomationTest {
         Assert.assertEquals(noRecordsText.getText(), "No attendance records to display");
     }
 
+    @Test(priority = 2)
+    public void fillInUserProfileForm() {
+        WebElement myInfo = driver.findElement(By.id("menu_pim_viewMyDetails"));
+        myInfo.click();
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("btnSave"))).click();
+        List<WebElement> inputElements = driver.findElements(By.xpath("//form[@id='frmEmpPersonalDetails']/fieldset//*"));
+
+        inputElements.stream()
+                .filter(webElement -> webElement.getTagName().equals("input"))
+                .filter(webElement -> webElement.getAttribute("type").equals("text"))
+                .forEach(WebElement::clear);
+        inputElements.stream()
+                .filter(webElement -> webElement.getTagName().equals("select"))
+                .map(Select::new)
+                .forEach(select -> select.selectByVisibleText("-- Select --"));
+
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("personal_txtEmpFirstName")))
+                .sendKeys("Pavlo");
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("personal_txtEmpLastName")))
+                .sendKeys("Hrytsyshyn");
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("personal_txtOtherID")))
+                .sendKeys("08");
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("personal_txtEmployeeId")))
+                .sendKeys("20");
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("personal_txtLicenNo")))
+                .sendKeys("104128");
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("personal_txtLicExpDate")))
+                .sendKeys(getCurrentDate().plusYears(20).toString());
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("personal_DOB")))
+                .sendKeys("1998-02-06");
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("personal_optGender_1")))
+                .click();
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("personal_cmbNation")))
+                .sendKeys("Ukr", Keys.ENTER);
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("personal_cmbMarital")))
+                .sendKeys("Sin", Keys.ENTER);
+
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("btnSave"))).click();
+
+        Assert.assertFalse(driver.findElement(By.id("personal_txtEmpFirstName")).isEnabled());
+        Assert.assertEquals(driver.findElement(By.id("personal_txtEmpFirstName")).getAttribute("value"), "Pavlo");
+
+    }
+    @Test(priority = 3)
+    public void checkUserInEmployeeList() {
+        sleep(2000);
+        WebElement pimOption = driver.findElement(By.id("menu_pim_viewPimModule"));
+        actions.moveToElement(pimOption).perform();
+        WebElement employeeListOption = driver.findElement(By.id("menu_pim_viewEmployeeList"));
+        employeeListOption.click();
+        WebElement resultTable = driver.findElement(By.id("resultTable"));
+        List<WebElement> webElements = resultTable.findElements(By.xpath("//tbody//td"));
+        boolean isUserExists = webElements.stream()
+                .anyMatch(webElement -> webElement.getText().equals("Hrytsyshyn"));
+        Assert.assertTrue(isUserExists);
+    }
+
     @AfterTest
     public void teardown() {
         driver.close();
@@ -122,12 +188,11 @@ public class AutomationTest {
         driver.manage().timeouts().implicitlyWait(l, TimeUnit.SECONDS);
     }
 
-    public String getCurrentDateTime() {
+    public static String getCurrentDateTime() {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate localDate = LocalDate.now();
-        String hour = String.valueOf(LocalDateTime.now().getHour());
-        String minute = String.valueOf(LocalDateTime.now().getMinute());
-        return String.format("%s %s:%s:00 GMT 2", dtf.format(localDate), hour, minute);
+        String  simpleDateFormat = new SimpleDateFormat("HH:mm").format(Calendar.getInstance().getTime());
+        return String.format("%s %s:00 GMT 2", dtf.format(localDate), simpleDateFormat);
     }
 
     public LocalDate getCurrentDate() {
