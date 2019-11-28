@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit;
 public abstract class DataTest {
 
     private WebDriver driver;
-    public final Employee MY_TEST_EMPLOYEE = new Employee("Ivan", "Mosiychuk", 16);
+    protected final Employee MY_TEST_EMPLOYEE = new Employee("Ivan", "Mosiychuk", 16);
     private final String URL = "http://test.biz.ua/symfony/web/index.php/auth/login";
     private final String LOGIN_FIELD_LOCATOR = "//*[@id=\"txtUsername\"]";
     private final String PASSWORD_FIELD_LOCATOR = "//*[@id=\"txtPassword\"]";
@@ -33,13 +33,13 @@ public abstract class DataTest {
     private final String PUNCH_IN_BUTTON = "//*[@id=\"btnPunch\"]";
     private final String DATE_INPUT = "//input[@id='attendance_date']";
     private final String USER_TABLE = "//table[@class='table']//tbody";
-    public String punchInTime;
-    public String punchOutTime;
-    public String punchInMessage = "Punch IN 9097";
-    public String punchOutMessage = "Punch OUT 9097";
+    protected String punchInTime;
+    protected String punchOutTime;
+    protected String punchInMessage = "Punch IN 9097";
+    protected String punchOutMessage = "Punch OUT 9097";
 
     @BeforeClass
-    public void initDriver() {
+    protected void initDriver() {
         Path driverPath = Paths.get("src", "main", "resources");
         System.setProperty("webdriver.chrome.driver", driverPath + File.separator + "chromedriver.exe");
         driver = new ChromeDriver();
@@ -50,7 +50,7 @@ public abstract class DataTest {
     }
 
     @AfterClass
-    public void closeDriver() {
+    protected void closeDriver() {
         driver.close();
     }
 
@@ -61,7 +61,7 @@ public abstract class DataTest {
         driver.findElement(By.xpath(LOGIN_BUTTON_LOCATOR)).click();
     }
 
-    public List<WebElement> getAllRecordData(LocalDate date) {
+    protected List<WebElement> getAllRecordData(LocalDate date) {
 
         driver.findElement(By.xpath(TIME_BUTTON)).click();
         driver.findElement(By.xpath(ATTENDANCE_BUTTON)).click();
@@ -76,7 +76,7 @@ public abstract class DataTest {
         return emploeeRecords.findElements(By.tagName("tr"));
     }
 
-    public String getRecordDataByPunchMessage(String punchMessage, int messageIndex, int timeIndex) {
+    protected String getRecordDataByPunchMessage(String punchMessage, int messageIndex, int timeIndex) {
         String punchDate = "";
         List<WebElement> recordData = getAllRecordData(LocalDate.now());
         List<WebElement> employeeRecord = new ArrayList<>();
@@ -89,7 +89,7 @@ public abstract class DataTest {
         return punchDate;
     }
 
-    public void punchIn() {
+    protected void punchIn() {
         driver.findElement(By.xpath(TIME_BUTTON)).click();
         WebElement attendaceButton = driver.findElement(By.xpath(ATTENDANCE_BUTTON));
         attendaceButton.click();
@@ -116,7 +116,7 @@ public abstract class DataTest {
         punchButton.click();
     }
 
-    public void editEmployeeData() {
+    protected void editEmployeeData() {
 
         openMyInfoPage();
         WebElement firstName = driver.findElement((By.xpath("//input[@id='personal_txtEmpFirstName']")));
@@ -141,7 +141,7 @@ public abstract class DataTest {
         myInfo.click();
     }
 
-    public String getUserLastName() {
+    protected String getUserLastName() {
         WebElement pimButton = driver.findElement((By.xpath("//a[@id='menu_pim_viewPimModule']")));
         pimButton.click();
         WebElement emloyeeListButton = driver.findElement((By.xpath("//a[@id='menu_pim_viewEmployeeList']")));
