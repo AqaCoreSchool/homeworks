@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.*;
+import static org.assertj.core.api.Assertions.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -43,7 +44,7 @@ public class WebPageTest {
         time.click();
         WebElement attendance = driver.findElement(By.xpath("//a[@id='menu_attendance_Attendance']"));
         attendance.click();
-        WebElement punch = driver.findElement(By.id("menu_attendance_punchIn"));
+        WebElement punch = driver.findElement(By.xpath("//a[@id='menu_attendance_punchIn']"));
         punch.click();
         WebElement noteIn = driver.findElement(By.xpath("//textarea[@id='note']"));
         noteIn.click();
@@ -58,11 +59,7 @@ public class WebPageTest {
         buttonOut.click();
         checkRecords();
         checkWeekBackRecords();
-    }
 
-    @AfterMethod
-    public void closeWebPage(){
-        driver.close();
     }
 
     public void checkRecords() {
@@ -70,7 +67,7 @@ public class WebPageTest {
         time.click();
         WebElement attendance = driver.findElement(By.xpath("//a[@id='menu_attendance_Attendance']"));
         attendance.click();
-        WebElement myRecords = driver.findElement(By.id("menu_attendance_viewMyAttendanceRecord"));
+        WebElement myRecords = driver.findElement(By.xpath("//a[@id='menu_attendance_viewMyAttendanceRecord']"));
         myRecords.click();
         WebElement inputDate = driver.findElement(By.xpath("//input[@id='attendance_date']"));
         inputDate.click();
@@ -83,7 +80,7 @@ public class WebPageTest {
         List<WebElement> webElementList = driver.findElements(By.tagName("td"));
         Optional<String> note = webElementList.stream()
                 .map(WebElement::getText)
-                .filter(s -> s.contains("START") || s.contains("FINISH"))
+                .filter(el -> el.contains("START") || el.contains("FINISH"))
                 .findAny();
 
         Assert.assertEquals("START", note.get());
@@ -95,16 +92,22 @@ public class WebPageTest {
         time.click();
         WebElement attendance = driver.findElement(By.xpath("//a[@id='menu_attendance_Attendance']"));
         attendance.click();
-        WebElement myRecords = driver.findElement(By.id("menu_attendance_viewMyAttendanceRecord"));
+        WebElement myRecords = driver.findElement(By.xpath("//a[@id='menu_attendance_viewMyAttendanceRecord']"));
         myRecords.click();
         WebElement chooseDate = driver.findElement(By.xpath("//input[@id='attendance_date']"));
-        chooseDate.click();
+        chooseDate.clear();
         chooseDate.sendKeys(weekBack, Keys.ENTER);
-        List<WebElement> webElementList = driver.findElements(By.tagName("td"));
-        String note = String.valueOf(webElementList.stream()
-                .map(WebElement::getText)
-                .filter(s -> s.contains("No attendance records to display"))
-                .findAny());
-        Assert.assertEquals("Optional.empty", note);
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        WebElement emptyTable = driver.findElement(By.xpath("//td[@id='noRecordsColumn']"));
+        assertThat(emptyTable.isDisplayed());
+    }
+
+    @AfterMethod
+    public void closeWebPage(){
+        driver.close();
     }
 }
