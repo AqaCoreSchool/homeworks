@@ -19,7 +19,7 @@ public class WebPageTest {
     LocalDate date = LocalDate.now();
     DateTimeFormatter format =
             DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    String formatedDate = date.format(format);
+    String formatDate = date.format(format);
     LocalDate dateBack =
             date.minus(1, ChronoUnit.WEEKS);
     String weekBack = dateBack.format(format);
@@ -34,47 +34,47 @@ public class WebPageTest {
 
     @Test
     public void testWebPage() {
-        WebElement userName = driver.findElement(By.cssSelector("#txtUsername"));
+        WebElement userName = driver.findElement(By.xpath("//input[@id='txtUsername']"));
         userName.sendKeys("TestUser01");
-        WebElement password = driver.findElement(By.cssSelector("#txtPassword"));
+        WebElement password = driver.findElement(By.xpath("//input[@id='txtPassword']"));
         password.sendKeys("Vfylhfujhf!1", Keys.ENTER);
 
         WebElement time = driver.findElement(By.xpath("//b[contains(text(),'Time')]"));
         time.click();
-        WebElement attendance = driver.findElement(By.cssSelector("#menu_attendance_Attendance"));
+        WebElement attendance = driver.findElement(By.xpath("//a[@id='menu_attendance_Attendance']"));
         attendance.click();
         WebElement punch = driver.findElement(By.id("menu_attendance_punchIn"));
         punch.click();
         WebElement noteIn = driver.findElement(By.xpath("//textarea[@id='note']"));
         noteIn.click();
         noteIn.sendKeys("START");
-        WebElement buttonIn = driver.findElement(By.cssSelector("#btnPunch"));
+        WebElement buttonIn = driver.findElement(By.xpath("//input[@id='btnPunch']"));
         buttonIn.click();
 
         WebElement noteOut = driver.findElement(By.xpath("//textarea[@id='note']"));
         noteOut.click();
         noteOut.sendKeys("FINISH");
-        WebElement buttonOut = driver.findElement(By.cssSelector("#btnPunch"));
+        WebElement buttonOut = driver.findElement(By.xpath("//input[@id='btnPunch']"));
         buttonOut.click();
         checkRecords();
         checkWeekBackRecords();
     }
 
     @AfterMethod
-    public void close(){
+    public void closeWebPage(){
         driver.close();
     }
 
     public void checkRecords() {
         WebElement time = driver.findElement(By.xpath("//b[contains(text(),'Time')]"));
         time.click();
-        WebElement attendance = driver.findElement(By.cssSelector("#menu_attendance_Attendance"));
+        WebElement attendance = driver.findElement(By.xpath("//a[@id='menu_attendance_Attendance']"));
         attendance.click();
         WebElement myRecords = driver.findElement(By.id("menu_attendance_viewMyAttendanceRecord"));
         myRecords.click();
-        WebElement inputDate = driver.findElement(By.cssSelector("#attendance_date"));
+        WebElement inputDate = driver.findElement(By.xpath("//input[@id='attendance_date']"));
         inputDate.click();
-        inputDate.sendKeys(formatedDate, Keys.ENTER);
+        inputDate.sendKeys(formatDate, Keys.ENTER);
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
@@ -93,11 +93,11 @@ public class WebPageTest {
     public void checkWeekBackRecords() {
         WebElement time = driver.findElement(By.xpath("//b[contains(text(),'Time')]"));
         time.click();
-        WebElement attendance = driver.findElement(By.cssSelector("#menu_attendance_Attendance"));
+        WebElement attendance = driver.findElement(By.xpath("//a[@id='menu_attendance_Attendance']"));
         attendance.click();
         WebElement myRecords = driver.findElement(By.id("menu_attendance_viewMyAttendanceRecord"));
         myRecords.click();
-        WebElement chooseDate = driver.findElement(By.cssSelector("#attendance_date"));
+        WebElement chooseDate = driver.findElement(By.xpath("//input[@id='attendance_date']"));
         chooseDate.click();
         chooseDate.sendKeys(weekBack, Keys.ENTER);
         List<WebElement> webElementList = driver.findElements(By.tagName("td"));
