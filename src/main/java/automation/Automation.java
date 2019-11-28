@@ -84,16 +84,11 @@ public class Automation {
         calendarIcon.sendKeys(LocalDate.now().toString());
         calendarIcon.submit();
 
-        List<WebElement> punchInDate = driver.findElements(By.xpath("//*[text()[contains(.,'" + labelDate + "')]]"));
+        List<WebElement> punchInDate = driver.findElements(By.xpath("//td[text()[contains(.,'" + labelDate + "')]]"));
 
-        int i = 0;
         for (WebElement element : punchInDate) {
             if (element.findElement(By.xpath("following-sibling::*")).getText().equals(message)) {
                 System.out.printf("Punch '%s' from '%s' exists. ", message, labelDate);
-                i++;
-            }
-            if (i == 0) {
-                System.out.println("There is no such note!");
             }
         }
         driver.close();
