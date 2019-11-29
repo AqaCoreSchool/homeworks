@@ -32,10 +32,10 @@ public class OrangeUserInfoTest {
     }
 
     @Test
-    @Parameters({"Username", "Password", "Name", "Surname"})
-    public void changeUserDataAndCheckUsersTest(String Username, String Password, String Name, String Surname){
+    @Parameters({"Username", "Password", "Name", "Surname", "DateOfBirth"})
+    public void changeUserDataAndCheckUsersTest(String Username, String Password, String Name, String Surname, String DateOfBirth){
         login(driver, Username, Password);
-        setUserNameSurname(driver, Name, Surname);
+        setUserData(driver, Name, Surname, DateOfBirth);
         WebElement userRecord = getUserFromList(driver, Username);
         List<WebElement> userRecordElements = userRecord.findElements(By.xpath("./td"));
         Assert.assertEquals(userRecordElements.get(3).getText(), String.format("%s %s", Name, Surname),
@@ -51,7 +51,7 @@ public class OrangeUserInfoTest {
         loginBtn.click();
     }
 
-    public static void setUserNameSurname(WebDriver driver, String Name, String Surname){
+    public static void setUserData(WebDriver driver, String Name, String Surname, String dateOfBirth){
         WebDriverWait editWait = new WebDriverWait(driver, 10);
         editWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("menu_pim_viewMyDetails")));
         WebElement myInfoModule = driver.findElement(By.id("menu_pim_viewMyDetails"));
@@ -72,7 +72,7 @@ public class OrangeUserInfoTest {
         nationalitySelect.selectByValue("185");
         WebElement dateOfBirthField = driver.findElement(By.id("personal_DOB"));
         dateOfBirthField.clear();
-        dateOfBirthField.sendKeys("1989-10-23");
+        dateOfBirthField.sendKeys(dateOfBirth);
         editBtn.click();
         WebDriverWait saveWait = new WebDriverWait(driver, 10);
         saveWait.until(ExpectedConditions.invisibilityOfElementLocated(By.className("message.success.fadable")));

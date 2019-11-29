@@ -9,6 +9,7 @@
                 <parameter name="Password" value="Vfylhfujhf!1"/>
                 <parameter name="Name" value="Nazariy"/>
                 <parameter name="Surname" value="Kushnir"/>
+                <parameter name="DateOfBirth" value="1989-10-23"/>
             </class>
         </classes>
     </test>
