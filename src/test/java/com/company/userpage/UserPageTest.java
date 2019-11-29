@@ -8,13 +8,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.annotations.AfterTest;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.TimeUnit;
-import java.util.stream.Collectors;
 
 public class UserPageTest
 {
@@ -40,10 +41,9 @@ public class UserPageTest
         password.sendKeys("Vfylhfujhf!1", Keys.ENTER);
         WebElement info = driver.findElement(By.xpath("//b[contains(text(),'My Info')]"));
         info.click();
-        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
         WebElement edit = driver.findElement(By.xpath("//input[@id='btnSave']"));
         edit.click();
-        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         WebElement fullName = driver.findElement(By.xpath("//input[@id='personal_txtEmpFirstName']"));
         fullName.clear();
         fullName.sendKeys("Olya",Keys.ENTER);
@@ -77,7 +77,6 @@ public class UserPageTest
 
         checkTime();
         checkEmployeeRecords();
-        driver.close();
     }
 
     public void checkTime(){
@@ -89,7 +88,7 @@ public class UserPageTest
         punch.click();
         WebElement noteIn = driver.findElement(By.xpath("//textarea[@id='note']"));
         noteIn.click();
-        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
         noteIn.sendKeys("START");
         WebElement buttonIn = driver.findElement(By.cssSelector("#btnPunch"));
         buttonIn.click();
@@ -116,12 +115,17 @@ public class UserPageTest
         chooseDate.sendKeys(formatDate, Keys.ENTER);
         WebElement viewButton = driver.findElement(By.xpath("//input[@id='btView']"));
         viewButton.click();
-        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
         List<WebElement> webElementList = driver.findElements(By.xpath("//div[@id='search-results']//div[@class='inner']"));
-        String note = webElementList.stream()
+        Optional<String> note = webElementList.stream()
                 .map(WebElement::getText)
                 .filter(el -> el.contains("START") && el.contains("FINISH"))
-                .collect(Collectors.joining(" "));
-        Assert.assertTrue(note.contains("Olya Bilynska"));
+                .findAny();
+        Assert.assertTrue("Olya Bilynska", note.isPresent());
+    }
+
+    @AfterTest
+    public void shutDownDriver() {
+        driver.close();
     }
 }
