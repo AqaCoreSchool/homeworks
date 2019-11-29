@@ -19,7 +19,7 @@ public class BasePage {
     public WebDriver getChromeDriver() {
         ChromeDriverManager.getInstance(DriverManagerType.CHROME).setup();
         WebDriver chromeDriver = new ChromeDriver();
-        chromeDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        chromeDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         chromeDriver.manage().window().maximize();
         return chromeDriver;
     }
