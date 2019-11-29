@@ -94,7 +94,7 @@ public class OrangeTest {
         WebElement baseTable = driver.findElement(By.xpath("//table[@class='table']"));
         List<WebElement> tableRows = baseTable.findElements(By.tagName("tr"));
         boolean stringSearch = tableRows.stream().map(WebElement::getText).anyMatch(
-                    o -> o.contains(timeInString)&&
+                o -> o.contains(timeInString)&&
                         o.contains(NOTE_IN)&&
                         o.contains(timeOutString)&&
                         o.contains(NOTE_OUT));

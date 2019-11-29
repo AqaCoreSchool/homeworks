@@ -1,0 +1,21 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="orangetest" verbose="1" >
+    <test name="orangetest.LoginTest" >
+        <classes> <class name="orangetest.LoginTest"/>
+        </classes>
+    </test>
+    <test name="orangetest.OrangeTest" >
+        <classes> <class name="orangetest.OrangeTest">
+        </class>
+        </classes>
+    </test>
+    <test name="orangetest.EditUserTest" >
+        <classes> <class name="orangetest.EditUserTest"/>
+        </classes>
+    </test>
+    <test name="orangetest.CheckUserTest" >
+        <classes> <class name="orangetest.CheckUserTest"/>
+        </classes>
+    </test>
+</suite>
