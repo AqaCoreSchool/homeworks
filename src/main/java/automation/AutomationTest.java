@@ -45,7 +45,7 @@ public class AutomationTest {
         driver = new ChromeDriver();
         driver.get("http://test.biz.ua");
         driver.manage().window().maximize();
-         wait = new WebDriverWait(driver, 10);
+        wait = new WebDriverWait(driver, 10);
         actions = new Actions(driver);
     }
 
@@ -63,8 +63,68 @@ public class AutomationTest {
         Assert.assertEquals("Welcome Pavlo", welcomeText.getText());
     }
 
+    @Test(priority = 2)
+    public void fillInUserProfileForm() {
+        sleep(2);
+        WebElement myInfo = driver.findElement(By.id("menu_pim_viewMyDetails"));
+        myInfo.click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.id("btnSave"))).click();
+        List<WebElement> inputElements = driver.findElements(By.xpath("//form[@id='frmEmpPersonalDetails']/fieldset//*"));
+
+        inputElements.stream()
+                .filter(webElement -> webElement.getTagName().equals("input"))
+                .filter(webElement -> webElement.getAttribute("type").equals("text"))
+                .forEach(WebElement::clear);
+        inputElements.stream()
+                .filter(webElement -> webElement.getTagName().equals("select"))
+                .map(Select::new)
+                .forEach(select -> select.selectByVisibleText("-- Select --"));
+
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("personal_txtEmpFirstName")))
+                .sendKeys("Pavlo");
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("personal_txtEmpLastName")))
+                .sendKeys("Hrytsyshyn");
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("personal_txtOtherID")))
+                .sendKeys("08");
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("personal_txtEmployeeId")))
+                .sendKeys("20");
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("personal_txtLicenNo")))
+                .sendKeys("104128");
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("personal_txtLicExpDate")))
+                .sendKeys(getCurrentDate().plusYears(20).toString());
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("personal_DOB")))
+                .sendKeys("1998-02-06");
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("personal_optGender_1")))
+                .click();
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("personal_cmbNation")))
+                .sendKeys("Ukr", Keys.ENTER);
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("personal_cmbMarital")))
+                .sendKeys("Sin", Keys.ENTER);
+
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("btnSave"))).click();
+
+        Assert.assertFalse(driver.findElement(By.id("personal_txtEmpFirstName")).isEnabled());
+        Assert.assertEquals(driver.findElement(By.id("personal_txtEmpFirstName")).getAttribute("value"), "Pavlo");
+
+    }
+
+    @Test(priority = 3)
+    public void checkUserInEmployeeList() {
+        sleep(2);
+        WebElement pimOption = driver.findElement(By.id("menu_pim_viewPimModule"));
+        actions.moveToElement(pimOption).perform();
+        WebElement employeeListOption = driver.findElement(By.id("menu_pim_viewEmployeeList"));
+        employeeListOption.click();
+        WebElement resultTable = driver.findElement(By.id("resultTable"));
+        List<WebElement> webElements = resultTable.findElements(By.xpath("//tbody//td"));
+        boolean isUserExists = webElements.stream()
+                .anyMatch(webElement -> webElement.getText().equals("Hrytsyshyn"));
+        Assert.assertTrue(isUserExists);
+    }
+
     @Test(priority = 4)
     public void goToPunchIn() {
+        sleep(2);
         WebElement timeOption = driver.findElement(By.id("menu_time_viewTimeModule"));
         actions.moveToElement(timeOption).perform();
         WebElement attendanceOption = driver.findElement(By.id("menu_attendance_Attendance"));
@@ -80,6 +140,7 @@ public class AutomationTest {
 
     @Test(priority = 5)
     public void performPunchInOutOperations() {
+        sleep(2);
         WebElement noteTextArea = driver.findElement(By.id("note"));
         noteTextArea.sendKeys(inNote);
         WebElement punchButton = driver.findElement(By.xpath("//input[@id='btnPunch' and @value='In']"));
@@ -120,63 +181,6 @@ public class AutomationTest {
         WebElement noRecordsText = driver.findElement(By.id("noRecordsColumn"));
 
         Assert.assertEquals(noRecordsText.getText(), "No attendance records to display");
-    }
-
-    @Test(priority = 2)
-    public void fillInUserProfileForm() {
-        WebElement myInfo = driver.findElement(By.id("menu_pim_viewMyDetails"));
-        myInfo.click();
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("btnSave"))).click();
-        List<WebElement> inputElements = driver.findElements(By.xpath("//form[@id='frmEmpPersonalDetails']/fieldset//*"));
-
-        inputElements.stream()
-                .filter(webElement -> webElement.getTagName().equals("input"))
-                .filter(webElement -> webElement.getAttribute("type").equals("text"))
-                .forEach(WebElement::clear);
-        inputElements.stream()
-                .filter(webElement -> webElement.getTagName().equals("select"))
-                .map(Select::new)
-                .forEach(select -> select.selectByVisibleText("-- Select --"));
-
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("personal_txtEmpFirstName")))
-                .sendKeys("Pavlo");
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("personal_txtEmpLastName")))
-                .sendKeys("Hrytsyshyn");
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("personal_txtOtherID")))
-                .sendKeys("08");
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("personal_txtEmployeeId")))
-                .sendKeys("20");
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("personal_txtLicenNo")))
-                .sendKeys("104128");
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("personal_txtLicExpDate")))
-                .sendKeys(getCurrentDate().plusYears(20).toString());
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("personal_DOB")))
-                .sendKeys("1998-02-06");
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("personal_optGender_1")))
-                .click();
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("personal_cmbNation")))
-                .sendKeys("Ukr", Keys.ENTER);
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("personal_cmbMarital")))
-                .sendKeys("Sin", Keys.ENTER);
-
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("btnSave"))).click();
-
-        Assert.assertFalse(driver.findElement(By.id("personal_txtEmpFirstName")).isEnabled());
-        Assert.assertEquals(driver.findElement(By.id("personal_txtEmpFirstName")).getAttribute("value"), "Pavlo");
-
-    }
-    @Test(priority = 3)
-    public void checkUserInEmployeeList() {
-        sleep(2000);
-        WebElement pimOption = driver.findElement(By.id("menu_pim_viewPimModule"));
-        actions.moveToElement(pimOption).perform();
-        WebElement employeeListOption = driver.findElement(By.id("menu_pim_viewEmployeeList"));
-        employeeListOption.click();
-        WebElement resultTable = driver.findElement(By.id("resultTable"));
-        List<WebElement> webElements = resultTable.findElements(By.xpath("//tbody//td"));
-        boolean isUserExists = webElements.stream()
-                .anyMatch(webElement -> webElement.getText().equals("Hrytsyshyn"));
-        Assert.assertTrue(isUserExists);
     }
 
     @AfterTest
