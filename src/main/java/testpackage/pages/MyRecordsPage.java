@@ -30,6 +30,9 @@ public class MyRecordsPage {
     @FindBy (xpath = " //td[@id='noRecordsColumn']")
     private  WebElement messagesNoAttendance;
 
+    @FindBy(xpath = "//table[@class='table']//tbody")
+    private List<WebElement> table;
+
     public MyRecordsPage(){
         PageFactory.initElements(BasePage.getInstance().getDriver(), this);
     }
@@ -49,9 +52,7 @@ public class MyRecordsPage {
     }
 
     public String filterTable(){
-        List<WebElement> tableRows = driver.findElements(By.xpath(
-            "//form[@id='employeeRecordsForm']//table//tbody//tr[@class='odd' or @class='even']"));
-    String workInDate = tableRows.stream()
+    String workInDate = table.stream()
             .map(WebElement::getText)
             .filter(e->e.contains(date)
                     &e.contains(input)
