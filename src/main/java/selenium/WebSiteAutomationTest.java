@@ -10,7 +10,6 @@ import org.testng.annotations.*;
 import static org.assertj.core.api.Assertions.*;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.stream.Collectors;
 import static java.lang.Thread.sleep;
 
 
@@ -19,8 +18,8 @@ public class WebSiteAutomationTest {
     private static final String URL = "http://test.biz.ua/";
     private static final String USERNAME = "TestUser02";
     private static final String PASSWORD = "Vfylhfujhf!1";
-    private static final String NOTE_IN = "Start";
-    private static final String NOTE_OUT = "Stop";
+    private static final String NOTE_IN = "I am punching in";
+    private static final String NOTE_OUT = "I am punching out";
 
     private WebDriver driver;
     private Actions action;
@@ -74,7 +73,7 @@ public class WebSiteAutomationTest {
         List<WebElement> rows = driver.findElements(By.tagName("tr"));
         String rowPunch = getStringForVerification(rows, NOTE_IN,NOTE_OUT,timeIn,timeOut);
 
-        assertThat(rowPunch).isNotEmpty();
+        assertThat(rowPunch).contains(NOTE_IN,NOTE_OUT,timeIn,timeOut);
         assertThat(checkRecordsOfAnotherWeek(LocalDate.now().minusWeeks(1)).isDisplayed());
         assertThat(checkRecordsOfAnotherWeek(LocalDate.now().plusWeeks(1)).isDisplayed());
     }
@@ -105,7 +104,8 @@ public class WebSiteAutomationTest {
                 .map(WebElement::getText)
                 .filter(s -> s.contains(noteIn) && s.contains(noteOut) &&
                         s.contains(timeIn) && s.contains(timeOut))
-                .collect(Collectors.joining(" "));
+                .findAny()
+                .orElse("No such records");
     }
     @AfterTest(alwaysRun = true)
     public void shutDownDriver() {
