@@ -51,7 +51,7 @@ public class OrangeUserInfoTest {
         loginBtn.click();
     }
 
-    public static void setUserData(WebDriver driver, String Name, String Surname, String dateOfBirth){
+    public static void setUserData(WebDriver driver, String name, String surname, String dateOfBirth){
         WebDriverWait editWait = new WebDriverWait(driver, 10);
         editWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("menu_pim_viewMyDetails")));
         WebElement myInfoModule = driver.findElement(By.id("menu_pim_viewMyDetails"));
@@ -60,10 +60,10 @@ public class OrangeUserInfoTest {
         editBtn.click();
         WebElement nameField =  driver.findElement(By.id("personal_txtEmpFirstName"));
         nameField.clear();
-        nameField.sendKeys(Name);
+        nameField.sendKeys(name);
         WebElement surnameField =  driver.findElement(By.id("personal_txtEmpLastName"));
         surnameField.clear();
-        surnameField.sendKeys(Surname);
+        surnameField.sendKeys(surname);
         WebElement genderMaleRadioBtn = driver.findElement(By.id("personal_optGender_1"));
         genderMaleRadioBtn.click();
         Select maritalStatusSelect = new Select(driver.findElement(By.id("personal_cmbMarital")));
@@ -73,6 +73,7 @@ public class OrangeUserInfoTest {
         WebElement dateOfBirthField = driver.findElement(By.id("personal_DOB"));
         dateOfBirthField.clear();
         dateOfBirthField.sendKeys(dateOfBirth);
+        editWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("btnSave")));
         editBtn.click();
         WebDriverWait saveWait = new WebDriverWait(driver, 10);
         saveWait.until(ExpectedConditions.invisibilityOfElementLocated(By.className("message.success.fadable")));
