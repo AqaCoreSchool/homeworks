@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="DataProviderExampleSuite" parallel="false">
+    <test name="ProfileAutomationTests">
+        <classes>
+            <class name="automation.ProfileAutomationTest"/>
+        </classes>
+    </test>
+</suite>
