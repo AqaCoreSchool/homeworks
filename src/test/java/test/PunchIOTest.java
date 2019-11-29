@@ -25,7 +25,7 @@ public class PunchIOTest extends BaseTest {
                 .moveToAttendance()
                 .clickMyRecords()
                 .goToDate("29");
-        assertThat(new MyRecordsPage().filterTable()).isNotEmpty();
+        assertThat(new MyRecordsPage().filterTable()).isTrue();
     }
 
 }

@@ -9,10 +9,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class MyRecordsPage {
 
@@ -51,13 +48,12 @@ public class MyRecordsPage {
         return new MyRecordsPage();
     }
 
-    public String filterTable(){
-    String workInDate = table.stream()
+    public boolean filterTable(){
+    boolean workInDate = table.stream()
             .map(WebElement::getText)
-            .filter(e->e.contains(date)
+            .anyMatch(e->e.contains(date)
                     &e.contains(input)
-                    &e.contains(output))
-            .collect(Collectors.joining(" "));
+                    &e.contains(output));
     return workInDate;
     }
 

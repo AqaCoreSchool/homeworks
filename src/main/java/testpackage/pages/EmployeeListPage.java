@@ -17,14 +17,13 @@ public class EmployeeListPage {
         PageFactory.initElements(BasePage.getInstance().getDriver(), this);
     }
 
-    public String filterEmployeeList(String firstName, String middleName, String lastName, String id){
-        String employee = table.stream()
+    public boolean filterEmployeeList(String firstName, String middleName, String lastName, String id){
+        boolean employee = table.stream()
                 .map(WebElement::getText)
-                .filter(e->e.contains(firstName)
+                .anyMatch(e->e.contains(firstName)
                         &e.contains(middleName)
                         &e.contains(lastName)
-                        &e.contains(id))
-                .collect(Collectors.joining(" "));
+                        &e.contains(id));
         return employee;
     }
 }

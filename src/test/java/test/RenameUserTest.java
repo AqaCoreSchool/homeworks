@@ -37,6 +37,6 @@ public class RenameUserTest extends BaseTest {
                 .clickEditSave()
                 .moveToPIM()
                 .moveToEmployeeList();
-        assertThat(new EmployeeListPage().filterEmployeeList(firstName,middleName,lastName,id)).isNotEmpty();
+        assertThat(new EmployeeListPage().filterEmployeeList(firstName,middleName,lastName,id)).isTrue();
     }
 }
