@@ -51,10 +51,10 @@ public class OrangeUserInfoTest {
     }
 
     public static void setUserNameSurname(WebDriver driver, String Name, String Surname){
+        WebDriverWait editWait = new WebDriverWait(driver, 10);
+        editWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("menu_pim_viewMyDetails")));
         WebElement myInfoModule = driver.findElement(By.id("menu_pim_viewMyDetails"));
         myInfoModule.click();
-        WebDriverWait editWait = new WebDriverWait(driver, 10);
-        editWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("btnSave")));
         WebElement editBtn =  driver.findElement(By.id("btnSave"));
         editBtn.click();
         WebElement nameField =  driver.findElement(By.id("personal_txtEmpFirstName"));
