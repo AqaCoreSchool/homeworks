@@ -75,15 +75,9 @@ public class OrangeUserInfoTest {
         userManagementMenu.click();
         List<WebElement> usersList = driver.findElements(By.xpath(
                 "//table[@id='resultTable']//tr[@class='odd' or @class='even']"));
-        return findUserInList(usersList, username);
-    }
-
-    public static WebElement findUserInList(List<WebElement> list, String Username){
-        for (WebElement user: list) {
-            if(user.findElement(By.xpath("./td/a")).getText().equals(Username)){
-                return user;
-            }
-        }
-        return null;
+        return usersList.stream()
+                .filter(o -> o.getText().contains(username))
+                .findFirst()
+                .orElse(null);
     }
 }
