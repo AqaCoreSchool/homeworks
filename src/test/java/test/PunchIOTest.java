@@ -11,11 +11,10 @@ public class PunchIOTest extends BaseTest {
 
     @Test
     public void punchInOutTest(){
-        LoginPage
+        LoginPage loginPage = new LoginPage();
+        loginPage
                 .openLoginPage()
-                .inputLogin("TestUser03")
-                .inputPassword("Vfylhfujhf!1")
-                .clickLogInButton()
+                .loginToTheSystem("TestUser03","Vfylhfujhf!1")
                 .moveToTime()
                 .moveToAttendance()
                 .clickPunchInOut()

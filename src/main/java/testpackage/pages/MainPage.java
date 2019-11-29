@@ -30,17 +30,17 @@ public class MainPage {
 
     public MainPage(){
         PageFactory.initElements(BasePage.getInstance().getDriver(), this);
-        wait = new WebDriverWait(BasePage.getInstance().getDriver(), 10);
+        wait = new WebDriverWait(BasePage.getInstance().getDriver(), 30);
     }
 
     public MainPage moveToTime(){
         timeBtnHeader.click();
-        return new MainPage();
+        return this;
     }
 
     public MainPage moveToAttendance(){
         attendanceBtnHeader.click();
-        return new MainPage();
+        return this;
     }
 
     public PunchInOutPage clickPunchInOut(){

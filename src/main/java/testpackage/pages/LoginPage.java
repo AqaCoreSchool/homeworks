@@ -24,24 +24,17 @@ public class LoginPage {
     }
 
 
-    public static LoginPage openLoginPage() {
+    public  LoginPage openLoginPage() {
         driver.get("http://test.biz.ua/");
-        return  new LoginPage();
+        return  this;
     }
 
-    public LoginPage inputLogin(String name) {
+    public MainPage loginToTheSystem(String name,String password) {
         userNameInput.sendKeys(name);
-        return  new LoginPage();
-    }
-
-    public LoginPage inputPassword(String password) {
         passwordInput.sendKeys(password);
-        return  new LoginPage();
-    }
-
-    public MainPage clickLogInButton() {
         loginButton.click();
         return new MainPage();
     }
+
 
 }

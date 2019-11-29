@@ -6,7 +6,6 @@ import org.openqa.selenium.support.PageFactory;
 import testpackage.base.BasePage;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class EmployeeListPage {
 

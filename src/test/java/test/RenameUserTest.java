@@ -19,11 +19,10 @@ public class RenameUserTest extends BaseTest {
 
     @Test
     public void userRenameTest(){
-        LoginPage
+        LoginPage loginPage = new LoginPage();
+        loginPage
                 .openLoginPage()
-                .inputLogin(login)
-                .inputPassword(password)
-                .clickLogInButton()
+                .loginToTheSystem(login,password)
                 .clickMyInfo()
                 .clickEditSave()
                 .inputFirstName(firstName)
