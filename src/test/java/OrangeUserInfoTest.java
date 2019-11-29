@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -46,8 +47,8 @@ public class OrangeUserInfoTest {
         usernameField.sendKeys(username);
         WebElement passwordField = driver.findElement(By.id("txtPassword"));
         passwordField.sendKeys(password);
-        WebElement loginButton = driver.findElement(By.id("btnLogin"));
-        loginButton.click();
+        WebElement loginBtn = driver.findElement(By.id("btnLogin"));
+        loginBtn.click();
     }
 
     public static void setUserNameSurname(WebDriver driver, String Name, String Surname){
@@ -63,6 +64,15 @@ public class OrangeUserInfoTest {
         WebElement surnameField =  driver.findElement(By.id("personal_txtEmpLastName"));
         surnameField.clear();
         surnameField.sendKeys(Surname);
+        WebElement genderMaleRadioBtn = driver.findElement(By.id("personal_optGender_1"));
+        genderMaleRadioBtn.click();
+        Select maritalStatusSelect = new Select(driver.findElement(By.id("personal_cmbMarital")));
+        maritalStatusSelect.selectByIndex(1);
+        Select nationalitySelect = new Select(driver.findElement(By.id("personal_cmbNation")));
+        nationalitySelect.selectByValue("185");
+        WebElement dateOfBirthField = driver.findElement(By.id("personal_DOB"));
+        dateOfBirthField.clear();
+        dateOfBirthField.sendKeys("1989-10-23");
         editBtn.click();
         WebDriverWait saveWait = new WebDriverWait(driver, 10);
         saveWait.until(ExpectedConditions.invisibilityOfElementLocated(By.className("message.success.fadable")));
