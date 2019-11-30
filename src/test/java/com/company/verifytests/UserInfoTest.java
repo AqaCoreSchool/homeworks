@@ -19,11 +19,7 @@ public class UserInfoTest extends BaseTest {
     public void testUserInfo(){
         loginPage = openLoginPage();
         loginPage.loginIntoSystem("TestUser07","Vfylhfujhf!1");
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        
         MainMenuPage mainPage = new MainMenuPage(driver);
         mainPage.clickMyInfo();
         MyInfoPage info = new MyInfoPage(driver);
@@ -49,7 +45,6 @@ public class UserInfoTest extends BaseTest {
         mainPage.moveToAttendance();
         EmployeeRecordsPage employeeRecords = new EmployeeRecordsPage(driver);
         employeeRecords.clickEmployeeRecords();
-        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         employeeRecords.chooseDateOfRecords(currentDate);
         employeeRecords.clickViewBtn();
         assertThat(employeeRecords.verifyEmployeeRecords("Olya Bilynska", currentDate)).isTrue();
