@@ -10,11 +10,6 @@ public class VerifyVacancyTest extends BaseTest {
     public void testVerifyCandidates() {
         loginPage = openLoginPage();
         loginPage.loginIntoSystem("TestUser07", "Vfylhfujhf!1");
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         MainMenuPage mainPage = new MainMenuPage(driver);
         mainPage.moveToRecruitment()
                 .moveToVacancy();
