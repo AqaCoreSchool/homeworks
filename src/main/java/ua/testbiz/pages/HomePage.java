@@ -15,6 +15,9 @@ public class HomePage {
     @FindBy(xpath = "//a[@id='menu_pim_viewPimModule']")
     private WebElement pimOption;
 
+    @FindBy(xpath = "//a[@id='menu_recruitment_viewRecruitmentModule']")
+    private WebElement recruitmentOption;
+
     public HomePage(WebDriver driver) {
         PageFactory.initElements(driver, this);
     }
@@ -31,4 +34,7 @@ public class HomePage {
         pimOption.click();
     }
 
+    public void selectRecruitment(){
+        recruitmentOption.click();
+    }
 }
