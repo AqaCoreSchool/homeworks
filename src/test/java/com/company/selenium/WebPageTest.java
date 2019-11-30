@@ -72,11 +72,6 @@ public class WebPageTest {
         WebElement inputDate = driver.findElement(By.xpath("//input[@id='attendance_date']"));
         inputDate.click();
         inputDate.sendKeys(formatDate, Keys.ENTER);
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         List<WebElement> webElementList = driver.findElements(By.tagName("td"));
         Optional<String> note = webElementList.stream()
                 .map(WebElement::getText)
@@ -97,11 +92,6 @@ public class WebPageTest {
         WebElement chooseDate = driver.findElement(By.xpath("//input[@id='attendance_date']"));
         chooseDate.clear();
         chooseDate.sendKeys(weekBack, Keys.ENTER);
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         WebElement emptyTable = driver.findElement(By.xpath("//td[@id='noRecordsColumn']"));
         assertThat(emptyTable.isDisplayed());
     }
