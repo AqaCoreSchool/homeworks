@@ -35,7 +35,7 @@ public class MyRecordsPage {
 
     public MyRecordsPage goToDate(String dayOfMonth){
         dateMyRecords.click();
-        BasePage.getInstance().getDriver().findElement(By.linkText(dayOfMonth)).click();
+        driver.findElement(By.linkText(dayOfMonth)).click();
         return new MyRecordsPage();
     }
 

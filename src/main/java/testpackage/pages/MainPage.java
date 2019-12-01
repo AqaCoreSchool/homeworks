@@ -30,7 +30,7 @@ public class MainPage {
 
     public MainPage(){
         PageFactory.initElements(BasePage.getInstance().getDriver(), this);
-        wait = new WebDriverWait(BasePage.getInstance().getDriver(), 30);
+        wait = new WebDriverWait(BasePage.getInstance().getDriver(), 10);
     }
 
     public MainPage moveToTime(){
