@@ -115,14 +115,16 @@ public class RecruitmentPage {
         saveButton.click();
     }
 
-    public void checkVacancy() {
+    public String checkVacancy() {
         for (WebElement element : candidateTable) {
             List<WebElement> vacancies = element.findElements(By.tagName("a"));
             List<WebElement> managers = element.findElements(By.xpath("//td[4]"));
 
             if (vacancies.get(0).getText().equals(position) && managers.get(0).getText().equals(managerName)) {
                 System.out.printf("Vacancy of %s [manager %s] exists.%n", vacancies.get(0).getText(), managers.get(0).getText());
+                return vacancies.get(0).getText() + " " + managers.get(0).getText();
             }
         }
+        return null;
     }
 }

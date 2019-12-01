@@ -34,9 +34,7 @@ public class VacancyAutomationTest {
 
         recruitmentPage.switchToVacancy();
 
-        recruitmentPage.checkVacancy();
-
-        //Assert.assertNotNull(recruitmentPage.checkCandidate(candidate), "Candidate is not found");
+        Assert.assertNotNull(recruitmentPage.checkVacancy(), "Vacancy is not found!");
     }
 
     @AfterMethod
