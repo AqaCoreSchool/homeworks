@@ -46,57 +46,57 @@ public class MyInfoPage {
 
     public MyInfoPage clickEditSave(){
         EditSaveBtn.click();
-        return new MyInfoPage();
+        return this;
     }
 
     public MyInfoPage inputFirstName(String firstName){
         firstNameInput.clear();
         firstNameInput.sendKeys(firstName);
-        return new MyInfoPage();
+        return this;
     }
 
     public MyInfoPage inputMiddleName(String middleName){
         middleNameInput.clear();
         middleNameInput.sendKeys(middleName);
-        return new MyInfoPage();
+        return this;
     }
 
     public MyInfoPage inputLastName(String lastName){
         lastNameInput.clear();
         lastNameInput.sendKeys(lastName);
-        return new MyInfoPage();
+        return this;
     }
 
     public MyInfoPage inputId(String id){
         employeeIdInput.clear();
         employeeIdInput.sendKeys(id);
-        return new MyInfoPage();
+        return this;
     }
 
     public MyInfoPage clickGenderMale(){
         genderMale.click();
-        return new MyInfoPage();
+        return this;
     }
 
     public MyInfoPage clickNationalityUkrainian(){
         nationalityUkrainian.click();
-        return new MyInfoPage();
+        return this;
     }
 
     public MyInfoPage clickMaritalStatus(){
         maritalStatus.click();
-        return new MyInfoPage();
+        return this;
     }
 
     public MyInfoPage inputDateOfBirth(String dateOfBirths){
         dateOfBirth.clear();
         dateOfBirth.sendKeys(dateOfBirths);
-        return new MyInfoPage();
+        return this;
     }
 
     public MyInfoPage moveToPIM(){
         pIMBtnHeader.click();
-        return new MyInfoPage();
+        return this;
     }
 
     public EmployeeListPage moveToEmployeeList(){

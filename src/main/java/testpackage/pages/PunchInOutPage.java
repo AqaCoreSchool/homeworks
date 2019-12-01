@@ -33,7 +33,7 @@ public class PunchInOutPage {
     public PunchInOutPage punchIn(){
         commentInputPunchInOut.sendKeys(input);
         inOutBtn.click();
-        return new PunchInOutPage();
+        return this;
     }
 
     public MainPage punchOut(){

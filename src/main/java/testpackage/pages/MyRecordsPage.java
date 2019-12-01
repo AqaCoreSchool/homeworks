@@ -36,7 +36,7 @@ public class MyRecordsPage {
     public MyRecordsPage goToDate(String dayOfMonth){
         dateMyRecords.click();
         driver.findElement(By.linkText(dayOfMonth)).click();
-        return new MyRecordsPage();
+        return this;
     }
 
     public MyRecordsPage goToDateWithMonth(String dayOfMonth,String month){
@@ -44,7 +44,7 @@ public class MyRecordsPage {
         months.click();
         driver.findElement(By.xpath("//option[contains(text(),'"+month+"')]")).click();
         driver.findElement(By.linkText(dayOfMonth)).click();
-        return new MyRecordsPage();
+        return this;
     }
 
     public boolean filterTable(){
@@ -58,6 +58,6 @@ public class MyRecordsPage {
 
     public MyRecordsPage verifyAttendance(){
         Assert.assertTrue(messagesNoAttendance.isDisplayed());
-        return new MyRecordsPage();
+        return this;
     }
 }

@@ -27,6 +27,15 @@ public class MainPage {
     @FindBy(xpath = " //a[@id='menu_pim_viewMyDetails']")
     private WebElement myInfoBtnDropDown;
 
+    @FindBy(xpath = " //b[contains(text(),'Recruitment')]")
+    private WebElement recruitmentBtnDropDown;
+
+    @FindBy(xpath = " //a[@id='menu_recruitment_viewCandidates']")
+    private WebElement candidatesBtnDropDown;
+
+    @FindBy(xpath = " //a[@id='menu_recruitment_viewJobVacancy']")
+    private WebElement vacancyBtnDropDown;
+
 
     public MainPage(){
         PageFactory.initElements(BasePage.getInstance().getDriver(), this);
@@ -57,6 +66,24 @@ public class MainPage {
         wait.until(ExpectedConditions.elementToBeClickable(myInfoBtnDropDown));
         myInfoBtnDropDown.click();
         return new MyInfoPage();
+    }
+
+    public MainPage moveToRecruitment(){
+        wait.until(ExpectedConditions.elementToBeClickable(recruitmentBtnDropDown));
+        recruitmentBtnDropDown.click();
+        return this;
+    }
+
+    public CandidatesPage moveToCandidates(){
+        wait.until(ExpectedConditions.elementToBeClickable(candidatesBtnDropDown));
+        candidatesBtnDropDown.click();
+        return new CandidatesPage();
+    }
+
+    public VacanciesPage moveToVacancies(){
+        wait.until(ExpectedConditions.elementToBeClickable(vacancyBtnDropDown));
+        vacancyBtnDropDown.click();
+        return new VacanciesPage();
     }
 
 }
