@@ -1,0 +1,14 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="OrangeHRM Test" verbose="1" >
+    <test name="Page Object Pattern approach">
+        <parameter name="Url" value="http://test.biz.ua"/>
+        <classes>
+            <class name="CreatePunchRecordTest"/>
+            <class name="CheckEmptyPunchesTest"/>
+            <class name="ChangeUserDataTest"/>
+            <class name="CreateVacancyTest"/>
+            <class name="ApplyCandidateTest"/>
+        </classes>
+    </test>
+</suite>
