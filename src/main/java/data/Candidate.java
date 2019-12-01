@@ -6,6 +6,7 @@ public class Candidate {
     private String firstName;
     private String lastName;
     private String email;
+    private String contactNo;
 
     public void setCandidateInfo() {
         Faker faker = new Faker();
@@ -13,6 +14,7 @@ public class Candidate {
         firstName = faker.name().firstName();
         lastName = faker.name().lastName();
         email = faker.internet().emailAddress();
+        contactNo = faker.phoneNumber().cellPhone();
     }
 
     public String getFirstName() {
@@ -25,5 +27,9 @@ public class Candidate {
 
     public String getEmail() {
         return email;
+    }
+
+    public String getContactNo() {
+        return contactNo;
     }
 }

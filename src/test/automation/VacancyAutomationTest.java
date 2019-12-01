@@ -1,17 +1,15 @@
 package automation;
 
-import data.UserInformation;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import ua.testbiz.pages.EmployeeListPage;
 import ua.testbiz.pages.HomePage;
 import ua.testbiz.pages.LoginPage;
-import ua.testbiz.pages.PersonalDetailsPage;
+import ua.testbiz.pages.RecruitmentPage;
 import util.Driver;
 
-public class ProfileAutomationTest {
+public class VacancyAutomationTest {
     private static WebDriver driver;
 
     @BeforeMethod
@@ -23,20 +21,22 @@ public class ProfileAutomationTest {
     public void test() {
         LoginPage loginPage = new LoginPage(driver);
         HomePage homePage = new HomePage(driver);
-        PersonalDetailsPage personalDetailsPage = new PersonalDetailsPage(driver);
-        EmployeeListPage employeeListPage = new EmployeeListPage(driver);
+        RecruitmentPage recruitmentPage = new RecruitmentPage(driver);
 
         loginPage.loginIntoSystem();
         Assert.assertTrue(homePage.isOpened(), "Not a home page");
 
-        homePage.selectMyInfo();
+        homePage.selectRecruitment();
 
-        UserInformation userInformation = new UserInformation();
-        userInformation.setUserInformation();
-        personalDetailsPage.setPersonalDetail(userInformation);
+        recruitmentPage.switchToVacancy();
 
-        homePage.selectPim();
-        employeeListPage.checkEmployee(userInformation);
+        recruitmentPage.addVacancy();
+
+        recruitmentPage.switchToVacancy();
+
+        recruitmentPage.checkVacancy();
+
+        //Assert.assertNotNull(recruitmentPage.checkCandidate(candidate), "Candidate is not found");
     }
 
     @AfterMethod

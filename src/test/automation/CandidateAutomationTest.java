@@ -10,7 +10,7 @@ import ua.testbiz.pages.LoginPage;
 import ua.testbiz.pages.RecruitmentPage;
 import util.Driver;
 
-public class RecruitmentAutomationTest {
+public class CandidateAutomationTest {
     private static WebDriver driver;
 
     @BeforeMethod
@@ -19,7 +19,7 @@ public class RecruitmentAutomationTest {
     }
 
     @org.testng.annotations.Test
-    public void login() {
+    public void test() {
         LoginPage loginPage = new LoginPage(driver);
         HomePage homePage = new HomePage(driver);
         RecruitmentPage recruitmentPage = new RecruitmentPage(driver);
@@ -34,6 +34,10 @@ public class RecruitmentAutomationTest {
         Candidate candidate = new Candidate();
         candidate.setCandidateInfo();
         recruitmentPage.addCandidate(candidate);
+
+        recruitmentPage.switchToCandidate();
+
+        Assert.assertNotNull(recruitmentPage.checkCandidate(candidate), "Candidate is not found");
     }
 
     @AfterMethod
