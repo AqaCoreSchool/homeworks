@@ -10,6 +10,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class OrangeDashboardPage {
     private final WebDriver driver;
+    private WebDriverWait menuWait;
 
     @FindBy(id = "menu_admin_viewAdminModule")
     private WebElement adminModule;
@@ -26,31 +27,28 @@ public class OrangeDashboardPage {
     public OrangeDashboardPage(WebDriver driver){
         PageFactory.initElements(driver, this);
         this.driver = driver;
+        menuWait = new WebDriverWait(driver, 10);
     }
 
     public OrangeAdminPage toAdminModulePage(){
-        WebDriverWait menuWait = new WebDriverWait(driver, 10);
         menuWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("menu_admin_viewAdminModule")));
         adminModule.click();
         return new OrangeAdminPage(driver);
     }
 
     public OrangeTimePage toTimeModulePage(){
-        WebDriverWait menuWait = new WebDriverWait(driver, 10);
         menuWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("menu_time_viewTimeModule")));
         timeModule.click();
         return new OrangeTimePage(driver);
     }
 
     public OrangeRecruitmentPage toRecruitmentModulePage(){
-        WebDriverWait menuWait = new WebDriverWait(driver, 10);
         menuWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("menu_recruitment_viewRecruitmentModule")));
         recruitmentModule.click();
         return new OrangeRecruitmentPage(driver);
     }
 
     public OrangeMyInfoPage toMyInfoPage(){
-        WebDriverWait menuWait = new WebDriverWait(driver, 10);
         menuWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("menu_pim_viewMyDetails")));
         myInfoModule.click();
         return new OrangeMyInfoPage(driver);

@@ -12,6 +12,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class OrangeMyInfoPage {
     private final WebDriver driver;
+    private WebDriverWait editWait;
+    private WebDriverWait saveWait;
 
     @FindBy(id = "btnSave")
     private WebElement editBtn;
@@ -40,10 +42,11 @@ public class OrangeMyInfoPage {
     public OrangeMyInfoPage(WebDriver driver){
         PageFactory.initElements(driver, this);
         this.driver = driver;
+        editWait = new WebDriverWait(driver, 10);
+        saveWait = new WebDriverWait(driver, 10);
     }
 
     public OrangeMyInfoPage clickEdit(){
-        WebDriverWait editWait = new WebDriverWait(driver, 10);
         editWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("btnSave")));
         editBtn.click();
         return this;
@@ -85,10 +88,8 @@ public class OrangeMyInfoPage {
     }
 
     public OrangeMyInfoPage clickSave(){
-        WebDriverWait editWait = new WebDriverWait(driver, 10);
         editWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("btnSave")));
         editBtn.click();
-        WebDriverWait saveWait = new WebDriverWait(driver, 10);
         saveWait.until(ExpectedConditions.invisibilityOfElementLocated(By.className("message.success.fadable")));
         return this;
     }
@@ -105,8 +106,6 @@ public class OrangeMyInfoPage {
     }
 
     public OrangeAdminPage toAdminPage(){
-        WebDriverWait menuWait = new WebDriverWait(driver, 10);
-        menuWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("menu_admin_viewAdminModule")));
         adminModule.click();
         return new OrangeAdminPage(driver);
     }
