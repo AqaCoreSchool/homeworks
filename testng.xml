@@ -1,0 +1,26 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="orangetest" verbose="1" >
+    <test name="orangetest.PunchInOutTest" >
+        <classes> <class name="orangetest.PunchInOutTest">
+        </class>
+        </classes>
+    </test>
+    <test name="orangetest.CheckPunchOtherWeeksTest" >
+        <classes> <class name="orangetest.CheckPunchOtherWeeksTest">
+        </class>
+        </classes>
+    </test>
+    <test name="orangetest.EditUserTest" >
+        <classes> <class name="orangetest.EditUserTest"/>
+        </classes>
+    </test>
+    <test name="orangetest.AddVacanciesTest" >
+        <classes> <class name="orangetest.AddVacanciesTest"/>
+        </classes>
+    </test>
+    <test name="orangetest.AddCandidatesTest" >
+        <classes> <class name="orangetest.AddCandidatesTest"/>
+        </classes>
+    </test>
+</suite>
