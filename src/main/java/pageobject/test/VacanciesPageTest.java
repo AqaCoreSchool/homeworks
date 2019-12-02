@@ -34,7 +34,7 @@ public class VacanciesPageTest extends BaseTest {
                 .clickSaveBtn()
                 .clickBackBtn();
 
-        assertThat(new VacanciesPage(driver).findVacancies(vacancy, jobTitle, hiringManager, status)).isNotEmpty();
+        assertThat(new VacanciesPage(driver).findVacancies(VACANCY, JOB_TITLE, HIRING_MANAGER, STATUS)).isNotEmpty();
     }
 
     @AfterTest(alwaysRun = true)
