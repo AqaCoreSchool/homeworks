@@ -1,18 +1,17 @@
 package testpackage.pages;
 
-import org.testng.Assert;
-import testpackage.base.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
+import testpackage.base.BasePage;
+import testpackage.manager.DriverManager;
 
 import java.util.List;
 
-public class MyRecordsPage {
+public class MyRecordsPage extends BasePage {
 
-    private WebDriver driver = BasePage.getInstance().getDriver();
+    private WebDriver driver = DriverManager.getInstance().getDriver();
     private String input = "Test start";
     private String output = "Test finish";
     private String date = PunchInOutPage.date;
@@ -28,10 +27,6 @@ public class MyRecordsPage {
 
     @FindBy(xpath = "//table[@class='table']//tbody")
     private List<WebElement> table;
-
-    public MyRecordsPage(){
-        PageFactory.initElements(BasePage.getInstance().getDriver(), this);
-    }
 
     public MyRecordsPage goToDate(String dayOfMonth){
         dateMyRecords.click();
@@ -56,8 +51,8 @@ public class MyRecordsPage {
     return workInDate;
     }
 
-    public MyRecordsPage verifyAttendance(){
-        Assert.assertTrue(messagesNoAttendance.isDisplayed());
-        return this;
+    public WebElement getMessagesNoAttendance(){
+//        Assert.assertTrue(messagesNoAttendance.isDisplayed());
+        return messagesNoAttendance;
     }
 }

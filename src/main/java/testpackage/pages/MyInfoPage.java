@@ -2,13 +2,12 @@ package testpackage.pages;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import testpackage.base.BasePage;
 
-public class MyInfoPage {
+public class MyInfoPage extends BasePage {
 
     @FindBy(xpath = "//input[@id='btnSave']")
-    private WebElement EditSaveBtn;
+    private WebElement editSaveBtn;
 
     @FindBy(xpath = "//input[@id='personal_txtEmpFirstName']")
     private WebElement firstNameInput;
@@ -40,12 +39,8 @@ public class MyInfoPage {
     @FindBy(xpath = "//a[@id='menu_pim_viewEmployeeList']")
     private WebElement employeeListBtnHeader;
 
-    public MyInfoPage(){
-        PageFactory.initElements(BasePage.getInstance().getDriver(), this);
-    }
-
     public MyInfoPage clickEditSave(){
-        EditSaveBtn.click();
+        editSaveBtn.click();
         return this;
     }
 

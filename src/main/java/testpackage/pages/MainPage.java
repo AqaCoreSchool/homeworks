@@ -2,15 +2,11 @@ package testpackage.pages;
 
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import testpackage.base.BasePage;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
+import testpackage.base.BasePage;
 
-public class MainPage {
-
-     private WebDriverWait wait;
+public class MainPage extends BasePage {
 
     @FindBy(xpath = "//a[@id='menu_time_viewTimeModule']")
     private WebElement timeBtnHeader;
@@ -37,10 +33,10 @@ public class MainPage {
     private WebElement vacancyBtnDropDown;
 
 
-    public MainPage(){
-        PageFactory.initElements(BasePage.getInstance().getDriver(), this);
-        wait = new WebDriverWait(BasePage.getInstance().getDriver(), 10);
-    }
+//    public MainPage(){
+//        PageFactory.initElements(DriverManager.getInstance().getDriver(), this);
+//        wait = new WebDriverWait(DriverManager.getInstance().getDriver(), 10);
+//    }
 
     public MainPage moveToTime(){
         timeBtnHeader.click();

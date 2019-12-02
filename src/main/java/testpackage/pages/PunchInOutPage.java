@@ -1,14 +1,12 @@
 package testpackage.pages;
 
-import testpackage.base.BasePage;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
+import testpackage.base.BasePage;
 
 import java.time.LocalDate;
 
-public class PunchInOutPage {
+public class PunchInOutPage extends BasePage {
 
     private String input = "Test start";
     private String output = "Test finish";
@@ -25,10 +23,6 @@ public class PunchInOutPage {
 
     @FindBy(xpath = "//span[@id='currentTime']")
     private WebElement currentTime;
-
-    public PunchInOutPage(){
-        PageFactory.initElements(BasePage.getInstance().getDriver(), this);
-    }
 
     public PunchInOutPage punchIn(){
         commentInputPunchInOut.sendKeys(input);

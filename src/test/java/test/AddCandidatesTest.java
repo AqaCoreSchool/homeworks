@@ -26,7 +26,6 @@ public class AddCandidatesTest {
     public void candidatesAddTest(){
     LoginPage loginPage = new LoginPage();
         loginPage
-                .openLoginPage()
                 .loginToTheSystem(login,password)
                 .moveToRecruitment()
                 .moveToCandidates()

@@ -13,7 +13,6 @@ public class PunchIOTest extends BaseTest {
     public void punchInOutTest(){
         LoginPage loginPage = new LoginPage();
         loginPage
-                .openLoginPage()
                 .loginToTheSystem("TestUser03","Vfylhfujhf!1")
                 .moveToTime()
                 .moveToAttendance()

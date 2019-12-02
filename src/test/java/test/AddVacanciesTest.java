@@ -19,7 +19,6 @@ public class AddVacanciesTest {
     public void vacanciesAddTest() {
         LoginPage loginPage = new LoginPage();
         loginPage
-                .openLoginPage()
                 .loginToTheSystem(login, password)
                 .moveToRecruitment()
                 .moveToVacancies()

@@ -21,7 +21,6 @@ public class RenameUserTest extends BaseTest {
     public void userRenameTest(){
         LoginPage loginPage = new LoginPage();
         loginPage
-                .openLoginPage()
                 .loginToTheSystem(login,password)
                 .clickMyInfo()
                 .clickEditSave()

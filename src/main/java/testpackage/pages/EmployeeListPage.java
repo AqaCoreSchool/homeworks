@@ -2,19 +2,14 @@ package testpackage.pages;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import testpackage.base.BasePage;
 
 import java.util.List;
 
-public class EmployeeListPage {
+public class EmployeeListPage extends BasePage {
 
     @FindBy (xpath = "//table[@id='resultTable']//tbody")
     private List<WebElement> table;
-
-    public EmployeeListPage() {
-        PageFactory.initElements(BasePage.getInstance().getDriver(), this);
-    }
 
     public boolean filterEmployeeList(String firstName, String middleName, String lastName, String id){
         boolean employee = table.stream()
