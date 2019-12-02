@@ -6,22 +6,22 @@ import testpackage.base.BasePage;
 
 public class MyInfoPage extends BasePage {
 
-    @FindBy(xpath = "//input[@id='btnSave']")
+    @FindBy(id = "btnSave")
     private WebElement editSaveBtn;
 
-    @FindBy(xpath = "//input[@id='personal_txtEmpFirstName']")
+    @FindBy(id = "personal_txtEmpFirstName")
     private WebElement firstNameInput;
 
-    @FindBy(xpath = "//input[@id='personal_txtEmpMiddleName']")
+    @FindBy(id = "personal_txtEmpMiddleName")
     private WebElement middleNameInput;
 
-    @FindBy(xpath = "//input[@id='personal_txtEmpLastName']")
+    @FindBy(id = "personal_txtEmpLastName")
     private WebElement lastNameInput;
 
-    @FindBy(xpath = " //input[@id='personal_txtEmployeeId']")
+    @FindBy(id = "personal_txtEmployeeId")
     private WebElement employeeIdInput;
 
-    @FindBy(xpath = "//input[@id='personal_optGender_1']")
+    @FindBy(id = "personal_optGender_1")
     private WebElement genderMale;
 
     @FindBy(xpath = "//option[contains(text(),'Ukrainian')]")
@@ -30,13 +30,13 @@ public class MyInfoPage extends BasePage {
     @FindBy(xpath = "//option[contains(text(),'Other')]")
     private WebElement maritalStatus;
 
-    @FindBy(xpath = "//input[@id='personal_DOB']")
+    @FindBy(id = "personal_DOB")
     private WebElement dateOfBirth;
 
-    @FindBy(xpath = "//a[@id='menu_pim_viewPimModule']")
+    @FindBy(id = "menu_pim_viewPimModule")
     private WebElement pIMBtnHeader;
 
-    @FindBy(xpath = "//a[@id='menu_pim_viewEmployeeList']")
+    @FindBy(id = "menu_pim_viewEmployeeList")
     private WebElement employeeListBtnHeader;
 
     public MyInfoPage clickEditSave(){

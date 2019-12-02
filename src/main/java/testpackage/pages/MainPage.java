@@ -1,42 +1,35 @@
 package testpackage.pages;
 
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import testpackage.base.BasePage;
 
 public class MainPage extends BasePage {
 
-    @FindBy(xpath = "//a[@id='menu_time_viewTimeModule']")
+    @FindBy(id = "menu_time_viewTimeModule")
     private WebElement timeBtnHeader;
 
-    @FindBy(xpath = "//a[@id='menu_attendance_Attendance']")
+    @FindBy(id = "menu_attendance_Attendance")
     private WebElement attendanceBtnHeader;
 
-    @FindBy(xpath = "//a[@id='menu_attendance_punchIn']")
+    @FindBy(id = "menu_attendance_punchIn")
     private WebElement punchInOutBtnDropDown;
 
-    @FindBy(xpath = "//a[@id='menu_attendance_viewMyAttendanceRecord']")
+    @FindBy(id = "menu_attendance_viewMyAttendanceRecord")
     private WebElement myRecordsBtnDropDown;
 
-    @FindBy(xpath = " //a[@id='menu_pim_viewMyDetails']")
+    @FindBy(id = "menu_pim_viewMyDetails")
     private WebElement myInfoBtnDropDown;
 
     @FindBy(xpath = " //b[contains(text(),'Recruitment')]")
     private WebElement recruitmentBtnDropDown;
 
-    @FindBy(xpath = " //a[@id='menu_recruitment_viewCandidates']")
+    @FindBy(id = "menu_recruitment_viewCandidates")
     private WebElement candidatesBtnDropDown;
 
-    @FindBy(xpath = " //a[@id='menu_recruitment_viewJobVacancy']")
+    @FindBy(id = "menu_recruitment_viewJobVacancy")
     private WebElement vacancyBtnDropDown;
-
-
-//    public MainPage(){
-//        PageFactory.initElements(DriverManager.getInstance().getDriver(), this);
-//        wait = new WebDriverWait(DriverManager.getInstance().getDriver(), 10);
-//    }
 
     public MainPage moveToTime(){
         timeBtnHeader.click();

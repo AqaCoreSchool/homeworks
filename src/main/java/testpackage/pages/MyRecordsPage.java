@@ -16,13 +16,13 @@ public class MyRecordsPage extends BasePage {
     private String output = "Test finish";
     private String date = PunchInOutPage.date;
 
-    @FindBy (xpath = "//select[@class='ui-datepicker-month']")
+    @FindBy (className = "ui-datepicker-month")
     private  WebElement months;
 
-    @FindBy (xpath = "//img[@class='ui-datepicker-trigger']")
+    @FindBy (className = "ui-datepicker-trigger")
     private WebElement dateMyRecords;
 
-    @FindBy (xpath = " //td[@id='noRecordsColumn']")
+    @FindBy (id = "noRecordsColumn")
     private  WebElement messagesNoAttendance;
 
     @FindBy(xpath = "//table[@class='table']//tbody")
@@ -52,7 +52,6 @@ public class MyRecordsPage extends BasePage {
     }
 
     public WebElement getMessagesNoAttendance(){
-//        Assert.assertTrue(messagesNoAttendance.isDisplayed());
         return messagesNoAttendance;
     }
 }

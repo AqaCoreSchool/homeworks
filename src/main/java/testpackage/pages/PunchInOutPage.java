@@ -12,16 +12,16 @@ public class PunchInOutPage extends BasePage {
     private String output = "Test finish";
     static String date = LocalDate.now().toString();
 
-    @FindBy(xpath = "//input[@id='btnPunch']")
+    @FindBy(id = "btnPunch")
     private WebElement inOutBtn;
 
-    @FindBy(xpath = "//textarea[@id='note']")
+    @FindBy(id = "note")
     private WebElement commentInputPunchInOut;
 
-    @FindBy(xpath = "//span[@id='currentDate']")
+    @FindBy(id = "currentDate")
     private WebElement currentDate;
 
-    @FindBy(xpath = "//span[@id='currentTime']")
+    @FindBy(id = "currentTime")
     private WebElement currentTime;
 
     public PunchInOutPage punchIn(){

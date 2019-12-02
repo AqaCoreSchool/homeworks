@@ -10,13 +10,13 @@ public class LoginPage extends BasePage {
 
     private static   WebDriver driver = DriverManager.getInstance().getDriver() ;
 
-    @FindBy(xpath = "//input[@id='txtUsername']")
+    @FindBy(id = "txtUsername")
     private WebElement userNameInput;
 
-    @FindBy(xpath = "//input[@id='txtPassword']")
+    @FindBy(id = "txtPassword")
     private WebElement passwordInput;
 
-    @FindBy(xpath = "//input[@id='btnLogin']")
+    @FindBy(id = "btnLogin")
     private WebElement loginButton;
 
     public MainPage loginToTheSystem(String name,String password) {

@@ -9,37 +9,37 @@ import java.util.List;
 
 public class CandidatesPage extends BasePage {
 
-    @FindBy (xpath = "//input[@id='btnAdd']")
+    @FindBy (id = "btnAdd")
     private WebElement btnAdd;
 
-    @FindBy (xpath = "//input[@id='addCandidate_firstName']")
+    @FindBy (id = "addCandidate_firstName")
     private WebElement firstNameInput;
 
-    @FindBy (xpath = "//input[@id='addCandidate_middleName']")
+    @FindBy (id = "addCandidate_middleName")
     private WebElement middleNameInput;
 
-    @FindBy (xpath = "//input[@id='addCandidate_lastName']")
+    @FindBy (id = "addCandidate_lastName")
     private WebElement lastNameInput;
 
-    @FindBy (xpath = "//input[@id='addCandidate_email']")
+    @FindBy (id = "addCandidate_email")
     private WebElement emailInput;
 
-    @FindBy (xpath = " //input[@id='addCandidate_contactNo']")
+    @FindBy (id = "addCandidate_contactNo")
     private WebElement phoneNumberInput;
 
-    @FindBy (xpath = "//select[@id='addCandidate_vacancy']")
+    @FindBy (id = "addCandidate_vacancy")
     private WebElement btnSelectVacancy;
 
     @FindBy (xpath = "//option[contains(text(),'AQA Junior')]")
     private WebElement selectAQAJunior;
 
-    @FindBy (xpath = "//input[@id='addCandidate_resume']")
+    @FindBy (id = "addCandidate_resume")
     private WebElement resumeInput;
 
-    @FindBy (xpath = "//input[@id='addCandidate_consentToKeepData']")
+    @FindBy (id = "addCandidate_consentToKeepData")
     private WebElement consentToKeepData;
 
-    @FindBy (xpath = "//input[@id='btnSave']")
+    @FindBy (id = "btnSave")
     private WebElement btnSave;
 
     @FindBy (xpath = "//table[@id='resultTable']//tbody")

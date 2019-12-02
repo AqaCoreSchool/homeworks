@@ -6,7 +6,7 @@ import testpackage.base.BaseTest;
 import testpackage.pages.LoginPage;
 import testpackage.pages.MyRecordsPage;
 
-public class PunchIOTestWithStar extends BaseTest {
+public class PunchIOWithStarTest extends BaseTest {
 
     @Test
     public void punchInOutTestWithStar(){

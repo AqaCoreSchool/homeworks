@@ -18,6 +18,11 @@ public class BaseTest {
 
     @AfterTest
     public void  close(){
-        driver.quit();
+       try {if (driver!= null){
+           driver.quit();
+       }
+       }finally {
+           driver = null;
+       }
     }
 }
