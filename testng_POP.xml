@@ -1,13 +1,28 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
 <suite name="OrangeHRM Test" verbose="1" >
-    <test name="Page Object Pattern approach">
-        <parameter name="Url" value="http://test.biz.ua"/>
+    <test name="Create Punch and check it in records table">
         <classes>
             <class name="CreatePunchRecordTest"/>
+        </classes>
+    </test>
+    <test name="Check user punch records is empty week before and after">
+        <classes>
             <class name="CheckEmptyPunchesTest"/>
+        </classes>
+    </test>
+    <test name="Change user data and check it in the list">
+        <classes>
             <class name="ChangeUserDataTest"/>
+        </classes>
+    </test>
+    <test name="Create vacancy and check it in the list">
+        <classes>
             <class name="CreateVacancyTest"/>
+        </classes>
+    </test>
+    <test name="Apply candidate to vacancy">
+        <classes>
             <class name="ApplyCandidateTest"/>
         </classes>
     </test>

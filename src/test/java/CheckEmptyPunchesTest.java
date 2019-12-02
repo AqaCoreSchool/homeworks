@@ -17,7 +17,6 @@ public class CheckEmptyPunchesTest {
     private final String USERNAME = "TestUser06";
     private final String PASSWORD = "Vfylhfujhf!1";
     private final String WEEK_BEFORE = LocalDateTime.now().minusWeeks(1).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-    private final String WEEK_AFTER = LocalDateTime.now().plusWeeks(1).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     private final String URL = "http://test.biz.ua";
 
     @BeforeMethod
@@ -39,8 +38,6 @@ public class CheckEmptyPunchesTest {
         OrangeDashboardPage dashboardPage = loginPage.loginCorrect(USERNAME, PASSWORD);
         OrangeTimePage timePage = dashboardPage.toTimeModulePage();
         timePage.checkEmptyRecordsTable(WEEK_BEFORE);
-        Assert.assertTrue(timePage.getEmptyRecord().isDisplayed(), "Record table isn't empty!");
-        timePage.checkEmptyRecordsTable(WEEK_AFTER);
         Assert.assertTrue(timePage.getEmptyRecord().isDisplayed(), "Record table isn't empty!");
     }
 }
