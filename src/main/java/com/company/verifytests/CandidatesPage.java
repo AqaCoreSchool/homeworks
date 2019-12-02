@@ -8,7 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 import java.util.List;
 
 public class CandidatesPage {
-    public WebDriver driver;
+    private WebDriver driver;
 
     @FindBy(xpath ="//select[@id='candidateSearch_jobTitle']//option[contains(text(),'AQA')]")
     private WebElement jobTitleCandidates;
@@ -49,56 +49,56 @@ public class CandidatesPage {
 
     public CandidatesPage chooseJobTitle(){
         jobTitleCandidates.click();
-        return new CandidatesPage(driver);
+        return this;
     }
 
     public CandidatesPage clickAddCandidate(){
         addCandidateButton.click();
-        return new CandidatesPage(driver);
+        return this;
     }
 
     public CandidatesPage searchCandidates(){
         searchCandidateButton.click();
-        return new CandidatesPage(driver);
+        return this;
     }
 
     public CandidatesPage inputFirstName(String firstName){
         firstNameOfCandidate.click();
         firstNameOfCandidate.sendKeys(firstName);
-        return new CandidatesPage(driver);
+        return this;
     }
 
     public CandidatesPage inputLastName(String lastName){
         lastNameOfCandidate.click();
         lastNameOfCandidate.sendKeys(lastName);
-        return new CandidatesPage(driver);
+        return this;
     }
 
     public CandidatesPage inputEmail(String email){
         emailOfCandidate.click();
         emailOfCandidate.sendKeys(email);
-        return new CandidatesPage(driver);
+        return this;
     }
 
     public CandidatesPage inputContactNo(String phoneNo){
         contactNo.click();
         contactNo.sendKeys(phoneNo);
-        return new CandidatesPage(driver);
+        return this;
     }
 
     public CandidatesPage chooseJobVacancy(){
         jobVacancy.click();
-        return new CandidatesPage(driver);
+        return this;
     }
 
     public CandidatesPage clickSaveBtn(){
         saveBtn.click();
-        return new CandidatesPage(driver);
+        return this;
     }
 
     public CandidatesPage clickBackBtn(){
         backBtn.click();
-        return new CandidatesPage(driver);
+        return this;
     }
 
     public boolean verifyCandidates(String fullName, String date){

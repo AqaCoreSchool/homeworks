@@ -4,11 +4,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class MainMenuPage {
-    public static WebDriver driver;
-    private WebDriverWait wait;
+    private WebDriver driver;
 
     @FindBy(xpath = "//a[@id='menu_time_viewTimeModule']")
     private WebElement timeBtnHeader;

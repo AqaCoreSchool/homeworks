@@ -6,7 +6,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class PunchPage {
-    public static WebDriver driver;
+    private WebDriver driver;
 
     @FindBy(xpath = "//input[@id='btnPunch']")
     private WebElement punch;

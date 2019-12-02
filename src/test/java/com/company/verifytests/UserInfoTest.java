@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class UserInfoTest extends BaseTest {
-    LoginPage loginPage = new LoginPage(driver);
+    LoginPage loginPage;
     LocalDate date = LocalDate.now();
     DateTimeFormatter format =
             DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -19,39 +19,33 @@ public class UserInfoTest extends BaseTest {
     public void testUserInfo(){
         loginPage = openLoginPage();
         loginPage.loginIntoSystem("TestUser07","Vfylhfujhf!1");
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         MainMenuPage mainPage = new MainMenuPage(driver);
-        mainPage.clickMyInfo();
-        MyInfoPage info = new MyInfoPage(driver);
-        info.clickEditSave();
-        info.inputFirstName("Olya");
-        info.inputLastName("Bilynska");
-        info.inputEmployeeId("1");
-        info.inputOtherId("07");
-        info.inputDriverNo("78956");
-        info.chooseGender();
-        info.chooseNationality();
-        info.chooseMaritalStatus();
-        info.inputDateOfBirth("2000-08-11");
-        info.clickEditSave();
+        mainPage.clickMyInfo()
+                .clickEditSave()
+                .inputFirstName("Olya")
+                .inputLastName("Bilynska")
+                .inputEmployeeId("1")
+                .inputOtherId("07")
+                .inputDriverNo("78956")
+                .chooseGender()
+                .chooseNationality()
+                .chooseMaritalStatus()
+                .inputDateOfBirth("2000-08-11")
+                .clickEditSave();
+
+        mainPage.moveToTime()
+                .moveToAttendance()
+                .clickPunchInOut()
+                .punchIn()
+                .punchOut();
+
         mainPage.moveToTime()
                 .moveToAttendance();
-        mainPage.clickPunchInOut();
-        PunchPage punchPage = new PunchPage(driver);
-        punchPage.punchIn();
-        punchPage.punchOut();
 
-        mainPage.moveToTime();
-        mainPage.moveToAttendance();
         EmployeeRecordsPage employeeRecords = new EmployeeRecordsPage(driver);
-        employeeRecords.clickEmployeeRecords();
-        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-        employeeRecords.chooseDateOfRecords(currentDate);
-        employeeRecords.clickViewBtn();
+        employeeRecords.clickEmployeeRecords()
+                .chooseDateOfRecords(currentDate)
+                .clickViewBtn();
         assertThat(employeeRecords.verifyEmployeeRecords("Olya Bilynska", currentDate)).isTrue();
     }
 }

@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class VerifyCandidatesTest extends BaseTest {
-    LoginPage loginPage = new LoginPage(driver);
+    LoginPage loginPage;
 
     LocalDate date = LocalDate.now();
     DateTimeFormatter format =
@@ -19,27 +19,21 @@ public class VerifyCandidatesTest extends BaseTest {
     public void testVerifyCandidates() {
         loginPage = openLoginPage();
         loginPage.loginIntoSystem("TestUser07", "Vfylhfujhf!1");
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         MainMenuPage mainPage = new MainMenuPage(driver);
-
         mainPage.moveToRecruitment()
-                .moveToCandidate();
-        CandidatesPage candidatesPage = new CandidatesPage(driver);
-        candidatesPage.chooseJobTitle();
-        candidatesPage.searchCandidates();
-        candidatesPage.clickAddCandidate();
-        candidatesPage.inputFirstName("Oleg");
-        candidatesPage.inputLastName("Vlasenko");
-        candidatesPage.inputEmail("vlasenko2007@gmail.com");
-        candidatesPage.inputContactNo("0951124853");
-        candidatesPage.chooseJobVacancy();
-        candidatesPage.clickSaveBtn();
-        candidatesPage.clickBackBtn();
+                .moveToCandidate()
+                .chooseJobTitle()
+                .searchCandidates()
+                .clickAddCandidate()
+                .inputFirstName("Oleg")
+                .inputLastName("Vlasenko")
+                .inputEmail("vlasenko2007@gmail.com")
+                .inputContactNo("0951124853")
+                .chooseJobVacancy()
+                .clickSaveBtn()
+                .clickBackBtn();
 
+        CandidatesPage candidatesPage = new CandidatesPage(driver);
         assertThat(candidatesPage.verifyCandidates("Oleg Vlasenko", formatDate)).isTrue();
     }
 }

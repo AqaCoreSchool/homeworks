@@ -8,7 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 import java.util.List;
 
 public class VacancyPage {
-    public WebDriver driver;
+    private WebDriver driver;
 
     @FindBy(xpath ="//select[@id='vacancySearch_jobTitle']//option[contains(text(),'AQA')]")
     private WebElement jobTitleOfVacancySearch;
@@ -46,50 +46,50 @@ public class VacancyPage {
 
     public VacancyPage chooseJobTitleOfVacancy(){
         jobTitleOfVacancySearch.click();
-        return new VacancyPage(driver);
+        return this;
     }
 
     public VacancyPage clickSearchBtn(){
         searchBtnOfVacancy.click();
-        return new VacancyPage(driver);
+        return this;
     }
 
     public VacancyPage addVacancy(){
         addVacancyBtn.click();
-        return new VacancyPage(driver);
+        return this;
     }
 
     public VacancyPage chooseJobTitle(){
         jobTitleOfVacancy.click();
-        return new VacancyPage(driver);
+        return this;
     }
 
     public VacancyPage inputVacancyName(String email){
         vacancyName.click();
         vacancyName.sendKeys(email);
-        return new VacancyPage(driver);
+        return this;
     }
 
     public VacancyPage inputHiringManagerName(String nameOfHR){
         hiringManagerName.click();
         hiringManagerName.sendKeys(nameOfHR);
-        return new VacancyPage(driver);
+        return this;
     }
 
     public VacancyPage inputNumberOfPositions(String positionsNo){
         numberOfPositions.click();
         numberOfPositions.sendKeys(positionsNo);
-        return new VacancyPage(driver);
+        return this;
     }
 
     public VacancyPage clickSaveBtn(){
         saveBtn.click();
-        return new VacancyPage(driver);
+        return this;
     }
 
     public VacancyPage clickBackBtn(){
         backBtn.click();
-        return new VacancyPage(driver);
+        return this;
     }
 
     public boolean verifyVacancy(String jobTitle, String hiringManagerName){

@@ -9,7 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 import java.util.List;
 
 public class EmployeeRecordsPage {
-    public static WebDriver driver;
+    private WebDriver driver;
 
     @FindBy(xpath = "//a[@id='menu_attendance_viewAttendanceRecord']")
     private WebElement employeeRecords;

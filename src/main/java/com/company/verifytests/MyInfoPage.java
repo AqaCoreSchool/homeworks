@@ -6,7 +6,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class MyInfoPage {
-    public static WebDriver driver;
+    private WebDriver driver;
+
     @FindBy(xpath = "//input[@id='btnSave']")
     private WebElement editSaveBtn;
 
@@ -44,32 +45,31 @@ public class MyInfoPage {
 
     public MyInfoPage clickEditSave(){
         editSaveBtn.click();
-        return new MyInfoPage(driver);
+        return this;
     }
 
     public MyInfoPage inputFirstName(String firstName){
         firstNameInput.clear();
         firstNameInput.sendKeys(firstName);
-        return new MyInfoPage(driver);
+        return this;
     }
 
     public MyInfoPage inputLastName(String lastName){
         lastNameInput.clear();
         lastNameInput.sendKeys(lastName);
-        return new MyInfoPage(driver);
+        return this;
     }
-
 
     public MyInfoPage inputEmployeeId(String id){
         employeeIdInput.clear();
         employeeIdInput.sendKeys(id);
-        return new MyInfoPage(driver);
+        return this;
     }
 
     public MyInfoPage inputOtherId(String id){
         otherId.clear();
         otherId.sendKeys(id);
-        return new MyInfoPage(driver);
+        return this;
     }
     public MyInfoPage inputDriverNo(String driverNo){
         driverNumber.clear();
@@ -79,7 +79,7 @@ public class MyInfoPage {
 
     public MyInfoPage chooseGender(){
         genderStatus.click();
-        return new MyInfoPage(driver);
+        return this;
     }
 
     public MyInfoPage chooseNationality(){
@@ -89,13 +89,13 @@ public class MyInfoPage {
 
     public MyInfoPage chooseMaritalStatus(){
         maritalStatus.click();
-        return new MyInfoPage(driver);
+        return this;
     }
 
     public MyInfoPage inputDateOfBirth(String dateOfBirths){
         birthDate.clear();
         birthDate.sendKeys(dateOfBirths);
-        return new MyInfoPage(driver);
+        return this;
     }
 
 }

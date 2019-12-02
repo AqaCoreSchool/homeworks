@@ -4,31 +4,26 @@ import org.testng.annotations.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class VerifyVacancyTest extends BaseTest {
-    LoginPage loginPage = new LoginPage(driver);
+    LoginPage loginPage;
 
     @Test
     public void testVerifyCandidates() {
         loginPage = openLoginPage();
         loginPage.loginIntoSystem("TestUser07", "Vfylhfujhf!1");
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         MainMenuPage mainPage = new MainMenuPage(driver);
         mainPage.moveToRecruitment()
-                .moveToVacancy();
-        VacancyPage vacancyPage = new VacancyPage(driver);
-        vacancyPage.chooseJobTitleOfVacancy();
-        vacancyPage.clickSearchBtn();
-        vacancyPage.addVacancy();
-        vacancyPage.chooseJobTitle();
-        vacancyPage.inputVacancyName("AQA Senior");
-        vacancyPage.inputHiringManagerName("Olya Bilynska");
-        vacancyPage.inputNumberOfPositions("1");
-        vacancyPage.clickSaveBtn();
-        vacancyPage.clickBackBtn();
+                .moveToVacancy()
+                .chooseJobTitleOfVacancy()
+                .clickSearchBtn()
+                .addVacancy()
+                .chooseJobTitle()
+                .inputVacancyName("AQA Senior")
+                .inputHiringManagerName("Olya Bilynska")
+                .inputNumberOfPositions("1")
+                .clickSaveBtn()
+                .clickBackBtn();
 
+        VacancyPage vacancyPage = new VacancyPage(driver);
         assertThat(vacancyPage.verifyVacancy("AQA", "Olya Bilynska")).isTrue();
 
     }
