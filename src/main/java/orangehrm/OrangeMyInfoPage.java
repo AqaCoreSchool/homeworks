@@ -1,6 +1,7 @@
 package orangehrm;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -42,6 +43,8 @@ public class OrangeMyInfoPage {
     }
 
     public OrangeMyInfoPage clickEdit(){
+        WebDriverWait editWait = new WebDriverWait(driver, 10);
+        editWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("btnSave")));
         editBtn.click();
         return this;
     }
@@ -77,7 +80,7 @@ public class OrangeMyInfoPage {
 
     public OrangeMyInfoPage setBirthDate(String date){
         dateOfBirthField.clear();
-        dateOfBirthField.sendKeys(date);
+        dateOfBirthField.sendKeys(date + Keys.ENTER);
         return this;
     }
 
@@ -94,14 +97,16 @@ public class OrangeMyInfoPage {
         return clickEdit()
                 .enterName(name)
                 .enterSurname(surname)
+                .setBirthDate(date)
                 .setGender()
                 .setMartialStatus()
                 .setNationality()
-                .setBirthDate(date)
                 .clickSave();
     }
 
     public OrangeAdminPage toAdminPage(){
+        WebDriverWait menuWait = new WebDriverWait(driver, 10);
+        menuWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("menu_admin_viewAdminModule")));
         adminModule.click();
         return new OrangeAdminPage(driver);
     }
