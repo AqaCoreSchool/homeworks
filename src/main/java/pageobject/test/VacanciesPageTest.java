@@ -11,10 +11,10 @@ import static org.assertj.core.api.Assertions.*;
 public class VacanciesPageTest extends BaseTest {
 
     private LoginPage loginPage;
-    private static final String jobTitle = "AQA";
-    private static final String vacancy = "Senior";
-    private static final String hiringManager = "Andrii Shtyiuk";
-    private static final String status = "Active";
+    private static final String JOB_TITLE = "AQA";
+    private static final String VACANCY = "Senior";
+    private static final String HIRING_MANAGER = "Andrii Shtyiuk";
+    private static final String STATUS = "Active";
 
     @BeforeTest
     public void beforeTest() {
@@ -28,9 +28,9 @@ public class VacanciesPageTest extends BaseTest {
                 .clickRecruitmentBtn()
                 .clickVacanciesBtn()
                 .clickAddBtn()
-                .selectJobTittle(jobTitle)
-                .vacancyNameInput(vacancy)
-                .hiringManagerInput(hiringManager)
+                .selectJobTittle(JOB_TITLE)
+                .vacancyNameInput(VACANCY)
+                .hiringManagerInput(HIRING_MANAGER)
                 .clickSaveBtn()
                 .clickBackBtn();
 
