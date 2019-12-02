@@ -1,6 +1,7 @@
 package ua.biz.test.entity;
 
 public class Vacancy {
+
     private String name;
     private String hiringManagerName;
     private int nubmerOfPositions;

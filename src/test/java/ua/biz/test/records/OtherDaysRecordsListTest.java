@@ -13,13 +13,10 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TomorrowRecordsListTest extends BaseTest {
-
-//    @FindBy(xpath = "//table[@class='table']//tbody//tr[@class='odd' or @class='even']")
-//    private List<WebElement> recordsDataList;
+public class OtherDaysRecordsListTest extends BaseTest {
 
     @Test
-    public void testTomorrowRecordsLisr() {
+    public void testRecordsLisr() {
         SoftAssert softAssert = new SoftAssert();
         MyRecordsPage myRecordsPage = mainPage.openMyRecordsPage(driver);
         myRecordsPage.showRecordDataByDate(LocalDate.now().plusDays(1));

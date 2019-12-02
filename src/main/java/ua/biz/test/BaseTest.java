@@ -15,32 +15,23 @@ import java.util.concurrent.TimeUnit;
 
 public abstract class BaseTest {
 
-
     protected WebDriver driver;
-    private final String URL = "http://test.biz.ua/symfony/web/index.php/auth/login";
     protected MainPage mainPage;
-    protected final Employee MY_TEST_EMPLOYEE = new Employee("Ivan", "Mosiychuk", 16);
+    private final String URL = "http://test.biz.ua/symfony/web/index.php/auth/login";
 
     @BeforeClass
     protected void configure() {
-        Path driverPath = Paths.get("src", "main", "resources");
+        Path driverPath = Paths.get("src","main", "resources");
         System.setProperty("webdriver.chrome.driver", driverPath + File.separator + "chromedriver.exe");
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(4, TimeUnit.SECONDS);
         driver.get(URL);
         mainPage = new LoginPage(driver).login(driver);
-
     }
 
     @AfterClass
     protected void tearDown() {
         driver.quit();
     }
-
-
-
-
-
-
 }

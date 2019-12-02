@@ -7,7 +7,6 @@ import org.openqa.selenium.support.PageFactory;
 
 public class CandidatesListPage {
 
-
     @FindBy(xpath = "//input[@id='btnAdd']")
     private WebElement addCandidateButton;
 
@@ -19,5 +18,4 @@ public class CandidatesListPage {
         addCandidateButton.click();
       return new CreateCandidatePage(driver);
     }
-
 }

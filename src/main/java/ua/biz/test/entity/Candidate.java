@@ -6,10 +6,11 @@ public class Candidate {
     private String email;
     private Vacancy vacancy;
 
-    public Candidate(String firstName, String lastName, String email) {
+    public Candidate(String firstName, String lastName, String email, Vacancy vacancy) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.vacancy = vacancy;
     }
 
     public String getFirstName() {
@@ -26,6 +27,10 @@ public class Candidate {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getFullName(){
+        return String.format("%s %s",firstName,lastName);
     }
 
     public String getEmail() {

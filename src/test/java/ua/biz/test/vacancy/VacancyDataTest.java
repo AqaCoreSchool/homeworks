@@ -2,6 +2,7 @@ package ua.biz.test.vacancy;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 import ua.biz.test.BaseTest;
@@ -21,32 +22,17 @@ public class VacancyDataTest extends BaseTest {
         CreateVacancyPage createVacancyPage = mainPage.openVacanciesListPage(driver).addNewVacancy(driver);
         createVacancyPage.createNewVacancy(testVacancy);
         createVacancyPage.backToVacanciesPage(driver);
-        Map<String, String> vacancyDate = getVacancyDate();
-        SoftAssert softAssert = new SoftAssert();
-        softAssert.assertEquals(vacancyDate.get("Hiring manager"), testVacancy.getHiringManagerName());
 
-        if (testVacancy.isActive()) {
-            softAssert.assertEquals(vacancyDate.get("Status"), "Active");
-        } else {
-            softAssert.assertEquals(vacancyDate.get("Status"), "Close");
-        }
-        softAssert.assertAll();
-    }
-
-    private Map<String, String> getVacancyDate() {
-        Map<String, String> vacancyData = new HashMap<>();
         List<WebElement> vacanciesDataList = driver.findElements(By.
                 xpath("//table[@id='resultTable']//tbody//tr[@class='odd' or @class='even']"));
-        System.out.println(vacanciesDataList.size());
-        //Зробити через Lambda
+
         for (WebElement element : vacanciesDataList) {
             List<WebElement> vacanciesData = element.findElements(By.tagName("td"));
-            if (vacanciesData.get(1).getText().equals(testVacancy.getName())) {
-                vacancyData.put("Hiring manager", vacanciesData.get(3).getText());
-                vacancyData.put("Status", vacanciesData.get(4).getText());
+            if (vacanciesData.get(1).getText().equals(testVacancy.getName()) &
+                    vacanciesData.get(3).getText().equals(testVacancy.getHiringManagerName()) &
+                    vacanciesData.get(4).getText().equals("Active")) {
+                Assert.assertTrue(true);
             }
         }
-        return vacancyData;
     }
-
 }
