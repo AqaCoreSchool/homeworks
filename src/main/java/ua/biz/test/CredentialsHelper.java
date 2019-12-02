@@ -1,4 +1,4 @@
-package selenium;
+package ua.biz.test;
 
 import java.io.*;
 import java.util.Properties;

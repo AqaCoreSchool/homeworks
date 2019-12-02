@@ -1,4 +1,4 @@
-package selenium;
+package ua.biz.test.entity;
 
 public class Employee {
 private String firstName;
