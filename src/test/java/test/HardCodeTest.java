@@ -9,13 +9,15 @@ import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import testpackage.base.BaseTest;
+
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
-public class HardCodeTest {
+public class HardCodeTest extends BaseTest {
 
     private  WebDriver driver;
     private String name = "TestUser03";

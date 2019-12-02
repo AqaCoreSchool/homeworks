@@ -1,6 +1,7 @@
 package test;
 
 import org.testng.annotations.Test;
+import testpackage.base.BaseTest;
 import testpackage.pages.CandidatesPage;
 import testpackage.pages.LoginPage;
 
@@ -8,7 +9,7 @@ import java.io.File;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class AddCandidatesTest {
+public class AddCandidatesTest extends BaseTest {
 
     private String login = "TestUser03";
     private String password = "Vfylhfujhf!1";

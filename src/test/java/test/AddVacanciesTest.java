@@ -1,12 +1,13 @@
 package test;
 
 import org.testng.annotations.Test;
+import testpackage.base.BaseTest;
 import testpackage.pages.LoginPage;
 import testpackage.pages.VacanciesPage;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class AddVacanciesTest {
+public class AddVacanciesTest extends BaseTest {
 
     private String login = "TestUser03";
     private String password = "Vfylhfujhf!1";
