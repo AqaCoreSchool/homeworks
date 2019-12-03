@@ -4,15 +4,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import selenium.driver.Driver;
 
 import java.util.List;
 
-public class MyRecordsPage {
-    private WebDriverWait wait;
+public class MyRecordsPage extends BasePage {
     private String latestPunchIn;
     private String latestPunchOut;
     private String latestPunchInNote;
@@ -31,11 +27,6 @@ public class MyRecordsPage {
     private WebElement noRecordColumn;
 
     private By lastRecordRow = By.xpath("./td");
-
-    public MyRecordsPage() {
-        PageFactory.initElements(Driver.getInstance().getDriver(), this);
-        wait = new WebDriverWait(Driver.getInstance().getDriver(), 10);
-    }
 
     public MyRecordsPage clearAttendanceDate() {
         wait.until(ExpectedConditions.visibilityOf(attendanceDate));

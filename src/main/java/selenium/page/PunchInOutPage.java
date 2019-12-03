@@ -2,14 +2,9 @@ package selenium.page;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import selenium.data.UserData;
-import selenium.driver.Driver;
 
-public class PunchInOutPage {
-    private WebDriverWait wait;
+public class PunchInOutPage extends BasePage {
 
     @FindBy(id = "currentDate")
     private WebElement currentDateLabel;
@@ -25,12 +20,6 @@ public class PunchInOutPage {
 
     @FindBy(xpath = "//div[@class='message success fadable']")
     private WebElement successMsg;
-
-
-    public PunchInOutPage() {
-        PageFactory.initElements(Driver.getInstance().getDriver(), this);
-        wait = new WebDriverWait(Driver.getInstance().getDriver(), 10);
-    }
 
     public String getCurrentDateLabel() {
         wait.until(ExpectedConditions.visibilityOf(currentDateLabel));

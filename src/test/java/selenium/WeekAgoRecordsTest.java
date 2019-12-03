@@ -11,7 +11,7 @@ public class WeekAgoRecordsTest extends BaseTest {
     @Test
     public void weekAgoRecordsTest() {
         MyRecordsPage page = getLoginPage()
-                .fillUsername(UserData.USER_NAME)
+                .fillUsername(UserData.USER_LOGIN_NAME)
                 .fillPassword(UserData.USER_PASSWORD)
                 .clickLoginButton()
                 .moveToTimeItem()

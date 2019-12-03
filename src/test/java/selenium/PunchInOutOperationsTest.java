@@ -10,7 +10,7 @@ public class PunchInOutOperationsTest extends BaseTest {
     @Test
     public void punchInOutVerifyingTest() {
         PunchInOutPage page = getLoginPage()
-                .fillUsername(UserData.USER_NAME)
+                .fillUsername(UserData.USER_LOGIN_NAME)
                 .fillPassword(UserData.USER_PASSWORD)
                 .clickLoginButton()
                 .moveToTimeItem()

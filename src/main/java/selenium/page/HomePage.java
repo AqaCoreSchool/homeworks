@@ -3,13 +3,10 @@ package selenium.page;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import selenium.driver.Driver;
 
-public class HomePage {
-    private WebDriverWait wait;
+public class HomePage extends BasePage {
     private Actions actions;
 
     @FindBy(id = "menu_time_viewTimeModule")
@@ -46,8 +43,7 @@ public class HomePage {
     private WebElement welcomeText;
 
     public HomePage() {
-        PageFactory.initElements(Driver.getInstance().getDriver(), this);
-        wait = new WebDriverWait(Driver.getInstance().getDriver(), 10);
+        super();
         actions = new Actions(Driver.getInstance().getDriver());
     }
 

@@ -3,13 +3,9 @@ package selenium.page;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import selenium.driver.Driver;
 
-public class CreateCandidatePage {
-    private WebDriverWait wait;
+public class CreateCandidatePage extends BasePage {
 
     @FindBy(id = "addCandidate_firstName")
     private WebElement candidateFirstName;
@@ -37,13 +33,6 @@ public class CreateCandidatePage {
 
     @FindBy(xpath = "//div[@class='message success fadable']")
     private WebElement successMsg;
-
-
-    public CreateCandidatePage() {
-        PageFactory.initElements(Driver.getInstance().getDriver(), this);
-        wait = new WebDriverWait(Driver.getInstance().getDriver(), 10);
-        wait.until(ExpectedConditions.visibilityOf(candidateForm));
-    }
 
     public CreateCandidatePage fillFirstName(String name) {
         candidateFirstName.sendKeys(name);

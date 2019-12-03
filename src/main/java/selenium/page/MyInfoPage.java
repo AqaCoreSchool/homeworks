@@ -3,17 +3,12 @@ package selenium.page;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import selenium.driver.Driver;
 
-import java.security.Key;
 import java.util.List;
 
-public class MyInfoPage {
-    private WebDriverWait wait;
+public class MyInfoPage extends BasePage {
 
     @FindBy(id = "btnSave")
     private WebElement btnSave;
@@ -53,12 +48,6 @@ public class MyInfoPage {
 
     @FindBy(id = "personal_cmbMarital")
     private WebElement employeeMarital;
-
-    public MyInfoPage() {
-        PageFactory.initElements(Driver.getInstance().getDriver(), this);
-        wait = new WebDriverWait(Driver.getInstance().getDriver(), 10);
-        wait.until(ExpectedConditions.visibilityOf(employeeInfoForm));
-    }
 
     public MyInfoPage clearAllFields() {
         inputElements.stream()

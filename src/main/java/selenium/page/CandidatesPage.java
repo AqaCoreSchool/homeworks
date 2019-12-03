@@ -3,15 +3,11 @@ package selenium.page;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import selenium.driver.Driver;
 
 import java.util.List;
 
-public class CandidatesPage {
-    private WebDriverWait wait;
+public class CandidatesPage extends BasePage{
     private boolean isCreated = false;
 
     @FindBy(id = "btnAdd")
@@ -19,11 +15,6 @@ public class CandidatesPage {
 
     @FindBy(xpath = "//table[@id='resultTable']//tr[@class='odd' or @class='even']")
     private List<WebElement> usersList;
-
-    public CandidatesPage() {
-        PageFactory.initElements(Driver.getInstance().getDriver(), this);
-        wait = new WebDriverWait(Driver.getInstance().getDriver(), 10);
-    }
 
     public CreateCandidatePage clickNewCandidateButton() {
         wait.until(ExpectedConditions.elementToBeClickable(btnAdd));
