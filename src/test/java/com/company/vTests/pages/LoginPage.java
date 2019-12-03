@@ -1,26 +1,20 @@
-package com.company.verifytests;
+package com.company.vTests.pages;
 
+import com.company.vTests.base.BasePage;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
-public class LoginPage {
-    private WebDriver driver;
+public class LoginPage extends BasePage {
 
     @FindBy(xpath ="//input[@id='txtUsername']")
     private WebElement userName;
     @FindBy(xpath ="//input[@id='txtPassword']")
     private WebElement userPassword;
 
-    public LoginPage(WebDriver driver) {
-        PageFactory.initElements(driver,this);
-    }
-
     public MainMenuPage loginIntoSystem(String name, String password) {
         userName.sendKeys(name);
         userPassword.sendKeys(password, Keys.ENTER);
-        return new MainMenuPage(driver);
+        return new MainMenuPage();
     }
 }

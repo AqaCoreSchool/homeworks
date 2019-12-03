@@ -1,12 +1,10 @@
-package com.company.verifytests;
+package com.company.vTests.pages;
 
-import org.openqa.selenium.WebDriver;
+import com.company.vTests.base.BasePage;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
-public class MainMenuPage {
-    private WebDriver driver;
+public class MainMenuPage extends BasePage {
 
     @FindBy(xpath = "//a[@id='menu_time_viewTimeModule']")
     private WebElement timeBtnHeader;
@@ -32,10 +30,14 @@ public class MainMenuPage {
     @FindBy(xpath ="//a[@id='menu_recruitment_viewCandidates']")
     private WebElement candidateBtn;
 
+    @FindBy(xpath = "//b[contains(text(),'Admin')]")
+    private WebElement adminBtn;
 
-    public MainMenuPage(WebDriver driver){
-        PageFactory.initElements(driver, this);
-    }
+    @FindBy(xpath = "//a[@id='menu_admin_Organization']")
+    private WebElement organizationBtn;
+
+    @FindBy(xpath = "//a[@id='menu_admin_viewLocations']")
+    private WebElement locationBtn;
 
     public MainMenuPage moveToTime(){
         timeBtnHeader.click();
@@ -52,24 +54,30 @@ public class MainMenuPage {
         return this;
     }
 
-    public PunchPage clickPunchInOut(){
-        punchInOut.click();
-        return new PunchPage(driver);
-    }
-
     public VacancyPage moveToVacancy(){
         vacancyBtn.click();
-        return new VacancyPage(driver);
+        return new VacancyPage();
     }
 
     public CandidatesPage moveToCandidate(){
         candidateBtn.click();
-        return new CandidatesPage(driver);
+        return new CandidatesPage();
     }
 
-    public MyInfoPage clickMyInfo(){
-        info.click();
-        return new MyInfoPage(driver);
+    public MainMenuPage moveToAdmin(){
+        adminBtn.click();
+        return this;
+    }
+
+    public MainMenuPage moveToOrganization(){
+        organizationBtn.click();
+        return this;
+    }
+
+    public LocationPage moveToLocation(){
+        locationBtn.click();
+        return new LocationPage();
     }
 
 }
+
