@@ -1,5 +1,7 @@
-package orangehrm;
+package pages;
 
+import data.CandidateData;
+import data.VacancyData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -14,8 +16,6 @@ import java.util.List;
 
 public class OrangeRecruitmentPage {
     private final WebDriver driver;
-    private WebElement createdVacancy;
-    private WebElement createdCandidate;
     private String title;
     private String recordVacancyName;
 
@@ -82,17 +82,16 @@ public class OrangeRecruitmentPage {
     @FindBy(id = "addCandidate_consentToKeepData")
     private WebElement consentDataCheckbox;
 
+    @FindBy(xpath = "//span[@class = 'validation-error' and @for='addCandidate_appliedDate']" )
+    private WebElement futureDateError;
+
+    @FindBy(xpath = "//span[@class = 'validation-error' and @for='addJobVacancy_jobTitle']" )
+    private WebElement noTitleError;
+
+
     public OrangeRecruitmentPage(WebDriver driver){
         PageFactory.initElements(driver, this);
         this.driver = driver;
-    }
-
-    public WebElement getCreatedVacancy() {
-        return createdVacancy;
-    }
-
-    public WebElement getCreatedCandidate() {
-        return createdCandidate;
     }
 
     public OrangeRecruitmentPage toVacancies(){
@@ -105,16 +104,15 @@ public class OrangeRecruitmentPage {
         return this;
     }
 
-    public OrangeRecruitmentPage selectJobTitle(){
+    public OrangeRecruitmentPage selectJobTitle(int index){
         Select jobTitle = new Select(jobTitleList);
-        jobTitle.selectByIndex(1);
+        jobTitle.selectByIndex(index);
         title = jobTitle.getFirstSelectedOption().getText();
         return this;
     }
 
     public OrangeRecruitmentPage setVacancyName(String nameVacancy){
         vacancyName.sendKeys(nameVacancy);
-        recordVacancyName = nameVacancy;
         return this;
     }
 
@@ -123,8 +121,8 @@ public class OrangeRecruitmentPage {
         return this;
     }
 
-    public OrangeRecruitmentPage setPositionsNumber(){
-        numberOfPositions.sendKeys("1");
+    public OrangeRecruitmentPage setPositionsNumber(String positionsNumber){
+        numberOfPositions.sendKeys(positionsNumber);
         return this;
     }
 
@@ -150,24 +148,36 @@ public class OrangeRecruitmentPage {
         return this;
     }
 
-    public OrangeRecruitmentPage createVacancy(String nameVacancy, String nameManager, String text){
+    public OrangeRecruitmentPage createVacancy(VacancyData vacancy){
         return clickAddBtn()
-                .selectJobTitle()
-                .setVacancyName(nameVacancy)
-                .setHiringManager(nameManager)
-                .setPositionsNumber()
-                .setDescription(text)
+                .selectJobTitle(vacancy.getJobTitleOption())
+                .setVacancyName(vacancy.getVacanyName())
+                .setHiringManager(vacancy.getHiringManager())
+                .setPositionsNumber(vacancy.getPositions())
+                .setDescription(vacancy.getDescription())
                 .uncheckRssFeed()
                 .clickSaveBtn();
     }
 
-    public OrangeRecruitmentPage findCreatedVacancy(String nameVacancy, String hiringManager){
-        createdVacancy = resultList.stream()
-                .filter(o -> o.findElements(By.xpath("./td")).get(1).getText().contains(nameVacancy) &&
-                        o.findElements(By.xpath("./td")).get(2).getText().contains(title) &&
-                        o.findElements(By.xpath("./td")).get(3).getText().contains(hiringManager))
-                .findFirst().orElse(null);
-        return this;
+    public OrangeRecruitmentPage createVacancyWithoutTitle(VacancyData vacancy){
+        return clickAddBtn()
+                .setVacancyName(vacancy.getVacanyName())
+                .setHiringManager(vacancy.getHiringManager())
+                .setPositionsNumber(vacancy.getPositions())
+                .setDescription(vacancy.getDescription())
+                .uncheckRssFeed()
+                .clickSaveBtn();
+    }
+
+    public boolean noTitleErrorDisplayed(){
+        return noTitleError.isDisplayed() && noTitleError.getText().equals("Required");
+    }
+
+    public boolean findCreatedVacancy(VacancyData vacancy){
+        return resultList.stream()
+                .anyMatch(o -> o.getText().contains(vacancy.getVacanyName()) &&
+                        o.getText().contains(title) &&
+                        o.getText().contains(vacancy.getHiringManager()));
     }
 
     public OrangeRecruitmentPage toCandidates(){
@@ -217,30 +227,44 @@ public class OrangeRecruitmentPage {
         return this;
     }
 
-    public OrangeRecruitmentPage applyCandidate(String candidateName, String candidateLastName, String candidateMail,
-                                                String contactNumber, String title, String commentText, String date){
+    public OrangeRecruitmentPage applyCandidate(CandidateData candidateApplication){
         return clickAddBtn()
-                .setName(candidateName)
-                .setLastName(candidateLastName)
-                .setEmail(candidateMail)
-                .setContact(contactNumber)
-                .selectVacancyByName(title)
-                .addComment(commentText)
+                .setName(candidateApplication.getFirstName())
+                .setLastName(candidateApplication.getLastName())
+                .setEmail(candidateApplication.getEmail())
+                .setContact(candidateApplication.getContactNo())
+                .selectVacancyByName(candidateApplication.getVacancyName())
+                .addComment(candidateApplication.getComment())
                 .allowKeepData()
-                .setApplicationDate(date)
+                .setApplicationDate(candidateApplication.getDate())
                 .clickSaveBtn();
     }
 
-    public OrangeRecruitmentPage findCreatedCandidate(String candidateName, String candidateLastName,
-                                                      String hiringManager, String recordVacancyName, String date){
-        String candidate = String.format("%s %s", candidateName, candidateLastName);
-        createdCandidate = resultList.stream()
-                .filter(o -> o.findElements(By.xpath("./td")).get(1).getText().contains(recordVacancyName) &&
-                        o.findElements(By.xpath("./td")).get(2).getText().contains(candidate) &&
-                        o.findElements(By.xpath("./td")).get(3).getText().contains(hiringManager) &&
-                        o.findElements(By.xpath("./td")).get(4).getText().contains(date))
-                .findFirst().orElse(null);
+    public OrangeRecruitmentPage applyCandidateForFuture(CandidateData candidateApplication){
+        clickAddBtn()
+                .setName(candidateApplication.getFirstName())
+                .setLastName(candidateApplication.getLastName())
+                .setEmail(candidateApplication.getEmail())
+                .setContact(candidateApplication.getContactNo())
+                .selectVacancyByName(candidateApplication.getVacancyName())
+                .addComment(candidateApplication.getComment())
+                .allowKeepData()
+                .setApplicationDate(candidateApplication.getFutureDate())
+                .clickSaveBtn();
         return this;
+    }
+
+    public boolean futureDateErrorDisplayed(){
+        return futureDateError.isDisplayed() && futureDateError.getText().equals("Should be less than current date");
+    }
+
+    public boolean findCreatedCandidate(CandidateData candidateApplication){
+        return resultList.stream()
+                .anyMatch(o -> o.getText().contains(candidateApplication.getVacancyName()) &&
+                        o.getText().contains(String.format(
+                                "%s %s", candidateApplication.getFirstName(), candidateApplication.getLastName())) &&
+                        o.getText().contains(candidateApplication.getHiringManager()) &&
+                        o.getText().contains(candidateApplication.getDate()));
     }
 
 }

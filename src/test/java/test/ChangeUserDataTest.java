@@ -1,8 +1,11 @@
+package test;
+
+import data.UserData;
 import io.github.bonigarcia.wdm.WebDriverManager;
-import orangehrm.OrangeAdminPage;
-import orangehrm.OrangeDashboardPage;
-import orangehrm.OrangeLoginPage;
-import orangehrm.OrangeMyInfoPage;
+import pages.OrangeAdminPage;
+import pages.OrangeDashboardPage;
+import pages.OrangeLoginPage;
+import pages.OrangeMyInfoPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
@@ -14,10 +17,8 @@ public class ChangeUserDataTest {
     private WebDriver driver;
     private final String USERNAME = "TestUser06";
     private final String PASSWORD = "Vfylhfujhf!1";
-    private final String NAME = "Nazariy";
-    private final String SURNAME = "Kushnir";
-    private final String BIRTHDAY_DATE = "1989-10-23";
     private final String URL = "http://test.biz.ua";
+    UserData userData = new UserData();
 
     @BeforeMethod
     public void setUp(){
@@ -37,10 +38,9 @@ public class ChangeUserDataTest {
         OrangeLoginPage loginPage = new OrangeLoginPage(driver);
         OrangeDashboardPage dashboardPage = loginPage.loginCorrect(USERNAME, PASSWORD);
         OrangeMyInfoPage infoPage = dashboardPage.toMyInfoPage();
-        infoPage.editUserData(NAME, SURNAME, BIRTHDAY_DATE);
+        infoPage.editUserData(userData);
         OrangeAdminPage adminPage = infoPage.toAdminPage();
-        adminPage.findUser(USERNAME);
-        Assert.assertEquals(adminPage.getUserRecord().get(3).getText(), String.format("%s %s", NAME, SURNAME),
+        Assert.assertTrue(adminPage.findUser(USERNAME, userData),
                 "User name and surname in list is different!");
     }
 }
