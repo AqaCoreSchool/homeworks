@@ -84,6 +84,7 @@ public class HomePage extends BasePage {
     }
 
     public HomePage moveMenuAttendanceItem() {
+        wait.until(ExpectedConditions.visibilityOf(attendanceItem));
         actions.moveToElement(attendanceItem).perform();
         return this;
     }

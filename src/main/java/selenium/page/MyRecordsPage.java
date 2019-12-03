@@ -26,6 +26,9 @@ public class MyRecordsPage extends BasePage {
     @FindBy(id = "noRecordsColumn")
     private WebElement noRecordColumn;
 
+    @FindBy(id = "employeeRecordsForm")
+    private WebElement employeeRecordsForm;
+
     private By lastRecordRow = By.xpath("./td");
 
     public MyRecordsPage clearAttendanceDate() {
@@ -41,11 +44,12 @@ public class MyRecordsPage extends BasePage {
     }
 
     public MyRecordsPage getMyLastRecordsDetails() {
+        wait.until(ExpectedConditions.visibilityOf(employeeRecordsForm));
         WebElement myLastRecordRow = recordsFormRows.get(recordsFormRows.size() - 1);
         myLastRecordDetails = myLastRecordRow.findElements(lastRecordRow);
         latestPunchIn = myLastRecordDetails.get(1).getText();
-        latestPunchOut = myLastRecordDetails.get(2).getText();
-        latestPunchInNote = myLastRecordDetails.get(3).getText();
+        latestPunchInNote = myLastRecordDetails.get(2).getText();
+        latestPunchOut = myLastRecordDetails.get(3).getText();
         latestPunchOutNote = myLastRecordDetails.get(4).getText();
         return this;
     }

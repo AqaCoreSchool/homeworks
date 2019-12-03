@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Suite">
+    <test name="Full Testing" preserve-order="true">
+        <classes>
+            <class name="selenium.HomePageTest"/>
+            <class name="selenium.PunchInOutPageTest"/>
+            <class name="selenium.PunchInOutOperationsTest"></class>
+            <class name="selenium.MyRecordsPageTest"></class>
+            <class name="selenium.WeekAgoRecordsTest"></class>
+            <class name="selenium.MyInfoPageTest"></class>
+            <class name="selenium.EmployeeListPageTest"></class>
+            <class name="selenium.CreateVacancyPageTest"></class>
+            <class name="selenium.VacanciesPageTest"></class>
+            <class name="selenium.CreateCandidatePageTest"></class>
+            <class name="selenium.CandidatesPageTest"></class>
+        </classes>
+    </test> <!-- Test -->
+</suite> <!-- Suite -->
