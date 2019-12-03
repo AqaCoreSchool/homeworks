@@ -1,15 +1,15 @@
 package pages;
 
-import org.openqa.selenium.WebDriver;
+import data.UserInfo;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
+import utils.Utils;
 
 
 import java.util.List;
 import java.util.NoSuchElementException;
 
-public class CandidatesPage extends BasePage{
+public class CandidatesPage extends MainPage{
 
     @FindBy (id = "btnAdd")
     private WebElement btnAdd;
@@ -43,40 +43,51 @@ public class CandidatesPage extends BasePage{
 
 
     public CandidatesPage clickAddCandidate(){
-        btnAdd.click();
+        Utils.waitAndClick(btnAdd);
         return this;
     }
 
     public  CandidatesPage fullNameInput(String firstName, String lastName){
-        firstNameInput.sendKeys(firstName);
-        lastNameInput.sendKeys(lastName);
+        Utils.waitAndSendKeys(firstNameInput, firstName);
+        Utils.waitAndSendKeys(lastNameInput, lastName);
         return this;
     }
 
     public  CandidatesPage emailInput(String email){
-        emailInput.sendKeys(email);
+        Utils.waitAndSendKeys(emailInput, email);
         return this;
     }
 
     public  CandidatesPage phoneNumberInput(String phoneNumber){
-        phoneNumberInput.sendKeys(phoneNumber);
+        Utils.waitAndSendKeys(phoneNumberInput, phoneNumber);
         return this;
     }
 
     public CandidatesPage selectJobVacancy(){
-        selectAQAJuniorVacancy.click();
+        Utils.waitAndClick(selectAQAJuniorVacancy);
         return this;
     }
 
 
     public CandidatesPage clickConsentAndSave(){
-        consentToKeepData.click();
-        btnSave.click();
+        Utils.waitAndClick(consentToKeepData);
+        Utils.waitAndClick(btnSave);
         return this;
     }
 
     public CandidatesPage clickBackBtn(){
-        btnBack.click();
+        Utils.waitAndClick(btnBack);
+        return this;
+    }
+
+    public CandidatesPage addCandidateInfo(){
+        clickAddCandidate();
+        fullNameInput(UserInfo.FIRST_NAME,UserInfo.LAST_NAME);
+        emailInput(UserInfo.EMAIL);
+        phoneNumberInput(UserInfo.PHONE_NUMBER);
+        selectJobVacancy();
+        clickConsentAndSave();
+        clickBackBtn();
         return this;
     }
 

@@ -24,6 +24,7 @@ public class BaseTest {
         Application.closeDriver();
     }
 
+
     public LoginPage openLoginPage(){
         driver.get(UserInfo.URL);
         return  new LoginPage();

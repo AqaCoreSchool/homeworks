@@ -1,15 +1,12 @@
 package pages;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-
 
 import java.util.List;
 import java.util.NoSuchElementException;
 
-public class EmployeeListPage extends BasePage{
+public class EmployeeListPage extends MainPage{
 
     @FindBy(tagName = "tr")
     private List<WebElement> employees;

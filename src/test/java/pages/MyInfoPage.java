@@ -1,14 +1,13 @@
 package pages;
 
-import org.openqa.selenium.WebDriver;
+import data.UserInfo;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
+
+import utils.Utils;
 
 
-public class MyInfoPage extends BasePage{
-
-    private WebDriver driver;
+public class MyInfoPage extends MainPage{
 
     @FindBy(id = "btnSave")
     private WebElement editOrSaveBtn;
@@ -42,56 +41,67 @@ public class MyInfoPage extends BasePage{
 
 
     public MyInfoPage clickEditOrSave(){
-        editOrSaveBtn.click();
+        Utils.waitAndClick(editOrSaveBtn);
         return this;
     }
 
     public MyInfoPage clickfirstNameInput(String firstName){
-        firstNameInput.clear();
-        firstNameInput.sendKeys(firstName);
+        Utils.waitAndSendKeys(firstNameInput, firstName);
         return this;
     }
 
     public MyInfoPage clicklastNameInput(String lastName){
-        lastNameInput.clear();
-        lastNameInput.sendKeys(lastName);
+        Utils.waitAndSendKeys(lastNameInput, lastName);
         return this;
     }
 
     public MyInfoPage clickIdInput(String id){
-        idInput.clear();
-        idInput.sendKeys(id);
+        Utils.waitAndSendKeys(idInput, id);
         return this;
     }
 
     public MyInfoPage clickGenderMale(){
-        genderRadioBtn.click();
+        Utils.waitAndClick(genderRadioBtn);
         return this;
     }
 
     public MyInfoPage clickNationalityUkrainian(){
-        nationalityUkrainian.click();
+        Utils.waitAndClick(nationalityUkrainian);
         return this;
     }
 
     public MyInfoPage clickMaritalStatus(){
-        maritalStatusMarried.click();
+        Utils.waitAndClick(maritalStatusMarried);
         return this;
     }
 
     public MyInfoPage clickinputDateOfBirth(String dateOfBirths){
-        dateOfBirthInput.clear();
-        dateOfBirthInput.sendKeys(dateOfBirths);
+        Utils.waitAndSendKeys(dateOfBirthInput, dateOfBirths);
         return this;
     }
 
     public MyInfoPage clickPimBtn(){
-        pimBtn.click();
+        Utils.waitAndClick(pimBtn);
         return this;
     }
 
     public EmployeeListPage clickEmployeeListBtn(){
-        employeeListBtn.click();
+        Utils.waitAndClick(employeeListBtn);
         return new EmployeeListPage();
+    }
+
+    public MyInfoPage editInfo(){
+        clickEditOrSave();
+        clickfirstNameInput(UserInfo.FIRST_NAME);
+        clicklastNameInput(UserInfo.LAST_NAME);
+        clickIdInput(UserInfo.ID);
+        clickGenderMale();
+        clickMaritalStatus();
+        clickNationalityUkrainian();
+        clickinputDateOfBirth(UserInfo.BIRTH_DATE);
+        clickEditOrSave();
+        clickPimBtn();
+        clickEmployeeListBtn();
+        return this;
     }
 }

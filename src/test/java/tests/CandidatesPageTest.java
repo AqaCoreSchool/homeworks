@@ -8,23 +8,15 @@ import static org.assertj.core.api.Assertions.*;
 
 
 public class CandidatesPageTest extends BaseTest {
-    UserInfo userInfo = new UserInfo();
 
     @Test
     public void testCandidatesPage(){
         loginPage
                 .loginIntoSite(UserInfo.LOGIN, UserInfo.PASSWORD)
-                .clickRecruitmentBtn()
-                .clickCandidatesBtn()
-                .clickAddCandidate()
-                .fullNameInput(userInfo.firstName,UserInfo.LASTNAME)
-                .emailInput(UserInfo.EMAIL)
-                .phoneNumberInput(UserInfo.PHONE_NUMBER)
-                .selectJobVacancy()
-                .clickConsentAndSave()
-                .clickBackBtn();
+                .moveToCandidatesPage()
+                .addCandidateInfo();
 
-        assertThat(new CandidatesPage().findCandidate(userInfo.firstName, UserInfo.LASTNAME, VacancyInfo.VACANCY))
+        assertThat(new CandidatesPage().findCandidate(UserInfo.FIRST_NAME, UserInfo.LAST_NAME, VacancyInfo.VACANCY))
                 .as("String should contain desired vacancy and candidate's name").isNotEmpty();
     }
 

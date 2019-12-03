@@ -12,21 +12,10 @@ public class EditUserInfoTest extends BaseTest{
     public void  testEditUser() {
         loginPage
                 .loginIntoSite(UserInfo.LOGIN, UserInfo.PASSWORD)
-                .clickMyInfoBtn()
-                .clickEditOrSave()
-                .clickfirstNameInput(UserInfo.firstName)
-                .clicklastNameInput(UserInfo.LASTNAME)
-                .clickIdInput(UserInfo.ID)
-                .clickGenderMale()
-                .clickMaritalStatus()
-                .clickNationalityUkrainian()
-                .clickinputDateOfBirth(UserInfo.BIRTH_DATE)
-                .clickEditOrSave()
-                .clickPimBtn()
-                .clickEmployeeListBtn();
+                .moveToMyInfoPage()
+                .editInfo();
 
-        assertThat(new EmployeeListPage().findEmployeeInfo(UserInfo.firstName, UserInfo.LASTNAME, UserInfo.ID))
+        assertThat(new EmployeeListPage().findEmployeeInfo(UserInfo.FIRST_NAME, UserInfo.LAST_NAME, UserInfo.ID))
                 .as("String should contain employee's name and id").isNotEmpty();
     }
-
 }

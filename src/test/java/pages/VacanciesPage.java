@@ -1,15 +1,14 @@
 package pages;
 
-import org.openqa.selenium.WebDriver;
+import data.VacancyInfo;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import utils.Utilities;
+import utils.Utils;
 
 import java.util.List;
 import java.util.NoSuchElementException;
 
-public class VacanciesPage extends BasePage{
-
+public class VacanciesPage extends MainPage {
 
     @FindBy(id = "btnAdd")
     private WebElement btnAdd;
@@ -37,33 +36,43 @@ public class VacanciesPage extends BasePage{
 
 
     public VacanciesPage clickAddBtn(){
-        Utilities.waitAndClick(btnAdd);
+        Utils.waitAndClick(btnAdd);
         return this;
     }
 
     public VacanciesPage selectJobTittle(){
-        clickJobTittle.click();
-        selectJobTittle.click();
+        Utils.waitAndClick(clickJobTittle);
+        Utils.waitAndClick(selectJobTittle);
         return this;
     }
 
     public VacanciesPage vacancyNameInput(String vacancy){
-        Utilities.waitAndSendKeys(inputVacancyName, vacancy);
+        Utils.waitAndSendKeys(inputVacancyName, vacancy);
         return this;
     }
 
     public VacanciesPage hiringManagerInput(String manager){
-        Utilities.waitAndSendKeys(inputHiringManager, manager);
+        Utils.waitAndSendKeys(inputHiringManager, manager);
         return this;
     }
 
     public VacanciesPage clickSaveBtn(){
-        Utilities.waitAndClick(btnSave);
+        Utils.waitAndClick(btnSave);
         return  this;
 
     }
     public VacanciesPage clickBackBtn(){
-        Utilities.waitAndClick(btnBack);
+        Utils.waitAndClick(btnBack);
+        return this;
+    }
+
+    public VacanciesPage addNewVacancy(){
+        clickAddBtn();
+        selectJobTittle();
+        vacancyNameInput(VacancyInfo.VACANCY);
+        hiringManagerInput(VacancyInfo.HIRING_MANAGER);
+        clickSaveBtn();
+        clickBackBtn();
         return this;
     }
 
