@@ -1,4 +1,4 @@
-package orangehrm;
+package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -31,25 +31,25 @@ public class OrangeDashboardPage {
     }
 
     public OrangeAdminPage toAdminModulePage(){
-        menuWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("menu_admin_viewAdminModule")));
+        menuWait.until(ExpectedConditions.visibilityOf(adminModule));
         adminModule.click();
         return new OrangeAdminPage(driver);
     }
 
     public OrangeTimePage toTimeModulePage(){
-        menuWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("menu_time_viewTimeModule")));
+        menuWait.until(ExpectedConditions.visibilityOf(timeModule));
         timeModule.click();
         return new OrangeTimePage(driver);
     }
 
     public OrangeRecruitmentPage toRecruitmentModulePage(){
-        menuWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("menu_recruitment_viewRecruitmentModule")));
+        menuWait.until(ExpectedConditions.visibilityOf(recruitmentModule));
         recruitmentModule.click();
         return new OrangeRecruitmentPage(driver);
     }
 
     public OrangeMyInfoPage toMyInfoPage(){
-        menuWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("menu_pim_viewMyDetails")));
+        menuWait.until(ExpectedConditions.visibilityOf(myInfoModule));
         myInfoModule.click();
         return new OrangeMyInfoPage(driver);
     }

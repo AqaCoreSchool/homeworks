@@ -1,7 +1,10 @@
+package test;
+
+import data.PunchData;
 import io.github.bonigarcia.wdm.WebDriverManager;
-import orangehrm.OrangeDashboardPage;
-import orangehrm.OrangeLoginPage;
-import orangehrm.OrangeTimePage;
+import pages.OrangeDashboardPage;
+import pages.OrangeLoginPage;
+import pages.OrangeTimePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
@@ -9,15 +12,12 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 public class CheckEmptyPunchesTest {
     private WebDriver driver;
     private final String USERNAME = "TestUser06";
     private final String PASSWORD = "Vfylhfujhf!1";
-    private final String WEEK_BEFORE = LocalDateTime.now().minusWeeks(1).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     private final String URL = "http://test.biz.ua";
+    private PunchData punch = new PunchData();
 
     @BeforeMethod
     public void setUp(){
@@ -37,7 +37,7 @@ public class CheckEmptyPunchesTest {
         OrangeLoginPage loginPage = new OrangeLoginPage(driver);
         OrangeDashboardPage dashboardPage = loginPage.loginCorrect(USERNAME, PASSWORD);
         OrangeTimePage timePage = dashboardPage.toTimeModulePage();
-        timePage.checkEmptyRecordsTable(WEEK_BEFORE);
+        timePage.checkEmptyRecordsTable(punch.getWeekAfter());
         Assert.assertTrue(timePage.getEmptyRecord().isDisplayed(), "Record table isn't empty!");
     }
 }

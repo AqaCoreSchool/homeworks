@@ -1,5 +1,6 @@
-package orangehrm;
+package pages;
 
+import data.UserData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -64,20 +65,20 @@ public class OrangeMyInfoPage {
         return this;
     }
 
-    public OrangeMyInfoPage setGender(){
+    public OrangeMyInfoPage setGenderMale(){
         genderMaleRadioBtn.click();
         return this;
     }
 
-    public OrangeMyInfoPage setMartialStatus(){
+    public OrangeMyInfoPage setMartialStatus(int option){
         Select maritalStatusSelect = new Select(maritalStatus);
-        maritalStatusSelect.selectByIndex(1);
+        maritalStatusSelect.selectByIndex(option);
         return this;
     }
 
-    public OrangeMyInfoPage setNationality(){
+    public OrangeMyInfoPage setNationality(String nationalityValue){
         Select nationalitySelect = new Select(nationality);
-        nationalitySelect.selectByValue("185");
+        nationalitySelect.selectByValue(nationalityValue);
         return this;
     }
 
@@ -88,20 +89,20 @@ public class OrangeMyInfoPage {
     }
 
     public OrangeMyInfoPage clickSave(){
-        editWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("btnSave")));
+        editWait.until(ExpectedConditions.visibilityOf(editBtn));
         editBtn.click();
         saveWait.until(ExpectedConditions.invisibilityOfElementLocated(By.className("message.success.fadable")));
         return this;
     }
 
-    public OrangeMyInfoPage editUserData(String name, String surname, String date){
+    public OrangeMyInfoPage editUserData(UserData userData){
         return clickEdit()
-                .enterName(name)
-                .enterSurname(surname)
-                .setBirthDate(date)
-                .setGender()
-                .setMartialStatus()
-                .setNationality()
+                .enterName(userData.getFirstName())
+                .enterSurname(userData.getLastName())
+                .setBirthDate(userData.getBirthdayDate())
+                .setGenderMale()
+                .setMartialStatus(userData.getMaritalStatus())
+                .setNationality(userData.getNationality())
                 .clickSave();
     }
 

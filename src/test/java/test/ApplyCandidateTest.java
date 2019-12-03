@@ -1,7 +1,10 @@
+package test;
+
+import data.CandidateData;
 import io.github.bonigarcia.wdm.WebDriverManager;
-import orangehrm.OrangeDashboardPage;
-import orangehrm.OrangeLoginPage;
-import orangehrm.OrangeRecruitmentPage;
+import pages.OrangeDashboardPage;
+import pages.OrangeLoginPage;
+import pages.OrangeRecruitmentPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
@@ -13,15 +16,8 @@ public class ApplyCandidateTest {
     private WebDriver driver;
     private final String USERNAME = "TestUser06";
     private final String PASSWORD = "Vfylhfujhf!1";
-    private final String CANDIDATE_NAME = "John";
-    private final String CANDIDATE_LASTNAME = "Doe";
-    private final String CANDIDATE_MAIL = "mail@mail.com";
-    private final String CONTACT_NUMBER = "0688442616";
-    private final String VACANCY_NAME = "Test vacancy";
-    private final String MANAGER_NAME = "Nazariy Kushnir";
-    private final String DESCRIPTION = "Vacancy Description";
-    private final String DATE = "2019-11-30";
     private final String URL = "http://test.biz.ua";
+    private CandidateData candidateData = new CandidateData("TEST_VACANCY_IMO", "Ivan Mosiychuk");
 
     @BeforeMethod
     public void setUp(){
@@ -36,16 +32,24 @@ public class ApplyCandidateTest {
         driver.quit();
     }
 
-    @Test
+    @Test(priority = 1)
     public void applyCandidateToVacancy(){
         OrangeLoginPage loginPage = new OrangeLoginPage(driver);
         OrangeDashboardPage dashboardPage = loginPage.loginCorrect(USERNAME, PASSWORD);
         OrangeRecruitmentPage recruitmentPage = dashboardPage.toRecruitmentModulePage();
-        recruitmentPage.toCandidates().applyCandidate(CANDIDATE_NAME, CANDIDATE_LASTNAME, CANDIDATE_MAIL,
-                CONTACT_NUMBER, VACANCY_NAME, DESCRIPTION, DATE);
-        recruitmentPage.clickBackBtn().findCreatedCandidate(CANDIDATE_NAME, CANDIDATE_LASTNAME, MANAGER_NAME,
-                VACANCY_NAME, DATE);
-        Assert.assertTrue(recruitmentPage.getCreatedCandidate().isDisplayed(), "Created candidate not found!");
+        recruitmentPage.toCandidates().applyCandidate(candidateData);
+        recruitmentPage.clickBackBtn();
+        Assert.assertTrue(recruitmentPage.findCreatedCandidate(candidateData), "Created candidate not found!");
+
+    }
+
+    @Test(priority = 2)
+    public void applyCandidateForFuture(){
+        OrangeLoginPage loginPage = new OrangeLoginPage(driver);
+        OrangeDashboardPage dashboardPage = loginPage.loginCorrect(USERNAME, PASSWORD);
+        OrangeRecruitmentPage recruitmentPage = dashboardPage.toRecruitmentModulePage();
+        recruitmentPage.toCandidates().applyCandidateForFuture(candidateData);
+        Assert.assertTrue( recruitmentPage.futureDateErrorDisplayed(), "Error notification not displayed");
 
     }
 }
