@@ -21,7 +21,7 @@ public class VacanciesPageTest extends BaseTest {
                 .clickSaveBtn()
                 .clickBackBtn();
 
-        assertThat(new VacanciesPage(driver)
+        assertThat(new VacanciesPage()
                 .findVacancies(VacancyInfo.VACANCY, VacancyInfo.JOB_TITLE, VacancyInfo.HIRING_MANAGER, VacancyInfo.STATUS))
                 .as("String should contain active vacancy").isNotEmpty();
     }

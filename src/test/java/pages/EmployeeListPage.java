@@ -9,14 +9,11 @@ import org.openqa.selenium.support.PageFactory;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-public class EmployeeListPage{
+public class EmployeeListPage extends BasePage{
 
     @FindBy(tagName = "tr")
     private List<WebElement> employees;
 
-    public EmployeeListPage(WebDriver driver) {
-        PageFactory.initElements(driver, this);
-    }
 
     public String findEmployeeInfo(String firstName, String lastName, String id){
         return employees.stream()

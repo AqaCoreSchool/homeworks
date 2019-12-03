@@ -6,7 +6,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 
-public class HomePage{
+public class HomePage extends BasePage{
     private WebDriver driver;
 
     @FindBy(id = "menu_time_viewTimeModule")
@@ -33,10 +33,6 @@ public class HomePage{
     @FindBy(id = "menu_recruitment_viewJobVacancy")
     private WebElement vacancyBtn;
 
-    public HomePage(WebDriver driver) {
-        this.driver=driver;
-        PageFactory.initElements(driver, this);
-    }
 
     public HomePage clickTimeBtn() {
         timeBtn.click();
@@ -60,7 +56,7 @@ public class HomePage{
 
     public MyInfoPage clickMyInfoBtn(){
         myInfoBtn.click();
-        return new MyInfoPage(driver);
+        return new MyInfoPage();
     }
 
     public HomePage clickRecruitmentBtn(){
@@ -70,11 +66,11 @@ public class HomePage{
 
     public CandidatesPage clickCandidatesBtn(){
         candidatesBtn.click();
-        return new CandidatesPage(driver);
+        return new CandidatesPage();
     }
 
     public VacanciesPage clickVacanciesBtn(){
         vacancyBtn.click();
-        return new VacanciesPage(driver);
+        return new VacanciesPage();
     }
 }

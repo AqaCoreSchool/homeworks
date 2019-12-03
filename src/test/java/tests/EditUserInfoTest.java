@@ -14,7 +14,7 @@ public class EditUserInfoTest extends BaseTest{
                 .loginIntoSite(UserInfo.LOGIN, UserInfo.PASSWORD)
                 .clickMyInfoBtn()
                 .clickEditOrSave()
-                .clickfirstNameInput(UserInfo.NAME)
+                .clickfirstNameInput(UserInfo.firstName)
                 .clicklastNameInput(UserInfo.LASTNAME)
                 .clickIdInput(UserInfo.ID)
                 .clickGenderMale()
@@ -25,7 +25,7 @@ public class EditUserInfoTest extends BaseTest{
                 .clickPimBtn()
                 .clickEmployeeListBtn();
 
-        assertThat(new EmployeeListPage(driver).findEmployeeInfo(UserInfo.NAME, UserInfo.LASTNAME, UserInfo.ID))
+        assertThat(new EmployeeListPage().findEmployeeInfo(UserInfo.firstName, UserInfo.LASTNAME, UserInfo.ID))
                 .as("String should contain employee's name and id").isNotEmpty();
     }
 

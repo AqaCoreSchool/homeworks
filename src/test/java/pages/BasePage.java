@@ -1,14 +1,11 @@
 package pages;
 
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import apps.Application;
 import org.openqa.selenium.support.PageFactory;
 
 public class BasePage {
-    public WebDriver driver;
-    public BasePage(WebDriver driver) {
-        this.driver=driver;
-        PageFactory.initElements(driver, this);
+    public BasePage() {
+        PageFactory.initElements(Application.getDriver(), this);
     }
 }

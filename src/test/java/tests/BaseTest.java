@@ -1,5 +1,6 @@
 package tests;
 
+import apps.Application;
 import data.UserInfo;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -9,8 +10,9 @@ import pages.LoginPage;
 
 
 public class BaseTest {
-    WebDriver driver;
+
     LoginPage loginPage ;
+    WebDriver driver = Application.getDriver();
 
     @BeforeTest
     public void setup(){
@@ -19,17 +21,12 @@ public class BaseTest {
 
     @AfterTest(alwaysRun = true)
     public void shutDownDriver() {
-        if (driver != null) {
-            driver.quit();
-        }
+        Application.closeDriver();
     }
 
     public LoginPage openLoginPage(){
-        driver = new ChromeDriver();
-        System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
-        driver.manage().window().maximize();
         driver.get(UserInfo.URL);
-        return  new LoginPage(driver);
+        return  new LoginPage();
     }
 
 

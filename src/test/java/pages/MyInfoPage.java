@@ -6,7 +6,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 
-public class MyInfoPage {
+public class MyInfoPage extends BasePage{
 
     private WebDriver driver;
 
@@ -40,10 +40,6 @@ public class MyInfoPage {
     @FindBy(id = "menu_pim_viewEmployeeList")
     private WebElement employeeListBtn;
 
-    public MyInfoPage(WebDriver driver) {
-        this.driver=driver;
-        PageFactory.initElements(driver, this);
-    }
 
     public MyInfoPage clickEditOrSave(){
         editOrSaveBtn.click();
@@ -96,6 +92,6 @@ public class MyInfoPage {
 
     public EmployeeListPage clickEmployeeListBtn(){
         employeeListBtn.click();
-        return new EmployeeListPage(driver);
+        return new EmployeeListPage();
     }
 }

@@ -9,7 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-public class CandidatesPage{
+public class CandidatesPage extends BasePage{
 
     @FindBy (id = "btnAdd")
     private WebElement btnAdd;
@@ -41,9 +41,6 @@ public class CandidatesPage{
     @FindBy(tagName = "tr")
     private List<WebElement> candidatesList;
 
-    public CandidatesPage(WebDriver driver) {
-        PageFactory.initElements(driver, this);
-    }
 
     public CandidatesPage clickAddCandidate(){
         btnAdd.click();

@@ -35,13 +35,9 @@ public class VacanciesPage extends BasePage{
     @FindBy(tagName = "tr")
     private List<WebElement> vacanciesList;
 
-    public VacanciesPage(WebDriver driver) {
-        super(driver);
-    }
-
 
     public VacanciesPage clickAddBtn(){
-        Utilities.waitAndClick(driver, btnAdd);
+        Utilities.waitAndClick(btnAdd);
         return this;
     }
 
@@ -52,22 +48,22 @@ public class VacanciesPage extends BasePage{
     }
 
     public VacanciesPage vacancyNameInput(String vacancy){
-        Utilities.waitAndSendKeys(driver, inputVacancyName, vacancy);
+        Utilities.waitAndSendKeys(inputVacancyName, vacancy);
         return this;
     }
 
     public VacanciesPage hiringManagerInput(String manager){
-        Utilities.waitAndSendKeys(driver, inputHiringManager, manager);
+        Utilities.waitAndSendKeys(inputHiringManager, manager);
         return this;
     }
 
     public VacanciesPage clickSaveBtn(){
-        Utilities.waitAndClick(driver, btnSave);
+        Utilities.waitAndClick(btnSave);
         return  this;
 
     }
     public VacanciesPage clickBackBtn(){
-        Utilities.waitAndClick(driver, btnBack);
+        Utilities.waitAndClick(btnBack);
         return this;
     }
 
