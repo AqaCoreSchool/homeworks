@@ -1,19 +1,15 @@
-package pageobject.logic;
+package pages;
 
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import utils.Utilities;
 
 import java.util.List;
 import java.util.NoSuchElementException;
 
-public class VacanciesPage {
+public class VacanciesPage extends BasePage{
 
-    private WebDriverWait wait;
 
     @FindBy(id = "btnAdd")
     private WebElement btnAdd;
@@ -40,39 +36,38 @@ public class VacanciesPage {
     private List<WebElement> vacanciesList;
 
     public VacanciesPage(WebDriver driver) {
-        PageFactory.initElements(driver, this);
-        wait = new WebDriverWait(driver, 5);
+        super(driver);
     }
 
+
     public VacanciesPage clickAddBtn(){
-        btnAdd.click();
+        Utilities.waitAndClick(driver, btnAdd);
         return this;
     }
 
-    public VacanciesPage selectJobTittle(String title){
+    public VacanciesPage selectJobTittle(){
         clickJobTittle.click();
         selectJobTittle.click();
         return this;
     }
 
     public VacanciesPage vacancyNameInput(String vacancy){
-        inputVacancyName.sendKeys(vacancy);
+        Utilities.waitAndSendKeys(driver, inputVacancyName, vacancy);
         return this;
     }
 
     public VacanciesPage hiringManagerInput(String manager){
-        inputHiringManager.sendKeys(manager, Keys.ENTER);
+        Utilities.waitAndSendKeys(driver, inputHiringManager, manager);
         return this;
     }
 
     public VacanciesPage clickSaveBtn(){
-        btnSave.click();
+        Utilities.waitAndClick(driver, btnSave);
         return  this;
 
     }
     public VacanciesPage clickBackBtn(){
-        wait.until(ExpectedConditions.elementToBeClickable(btnBack));
-        btnBack.click();
+        Utilities.waitAndClick(driver, btnBack);
         return this;
     }
 
