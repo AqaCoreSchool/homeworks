@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-public class CreateVacancyPage extends BasePage{
+public class CreateVacancyPage extends BasePage {
 
     @FindBy(id = "frmAddJobVacancy")
     private WebElement vacancyForm;

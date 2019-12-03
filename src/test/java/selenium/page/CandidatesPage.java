@@ -6,7 +6,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
 
-public class CandidatesPage extends BasePage{
+public class CandidatesPage extends BasePage {
     private boolean isCreated = false;
 
     @FindBy(id = "btnAdd")

@@ -1,22 +1,21 @@
-package selenium;
+package selenium.test;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import selenium.data.UserData;
 import selenium.data.VacancyData;
-import selenium.page.VacanciesPage;
+import selenium.page.CandidatesPage;
 
-public class VacanciesPageTest extends BaseTest {
-
+public class CandidatesPageTest extends BaseTest {
     @Test
-    public void vacanciesPageTest() {
-        VacanciesPage page = getLoginPage()
+    public void candidatesPageTest() {
+        CandidatesPage page = getLoginPage()
                 .fillUsername(UserData.USER_LOGIN_NAME)
                 .fillPassword(UserData.USER_PASSWORD)
                 .clickLoginButton()
                 .moveToRecruitmentItem()
-                .clickVacanciesButton()
-                .checkVacancy(VacancyData.VACANCY_NAME, VacancyData.HIRING_MANAGER);
+                .clickCandidateListButton()
+                .checkCandidate(VacancyData.VACANCY_NAME, UserData.USER_LASTNAME);
 
         boolean isCreated = page.isCreated();
         Assert.assertTrue(isCreated);

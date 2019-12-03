@@ -6,7 +6,7 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-public class EmployeeListPage extends BasePage{
+public class EmployeeListPage extends BasePage {
 
     @FindBy(id = "resultTable")
     private WebElement resultTable;
