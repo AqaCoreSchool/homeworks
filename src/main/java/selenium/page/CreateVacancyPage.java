@@ -38,6 +38,7 @@ public class CreateVacancyPage extends BasePage{
     private WebElement successMsg;
 
     public CreateVacancyPage fillJobTitle(String title) {
+        wait.until(ExpectedConditions.visibilityOf(jobTitle));
         jobTitle.sendKeys(title);
         return this;
     }

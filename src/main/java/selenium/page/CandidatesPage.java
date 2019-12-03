@@ -1,6 +1,5 @@
 package selenium.page;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -13,7 +12,7 @@ public class CandidatesPage extends BasePage{
     @FindBy(id = "btnAdd")
     private WebElement btnAdd;
 
-    @FindBy(xpath = "//table[@id='resultTable']//tr[@class='odd' or @class='even']")
+    @FindBy(tagName = "tr")
     private List<WebElement> usersList;
 
     public CreateCandidatePage clickNewCandidateButton() {
@@ -24,8 +23,9 @@ public class CandidatesPage extends BasePage{
 
     public CandidatesPage checkCandidate (String candidateName, String vacancyName) {
         isCreated = usersList.stream()
-                .anyMatch(item -> item.findElements(By.xpath("./td")).get(1).getText().contains(vacancyName) &&
-                        item.findElements(By.xpath("./td")).get(2).getText().contains(candidateName));
+                .map(WebElement::getText)
+                .anyMatch(item -> item.contains(candidateName) &&
+                        item.contains(vacancyName));
         return this;
     }
 

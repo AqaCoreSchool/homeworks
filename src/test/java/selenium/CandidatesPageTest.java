@@ -15,7 +15,7 @@ public class CandidatesPageTest extends BaseTest {
                 .clickLoginButton()
                 .moveToRecruitmentItem()
                 .clickCandidateListButton()
-                .checkCandidate(VacancyData.VACANCY_NAME, UserData.USER_NAME);
+                .checkCandidate(VacancyData.VACANCY_NAME, UserData.USER_LASTNAME);
 
         boolean isCreated = page.isCreated();
         Assert.assertTrue(isCreated);
