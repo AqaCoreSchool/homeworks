@@ -1,6 +1,5 @@
 package pages;
 
-import data.VacancyInfo;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -132,17 +131,29 @@ public class VacanciesPage extends MainPage {
 
     @Step
     public boolean isTitleNotSelectedErrorDisplayed(){
-        return titleNotSelected.isDisplayed();
+        try {
+            return titleNotSelected.isDisplayed();
+        }catch (org.openqa.selenium.NoSuchElementException e){
+            return false;
+        }
     }
 
     @Step
     public boolean isVacancyExistsErrorDisplayed(){
-        return vacancyExistError.isDisplayed();
+        try {
+            return vacancyExistError.isDisplayed();
+        }catch (org.openqa.selenium.NoSuchElementException e){
+            return false;
+        }
     }
 
     @Step
     public boolean isManagerInputErrorDisplayed(){
-        return invalidManagerInput.isDisplayed();
+        try {
+            return invalidManagerInput.isDisplayed();
+        }catch (org.openqa.selenium.NoSuchElementException e){
+                return false;
+        }
     }
 
 }

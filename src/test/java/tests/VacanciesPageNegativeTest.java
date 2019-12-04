@@ -2,27 +2,27 @@ package tests;
 
 import data.UserInfo;
 import data.VacancyInfo;
-import org.testng.Assert;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 import pages.VacanciesPage;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 
 public class VacanciesPageNegativeTest extends BaseTest {
 
     @Test
     public void testNegativeVacanciesPage() {
-        loginPage
+        VacanciesPage vacanciesPage = loginPage
                 .loginIntoSite(UserInfo.LOGIN, UserInfo.PASSWORD)
                 .moveToVacanciesPage()
-                .addVacancyForNegativeTest(VacancyInfo.VACANCY, "Marty Stew");
+                .addVacancyForNegativeTest(VacancyInfo.VACANCY, "Marty Stu");
 
-        Assert.assertTrue(new VacanciesPage().isTitleNotSelectedErrorDisplayed(),
-                "Validation error not displayed. That was the correct input");
-        Assert.assertTrue(new VacanciesPage().isVacancyExistsErrorDisplayed(),
-                "Validation error not displayed. That was the correct input");
-        Assert.assertTrue(new VacanciesPage().isManagerInputErrorDisplayed(),
-                "Validation error not displayed. That was the correct input");
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertTrue(vacanciesPage.isTitleNotSelectedErrorDisplayed(),
+                "Validation error isn't displayed. Title was selected");
+        softAssert.assertTrue(vacanciesPage.isVacancyExistsErrorDisplayed(),
+                "Validation error isn't displayed. Vacancy wasn't exists");
+        softAssert.assertTrue(vacanciesPage.isManagerInputErrorDisplayed(),
+                "Validation error isn't displayed. Manager's name input was correct");
+        softAssert.assertAll();
     }
 }

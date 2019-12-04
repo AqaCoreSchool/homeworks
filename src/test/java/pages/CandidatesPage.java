@@ -6,8 +6,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import utils.Utils;
 
-
-import java.time.LocalDate;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -117,7 +115,7 @@ public class CandidatesPage extends MainPage{
     public CandidatesPage addCandidateInfoForNegativeTest(){
         clickAddCandidate();
         emailInput("email");
-        phoneNumberInput("2222222222222222222222222222222222222222222222222222222222222222222222222222222222222222");
+        phoneNumberInput("222222222222222222222222222222222222222222222222222222222222222222222222222222222222");
         clickConsentAndSave();
         return this;
     }
@@ -135,22 +133,42 @@ public class CandidatesPage extends MainPage{
     }
     @Step
     public boolean isCandidateNameErrorDisplayed(){
-        return firstNameInputError.isDisplayed();
+        try{
+            return firstNameInputError.isDisplayed();
+        }catch (org.openqa.selenium.NoSuchElementException e){
+            return false;
+        }
     }
     @Step
     public boolean isCandidateLastNameErrorDisplayed(){
-        return firstNameInputError.isDisplayed();
+        try{
+            return lastNameInputError.isDisplayed();
+        }catch(org.openqa.selenium.NoSuchElementException e){
+            return false;
+        }
     }
     @Step
     public boolean isFutureDataErrorDisplayed(){
-        return futureDataError.isDisplayed();
+        try{
+            return futureDataError.isDisplayed();
+        }catch(org.openqa.selenium.NoSuchElementException e){
+            return false;
+        }
     }
     @Step
     public boolean isEmailFormatErrorDisplayed(){
-        return emailFormatError.isDisplayed();
+        try{
+            return emailFormatError.isDisplayed();
+        }catch(org.openqa.selenium.NoSuchElementException e){
+            return false;
+        }
     }
     @Step
     public boolean isPhoneFormatErrorDisplayed(){
-        return phoneFormatError.isDisplayed();
+        try{
+            return phoneFormatError.isDisplayed();
+        }catch(org.openqa.selenium.NoSuchElementException e){
+            return false;
+        }
     }
 }

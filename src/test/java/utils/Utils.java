@@ -12,14 +12,14 @@ public class Utils {
 
     public static void waitAndClick(WebElement element){
         WebDriverWait wait;
-        wait = new WebDriverWait(Application.getDriver(), 5);
+        wait = new WebDriverWait(Application.getDriver(), 10);
         wait.until(ExpectedConditions.elementToBeClickable(element));
         element.click();
     }
 
     public static void waitAndSendKeys(WebElement element, String inputString){
         WebDriverWait wait;
-        wait = new WebDriverWait(Application.getDriver(), 5);
+        wait = new WebDriverWait(Application.getDriver(), 10);
         wait.until(ExpectedConditions.elementToBeClickable(element));
         element.clear();
         element.sendKeys(inputString);

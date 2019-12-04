@@ -41,6 +41,12 @@ public class MainPage extends BasePage{
     @FindBy(id = "menu_recruitment_viewJobVacancy")
     private WebElement vacancyBtn;
 
+    @FindBy(id = "menu_pim_viewPimModule")
+    private WebElement pimBtn;
+
+    @FindBy(id = "menu_pim_viewEmployeeList")
+    private WebElement employeeListBtn;
+
 
     public MainPage clickTimeBtn() {
         Utils.waitAndClick(timeBtn);
@@ -65,6 +71,13 @@ public class MainPage extends BasePage{
     public MainPage clickRecruitmentBtn(){
         Utils.waitAndClick(recruitmentBtn);
         return this;
+    }
+
+    @Step
+    public EmployeeListPage moveToEmployeeListPage(){
+        Utils.waitAndClick(pimBtn);
+        Utils.waitAndClick(employeeListBtn);
+        return new EmployeeListPage();
     }
 
     @Step

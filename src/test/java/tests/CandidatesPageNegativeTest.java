@@ -1,27 +1,29 @@
 package tests;
 
 import data.UserInfo;
-import org.testng.Assert;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 import pages.CandidatesPage;
 
 public class CandidatesPageNegativeTest extends BaseTest {
 
     @Test
     public void testNegativeCandidatesPage() {
-        loginPage
+        CandidatesPage candidatesPage = loginPage
                 .loginIntoSite(UserInfo.LOGIN, UserInfo.PASSWORD)
                 .moveToCandidatesPage()
                 .addCandidateInfoForNegativeTest();
 
 
-        Assert.assertTrue(new CandidatesPage().isCandidateNameErrorDisplayed(),
-                "Input was correct, error not Displayed");
-        Assert.assertTrue(new CandidatesPage().isCandidateLastNameErrorDisplayed(),
-                "Input was correct, error not Displayed");
-        Assert.assertTrue(new CandidatesPage().isEmailFormatErrorDisplayed(),
-                "Input was correct, error not Displayed");
-        Assert.assertTrue(new CandidatesPage().isPhoneFormatErrorDisplayed(),
-                "Input was correct, error not Displayed");
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertTrue(candidatesPage.isCandidateNameErrorDisplayed(),
+                "First name input was correct, error isn't displayed");
+        softAssert.assertTrue(candidatesPage.isCandidateLastNameErrorDisplayed(),
+                "Last name input was correct, error isn't displayed");
+        softAssert.assertTrue(candidatesPage.isEmailFormatErrorDisplayed(),
+                "Email input was correct, error isn't displayed");
+        softAssert.assertTrue(candidatesPage.isPhoneFormatErrorDisplayed(),
+                "Phone input was correct, error isn't displayed");
+        softAssert.assertAll();
     }
 }

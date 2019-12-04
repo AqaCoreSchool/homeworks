@@ -10,12 +10,13 @@ public class EditUserInfoTest extends BaseTest{
 
     @Test
     public void  testEditUser() {
-        loginPage
+        EmployeeListPage employeeListPage = loginPage
                 .loginIntoSite(UserInfo.LOGIN, UserInfo.PASSWORD)
                 .moveToMyInfoPage()
-                .editInfo();
+                .editInfo()
+                .moveToEmployeeListPage();
 
-        assertThat(new EmployeeListPage().findEmployeeInfo(UserInfo.FIRST_NAME, UserInfo.LAST_NAME, UserInfo.ID))
+        assertThat(employeeListPage.findEmployeeInfo(UserInfo.FIRST_NAME, UserInfo.LAST_NAME, UserInfo.ID))
                 .as("String should contain employee's name and id").isNotEmpty();
     }
 }

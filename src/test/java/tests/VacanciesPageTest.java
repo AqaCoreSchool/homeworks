@@ -11,12 +11,12 @@ public class VacanciesPageTest extends BaseTest {
 
     @Test
     public void testVacanciesPage() {
-        loginPage
+        VacanciesPage vacanciesPage = loginPage
                 .loginIntoSite(UserInfo.LOGIN, UserInfo.PASSWORD)
                 .moveToVacanciesPage()
                 .addNewVacancy(VacancyInfo.VACANCY, VacancyInfo.HIRING_MANAGER);
 
-        assertThat(new VacanciesPage()
+        assertThat(vacanciesPage
                 .findVacancies(VacancyInfo.VACANCY, VacancyInfo.JOB_TITLE, VacancyInfo.HIRING_MANAGER, VacancyInfo.STATUS))
                 .as("String should contain active vacancy").isNotEmpty();
     }

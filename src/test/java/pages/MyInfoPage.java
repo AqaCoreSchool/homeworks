@@ -34,12 +34,6 @@ public class MyInfoPage extends MainPage{
     @FindBy(id = "personal_DOB")
     private WebElement dateOfBirthInput;
 
-    @FindBy(id = "menu_pim_viewPimModule")
-    private WebElement pimBtn;
-
-    @FindBy(id = "menu_pim_viewEmployeeList")
-    private WebElement employeeListBtn;
-
 
     public MyInfoPage clickEditOrSave(){
         Utils.waitAndClick(editOrSaveBtn);
@@ -81,17 +75,6 @@ public class MyInfoPage extends MainPage{
         return this;
     }
 
-    public MyInfoPage clickPimBtn(){
-        Utils.waitAndClick(pimBtn);
-        return this;
-    }
-
-    @Step
-    public EmployeeListPage clickEmployeeListBtn(){
-        Utils.waitAndClick(employeeListBtn);
-        return new EmployeeListPage();
-    }
-
     @Step
     public MyInfoPage editInfo(){
         clickEditOrSave();
@@ -103,8 +86,6 @@ public class MyInfoPage extends MainPage{
         clickNationalityUkrainian();
         clickinputDateOfBirth(UserInfo.BIRTH_DATE);
         clickEditOrSave();
-        clickPimBtn();
-        clickEmployeeListBtn();
         return this;
     }
 }

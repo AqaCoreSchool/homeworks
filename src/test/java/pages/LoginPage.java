@@ -19,7 +19,7 @@ public class LoginPage extends BasePage{
     @FindBy(id = "welcome")
     private WebElement welcomeElement;
 
-    @Step("")
+    @Step
     public MainPage loginIntoSite(String login, String password){
         usernameField.sendKeys(login);
         passwordField.sendKeys(password);

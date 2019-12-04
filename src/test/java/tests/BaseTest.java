@@ -1,11 +1,8 @@
 package tests;
 
 import apps.Application;
-import data.UserInfo;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.*;
 import pages.LoginPage;
 
 
@@ -14,8 +11,8 @@ public class BaseTest {
     public LoginPage loginPage ;
     private WebDriver driver = Application.getDriver();
 
-    @BeforeTest
-    public void setup(){
+    @BeforeMethod
+    public void login(){
         loginPage = openLoginPage();
     }
 
@@ -26,7 +23,8 @@ public class BaseTest {
 
 
     public LoginPage openLoginPage(){
-        driver.get(UserInfo.URL);
+        String url = "http://test.biz.ua";
+        driver.get(url);
         return  new LoginPage();
     }
 

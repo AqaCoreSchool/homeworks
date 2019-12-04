@@ -11,12 +11,12 @@ public class CandidatesPageTest extends BaseTest {
 
     @Test
     public void testCandidatesPage(){
-        loginPage
+        CandidatesPage candidatesPage = loginPage
                 .loginIntoSite(UserInfo.LOGIN, UserInfo.PASSWORD)
                 .moveToCandidatesPage()
                 .addCandidateInfo();
 
-        assertThat(new CandidatesPage().findCandidate(UserInfo.FIRST_NAME, UserInfo.LAST_NAME, VacancyInfo.VACANCY))
+        assertThat(candidatesPage.findCandidate(UserInfo.FIRST_NAME, UserInfo.LAST_NAME, VacancyInfo.VACANCY))
                 .as("String should contain desired vacancy and candidate's name").isNotEmpty();
     }
 
