@@ -1,4 +1,4 @@
-package ua.testbiz.pages;
+package ua.testbiz.page;
 
 import com.github.javafaker.Faker;
 import data.Candidate;
@@ -50,6 +50,9 @@ public class RecruitmentPage {
 
     @FindBy(xpath = "//input[@id='addJobVacancy_name']")
     private WebElement vacancyNameInput;
+
+    @FindBy(xpath = "//span[@class='validation-error']")
+    public WebElement validationError;
 
     @FindBy(xpath = "//input[@id='addJobVacancy_hiringManager']")
     private WebElement managerInput;

@@ -1,7 +1,7 @@
 package ua.testbiz.page;
 
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import util.Driver;
 
@@ -13,7 +13,7 @@ public class BaseTest {
         driver = Driver.getInstance();
     }
 
-    @AfterMethod
+    @AfterSuite
     public void tearDown() {
         driver.quit();
     }

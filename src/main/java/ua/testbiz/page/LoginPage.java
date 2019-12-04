@@ -1,4 +1,4 @@
-package ua.testbiz.pages;
+package ua.testbiz.page;
 
 import data.UserCredential;
 import org.openqa.selenium.WebDriver;

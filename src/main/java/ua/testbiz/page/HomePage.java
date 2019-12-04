@@ -1,4 +1,4 @@
-package ua.testbiz.pages;
+package ua.testbiz.page;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -34,7 +34,7 @@ public class HomePage {
         pimOption.click();
     }
 
-    public void selectRecruitment(){
+    public void selectRecruitment() {
         recruitmentOption.click();
     }
 }

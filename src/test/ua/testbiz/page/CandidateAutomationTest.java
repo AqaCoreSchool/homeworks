@@ -1,25 +1,12 @@
-package automation;
+package ua.testbiz.page;
 
 import data.Candidate;
-import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import ua.testbiz.pages.HomePage;
-import ua.testbiz.pages.LoginPage;
-import ua.testbiz.pages.RecruitmentPage;
-import util.Driver;
 
-public class CandidateAutomationTest {
-    private static WebDriver driver;
-
-    @BeforeMethod
-    public void setUp() {
-        driver = Driver.getInstance();
-    }
+public class CandidateAutomationTest extends BaseTest {
 
     @org.testng.annotations.Test
-    public void test() {
+    public void addCandidate() {
         LoginPage loginPage = new LoginPage(driver);
         HomePage homePage = new HomePage(driver);
         RecruitmentPage recruitmentPage = new RecruitmentPage(driver);
@@ -38,10 +25,5 @@ public class CandidateAutomationTest {
         recruitmentPage.switchToCandidate();
 
         Assert.assertNotNull(recruitmentPage.checkCandidate(candidate), "Candidate is not found");
-    }
-
-    @AfterMethod
-    public void tearDown() {
-        driver.quit();
     }
 }
