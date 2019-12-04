@@ -6,3 +6,4 @@ allure-report/
 build/
 *.iml
 .DS_Store
+chromedriver.exe
