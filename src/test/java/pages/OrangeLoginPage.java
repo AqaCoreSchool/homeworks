@@ -34,7 +34,7 @@ public class OrangeLoginPage {
 
     public OrangeDashboardPage clickLoginBtn(){
         loginBtn.click();
-        return new OrangeDashboardPage(driver);
+        return new OrangeDashboardPage();
     }
 
     public OrangeDashboardPage loginCorrect(String username, String password){
