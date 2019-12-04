@@ -2,6 +2,7 @@ package selenium.test;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import selenium.driver.Driver;
 import selenium.model.Candidate;
 import selenium.page.CreateCandidatePage;
 
@@ -24,7 +25,12 @@ public class CreateCandidatePageTest extends BaseTest {
                 .fillDate(candidate.getCandidateAppliedDate())
                 .btnSaveClick();
 
-        String successMessage = page.getSuccessMessage();
-        Assert.assertEquals(successMessage, "Successfully Saved\nClose");
+
+        if (page.checkValidation()) {
+            String successMessage = page.getSuccessMessage();
+            Assert.assertEquals(successMessage, "Successfully Saved\nClose");
+        } else {
+            Assert.fail("Check required fields! Fields message: \n" + page.getValidationMessage());
+        }
     }
 }

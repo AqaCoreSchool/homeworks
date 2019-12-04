@@ -42,67 +42,89 @@ public class HomePage extends BasePage {
     @FindBy(id = "welcome")
     private WebElement welcomeText;
 
+    @FindBy(id = "menu_admin_viewAdminModule")
+    private WebElement adminMenu;
+
+    @FindBy(id = "menu_admin_Organization")
+    private WebElement organizationMenu;
+
+    @FindBy(id = "menu_admin_viewLocations")
+    private WebElement locationsItem;
+
     public HomePage() {
         super();
         actions = new Actions(Driver.getInstance().getDriver());
     }
 
     public HomePage moveToTimeItem() {
-        wait.until(ExpectedConditions.visibilityOf(timeItem));
+        getWait().until(ExpectedConditions.visibilityOf(timeItem));
         actions.moveToElement(timeItem).perform();
         return this;
     }
 
     public HomePage moveToRecruitmentItem() {
-        wait.until(ExpectedConditions.elementToBeClickable(recruitmentItem));
+        getWait().until(ExpectedConditions.elementToBeClickable(recruitmentItem));
         actions.moveToElement(recruitmentItem).perform();
         return this;
     }
 
     public HomePage moveToPimItem() {
-        wait.until(ExpectedConditions.visibilityOf(pimButton));
+        getWait().until(ExpectedConditions.visibilityOf(pimButton));
         actions.moveToElement(pimButton).perform();
         return this;
     }
 
+    public HomePage moveToAdminMenu() {
+        getWait().until(ExpectedConditions.visibilityOf(adminMenu));
+        adminMenu.click();
+        return this;
+    }
+
+    public LocationPage moveToOrganizationMenu() {
+        actions.moveToElement(organizationMenu).perform();
+        getWait().until(ExpectedConditions.visibilityOf(locationsItem));
+        locationsItem.click();
+        return new LocationPage();
+    }
+
     public EmployeeListPage clickEmployeeListButton() {
-        wait.until(ExpectedConditions.elementToBeClickable(employeeListButton));
+        getWait().until(ExpectedConditions.elementToBeClickable(employeeListButton));
         employeeListButton.click();
         return new EmployeeListPage();
     }
 
     public CandidatesPage clickCandidateListButton() {
-        wait.until(ExpectedConditions.elementToBeClickable(candidatesButton));
+        getWait().until(ExpectedConditions.elementToBeClickable(candidatesButton));
         candidatesButton.click();
         return new CandidatesPage();
     }
 
     public VacanciesPage clickVacanciesButton() {
-        wait.until(ExpectedConditions.elementToBeClickable(candidatesButton));
+        getWait().until(ExpectedConditions.elementToBeClickable(candidatesButton));
         vacanciesButton.click();
         return new VacanciesPage();
     }
 
     public HomePage moveMenuAttendanceItem() {
-        wait.until(ExpectedConditions.visibilityOf(attendanceItem));
+        getWait().until(ExpectedConditions.visibilityOf(attendanceItem));
         actions.moveToElement(attendanceItem).perform();
         return this;
     }
 
     public PunchInOutPage clickPunchIn() {
-        wait.until(ExpectedConditions.elementToBeClickable(punchInOutButton));
+        getWait().until(ExpectedConditions.elementToBeClickable(punchInOutButton));
         punchInOutButton.click();
         return new PunchInOutPage();
     }
 
     public MyRecordsPage clickMyRecords() {
-        wait.until(ExpectedConditions.elementToBeClickable(myRecordsButton));
+        getWait().until(ExpectedConditions.elementToBeClickable(myRecordsButton));
         myRecordsButton.click();
         return new MyRecordsPage();
     }
 
     public MyInfoPage clickMyInfo() {
-        wait.until(ExpectedConditions.elementToBeClickable(myInfoButton));
+        getWait().until(ExpectedConditions.elementToBeClickable(myInfoButton));
         myInfoButton.click();
         return new MyInfoPage();
     }

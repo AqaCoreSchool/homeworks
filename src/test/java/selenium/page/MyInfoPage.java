@@ -112,7 +112,7 @@ public class MyInfoPage extends BasePage {
     }
 
     public MyInfoPage btnClick() {
-        wait.until(ExpectedConditions.elementToBeClickable(btnSave));
+        getWait().until(ExpectedConditions.elementToBeClickable(btnSave));
         btnSave.click();
         return this;
     }

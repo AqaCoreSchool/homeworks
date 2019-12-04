@@ -16,7 +16,7 @@ public class CandidatesPage extends BasePage {
     private List<WebElement> usersList;
 
     public CreateCandidatePage clickNewCandidateButton() {
-        wait.until(ExpectedConditions.elementToBeClickable(btnAdd));
+        getWait().until(ExpectedConditions.elementToBeClickable(btnAdd));
         btnAdd.click();
         return new CreateCandidatePage();
     }

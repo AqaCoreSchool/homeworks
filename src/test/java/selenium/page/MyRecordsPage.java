@@ -32,19 +32,19 @@ public class MyRecordsPage extends BasePage {
     private By lastRecordRow = By.xpath("./td");
 
     public MyRecordsPage clearAttendanceDate() {
-        wait.until(ExpectedConditions.visibilityOf(attendanceDate));
+        getWait().until(ExpectedConditions.visibilityOf(attendanceDate));
         attendanceDate.clear();
         return this;
     }
 
     public MyRecordsPage fillAttendanceDate(String date) {
-        wait.until(ExpectedConditions.visibilityOf(attendanceDate));
+        getWait().until(ExpectedConditions.visibilityOf(attendanceDate));
         attendanceDate.sendKeys(date, Keys.ENTER);
         return this;
     }
 
     public MyRecordsPage getMyLastRecordsDetails() {
-        wait.until(ExpectedConditions.visibilityOf(employeeRecordsForm));
+        getWait().until(ExpectedConditions.visibilityOf(employeeRecordsForm));
         WebElement myLastRecordRow = recordsFormRows.get(recordsFormRows.size() - 1);
         myLastRecordDetails = myLastRecordRow.findElements(lastRecordRow);
         latestPunchIn = myLastRecordDetails.get(1).getText();
@@ -55,7 +55,7 @@ public class MyRecordsPage extends BasePage {
     }
 
     public String getRecordColumnText() {
-        wait.until(ExpectedConditions.visibilityOf(noRecordColumn));
+        getWait().until(ExpectedConditions.visibilityOf(noRecordColumn));
         return noRecordColumn.getText();
     }
 

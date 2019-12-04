@@ -25,7 +25,11 @@ public class CreateVacancyPageTest extends BaseTest {
                 .setPublishedInFeedStatus()
                 .saveVacancy();
 
-        String successMessage = page.getSuccessMessage();
-        Assert.assertEquals(successMessage, "Successfully Saved\nClose");
+        if (page.checkValidation()) {
+            String successMessage = page.getSuccessMessage();
+            Assert.assertEquals(successMessage, "Successfully Saved\nClose");
+        } else {
+            Assert.fail("Check required fields! Fields message: \n" + page.getValidationMessage());
+        }
     }
 }

@@ -10,4 +10,8 @@ public class BasePage {
         PageFactory.initElements(Driver.getInstance().getDriver(), this);
         wait = new WebDriverWait(Driver.getInstance().getDriver(), 10);
     }
+
+    public WebDriverWait getWait() {
+        return wait;
+    }
 }

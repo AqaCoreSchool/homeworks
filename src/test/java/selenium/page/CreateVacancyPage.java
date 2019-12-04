@@ -4,6 +4,10 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import selenium.common.Utils;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class CreateVacancyPage extends BasePage {
 
@@ -37,8 +41,11 @@ public class CreateVacancyPage extends BasePage {
     @FindBy(xpath = "//div[@class='message success fadable']")
     private WebElement successMsg;
 
+    @FindBy(className = "validation-error")
+    private List<WebElement> requiredFields;
+
     public CreateVacancyPage fillJobTitle(String title) {
-        wait.until(ExpectedConditions.visibilityOf(jobTitle));
+        getWait().until(ExpectedConditions.visibilityOf(jobTitle));
         jobTitle.sendKeys(title);
         return this;
     }
@@ -78,13 +85,26 @@ public class CreateVacancyPage extends BasePage {
     }
 
     public CreateVacancyPage saveVacancy() {
-        wait.until(ExpectedConditions.elementToBeClickable(btnSave));
+        getWait().until(ExpectedConditions.elementToBeClickable(btnSave));
         btnSave.click();
         return this;
     }
 
     public String getSuccessMessage() {
-        wait.until(ExpectedConditions.visibilityOf(successMsg));
+        getWait().until(ExpectedConditions.visibilityOf(successMsg));
         return successMsg.getText();
+    }
+
+    public boolean checkValidation() {
+        return requiredFields.isEmpty();
+    }
+
+    public String getValidationMessage() {
+        return requiredFields.stream()
+                .map(WebElement::getText)
+                .filter(message -> message.contains(Utils.getProperty("required")) ||
+                        message.contains(Utils.getProperty("invalid")) ||
+                        message.contains(Utils.getProperty("expectedFormat")))
+                .collect(Collectors.joining("\n"));
     }
 }

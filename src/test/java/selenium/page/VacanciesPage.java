@@ -16,7 +16,7 @@ public class VacanciesPage extends BasePage {
     private List<WebElement> resultList;
 
     public CreateVacancyPage clickNewVacancyButton() {
-        wait.until(ExpectedConditions.elementToBeClickable(btnAdd));
+        getWait().until(ExpectedConditions.elementToBeClickable(btnAdd));
         btnAdd.click();
         return new CreateVacancyPage();
     }

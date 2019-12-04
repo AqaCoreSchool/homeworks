@@ -22,24 +22,24 @@ public class PunchInOutPage extends BasePage {
     private WebElement successMsg;
 
     public String getCurrentDateLabel() {
-        wait.until(ExpectedConditions.visibilityOf(currentDateLabel));
+        getWait().until(ExpectedConditions.visibilityOf(currentDateLabel));
         return currentDateLabel.getText();
     }
 
     public PunchInOutPage fillTextArea(String note) {
-        wait.until(ExpectedConditions.visibilityOf(noteTextArea));
+        getWait().until(ExpectedConditions.visibilityOf(noteTextArea));
         noteTextArea.sendKeys(note);
         return this;
     }
 
     public PunchInOutPage clickPunchButton() {
-        wait.until(ExpectedConditions.elementToBeClickable(btnPunch));
+        getWait().until(ExpectedConditions.elementToBeClickable(btnPunch));
         btnPunch.click();
         return this;
     }
 
     public String getSuccessMessage() {
-        wait.until(ExpectedConditions.visibilityOf(successMsg));
+        getWait().until(ExpectedConditions.visibilityOf(successMsg));
         return successMsg.getText();
     }
 }

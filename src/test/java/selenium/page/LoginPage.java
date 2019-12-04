@@ -16,19 +16,19 @@ public class LoginPage extends BasePage {
     private WebElement loginButton;
 
     public LoginPage fillUsername(String name) {
-        wait.until(ExpectedConditions.elementToBeClickable(usernameField));
+        getWait().until(ExpectedConditions.elementToBeClickable(usernameField));
         usernameField.sendKeys(name);
         return this;
     }
 
     public LoginPage fillPassword(String password) {
-        wait.until(ExpectedConditions.elementToBeClickable(passwordField));
+        getWait().until(ExpectedConditions.elementToBeClickable(passwordField));
         passwordField.sendKeys(password);
         return this;
     }
 
     public HomePage clickLoginButton() {
-        wait.until(ExpectedConditions.elementToBeClickable(loginButton));
+        getWait().until(ExpectedConditions.elementToBeClickable(loginButton));
         loginButton.click();
 
         return new HomePage();
