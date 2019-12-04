@@ -1,23 +1,21 @@
-package orangetest;
+package orangetest.pages;
 
+import io.qameta.allure.Step;
+import orangetest.data.User;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
-public class EditUserPage {
+public class EditUserPage extends BasePage {
     private static final String FIRST_NAME = "Mariana";
     private static final String LAST_NAME = "Mykytovych";
     private static final String MIDDLE_NAME = "Romanivna";
     private static final String BIRTHDAY = "1993-09-07";
-    @FindBy(xpath = "//b[contains(text(),'PIM')]")
-    WebElement pimMenuItem;
-    @FindBy(xpath = "//a[@id='menu_pim_viewEmployeeList']")
-    WebElement viewEmployeeList;
+
+
     @FindBy(xpath = "//input[@id='btnSave']")
     WebElement saveEditButton;
     @FindBy(xpath = "//input[@id='personal_optGender_2']")
@@ -39,32 +37,37 @@ public class EditUserPage {
     @FindBy(linkText = LAST_NAME)
     WebElement myUser;
 
-    public EditUserPage(WebDriver driver) {
-        PageFactory.initElements(driver, this);
+    User user = new User();
+
+    public EditUserPage() {
+        super();
     }
 
-    public void editUser() {
+    @Step("Editing an Existing User")
+    public EditUserPage editUser() {
         pimMenuItem.click();
         viewEmployeeList.click();
         myUser.click();
         saveEditButton.click();
         calendar.click();
         calendar.clear();
-        calendar.sendKeys(BIRTHDAY, Keys.ENTER);
+        calendar.sendKeys(user.getBirthday(), Keys.ENTER);
         nationality.click();
         nationality.findElement(By.xpath("//option[contains(text(),'Ukrainian')]")).click();
         marital.click();
         marital.findElement(By.xpath("//option[contains(text(),'Other')]")).click();
         gender.click();
         firstName.clear();
-        firstName.sendKeys(FIRST_NAME);
+        firstName.sendKeys(user.getFirstName());
         lastName.clear();
-        lastName.sendKeys(LAST_NAME);
+        lastName.sendKeys(user.getLastName());
         middleName.clear();
-        middleName.sendKeys(MIDDLE_NAME);
+        middleName.sendKeys(user.getMiddleName());
         saveEditButton.click();
+        return this;
     }
 
+    @Step("Checking if all changes are saved after editing")
     public boolean checkEditedUser() {
         pimMenuItem.click();
         viewEmployeeList.click();

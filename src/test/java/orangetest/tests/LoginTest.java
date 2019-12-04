@@ -1,28 +1,29 @@
-package orangetest;
+package orangetest.tests;
 
-import org.openqa.selenium.By;
+import orangetest.utils.Application;
 import org.testng.Assert;
+import org.testng.annotations.AfterSuite;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-public class LoginTest extends BaseTest{
+public class LoginTest extends BaseTest {
     public static final String PASSWORD = "Vfylhfujhf!1";
     public static final String LOGIN = "TestUser05";
 
     @BeforeTest
-    public void beforeClass() {
+    public void beforeTest() {
         loginPage = openLoginPage();
     }
 
     @Test
     public void loginTest() {
         loginPage.loginIntoSystem(LOGIN, PASSWORD);
-        Assert.assertTrue((driver.findElements(By.xpath("//a[@id='welcome']")).size() > 0));
+        Assert.assertTrue(loginPage.checkLogin());
     }
 
-    @AfterTest
-    public void tearDown(){
-        //driver.close();
+    @AfterSuite
+    public void close() {
+        Application.closeDriver();
     }
 }

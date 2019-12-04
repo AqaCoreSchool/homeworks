@@ -1,26 +1,22 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
-<suite name="orangetest" verbose="1" >
-    <test name="orangetest.PunchInOutTest" >
-        <classes> <class name="orangetest.PunchInOutTest">
-        </class>
+<suite name="orangetest" verbose="1">
+    <test name="Home task Selenium">
+        <classes>
+            <class name="orangetest.tests.PunchInOutTest"/>
+            <class name="orangetest.tests.CheckPunchOtherWeeksTest"/>
+            <class name="orangetest.tests.EditUserTest"/>
+            <class name="orangetest.tests.AddCandidateTest"/>
+            <class name="orangetest.tests.AddVacancyTest"/>
         </classes>
     </test>
-    <test name="orangetest.CheckPunchOtherWeeksTest" >
-        <classes> <class name="orangetest.CheckPunchOtherWeeksTest">
-        </class>
-        </classes>
-    </test>
-    <test name="orangetest.EditUserTest" >
-        <classes> <class name="orangetest.EditUserTest"/>
-        </classes>
-    </test>
-    <test name="orangetest.AddVacanciesTest" >
-        <classes> <class name="orangetest.AddVacanciesTest"/>
-        </classes>
-    </test>
-    <test name="orangetest.AddCandidatesTest" >
-        <classes> <class name="orangetest.AddCandidatesTest"/>
+    <test name="Home task Thread Local">
+        <classes>
+            <class name="orangetest.tests.AddCandidateTest"/>
+            <class name="orangetest.tests.AddVacancyTest"/>
+            <class name="orangetest.tests.AddLocationTest"/>
+            <class name="orangetest.tests.AddEmptyCandidateTest"/>
+            <class name="orangetest.tests.AddEmptyVacancyTest"/>
         </classes>
     </test>
 </suite>
