@@ -91,8 +91,8 @@ public class CreateCandidatePage extends BasePage {
         return requiredFields.stream()
                 .map(WebElement::getText)
                 .filter(message -> message.contains(Utils.getProperty("required")) ||
-                message.contains(Utils.getProperty("invalid")) ||
-                message.contains(Utils.getProperty("expectedFormat")))
+                        message.contains(Utils.getProperty("invalid")) ||
+                        message.contains(Utils.getProperty("expectedFormat")))
                 .collect(Collectors.joining("\n"));
     }
 }
