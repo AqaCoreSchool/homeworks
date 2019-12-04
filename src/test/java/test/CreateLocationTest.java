@@ -12,29 +12,12 @@ import pages.OrangeAdminPage;
 import pages.OrangeDashboardPage;
 import pages.OrangeLoginPage;
 
-public class CreateLocationTest {
-    private WebDriver driver;
-    private final String USERNAME = "TestUser06";
-    private final String PASSWORD = "Vfylhfujhf!1";
-    private final String URL = "http://test.biz.ua";
+public class CreateLocationTest extends BaseTest{
     LocationData location = new LocationData();
-
-    @BeforeMethod
-    public void setUp(){
-        WebDriverManager.chromedriver().version("77.0.3865.40").setup();
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.get(URL);
-    }
-
-    @AfterMethod
-    public void tearDown(){
-        driver.quit();
-    }
 
     @Test(priority = 1)
     public void createVacancyTest(){
-        OrangeLoginPage loginPage = new OrangeLoginPage(driver);
+        OrangeLoginPage loginPage = openLoginPage();
         OrangeDashboardPage dashboardPage = loginPage.loginCorrect(USERNAME, PASSWORD);
         OrangeAdminPage adminPage = dashboardPage.toAdminModulePage();
         adminPage.toOrganization().toLocations().createLocation(location);
