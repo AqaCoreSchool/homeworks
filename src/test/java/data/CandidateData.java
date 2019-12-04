@@ -15,9 +15,8 @@ public class CandidateData {
     private String hiringManager;
     private String comment;
     private String date;
-    private String futureDate;
 
-    public CandidateData(String vacancyName, String hiringManager) {
+    public CandidateData(String vacancyName, String hiringManager, String date) {
         this.firstName = faker.name().firstName();
         this.lastName = faker.name().lastName();
         this.email = faker.internet().emailAddress();
@@ -25,8 +24,7 @@ public class CandidateData {
         this.vacancyName = vacancyName;
         this.hiringManager = hiringManager;
         this.comment = faker.lorem().sentence(3);
-        this.date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        this.futureDate = LocalDateTime.now().plusDays(1).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        this.date = date;
     }
 
     public String getFirstName() {
@@ -61,7 +59,4 @@ public class CandidateData {
         return date;
     }
 
-    public String getFutureDate() {
-        return futureDate;
-    }
 }

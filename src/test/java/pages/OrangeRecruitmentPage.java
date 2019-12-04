@@ -235,20 +235,6 @@ public class OrangeRecruitmentPage extends BasePage{
                 .clickSaveBtn();
     }
 
-    public OrangeRecruitmentPage applyCandidateForFuture(CandidateData candidateApplication){
-        clickAddBtn()
-                .setName(candidateApplication.getFirstName())
-                .setLastName(candidateApplication.getLastName())
-                .setEmail(candidateApplication.getEmail())
-                .setContact(candidateApplication.getContactNo())
-                .selectVacancyByName(candidateApplication.getVacancyName())
-                .addComment(candidateApplication.getComment())
-                .allowKeepData()
-                .setApplicationDate(candidateApplication.getFutureDate())
-                .clickSaveBtn();
-        return this;
-    }
-
     public boolean futureDateErrorDisplayed(){
         return futureDateError.isDisplayed() && futureDateError.getText().equals("Should be less than current date");
     }
