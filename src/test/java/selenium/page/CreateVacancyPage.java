@@ -3,8 +3,8 @@ package selenium.page;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import selenium.common.Utils;
+import selenium.common.Wait;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -45,7 +45,7 @@ public class CreateVacancyPage extends BasePage {
     private List<WebElement> requiredFields;
 
     public CreateVacancyPage fillJobTitle(String title) {
-        getWait().until(ExpectedConditions.visibilityOf(jobTitle));
+        Wait.waitForVisible(jobTitle);
         jobTitle.sendKeys(title);
         return this;
     }
@@ -85,13 +85,13 @@ public class CreateVacancyPage extends BasePage {
     }
 
     public CreateVacancyPage saveVacancy() {
-        getWait().until(ExpectedConditions.elementToBeClickable(btnSave));
+        Wait.waitForElementToBeClickable(btnSave);
         btnSave.click();
         return this;
     }
 
     public String getSuccessMessage() {
-        getWait().until(ExpectedConditions.visibilityOf(successMsg));
+        Wait.waitForVisible(successMsg);
         return successMsg.getText();
     }
 

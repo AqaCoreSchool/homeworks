@@ -4,7 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
+import selenium.common.Wait;
 
 import java.util.List;
 
@@ -32,19 +32,18 @@ public class MyRecordsPage extends BasePage {
     private By lastRecordRow = By.xpath("./td");
 
     public MyRecordsPage clearAttendanceDate() {
-        getWait().until(ExpectedConditions.visibilityOf(attendanceDate));
+        Wait.waitForVisible(attendanceDate);
         attendanceDate.clear();
         return this;
     }
 
     public MyRecordsPage fillAttendanceDate(String date) {
-        getWait().until(ExpectedConditions.visibilityOf(attendanceDate));
         attendanceDate.sendKeys(date, Keys.ENTER);
         return this;
     }
 
     public MyRecordsPage getMyLastRecordsDetails() {
-        getWait().until(ExpectedConditions.visibilityOf(employeeRecordsForm));
+        Wait.waitForVisible(employeeRecordsForm);
         WebElement myLastRecordRow = recordsFormRows.get(recordsFormRows.size() - 1);
         myLastRecordDetails = myLastRecordRow.findElements(lastRecordRow);
         latestPunchIn = myLastRecordDetails.get(1).getText();
@@ -55,7 +54,7 @@ public class MyRecordsPage extends BasePage {
     }
 
     public String getRecordColumnText() {
-        getWait().until(ExpectedConditions.visibilityOf(noRecordColumn));
+        Wait.waitForVisible(noRecordColumn);
         return noRecordColumn.getText();
     }
 

@@ -3,8 +3,8 @@ package selenium.page;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import selenium.common.Wait;
 
 import java.util.List;
 
@@ -112,7 +112,7 @@ public class MyInfoPage extends BasePage {
     }
 
     public MyInfoPage btnClick() {
-        getWait().until(ExpectedConditions.elementToBeClickable(btnSave));
+        Wait.waitForElementToBeClickable(btnSave);
         btnSave.click();
         return this;
     }

@@ -2,7 +2,7 @@ package selenium.page;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
+import selenium.common.Wait;
 
 public class LoginPage extends BasePage {
 
@@ -16,19 +16,19 @@ public class LoginPage extends BasePage {
     private WebElement loginButton;
 
     public LoginPage fillUsername(String name) {
-        getWait().until(ExpectedConditions.elementToBeClickable(usernameField));
+        Wait.waitForElementToBeClickable(usernameField);
         usernameField.sendKeys(name);
         return this;
     }
 
     public LoginPage fillPassword(String password) {
-        getWait().until(ExpectedConditions.elementToBeClickable(passwordField));
+        Wait.waitForElementToBeClickable(passwordField);
         passwordField.sendKeys(password);
         return this;
     }
 
     public HomePage clickLoginButton() {
-        getWait().until(ExpectedConditions.elementToBeClickable(loginButton));
+        Wait.waitForElementToBeClickable(loginButton);
         loginButton.click();
 
         return new HomePage();

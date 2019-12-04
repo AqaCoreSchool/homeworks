@@ -2,7 +2,6 @@ package selenium.test;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import selenium.driver.Driver;
 import selenium.model.Candidate;
 import selenium.page.CreateCandidatePage;
 

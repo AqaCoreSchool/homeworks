@@ -3,7 +3,7 @@ package selenium.page;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
+import selenium.common.Wait;
 
 public class CreateLocationPage extends BasePage {
 
@@ -26,6 +26,7 @@ public class CreateLocationPage extends BasePage {
     private WebElement btnSave;
 
     public CreateLocationPage fillLocationName(String name) {
+        Wait.waitForVisible(locationCity);
         locationName.sendKeys(name);
         return this;
     }
@@ -46,7 +47,7 @@ public class CreateLocationPage extends BasePage {
     }
 
     public CreateLocationPage saveLocation() {
-        getWait().until(ExpectedConditions.visibilityOf(btnSave));
+        Wait.waitForVisible(btnSave);
         btnSave.click();
         return this;
     }

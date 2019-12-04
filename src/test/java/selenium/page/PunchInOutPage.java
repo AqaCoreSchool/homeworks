@@ -3,6 +3,7 @@ package selenium.page;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import selenium.common.Wait;
 
 public class PunchInOutPage extends BasePage {
 
@@ -22,24 +23,24 @@ public class PunchInOutPage extends BasePage {
     private WebElement successMsg;
 
     public String getCurrentDateLabel() {
-        getWait().until(ExpectedConditions.visibilityOf(currentDateLabel));
+        Wait.waitForVisible(currentDateLabel);
         return currentDateLabel.getText();
     }
 
     public PunchInOutPage fillTextArea(String note) {
-        getWait().until(ExpectedConditions.visibilityOf(noteTextArea));
+        Wait.waitForVisible(noteTextArea);
         noteTextArea.sendKeys(note);
         return this;
     }
 
     public PunchInOutPage clickPunchButton() {
-        getWait().until(ExpectedConditions.elementToBeClickable(btnPunch));
+        Wait.waitForElementToBeClickable(btnPunch);
         btnPunch.click();
         return this;
     }
 
     public String getSuccessMessage() {
-        getWait().until(ExpectedConditions.visibilityOf(successMsg));
+        Wait.waitForVisible(successMsg);
         return successMsg.getText();
     }
 }

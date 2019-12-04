@@ -2,7 +2,7 @@ package selenium.page;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
+import selenium.common.Wait;
 
 import java.util.List;
 
@@ -16,7 +16,7 @@ public class CandidatesPage extends BasePage {
     private List<WebElement> usersList;
 
     public CreateCandidatePage clickNewCandidateButton() {
-        getWait().until(ExpectedConditions.elementToBeClickable(btnAdd));
+        Wait.waitForElementToBeClickable(btnAdd);
         btnAdd.click();
         return new CreateCandidatePage();
     }

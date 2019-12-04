@@ -3,7 +3,7 @@ package selenium.page;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
+import selenium.common.Wait;
 import selenium.driver.Driver;
 
 public class HomePage extends BasePage {
@@ -57,74 +57,74 @@ public class HomePage extends BasePage {
     }
 
     public HomePage moveToTimeItem() {
-        getWait().until(ExpectedConditions.visibilityOf(timeItem));
+        Wait.waitForVisible(timeItem);
         actions.moveToElement(timeItem).perform();
         return this;
     }
 
     public HomePage moveToRecruitmentItem() {
-        getWait().until(ExpectedConditions.elementToBeClickable(recruitmentItem));
+        Wait.waitForElementToBeClickable(recruitmentItem);
         actions.moveToElement(recruitmentItem).perform();
         return this;
     }
 
     public HomePage moveToPimItem() {
-        getWait().until(ExpectedConditions.visibilityOf(pimButton));
+        Wait.waitForVisible(pimButton);
         actions.moveToElement(pimButton).perform();
         return this;
     }
 
     public HomePage moveToAdminMenu() {
-        getWait().until(ExpectedConditions.visibilityOf(adminMenu));
+        Wait.waitForVisible(adminMenu);
         adminMenu.click();
         return this;
     }
 
     public LocationPage moveToOrganizationMenu() {
         actions.moveToElement(organizationMenu).perform();
-        getWait().until(ExpectedConditions.visibilityOf(locationsItem));
+        Wait.waitForVisible(locationsItem);
         locationsItem.click();
         return new LocationPage();
     }
 
     public EmployeeListPage clickEmployeeListButton() {
-        getWait().until(ExpectedConditions.elementToBeClickable(employeeListButton));
+        Wait.waitForElementToBeClickable(employeeListButton);
         employeeListButton.click();
         return new EmployeeListPage();
     }
 
     public CandidatesPage clickCandidateListButton() {
-        getWait().until(ExpectedConditions.elementToBeClickable(candidatesButton));
+        Wait.waitForElementToBeClickable(candidatesButton);
         candidatesButton.click();
         return new CandidatesPage();
     }
 
     public VacanciesPage clickVacanciesButton() {
-        getWait().until(ExpectedConditions.elementToBeClickable(candidatesButton));
+        Wait.waitForElementToBeClickable(vacanciesButton);
         vacanciesButton.click();
         return new VacanciesPage();
     }
 
     public HomePage moveMenuAttendanceItem() {
-        getWait().until(ExpectedConditions.visibilityOf(attendanceItem));
+        Wait.waitForVisible(attendanceItem);
         actions.moveToElement(attendanceItem).perform();
         return this;
     }
 
     public PunchInOutPage clickPunchIn() {
-        getWait().until(ExpectedConditions.elementToBeClickable(punchInOutButton));
+        Wait.waitForElementToBeClickable(punchInOutButton);
         punchInOutButton.click();
         return new PunchInOutPage();
     }
 
     public MyRecordsPage clickMyRecords() {
-        getWait().until(ExpectedConditions.elementToBeClickable(myRecordsButton));
+        Wait.waitForElementToBeClickable(myRecordsButton);
         myRecordsButton.click();
         return new MyRecordsPage();
     }
 
     public MyInfoPage clickMyInfo() {
-        getWait().until(ExpectedConditions.elementToBeClickable(myInfoButton));
+        Wait.waitForElementToBeClickable(myInfoButton);
         myInfoButton.click();
         return new MyInfoPage();
     }
