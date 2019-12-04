@@ -1,6 +1,7 @@
 package pages;
 
 import data.VacancyInfo;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import utils.Utils;
@@ -39,6 +40,15 @@ public class VacanciesPage extends MainPage {
 
     @FindBy(tagName = "tr")
     private List<WebElement> vacanciesList;
+
+    @FindBy(xpath = "//span[contains(text(),'Already exists')]")
+    private WebElement vacancyExistError;
+
+    @FindBy(xpath = "//span[contains(text(),'Invalid')]")
+    private WebElement invalidManagerInput;
+
+    @FindBy (xpath = "//form[@id='frmAddJobVacancy']//fieldset//ol")
+    private WebElement titleNotSelected;
 
 
     public VacanciesPage clickAddBtn(){
@@ -86,11 +96,12 @@ public class VacanciesPage extends MainPage {
         return this;
     }
 
-    public VacanciesPage addNewVacancy(){
+    @Step
+    public VacanciesPage addNewVacancy(String vacancy, String manager){
         clickAddBtn();
         selectJobTittle();
-        vacancyNameInput(VacancyInfo.VACANCY);
-        hiringManagerInput(VacancyInfo.HIRING_MANAGER);
+        vacancyNameInput(vacancy);
+        hiringManagerInput(manager);
         selectStatus();
         selectPublishedInFeed();
         clickSaveBtn();
@@ -98,6 +109,16 @@ public class VacanciesPage extends MainPage {
         return this;
     }
 
+    @Step
+    public VacanciesPage addVacancyForNegativeTest(String vacancy, String manager){
+        clickAddBtn();
+        vacancyNameInput(vacancy);
+        hiringManagerInput(manager);
+        clickSaveBtn();
+        return this;
+    }
+
+    @Step
     public String findVacancies(String vacancy, String jobTitle, String manager, String  status){
         return vacanciesList.stream()
                 .map(WebElement::getText)
@@ -107,6 +128,21 @@ public class VacanciesPage extends MainPage {
                 .filter(s -> s.contains(status))
                 .findAny()
                 .orElseThrow(NoSuchElementException::new);
+    }
+
+    @Step
+    public boolean isTitleNotSelectedErrorDisplayed(){
+        return titleNotSelected.isDisplayed();
+    }
+
+    @Step
+    public boolean isVacancyExistsErrorDisplayed(){
+        return vacancyExistError.isDisplayed();
+    }
+
+    @Step
+    public boolean isManagerInputErrorDisplayed(){
+        return invalidManagerInput.isDisplayed();
     }
 
 }

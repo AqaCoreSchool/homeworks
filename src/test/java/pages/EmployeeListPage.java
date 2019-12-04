@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -11,7 +12,7 @@ public class EmployeeListPage extends MainPage{
     @FindBy(tagName = "tr")
     private List<WebElement> employees;
 
-
+    @Step
     public String findEmployeeInfo(String firstName, String lastName, String id){
         return employees.stream()
                 .map(WebElement::getText)

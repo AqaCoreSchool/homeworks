@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import utils.Utils;
@@ -66,23 +67,26 @@ public class MainPage extends BasePage{
         return this;
     }
 
+    @Step
     public MyInfoPage moveToMyInfoPage(){
         Utils.waitAndClick(myInfoBtn);
         return new MyInfoPage();
     }
-
+    @Step("qwweer")
     public CandidatesPage moveToCandidatesPage(){
         Utils.waitAndClick(recruitmentBtn);
         Utils.waitAndClick(candidatesBtn);
         return new CandidatesPage();
     }
 
+    @Step
     public VacanciesPage moveToVacanciesPage(){
         Utils.waitAndClick(recruitmentBtn);
         Utils.waitAndClick(vacancyBtn);
         return new VacanciesPage();
     }
 
+    @Step
     public LocationsPage moveToLocationsPage(){
         Utils.waitAndClick(adminBtn);
         Utils.waitAndClick(organizationBtn);

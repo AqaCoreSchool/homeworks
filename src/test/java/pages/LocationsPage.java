@@ -1,6 +1,7 @@
 package pages;
 
 import data.LocationInfo;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import utils.Utils;
@@ -87,6 +88,7 @@ public class LocationsPage extends MainPage{
         return this;
     }
 
+    @Step
     public LocationsPage createLocation(){
         clickAddBtn();
         locationNameInput(LocationInfo.LOCATION_NAME);
@@ -100,6 +102,7 @@ public class LocationsPage extends MainPage{
         return this;
     }
 
+    @Step
     public boolean isLocationCreated(String name,
                                      String city, String country, String phone){
         return  locations.stream()

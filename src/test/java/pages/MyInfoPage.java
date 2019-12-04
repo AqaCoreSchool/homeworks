@@ -1,6 +1,7 @@
 package pages;
 
 import data.UserInfo;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -85,11 +86,13 @@ public class MyInfoPage extends MainPage{
         return this;
     }
 
+    @Step
     public EmployeeListPage clickEmployeeListBtn(){
         Utils.waitAndClick(employeeListBtn);
         return new EmployeeListPage();
     }
 
+    @Step
     public MyInfoPage editInfo(){
         clickEditOrSave();
         clickfirstNameInput(UserInfo.FIRST_NAME);
