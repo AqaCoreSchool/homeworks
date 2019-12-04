@@ -83,7 +83,8 @@ public class OrangeMyInfoPage extends BasePage{
     public OrangeMyInfoPage clickSave(){
         wait.until(ExpectedConditions.visibilityOf(editBtn));
         editBtn.click();
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.className("message.success.fadable")));
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(
+                By.xpath("//input[@id='btnSave' and @value='Processing")));
         return this;
     }
 
