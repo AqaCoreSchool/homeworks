@@ -1,7 +1,5 @@
 package pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -9,7 +7,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.WebDriverFactory;
 
-public class OrangeDashboardPage extends BasePage{
+
+public class BasePage {
     private WebDriverWait menuWait = new WebDriverWait(WebDriverFactory.getDriver(), 10);
 
     @FindBy(id = "menu_admin_viewAdminModule")
@@ -23,6 +22,10 @@ public class OrangeDashboardPage extends BasePage{
 
     @FindBy(id = "menu_pim_viewMyDetails")
     private WebElement myInfoModule;
+
+    public BasePage() {
+        PageFactory.initElements(WebDriverFactory.getDriver(), this);
+    }
 
     public OrangeAdminPage toAdminModulePage(){
         menuWait.until(ExpectedConditions.visibilityOf(adminModule));

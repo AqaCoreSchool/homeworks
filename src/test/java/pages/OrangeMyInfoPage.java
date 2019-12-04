@@ -10,11 +10,10 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import utils.WebDriverFactory;
 
-public class OrangeMyInfoPage {
-    private final WebDriver driver;
-    private WebDriverWait editWait;
-    private WebDriverWait saveWait;
+public class OrangeMyInfoPage extends BasePage{
+    private WebDriverWait wait = new WebDriverWait(WebDriverFactory.getDriver(), 10);
 
     @FindBy(id = "btnSave")
     private WebElement editBtn;
@@ -40,15 +39,8 @@ public class OrangeMyInfoPage {
     @FindBy(id = "menu_admin_viewAdminModule")
     private WebElement adminModule;
 
-    public OrangeMyInfoPage(WebDriver driver){
-        PageFactory.initElements(driver, this);
-        this.driver = driver;
-        editWait = new WebDriverWait(driver, 10);
-        saveWait = new WebDriverWait(driver, 10);
-    }
-
     public OrangeMyInfoPage clickEdit(){
-        editWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("btnSave")));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("btnSave")));
         editBtn.click();
         return this;
     }
@@ -89,9 +81,9 @@ public class OrangeMyInfoPage {
     }
 
     public OrangeMyInfoPage clickSave(){
-        editWait.until(ExpectedConditions.visibilityOf(editBtn));
+        wait.until(ExpectedConditions.visibilityOf(editBtn));
         editBtn.click();
-        saveWait.until(ExpectedConditions.invisibilityOfElementLocated(By.className("message.success.fadable")));
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.className("message.success.fadable")));
         return this;
     }
 
@@ -104,10 +96,5 @@ public class OrangeMyInfoPage {
                 .setMartialStatus(userData.getMaritalStatus())
                 .setNationality(userData.getNationality())
                 .clickSave();
-    }
-
-    public OrangeAdminPage toAdminPage(){
-        adminModule.click();
-        return new OrangeAdminPage(driver);
     }
 }

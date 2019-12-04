@@ -11,13 +11,14 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import utils.WebDriverFactory;
 
 import java.util.List;
 
-public class OrangeRecruitmentPage {
-    private final WebDriver driver;
+public class OrangeRecruitmentPage extends BasePage{
     private String title;
     private String recordVacancyName;
+    private WebDriverWait wait = new WebDriverWait(WebDriverFactory.getDriver(), 10);
 
     @FindBy(id = "menu_recruitment_viewJobVacancy")
     private WebElement vacancies;
@@ -89,11 +90,6 @@ public class OrangeRecruitmentPage {
     private WebElement noTitleError;
 
 
-    public OrangeRecruitmentPage(WebDriver driver){
-        PageFactory.initElements(driver, this);
-        this.driver = driver;
-    }
-
     public OrangeRecruitmentPage toVacancies(){
         vacancies.click();
         return this;
@@ -138,8 +134,7 @@ public class OrangeRecruitmentPage {
 
     public OrangeRecruitmentPage clickSaveBtn(){
         saveBtn.click();
-        WebDriverWait saveWait = new WebDriverWait(driver, 10);
-        saveWait.until(ExpectedConditions.invisibilityOfElementLocated(By.className("message.success.fadable")));
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.className("message.success.fadable")));
         return this;
     }
 

@@ -21,7 +21,7 @@ public class CandidateData {
         this.firstName = faker.name().firstName();
         this.lastName = faker.name().lastName();
         this.email = faker.internet().emailAddress();
-        this.contactNo = faker.phoneNumber().cellPhone();
+        this.contactNo = faker.idNumber().valid();
         this.vacancyName = vacancyName;
         this.hiringManager = hiringManager;
         this.comment = faker.lorem().sentence(3);

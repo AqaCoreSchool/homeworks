@@ -6,12 +6,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import utils.WebDriverFactory;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class OrangeTimePage {
-    private final WebDriver driver;
+public class OrangeTimePage extends BasePage{
     private String punchInDateTime;
     private String punchOutDateTime;
     private List<WebElement> latestRecord;
@@ -20,6 +22,7 @@ public class OrangeTimePage {
     private WebElement latestRecordPunchOut;
     private WebElement latestRecordPunchOutNote;
     private WebElement emptyRecord;
+    private WebDriverWait wait = new WebDriverWait(WebDriverFactory.getDriver(), 10);
 
     @FindBy(id = "menu_attendance_Attendance")
     private WebElement attendanceMenu;
@@ -80,10 +83,6 @@ public class OrangeTimePage {
         return emptyRecord;
     }
 
-    public OrangeTimePage(WebDriver driver){
-        PageFactory.initElements(driver, this);
-        this.driver = driver;
-    }
 
     public OrangeTimePage toAttendanceMenu(){
         attendanceMenu.click();
@@ -122,7 +121,7 @@ public class OrangeTimePage {
     public OrangeTimePage getRecordsByDate(String date){
         attendanceDate.clear();
         attendanceDate.sendKeys(date + Keys.ENTER);
-        driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("recordsTable")));
         return this;
     }
 

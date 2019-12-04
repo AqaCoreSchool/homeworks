@@ -10,8 +10,7 @@ import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
 
-public class OrangeAdminPage {
-    private final WebDriver driver;
+public class OrangeAdminPage extends BasePage{
     private WebElement user;
     private List<WebElement> userRecord;
     private String country;
@@ -70,11 +69,6 @@ public class OrangeAdminPage {
 
     public List<WebElement> getUserRecord() {
         return userRecord;
-    }
-
-    public OrangeAdminPage(WebDriver driver){
-        PageFactory.initElements(driver, this);
-        this.driver = driver;
     }
 
     public OrangeAdminPage toUserManagement(){
