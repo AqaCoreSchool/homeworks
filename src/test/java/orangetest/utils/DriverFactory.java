@@ -13,8 +13,8 @@ public class DriverFactory {
 
     public WebDriver getDriver() {
         if (driver == null) {
-            System.setProperty("webdriver.chrome.driver", PATH);
-            driver = new ChromeDriver();
+            WebDriverManager.chromedriver().setup();
+            this.driver = new ChromeDriver();
             driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
             driver.manage().window().maximize();
             return driver;
@@ -23,7 +23,7 @@ public class DriverFactory {
         }
     }
 
-    public WebDriver closeDriver() {
+    public void closeDriver() {
         try {
             if (driver != null) {
                 driver.quit();
@@ -31,6 +31,5 @@ public class DriverFactory {
         } finally {
             driver = null;
         }
-        return driver;
     }
 }

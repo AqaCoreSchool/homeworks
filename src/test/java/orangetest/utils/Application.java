@@ -9,7 +9,7 @@ public class Application {
         return driverInstance.get().getDriver();
     }
 
-    public static WebDriver closeDriver() {
-        return driverInstance.get().closeDriver();
+    public static void closeDriver() {
+        driverInstance.get().closeDriver();
     }
 }
