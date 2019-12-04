@@ -2,7 +2,7 @@ package selenium.test;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import selenium.data.UserData;
+import selenium.common.Utils;
 import selenium.page.PunchInOutPage;
 
 public class PunchInOutOperationsTest extends BaseTest {
@@ -10,15 +10,15 @@ public class PunchInOutOperationsTest extends BaseTest {
     @Test
     public void punchInOutVerifyingTest() {
         PunchInOutPage page = getLoginPage()
-                .fillUsername(UserData.USER_LOGIN_NAME)
-                .fillPassword(UserData.USER_PASSWORD)
+                .fillUsername(getUser().getUserLoginName())
+                .fillPassword(getUser().getUserPassword())
                 .clickLoginButton()
                 .moveToTimeItem()
                 .moveMenuAttendanceItem()
                 .clickPunchIn()
-                .fillTextArea(UserData.IN_NOTE)
+                .fillTextArea(Utils.getProperty("inNote"))
                 .clickPunchButton()
-                .fillTextArea(UserData.OUT_NOTE)
+                .fillTextArea(Utils.getProperty("outNote"))
                 .clickPunchButton();
 
         String successMessage = page.getSuccessMessage();

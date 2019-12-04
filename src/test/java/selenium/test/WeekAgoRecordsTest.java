@@ -3,7 +3,6 @@ package selenium.test;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import selenium.common.Utils;
-import selenium.data.UserData;
 import selenium.page.MyRecordsPage;
 
 public class WeekAgoRecordsTest extends BaseTest {
@@ -11,8 +10,8 @@ public class WeekAgoRecordsTest extends BaseTest {
     @Test
     public void weekAgoRecordsTest() {
         MyRecordsPage page = getLoginPage()
-                .fillUsername(UserData.USER_LOGIN_NAME)
-                .fillPassword(UserData.USER_PASSWORD)
+                .fillUsername(getUser().getUserLoginName())
+                .fillPassword(getUser().getUserPassword())
                 .clickLoginButton()
                 .moveToTimeItem()
                 .moveMenuAttendanceItem()

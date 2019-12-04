@@ -2,7 +2,6 @@ package selenium.test;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import selenium.data.UserData;
 import selenium.page.HomePage;
 
 public class HomePageTest extends BaseTest {
@@ -10,10 +9,11 @@ public class HomePageTest extends BaseTest {
     @Test
     public void loginTest() {
         HomePage homePage = getLoginPage()
-                .fillUsername(UserData.USER_LOGIN_NAME)
-                .fillPassword(UserData.USER_PASSWORD)
+                .fillUsername(getUser().getUserLoginName())
+                .fillPassword(getUser().getUserPassword())
                 .clickLoginButton();
 
-        Assert.assertEquals(homePage.getWelcomeText(), "Welcome Pavlo");
+        Assert.assertEquals(String.format(homePage.getWelcomeText(), "Welcome %s", getUser().getUserFirstName()),
+                "Welcome " + getUser().getUserFirstName());
     }
 }

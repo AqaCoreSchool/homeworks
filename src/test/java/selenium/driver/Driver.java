@@ -1,7 +1,7 @@
 package selenium.driver;
 
 import org.openqa.selenium.WebDriver;
-import selenium.data.UserData;
+import selenium.common.Utils;
 
 public class Driver {
     private static volatile Driver instance;
@@ -27,7 +27,7 @@ public class Driver {
             synchronized (Driver.class) {
                 if (drivers.get() == null) {
                     drivers.set(new WebDriverConfigurer().getChromeDriver());
-                    drivers.get().get(UserData.URL);
+                    drivers.get().get(Utils.getProperty("url"));
                 }
             }
         }

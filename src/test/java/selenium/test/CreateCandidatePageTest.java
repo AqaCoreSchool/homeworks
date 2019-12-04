@@ -2,27 +2,26 @@ package selenium.test;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import selenium.common.Utils;
-import selenium.data.UserData;
-import selenium.data.VacancyData;
+import selenium.model.Candidate;
 import selenium.page.CreateCandidatePage;
 
 public class CreateCandidatePageTest extends BaseTest {
     @Test
     public void createCandidateTest() {
+        Candidate candidate = new Candidate();
         CreateCandidatePage page = getLoginPage()
-                .fillUsername(UserData.USER_LOGIN_NAME)
-                .fillPassword(UserData.USER_PASSWORD)
+                .fillUsername(getUser().getUserLoginName())
+                .fillPassword(getUser().getUserPassword())
                 .clickLoginButton()
                 .moveToRecruitmentItem()
                 .clickCandidateListButton()
                 .clickNewCandidateButton()
-                .fillFirstName(UserData.USER_NAME)
-                .fillLastName(UserData.USER_LASTNAME)
-                .fillEmail(UserData.USER_EMAIL)
-                .fillContactNo(UserData.USER_CONTACT_NO)
-                .selectVacancy(VacancyData.VACANCY_NAME)
-                .fillDate(Utils.getCurrentDate().toString())
+                .fillFirstName(candidate.getCandidateFirstName())
+                .fillLastName(candidate.getCandidateLastName())
+                .fillEmail(candidate.getCandidateEmail())
+                .fillContactNo(candidate.getCandidateContactNo())
+                .selectVacancy(candidate.getCandidateVacancy())
+                .fillDate(candidate.getCandidateAppliedDate())
                 .btnSaveClick();
 
         String successMessage = page.getSuccessMessage();

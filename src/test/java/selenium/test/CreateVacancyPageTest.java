@@ -2,25 +2,25 @@ package selenium.test;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import selenium.data.UserData;
-import selenium.data.VacancyData;
+import selenium.model.Vacancy;
 import selenium.page.CreateVacancyPage;
 
 public class CreateVacancyPageTest extends BaseTest {
     @Test
     public void createVacancyTest() {
+        Vacancy vacancy = new Vacancy();
         CreateVacancyPage page = getLoginPage()
-                .fillUsername(UserData.USER_LOGIN_NAME)
-                .fillPassword(UserData.USER_PASSWORD)
+                .fillUsername(getUser().getUserLoginName())
+                .fillPassword(getUser().getUserPassword())
                 .clickLoginButton()
                 .moveToRecruitmentItem()
                 .clickVacanciesButton()
                 .clickNewVacancyButton()
-                .fillJobTitle(VacancyData.JOB_TITLE)
-                .fillVacancyName(VacancyData.VACANCY_NAME)
-                .fillHiringManager(VacancyData.HIRING_MANAGER)
-                .fillPositionsNo(VacancyData.POSITIONS_NUMBER)
-                .fillDescription(VacancyData.DESCRIPTION)
+                .fillJobTitle(vacancy.getJobTitle())
+                .fillVacancyName(vacancy.getVacancyName())
+                .fillHiringManager(vacancy.getHiringManager())
+                .fillPositionsNo(vacancy.getNoOfPositions())
+                .fillDescription(vacancy.getDescription())
                 .setJobStatus()
                 .setPublishedInFeedStatus()
                 .saveVacancy();
