@@ -8,7 +8,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class DriverFactory {
 
     private WebDriver driver;
-    WebDriverWait wait;
     public WebDriver getDriver(){
         if(driver == null){
             WebDriverManager.chromedriver().setup();

@@ -25,6 +25,12 @@ public class VacanciesPage extends MainPage {
     @FindBy (id = "addJobVacancy_hiringManager")
     private WebElement inputHiringManager;
 
+    @FindBy(id = "addJobVacancy_status")
+    private WebElement status;
+
+    @FindBy(id = "addJobVacancy_publishedInFeed")
+    private WebElement publishedInFeed;
+
     @FindBy (id = "btnSave")
     private WebElement btnSave;
 
@@ -56,6 +62,20 @@ public class VacanciesPage extends MainPage {
         return this;
     }
 
+    public VacanciesPage selectStatus() {
+        if (!status.isSelected()) {
+            Utils.waitAndClick(status);
+        }
+        return this;
+    }
+
+    public VacanciesPage selectPublishedInFeed() {
+        if (!publishedInFeed.isSelected()) {
+            Utils.waitAndClick(publishedInFeed);
+        }
+        return this;
+    }
+
     public VacanciesPage clickSaveBtn(){
         Utils.waitAndClick(btnSave);
         return  this;
@@ -71,6 +91,8 @@ public class VacanciesPage extends MainPage {
         selectJobTittle();
         vacancyNameInput(VacancyInfo.VACANCY);
         hiringManagerInput(VacancyInfo.HIRING_MANAGER);
+        selectStatus();
+        selectPublishedInFeed();
         clickSaveBtn();
         clickBackBtn();
         return this;

@@ -83,10 +83,10 @@ public class MainPage extends BasePage{
         return new VacanciesPage();
     }
 
-    public VacanciesPage moveToLocationsPage(){
+    public LocationsPage moveToLocationsPage(){
         Utils.waitAndClick(adminBtn);
         Utils.waitAndClick(organizationBtn);
         Utils.waitAndClick(locationsBtn);
-        return new VacanciesPage();
+        return new LocationsPage();
     }
 }

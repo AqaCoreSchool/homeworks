@@ -11,8 +11,8 @@ import pages.LoginPage;
 
 public class BaseTest {
 
-    LoginPage loginPage ;
-    WebDriver driver = Application.getDriver();
+    public LoginPage loginPage ;
+    private WebDriver driver = Application.getDriver();
 
     @BeforeTest
     public void setup(){
