@@ -1,5 +1,7 @@
 package data;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.github.javafaker.Faker;
 
 public class LocationData {
@@ -60,5 +62,52 @@ public class LocationData {
 
     public String getNotes() {
         return notes;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        LocationData that = (LocationData) o;
+
+        if (!name.equals(that.name)) return false;
+        if (!countryCode.equals(that.countryCode)) return false;
+        if (!state.equals(that.state)) return false;
+        if (!city.equals(that.city)) return false;
+        if (!address.equals(that.address)) return false;
+        if (!zip.equals(that.zip)) return false;
+        if (!phone.equals(that.phone)) return false;
+        if (!fax.equals(that.fax)) return false;
+        return notes.equals(that.notes);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = name.hashCode();
+        result = 31 * result + countryCode.hashCode();
+        result = 31 * result + state.hashCode();
+        result = 31 * result + city.hashCode();
+        result = 31 * result + address.hashCode();
+        result = 31 * result + zip.hashCode();
+        result = 31 * result + phone.hashCode();
+        result = 31 * result + fax.hashCode();
+        result = 31 * result + notes.hashCode();
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "LocationData{" +
+                "name='" + name + '\'' +
+                ", countryCode='" + countryCode + '\'' +
+                ", state='" + state + '\'' +
+                ", city='" + city + '\'' +
+                ", address='" + address + '\'' +
+                ", zip='" + zip + '\'' +
+                ", phone='" + phone + '\'' +
+                ", fax='" + fax + '\'' +
+                ", notes='" + notes + '\'' +
+                '}';
     }
 }
