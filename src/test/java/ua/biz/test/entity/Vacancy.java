@@ -1,11 +1,19 @@
 package ua.biz.test.entity;
 
-public class Vacancy {
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import java.io.Serializable;
+import java.util.Objects;
+
+public class Vacancy{
 
     private String name;
     private String hiringManagerName;
     private int nubmerOfPositions;
+
     private boolean isActive;
+
+    public Vacancy() { }
 
     public Vacancy(String name, String hiringManagerName) {
         this.name = name;
@@ -37,5 +45,21 @@ public class Vacancy {
 
     public boolean isActive() {
         return isActive;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Vacancy vacancy = (Vacancy) o;
+        return nubmerOfPositions == vacancy.nubmerOfPositions &&
+                isActive == vacancy.isActive &&
+                Objects.equals(name, vacancy.name) &&
+                Objects.equals(hiringManagerName, vacancy.hiringManagerName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, hiringManagerName, nubmerOfPositions, isActive);
     }
 }

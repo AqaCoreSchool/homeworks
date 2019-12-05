@@ -14,7 +14,7 @@ import java.util.List;
 
 public class VacancyDataTest extends BaseTest {
 
-    private Vacancy TEST_VACANCY = new Vacancy("Manager", "Ivan Mosiychuk", 2, true);
+    private Vacancy TEST_VACANCY = new Vacancy(faker.name()+"Manager", "Ivan Mosiychuk", 2, true);
 
     private CreateVacancyPage createVacancyPage;
 
@@ -33,7 +33,7 @@ public class VacancyDataTest extends BaseTest {
 
     @Test
     public void testIncorrectDataVacancy() {
-        TEST_VACANCY.setName("Tester");
+        TEST_VACANCY.setName(faker.name()+"Tester");
         createVacancyPage.createNewVacancy(TEST_VACANCY);
         VacanciesListPage vacanciesListPage =createVacancyPage.backToVacanciesPage();
         vacanciesListPage.addNewVacancy().createNewVacancy(TEST_VACANCY);
