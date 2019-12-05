@@ -1,23 +1,23 @@
 package tests;
 
-import data.UserInfo;
-import data.VacancyInfo;
+import data.LoginInfo;
+import data.Vacancy;
 import org.testng.annotations.Test;
-import org.testng.asserts.SoftAssert;
 import pages.VacanciesPage;
-import static org.assertj.core.api.Assertions.*;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class VacanciesPageTest extends BaseTest {
 
     @Test
     public void testVacanciesPage() {
+        Vacancy vacancy = new Vacancy();
         VacanciesPage vacanciesPage = loginPage
-                .loginIntoSite(UserInfo.LOGIN, UserInfo.PASSWORD)
+                .loginIntoSite(LoginInfo.LOGIN, LoginInfo.PASSWORD)
                 .moveToVacanciesPage()
-                .addNewVacancy(VacancyInfo.VACANCY, VacancyInfo.HIRING_MANAGER);
+                .addNewVacancy(vacancy);
 
-        assertThat(vacanciesPage
-                .findVacancies(VacancyInfo.VACANCY, VacancyInfo.JOB_TITLE, VacancyInfo.HIRING_MANAGER, VacancyInfo.STATUS))
+        assertThat(vacanciesPage.findVacancy(vacancy))
                 .as("String should contain active vacancy").isNotEmpty();
     }
 

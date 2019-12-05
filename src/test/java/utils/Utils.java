@@ -8,18 +8,14 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import static java.lang.Thread.sleep;
 
 public class Utils {
-
+    public static WebDriverWait wait = new WebDriverWait(Application.getDriver(), 10);;;
 
     public static void waitAndClick(WebElement element){
-        WebDriverWait wait;
-        wait = new WebDriverWait(Application.getDriver(), 10);
         wait.until(ExpectedConditions.elementToBeClickable(element));
         element.click();
     }
 
     public static void waitAndSendKeys(WebElement element, String inputString){
-        WebDriverWait wait;
-        wait = new WebDriverWait(Application.getDriver(), 10);
         wait.until(ExpectedConditions.elementToBeClickable(element));
         element.clear();
         element.sendKeys(inputString);

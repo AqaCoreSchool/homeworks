@@ -1,6 +1,6 @@
 package tests;
 
-import data.UserInfo;
+import data.LoginInfo;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 import pages.CandidatesPage;
@@ -10,10 +10,9 @@ public class CandidatesPageNegativeTest extends BaseTest {
     @Test
     public void testNegativeCandidatesPage() {
         CandidatesPage candidatesPage = loginPage
-                .loginIntoSite(UserInfo.LOGIN, UserInfo.PASSWORD)
+                .loginIntoSite(LoginInfo.LOGIN, LoginInfo.PASSWORD)
                 .moveToCandidatesPage()
                 .addCandidateInfoForNegativeTest();
-
 
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertTrue(candidatesPage.isCandidateNameErrorDisplayed(),

@@ -1,7 +1,6 @@
 package tests;
 
-import data.UserInfo;
-import data.VacancyInfo;
+import data.LoginInfo;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 import pages.VacanciesPage;
@@ -12,9 +11,9 @@ public class VacanciesPageNegativeTest extends BaseTest {
     @Test
     public void testNegativeVacanciesPage() {
         VacanciesPage vacanciesPage = loginPage
-                .loginIntoSite(UserInfo.LOGIN, UserInfo.PASSWORD)
+                .loginIntoSite(LoginInfo.LOGIN, LoginInfo.PASSWORD)
                 .moveToVacanciesPage()
-                .addVacancyForNegativeTest(VacancyInfo.VACANCY, "Marty Stu");
+                .addVacancyForNegativeTest("Junior", "Marty Stu");
 
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertTrue(vacanciesPage.isTitleNotSelectedErrorDisplayed(),

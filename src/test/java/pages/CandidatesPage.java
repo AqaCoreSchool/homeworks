@@ -1,13 +1,12 @@
 package pages;
 
-import data.UserInfo;
+import data.Candidate;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import utils.Utils;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 
 public class CandidatesPage extends MainPage{
 
@@ -101,16 +100,17 @@ public class CandidatesPage extends MainPage{
         return this;
     }
     @Step
-    public CandidatesPage addCandidateInfo(){
+    public CandidatesPage addCandidateInfo(Candidate candidate){
         clickAddCandidate();
-        fullNameInput(UserInfo.FIRST_NAME,UserInfo.LAST_NAME);
-        emailInput(UserInfo.EMAIL);
-        phoneNumberInput(UserInfo.PHONE_NUMBER);
+        fullNameInput(candidate.getFirstName(), candidate.getLastName());
+        emailInput(candidate.getEmail());
+        phoneNumberInput(candidate.getPhoneNumber());
         selectJobVacancy();
         clickConsentAndSave();
         clickBackBtn();
         return this;
     }
+
     @Step
     public CandidatesPage addCandidateInfoForNegativeTest(){
         clickAddCandidate();
@@ -119,17 +119,16 @@ public class CandidatesPage extends MainPage{
         clickConsentAndSave();
         return this;
     }
+
     @Step
-    public String findCandidate(String firstName, String lastName, String vacancy){
+    public String findCandidate(Candidate candidate){
         return candidatesList.stream()
                 .map(WebElement::getText)
-                .filter(s -> s.contains(firstName))
-                .filter(s -> s.contains(lastName))
-                .filter(s -> s.contains(lastName))
-                .filter(s -> s.contains(vacancy))
+                .filter(s -> s.contains(candidate.getFirstName()))
+                .filter(s -> s.contains(candidate.getLastName()))
+                .filter(s -> s.contains(candidate.getVacancy()))
                 .findAny()
-                .orElseThrow(NoSuchElementException::new);
-
+                .orElse("");
     }
     @Step
     public boolean isCandidateNameErrorDisplayed(){

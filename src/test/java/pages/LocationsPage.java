@@ -1,6 +1,6 @@
 package pages;
 
-import data.LocationInfo;
+import data.Location;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -41,7 +41,7 @@ public class LocationsPage extends MainPage{
     private WebElement btnSave;
 
     @FindBy(tagName = "tr")
-    private List<WebElement> locations;
+    private List<WebElement> locationsList;
 
     public LocationsPage clickAddBtn(){
         Utils.waitAndClick(btnAdd);
@@ -89,27 +89,26 @@ public class LocationsPage extends MainPage{
     }
 
     @Step
-    public LocationsPage createLocation(){
+    public LocationsPage createLocation(Location location){
         clickAddBtn();
-        locationNameInput(LocationInfo.LOCATION_NAME);
+        locationNameInput(location.getLocationName());
         selectCountryInDropDown();
-        provinceInput(LocationInfo.PROVINCE);
-        cityInput(LocationInfo.CITY);
-        addressInput(LocationInfo.ADDRESS);
-        postalCodeInput(LocationInfo.POSTAL_CODE);
-        phoneNumberInput(LocationInfo.PHONE_NUMBER);
+        provinceInput(location.getProvince());
+        cityInput(location.getCity());
+        addressInput(location.getAddress());
+        postalCodeInput(location.getPostalCode());
+        phoneNumberInput(location.getPhone());
         clickSaveBtn();
         return this;
     }
 
     @Step
-    public boolean isLocationCreated(String name,
-                                     String city, String country, String phone){
-        return  locations.stream()
+    public boolean isLocationCreated(Location location){
+        return  locationsList.stream()
                 .map(WebElement::getText)
-                .anyMatch(s -> s.contains(name)
-                        && s.contains(city)
-                        && s.contains(country)
-                        && s.contains(phone));
+                .anyMatch(s -> s.contains(location.getLocationName())
+                        && s.contains(location.getCity())
+                        && s.contains(location.getCountry())
+                        && s.contains(location.getPhone()));
     }
 }

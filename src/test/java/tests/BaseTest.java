@@ -1,10 +1,10 @@
 package tests;
 
 import apps.Application;
+import data.LoginInfo;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.*;
 import pages.LoginPage;
-
 
 public class BaseTest {
 
@@ -23,12 +23,7 @@ public class BaseTest {
 
 
     public LoginPage openLoginPage(){
-        String url = "http://test.biz.ua";
-        driver.get(url);
+        driver.get(LoginInfo.URL);
         return  new LoginPage();
     }
-
-
-
-
 }

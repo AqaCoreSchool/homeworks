@@ -1,12 +1,12 @@
 package pages;
 
+import data.Vacancy;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import utils.Utils;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 
 public class VacanciesPage extends MainPage {
 
@@ -96,11 +96,11 @@ public class VacanciesPage extends MainPage {
     }
 
     @Step
-    public VacanciesPage addNewVacancy(String vacancy, String manager){
+    public VacanciesPage addNewVacancy(Vacancy vacancy){
         clickAddBtn();
         selectJobTittle();
-        vacancyNameInput(vacancy);
-        hiringManagerInput(manager);
+        vacancyNameInput(vacancy.getVacancyName());
+        hiringManagerInput(vacancy.getHiringManager());
         selectStatus();
         selectPublishedInFeed();
         clickSaveBtn();
@@ -118,15 +118,15 @@ public class VacanciesPage extends MainPage {
     }
 
     @Step
-    public String findVacancies(String vacancy, String jobTitle, String manager, String  status){
+    public String findVacancy(Vacancy vacancy){
         return vacanciesList.stream()
                 .map(WebElement::getText)
-                .filter(s -> s.contains(vacancy))
-                .filter(s -> s.contains(jobTitle))
-                .filter(s -> s.contains(manager))
-                .filter(s -> s.contains(status))
+                .filter(s -> s.contains(vacancy.getVacancyName()))
+                .filter(s -> s.contains(vacancy.getJobTitle()))
+                .filter(s -> s.contains(vacancy.getHiringManager()))
+                .filter(s -> s.contains(vacancy.getStatus()))
                 .findAny()
-                .orElseThrow(NoSuchElementException::new);
+                .orElse("");
     }
 
     @Step
