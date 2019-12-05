@@ -17,10 +17,10 @@ public class OrangeTimePage extends BasePage{
     private String punchInDateTime;
     private String punchOutDateTime;
     private List<WebElement> latestRecord;
-    private WebElement latestRecordPunchIn;
-    private WebElement latestRecordPunchInNote;
-    private WebElement latestRecordPunchOut;
-    private WebElement latestRecordPunchOutNote;
+    private String latestRecordPunchIn;
+    private String latestRecordPunchInNote;
+    private String latestRecordPunchOut;
+    private String latestRecordPunchOutNote;
     private WebElement emptyRecord;
     private WebDriverWait wait = new WebDriverWait(WebDriverFactory.getDriver(), 10);
 
@@ -63,24 +63,20 @@ public class OrangeTimePage extends BasePage{
         return punchOutDateTime;
     }
 
-    public WebElement getLatestRecordPunchIn() {
+    public String getLatestRecordPunchIn() {
         return latestRecordPunchIn;
     }
 
-    public WebElement getLatestRecordPunchInNote() {
+    public String getLatestRecordPunchInNote() {
         return latestRecordPunchInNote;
     }
 
-    public WebElement getLatestRecordPunchOut() {
+    public String getLatestRecordPunchOut() {
         return latestRecordPunchOut;
     }
 
-    public WebElement getLatestRecordPunchOutNote() {
+    public String getLatestRecordPunchOutNote() {
         return latestRecordPunchOutNote;
-    }
-
-    public WebElement getEmptyRecord() {
-        return emptyRecord;
     }
 
 
@@ -127,10 +123,10 @@ public class OrangeTimePage extends BasePage{
 
     public OrangeTimePage getLastRecordData(){
         latestRecord = employeeRecords.get(employeeRecords.size()-1).findElements(By.xpath("./td"));
-        latestRecordPunchIn = latestRecord.get(1);
-        latestRecordPunchInNote = latestRecord.get(2);
-        latestRecordPunchOut = latestRecord.get(3);
-        latestRecordPunchOutNote = latestRecord.get(4);
+        latestRecordPunchIn = latestRecord.get(1).getText();
+        latestRecordPunchInNote = latestRecord.get(2).getText();
+        latestRecordPunchOut = latestRecord.get(3).getText();
+        latestRecordPunchOutNote = latestRecord.get(4).getText();
         return this;
     }
 
@@ -145,5 +141,9 @@ public class OrangeTimePage extends BasePage{
 
     public OrangeTimePage checkEmptyRecordsTable(String date){
         return toAttendanceMenu().toRecords().getRecordsByDate(date).getNoRecords();
+    }
+
+    public boolean noRecordsIsDisplayed(){
+        return emptyRecord.isDisplayed();
     }
 }
