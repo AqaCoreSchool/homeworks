@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class ApplyCandidateTest extends BaseTest{
-    private String todayDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+    private String todayDate = LocalDateTime.now().minusDays(1).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     private String futureDate = LocalDateTime.now().plusDays(2).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     private CandidateData candidate = new CandidateData("Test vacancy", "Nazariy Kushnir", todayDate);
     private CandidateData candidateFuture = new CandidateData("Test vacancy", "Nazariy Kushnir", futureDate);

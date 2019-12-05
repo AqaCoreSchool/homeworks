@@ -2,21 +2,18 @@ package pages;
 
 import data.CandidateData;
 import data.VacancyData;
-import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import utils.Waits;
 import utils.WebDriverFactory;
 
 import java.util.List;
 
 public class OrangeRecruitmentPage extends BasePage{
     private String title;
-    private String recordVacancyName;
-    private WebDriverWait wait = new WebDriverWait(WebDriverFactory.getDriver(), 10);
+    Waits wait = new Waits(WebDriverFactory.getDriver());
 
     @FindBy(id = "menu_recruitment_viewJobVacancy")
     private WebElement vacancies;
@@ -87,7 +84,6 @@ public class OrangeRecruitmentPage extends BasePage{
     @FindBy(xpath = "//span[@class = 'validation-error' and @for='addJobVacancy_jobTitle']" )
     private WebElement noTitleError;
 
-
     public OrangeRecruitmentPage toVacancies(){
         vacancies.click();
         return this;
@@ -132,7 +128,7 @@ public class OrangeRecruitmentPage extends BasePage{
 
     public OrangeRecruitmentPage clickSaveBtn(){
         saveBtn.click();
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.className("message.success.fadable")));
+        wait.waitForInvisibilityByClass("message.success.fadable");
         return this;
     }
 

@@ -1,9 +1,7 @@
 package data;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.github.javafaker.Faker;
 
-@JsonDeserialize(as = VacancyData.class)
 public class VacancyData {
     private static Faker faker = new Faker();
     private int jobTitleOption;

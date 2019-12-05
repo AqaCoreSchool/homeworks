@@ -2,10 +2,8 @@ package pages;
 
 import data.LocationData;
 import data.UserData;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
@@ -62,10 +60,6 @@ public class OrangeAdminPage extends BasePage{
 
     @FindBy(id = "location_notes")
     private WebElement locationNotes;
-
-    public WebElement getUser() {
-        return user;
-    }
 
     public List<WebElement> getUserRecord() {
         return userRecord;

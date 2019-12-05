@@ -1,7 +1,5 @@
 package data;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.github.javafaker.Faker;
 
 public class LocationData {
@@ -96,18 +94,4 @@ public class LocationData {
         return result;
     }
 
-    @Override
-    public String toString() {
-        return "LocationData{" +
-                "name='" + name + '\'' +
-                ", countryCode='" + countryCode + '\'' +
-                ", state='" + state + '\'' +
-                ", city='" + city + '\'' +
-                ", address='" + address + '\'' +
-                ", zip='" + zip + '\'' +
-                ", phone='" + phone + '\'' +
-                ", fax='" + fax + '\'' +
-                ", notes='" + notes + '\'' +
-                '}';
-    }
 }

@@ -1,19 +1,15 @@
 package pages;
 
 import data.UserData;
-import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import utils.Waits;
 import utils.WebDriverFactory;
 
 public class OrangeMyInfoPage extends BasePage{
-    private WebDriverWait wait = new WebDriverWait(WebDriverFactory.getDriver(), 10);
+    Waits wait = new Waits(WebDriverFactory.getDriver());
 
     @FindBy(id = "btnSave")
     private WebElement editBtn;
@@ -40,7 +36,7 @@ public class OrangeMyInfoPage extends BasePage{
     private WebElement adminModule;
 
     public OrangeMyInfoPage clickEdit(){
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("btnSave")));
+        wait.waitForVisibility(editBtn);
         editBtn.click();
         return this;
     }
@@ -81,10 +77,9 @@ public class OrangeMyInfoPage extends BasePage{
     }
 
     public OrangeMyInfoPage clickSave(){
-        wait.until(ExpectedConditions.visibilityOf(editBtn));
+        wait.waitForVisibility(editBtn);
         editBtn.click();
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(
-                By.xpath("//input[@id='btnSave' and @value='Processing")));
+        wait.waitForInvisibilityByXpath("//input[@id='btnSave' and @value='Processing");
         return this;
     }
 
