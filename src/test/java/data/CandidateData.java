@@ -2,9 +2,6 @@ package data;
 
 import com.github.javafaker.Faker;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 public class CandidateData {
     private static Faker faker = new Faker();
     private String firstName;
@@ -25,6 +22,9 @@ public class CandidateData {
         this.hiringManager = hiringManager;
         this.comment = faker.lorem().sentence(3);
         this.date = date;
+    }
+
+    private CandidateData(){
     }
 
     public String getFirstName() {
@@ -59,4 +59,33 @@ public class CandidateData {
         return date;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        CandidateData that = (CandidateData) o;
+
+        if (!firstName.equals(that.firstName)) return false;
+        if (!lastName.equals(that.lastName)) return false;
+        if (!email.equals(that.email)) return false;
+        if (!contactNo.equals(that.contactNo)) return false;
+        if (!vacancyName.equals(that.vacancyName)) return false;
+        if (!hiringManager.equals(that.hiringManager)) return false;
+        if (!comment.equals(that.comment)) return false;
+        return date.equals(that.date);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = firstName.hashCode();
+        result = 31 * result + lastName.hashCode();
+        result = 31 * result + email.hashCode();
+        result = 31 * result + contactNo.hashCode();
+        result = 31 * result + vacancyName.hashCode();
+        result = 31 * result + hiringManager.hashCode();
+        result = 31 * result + comment.hashCode();
+        result = 31 * result + date.hashCode();
+        return result;
+    }
 }

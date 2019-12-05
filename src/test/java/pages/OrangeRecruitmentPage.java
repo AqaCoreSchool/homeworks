@@ -4,10 +4,8 @@ import data.CandidateData;
 import data.VacancyData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -146,7 +144,7 @@ public class OrangeRecruitmentPage extends BasePage{
     public OrangeRecruitmentPage createVacancy(VacancyData vacancy){
         return clickAddBtn()
                 .selectJobTitle(vacancy.getJobTitleOption())
-                .setVacancyName(vacancy.getVacanyName())
+                .setVacancyName(vacancy.getVacancyName())
                 .setHiringManager(vacancy.getHiringManager())
                 .setPositionsNumber(vacancy.getPositions())
                 .setDescription(vacancy.getDescription())
@@ -156,7 +154,7 @@ public class OrangeRecruitmentPage extends BasePage{
 
     public OrangeRecruitmentPage createVacancyWithoutTitle(VacancyData vacancy){
         return clickAddBtn()
-                .setVacancyName(vacancy.getVacanyName())
+                .setVacancyName(vacancy.getVacancyName())
                 .setHiringManager(vacancy.getHiringManager())
                 .setPositionsNumber(vacancy.getPositions())
                 .setDescription(vacancy.getDescription())
@@ -170,7 +168,7 @@ public class OrangeRecruitmentPage extends BasePage{
 
     public boolean findCreatedVacancy(VacancyData vacancy){
         return resultList.stream()
-                .anyMatch(o -> o.getText().contains(vacancy.getVacanyName()) &&
+                .anyMatch(o -> o.getText().contains(vacancy.getVacancyName()) &&
                         o.getText().contains(title) &&
                         o.getText().contains(vacancy.getHiringManager()));
     }
