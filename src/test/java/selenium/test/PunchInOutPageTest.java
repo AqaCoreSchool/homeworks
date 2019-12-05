@@ -10,8 +10,8 @@ public class PunchInOutPageTest extends BaseTest {
     @Test
     public void punchInPageDateVerifyingTest() {
         PunchInOutPage homePage = getLoginPage()
-                .fillUsername(getUser().getUserLoginName())
-                .fillPassword(getUser().getUserPassword())
+                .fillUsername(getCredentials().getUserLoginName())
+                .fillPassword(getCredentials().getUserPassword())
                 .clickLoginButton()
                 .moveToTimeItem()
                 .moveMenuAttendanceItem()

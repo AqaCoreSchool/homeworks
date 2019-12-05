@@ -10,8 +10,8 @@ public class CreateVacancyPageTest extends BaseTest {
     public void createVacancyTest() {
         Vacancy vacancy = new Vacancy();
         CreateVacancyPage page = getLoginPage()
-                .fillUsername(getUser().getUserLoginName())
-                .fillPassword(getUser().getUserPassword())
+                .fillUsername(getCredentials().getUserLoginName())
+                .fillPassword(getCredentials().getUserPassword())
                 .clickLoginButton()
                 .moveToRecruitmentItem()
                 .clickVacanciesButton()

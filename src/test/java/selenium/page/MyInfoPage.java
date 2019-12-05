@@ -25,17 +25,8 @@ public class MyInfoPage extends BasePage {
     @FindBy(id = "personal_txtEmpLastName")
     private WebElement employeeLastName;
 
-    @FindBy(id = "personal_txtOtherID")
-    private WebElement employeeOtherId;
-
     @FindBy(id = "personal_txtEmployeeId")
     private WebElement employeeId;
-
-    @FindBy(id = "personal_txtLicenNo")
-    private WebElement employeeLicenceNo;
-
-    @FindBy(id = "personal_txtLicExpDate")
-    private WebElement employeeLicenceExDate;
 
     @FindBy(id = "personal_DOB")
     private WebElement employeeBirthDate;
@@ -45,9 +36,6 @@ public class MyInfoPage extends BasePage {
 
     @FindBy(id = "personal_cmbNation")
     private WebElement employeeNation;
-
-    @FindBy(id = "personal_cmbMarital")
-    private WebElement employeeMarital;
 
     public MyInfoPage clearAllFields() {
         inputElements.stream()
@@ -71,23 +59,8 @@ public class MyInfoPage extends BasePage {
         return this;
     }
 
-    public MyInfoPage fillEmployeeOtherId(String id) {
-        employeeOtherId.sendKeys(id);
-        return this;
-    }
-
     public MyInfoPage fillEmployeeId(String id) {
         employeeId.sendKeys(id);
-        return this;
-    }
-
-    public MyInfoPage fillEmployeeLicenceNo(String licenceNo) {
-        employeeLicenceNo.sendKeys(licenceNo);
-        return this;
-    }
-
-    public MyInfoPage fillEmployeeLicenceExpDate(String date) {
-        employeeLicenceExDate.sendKeys(date);
         return this;
     }
 
@@ -101,24 +74,14 @@ public class MyInfoPage extends BasePage {
         return this;
     }
 
-    public MyInfoPage selectEmployeeGender() {
-        employeeGender.click();
-        return this;
-    }
-
-    public MyInfoPage fillEmployeeMarital(String maritalStatus) {
-        employeeMarital.sendKeys(maritalStatus, Keys.ENTER);
-        return this;
-    }
-
     public MyInfoPage btnClick() {
         Wait.waitForElementToBeClickable(btnSave);
         btnSave.click();
         return this;
     }
 
-    public WebElement getEmployeeFirstName() {
-        return employeeFirstName;
+    public String getEmployeeFirstName() {
+        return employeeFirstName.getAttribute("value");
     }
 
 }

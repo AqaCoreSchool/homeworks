@@ -8,8 +8,8 @@ public class CandidatesPageTest extends BaseTest {
     @Test
     public void candidatesPageTest() {
         CandidatesPage page = getLoginPage()
-                .fillUsername(getUser().getUserLoginName())
-                .fillPassword(getUser().getUserPassword())
+                .fillUsername(getCredentials().getUserLoginName())
+                .fillPassword(getCredentials().getUserPassword())
                 .clickLoginButton()
                 .moveToRecruitmentItem()
                 .clickCandidateListButton()

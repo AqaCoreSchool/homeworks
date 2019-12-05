@@ -8,8 +8,8 @@ public class EmployeeListPageTest extends BaseTest {
     @Test
     public void employeeListTest() {
         boolean userExists = getLoginPage()
-                .fillUsername(getUser().getUserLoginName())
-                .fillPassword(getUser().getUserPassword())
+                .fillUsername(getCredentials().getUserLoginName())
+                .fillPassword(getCredentials().getUserPassword())
                 .clickLoginButton()
                 .moveToPimItem()
                 .clickEmployeeListButton()

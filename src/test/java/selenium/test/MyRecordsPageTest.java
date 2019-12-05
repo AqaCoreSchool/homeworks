@@ -10,8 +10,8 @@ public class MyRecordsPageTest extends BaseTest {
     @Test
     public void myRecordsTest() {
         MyRecordsPage page = getLoginPage()
-                .fillUsername(getUser().getUserLoginName())
-                .fillPassword(getUser().getUserPassword())
+                .fillUsername(getCredentials().getUserLoginName())
+                .fillPassword(getCredentials().getUserPassword())
                 .clickLoginButton()
                 .moveToTimeItem()
                 .moveMenuAttendanceItem()

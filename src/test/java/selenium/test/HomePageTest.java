@@ -9,8 +9,8 @@ public class HomePageTest extends BaseTest {
     @Test
     public void loginTest() {
         HomePage homePage = getLoginPage()
-                .fillUsername(getUser().getUserLoginName())
-                .fillPassword(getUser().getUserPassword())
+                .fillUsername(getCredentials().getUserLoginName())
+                .fillPassword(getCredentials().getUserPassword())
                 .clickLoginButton();
 
         Assert.assertEquals(String.format(homePage.getWelcomeText(), "Welcome %s", getUser().getUserFirstName()),

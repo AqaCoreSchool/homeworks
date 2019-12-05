@@ -9,15 +9,15 @@ public class CreateLocationPageTest extends BaseTest {
     @Test
     public void createLocationTest() {
         CreateLocationPage page = getLoginPage()
-                .fillUsername(getUser().getUserLoginName())
-                .fillPassword(getUser().getUserPassword())
+                .fillUsername(getCredentials().getUserLoginName())
+                .fillPassword(getCredentials().getUserPassword())
                 .clickLoginButton()
                 .moveToAdminMenu()
                 .moveToOrganizationMenu()
                 .createNewLocation()
                 .fillLocationName(getLocation().getName())
                 .fillCountry(getLocation().getCountry())
-                .fillCity(getLocation().getCity())
+                 .fillCity(getLocation().getCity())
                 .fillPhone(getLocation().getPhone())
                 .saveLocation();
 

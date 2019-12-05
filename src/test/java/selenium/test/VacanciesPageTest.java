@@ -9,8 +9,8 @@ public class VacanciesPageTest extends BaseTest {
     @Test
     public void vacanciesPageTest() {
         VacanciesPage page = getLoginPage()
-                .fillUsername(getUser().getUserLoginName())
-                .fillPassword(getUser().getUserPassword())
+                .fillUsername(getCredentials().getUserLoginName())
+                .fillPassword(getCredentials().getUserPassword())
                 .clickLoginButton()
                 .moveToRecruitmentItem()
                 .clickVacanciesButton()

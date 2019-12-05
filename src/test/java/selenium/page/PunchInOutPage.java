@@ -2,7 +2,6 @@ package selenium.page;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import selenium.common.Wait;
 
 public class PunchInOutPage extends BasePage {

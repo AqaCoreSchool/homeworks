@@ -10,8 +10,8 @@ public class CreateCandidatePageTest extends BaseTest {
     public void createCandidateTest() {
         Candidate candidate = new Candidate();
         CreateCandidatePage page = getLoginPage()
-                .fillUsername(getUser().getUserLoginName())
-                .fillPassword(getUser().getUserPassword())
+                .fillUsername(getCredentials().getUserLoginName())
+                .fillPassword(getCredentials().getUserPassword())
                 .clickLoginButton()
                 .moveToRecruitmentItem()
                 .clickCandidateListButton()
