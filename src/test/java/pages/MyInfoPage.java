@@ -1,6 +1,6 @@
 package pages;
 
-import data.UserInfo;
+import data.User;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -60,7 +60,7 @@ public class MyInfoPage extends MainPage{
         return this;
     }
 
-    public MyInfoPage clickNationalityUkrainian(){
+    public MyInfoPage chooseNationalityUkrainian(){
         Utils.waitAndClick(nationalityUkrainian);
         return this;
     }
@@ -70,21 +70,21 @@ public class MyInfoPage extends MainPage{
         return this;
     }
 
-    public MyInfoPage clickinputDateOfBirth(String dateOfBirths){
+    public MyInfoPage clickDateOfBirthInput(String dateOfBirths){
         Utils.waitAndSendKeys(dateOfBirthInput, dateOfBirths);
         return this;
     }
 
     @Step
-    public MyInfoPage editInfo(){
+    public MyInfoPage editInfo(User user){
         clickEditOrSave();
-        clickfirstNameInput(UserInfo.FIRST_NAME);
-        clicklastNameInput(UserInfo.LAST_NAME);
-        clickIdInput(UserInfo.ID);
+        clickfirstNameInput(user.getFirstName());
+        clicklastNameInput(user.getLastName());
+        clickIdInput(user.getId());
         clickGenderMale();
         clickMaritalStatus();
-        clickNationalityUkrainian();
-        clickinputDateOfBirth(UserInfo.BIRTH_DATE);
+        chooseNationalityUkrainian();
+        clickDateOfBirthInput(user.getBirthDate());
         clickEditOrSave();
         return this;
     }

@@ -1,7 +1,8 @@
 package tests;
 
-import data.UserInfo;
-import data.VacancyInfo;
+import data.Candidate;
+import data.LoginInfo;
+import data.User;
 import org.testng.annotations.Test;
 import pages.CandidatesPage;
 import static org.assertj.core.api.Assertions.*;
@@ -11,12 +12,13 @@ public class CandidatesPageTest extends BaseTest {
 
     @Test
     public void testCandidatesPage(){
+        Candidate candidate = new Candidate();
         CandidatesPage candidatesPage = loginPage
-                .loginIntoSite(UserInfo.LOGIN, UserInfo.PASSWORD)
+                .loginIntoSite(LoginInfo.LOGIN, LoginInfo.PASSWORD)
                 .moveToCandidatesPage()
-                .addCandidateInfo();
+                .addCandidateInfo(candidate);
 
-        assertThat(candidatesPage.findCandidate(UserInfo.FIRST_NAME, UserInfo.LAST_NAME, VacancyInfo.VACANCY))
+        assertThat(candidatesPage.findCandidate(candidate))
                 .as("String should contain desired vacancy and candidate's name").isNotEmpty();
     }
 

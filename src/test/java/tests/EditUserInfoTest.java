@@ -1,15 +1,9 @@
 package tests;
 
-import data.UserInfo;
-import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.testng.annotations.AfterMethod;
+import data.LoginInfo;
+import data.User;
 import org.testng.annotations.Test;
 import pages.EmployeeListPage;
-
-import java.io.File;
-import java.io.IOException;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -17,14 +11,15 @@ import static org.assertj.core.api.Assertions.*;
 public class EditUserInfoTest extends BaseTest{
 
     @Test
-    public void  testEditUser() {
+    public void testUserInfo() {
+        User user = new User();
         EmployeeListPage employeeListPage = loginPage
-                .loginIntoSite(UserInfo.LOGIN, UserInfo.PASSWORD)
+                .loginIntoSite(LoginInfo.LOGIN, LoginInfo.PASSWORD)
                 .moveToMyInfoPage()
-                .editInfo()
+                .editInfo(user)
                 .moveToEmployeeListPage();
 
-        assertThat(employeeListPage.findEmployeeInfo(UserInfo.FIRST_NAME, UserInfo.LAST_NAME, UserInfo.ID))
+        assertThat(employeeListPage.findEmployeeInfo(user))
                 .as("String should contain employee's name and id").isNotEmpty();
     }
 }

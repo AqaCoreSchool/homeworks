@@ -1,7 +1,7 @@
 package tests;
 
-import data.LocationInfo;
-import data.UserInfo;
+import data.Location;
+import data.LoginInfo;
 import org.testng.annotations.Test;
 import pages.LocationsPage;
 
@@ -11,13 +11,13 @@ public class LocationsPageTest extends BaseTest{
 
     @Test
     public void testLocationPage(){
+        Location location = new Location();
         LocationsPage locationsPage = loginPage
-                .loginIntoSite(UserInfo.LOGIN, UserInfo.PASSWORD)
+                .loginIntoSite(LoginInfo.LOGIN, LoginInfo.PASSWORD)
                 .moveToLocationsPage()
-                .createLocation();
+                .createLocation(location);
 
-        assertThat(locationsPage.isLocationCreated(LocationInfo.LOCATION_NAME, LocationInfo.CITY,
-                LocationInfo.COUNTRY, LocationInfo.PHONE_NUMBER))
+        assertThat(locationsPage.isLocationCreated(location))
                 .as("Location is already exists").isTrue();
     }
 }
