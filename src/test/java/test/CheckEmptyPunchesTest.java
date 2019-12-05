@@ -15,6 +15,6 @@ public class CheckEmptyPunchesTest extends BaseTest{
                 .loginCorrect(USERNAME, PASSWORD)
                 .toTimeModulePage()
                 .checkEmptyRecordsTable(punch.getWeekAfter());
-        Assert.assertTrue(timePage.getEmptyRecord().isDisplayed(), "Record table isn't empty!");
+        Assert.assertTrue(timePage.noRecordsIsDisplayed(), "Record table isn't empty!");
     }
 }
