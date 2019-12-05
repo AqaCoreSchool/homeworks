@@ -1,7 +1,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
 <suite name="OrangeHRM Test" verbose="1" parallel="classes" thread-count="2">
-    <test name="Check user punch records is empty week before and after">
+    <test name="Check parallel method running">
         <classes>
             <class name="test.CheckEmptyPunchesTest"/>
             <class name="test.CreatePunchRecordTest"/>

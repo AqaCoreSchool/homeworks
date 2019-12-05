@@ -3,13 +3,12 @@ package pages;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import utils.Waits;
 import utils.WebDriverFactory;
 
 
 public class BasePage {
-    private WebDriverWait menuWait = new WebDriverWait(WebDriverFactory.getDriver(), 10);
+    Waits wait = new Waits(WebDriverFactory.getDriver());
 
     @FindBy(id = "menu_admin_viewAdminModule")
     private WebElement adminModule;
@@ -28,25 +27,25 @@ public class BasePage {
     }
 
     public OrangeAdminPage toAdminModulePage(){
-        menuWait.until(ExpectedConditions.visibilityOf(adminModule));
+        wait.waitForVisibility(adminModule);
         adminModule.click();
         return new OrangeAdminPage();
     }
 
     public OrangeTimePage toTimeModulePage(){
-        menuWait.until(ExpectedConditions.visibilityOf(timeModule));
+        wait.waitForVisibility(timeModule);
         timeModule.click();
         return new OrangeTimePage();
     }
 
     public OrangeRecruitmentPage toRecruitmentModulePage(){
-        menuWait.until(ExpectedConditions.visibilityOf(recruitmentModule));
+        wait.waitForVisibility(recruitmentModule);
         recruitmentModule.click();
         return new OrangeRecruitmentPage();
     }
 
     public OrangeMyInfoPage toMyInfoPage(){
-        menuWait.until(ExpectedConditions.visibilityOf(myInfoModule));
+        wait.waitForVisibility(myInfoModule);
         myInfoModule.click();
         return new OrangeMyInfoPage();
     }
