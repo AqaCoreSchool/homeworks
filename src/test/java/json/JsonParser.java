@@ -8,38 +8,32 @@ import data.Vacancy;
 import java.io.IOException;
 
 public class JsonParser {
+    public ObjectMapper objectMapper = new ObjectMapper();
 
-
-    public Candidate getCandidate(String jsonString) {
-        ObjectMapper objectMapper = new ObjectMapper();
-        Candidate candidate = null;
+    public Candidate getCandidateFrom(String jsonString) {
         try {
-            candidate = objectMapper.readValue(jsonString, Candidate.class);
+            return objectMapper.readValue(jsonString, Candidate.class);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return candidate;
+        return null;
     }
 
-    public Vacancy getVacancy(String jsonString) {
-        ObjectMapper objectMapper = new ObjectMapper();
-        Vacancy vacancy = null;
+    public Vacancy getVacancyFrom(String jsonString) {
         try {
-            vacancy = objectMapper.readValue(jsonString, Vacancy.class);
+            return objectMapper.readValue(jsonString, Vacancy.class);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return vacancy;
+        return null;
     }
 
-    public Location getLocation(String jsonString) {
-        ObjectMapper objectMapper = new ObjectMapper();
-        Location location = null;
+    public Location getLocationFrom(String jsonString) {
         try {
-            location = objectMapper.readValue(jsonString, Location.class);
+            return objectMapper.readValue(jsonString, Location.class);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return location;
+         return null;
     }
 }
