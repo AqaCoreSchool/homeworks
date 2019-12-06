@@ -1,9 +1,7 @@
 package orangetest.tests;
 
 import orangetest.pages.LocationPage;
-import orangetest.utils.Application;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.Test;
 
 public class AddLocationTest extends BaseTest {

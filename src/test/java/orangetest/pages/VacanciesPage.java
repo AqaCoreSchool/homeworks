@@ -1,6 +1,9 @@
 package orangetest.pages;
 
 import orangetest.data.Vacancy;
+import orangetest.utils.JsonConverter;
+import orangetest.utils.Utils;
+import org.json.JSONObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
@@ -50,6 +53,7 @@ public class VacanciesPage extends BasePage {
         menuRecruitment.click();
         viewJobVacancy.click();
         btnAdd.click();
+        Utils.waitUntilIsClickable(jobTitle);
         jobTitle.click();
         jobTitle.findElement(By.xpath("//option[contains(text(),'AQA')]")).click();
         vacancyName.sendKeys(vacancy.getVacancyName());
@@ -62,6 +66,7 @@ public class VacanciesPage extends BasePage {
         menuRecruitment.click();
         viewJobVacancy.click();
         btnAdd.click();
+        Utils.waitUntilIsClickable(btnSave);
         btnSave.click();
         try {
             System.out.println("Job Title. Error message: " + errorJobTitle.getText());
@@ -80,5 +85,12 @@ public class VacanciesPage extends BasePage {
         return tableRows.stream().map(WebElement::getText).anyMatch(
                 o -> o.contains(vacancy.getHiringManager()) &&
                         o.contains(vacancy.getVacancyName()));
+    }
+
+    public boolean checkFromJSON() {
+        JsonConverter converter = new JsonConverter();
+        JSONObject vacancyJson = converter.convertObjectToJson(vacancy);
+        Vacancy vacancyObjFromJson = (Vacancy) converter.convertJsonToObject(vacancyJson.toString(), Vacancy.class);
+        return vacancy.equals(vacancyObjFromJson);
     }
 }

@@ -4,12 +4,13 @@ import orangetest.pages.CandidatesPage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class AddEmptyCandidateTest extends BaseTest {
+public class CheckCandidateJsonTest extends BaseTest {
+
     private CandidatesPage candidatesPage;
 
     @Test
-    public void addEmptyCandidateTest() {
+    public void checkCandidateJsonTest() {
         candidatesPage = new CandidatesPage();
-        Assert.assertTrue(candidatesPage.addEmptyCandidate(), "Should be 3 error messages");
+        Assert.assertTrue(candidatesPage.checkFromJSON());
     }
 }

@@ -1,9 +1,7 @@
 package orangetest.tests;
 
-import orangetest.utils.Application;
 import orangetest.pages.AttendancePage;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.Test;
 
 import java.time.LocalDate;
@@ -15,7 +13,7 @@ public class CheckPunchOtherWeeksTest extends BaseTest {
     @Test(priority = 1)
     public void checkPreviousWeek() {
         attendancePage = new AttendancePage();
-        String previousWeekDate = date.minusDays(7).toString();
+        String previousWeekDate = date.minusWeeks(2).toString();
         boolean stringSearch = attendancePage.checkPreviousOrNextWeek(previousWeekDate);
         Assert.assertTrue(stringSearch);
     }

@@ -1,9 +1,7 @@
 package orangetest.tests;
 
 import orangetest.pages.CandidatesPage;
-import orangetest.utils.Application;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.Test;
 
 public class AddCandidateTest extends BaseTest {
@@ -15,5 +13,6 @@ public class AddCandidateTest extends BaseTest {
         Assert.assertTrue(candidatesPage
                 .addCandidate()
                 .checkAddedCandidate());
+        Assert.assertTrue(true);
     }
 }

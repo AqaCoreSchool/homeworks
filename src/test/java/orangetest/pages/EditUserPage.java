@@ -49,14 +49,14 @@ public class EditUserPage extends BasePage {
         viewEmployeeList.click();
         myUser.click();
         saveEditButton.click();
-        calendar.click();
-        calendar.clear();
-        calendar.sendKeys(user.getBirthday(), Keys.ENTER);
         nationality.click();
         nationality.findElement(By.xpath("//option[contains(text(),'Ukrainian')]")).click();
         marital.click();
         marital.findElement(By.xpath("//option[contains(text(),'Other')]")).click();
         gender.click();
+        calendar.click();
+        calendar.clear();
+        calendar.sendKeys(user.getBirthday(), Keys.ENTER);
         firstName.clear();
         firstName.sendKeys(user.getFirstName());
         lastName.clear();
