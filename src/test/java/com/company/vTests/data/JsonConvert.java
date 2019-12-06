@@ -4,14 +4,17 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class JsonConvert {
-    private ObjectMapper objectMapper;
+    private ObjectMapper objectMapper = new ObjectMapper();
 
-    public JsonConvert() {
-            objectMapper = new ObjectMapper();
+    public <T> T jsonToObject(String jsonString, Class<T> object) {
+        try {
+            return objectMapper.readerFor(object).readValue(jsonString);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+        return null;
+    }
+}
 
-        public <T> T jsonToObject(String json, Class<T> object) throws JsonProcessingException {
-            return objectMapper.readerFor(object).readValue(json);
-        }
 
 }
