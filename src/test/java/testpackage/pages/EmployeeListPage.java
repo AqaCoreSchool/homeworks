@@ -1,5 +1,6 @@
 package testpackage.pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import testpackage.base.BasePage;
@@ -12,6 +13,7 @@ public class EmployeeListPage extends BasePage {
     @FindBy (xpath = "//table[@id='resultTable']//tbody")
     private List<WebElement> table;
 
+    @Step
     public boolean filterEmployeeList(User user){
         boolean employee = table.stream()
                 .map(WebElement::getText)

@@ -1,5 +1,6 @@
 package testpackage.pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -37,6 +38,7 @@ public class LocationPage extends BasePage {
     @FindBy(xpath = "//table[@id='resultTable']//tbody")
     private List<WebElement> table;
 
+    @Step
     public LocationPage createLocation(Location location ){
         wait.until(ExpectedConditions.elementToBeClickable(addButton));
         addButton.click();
@@ -51,6 +53,7 @@ public class LocationPage extends BasePage {
         return this;
     }
 
+    @Step
     public boolean filterTable(Location location){
         boolean locations = table.stream()
                 .map(WebElement::getText)

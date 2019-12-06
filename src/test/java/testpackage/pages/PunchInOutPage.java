@@ -1,5 +1,6 @@
 package testpackage.pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import testpackage.base.BasePage;
@@ -24,12 +25,14 @@ public class PunchInOutPage extends BasePage {
     @FindBy(id = "currentTime")
     private WebElement currentTime;
 
+    @Step
     public PunchInOutPage punchIn(){
         commentInputPunchInOut.sendKeys(input);
         inOutBtn.click();
         return this;
     }
 
+    @Step
     public MainPage punchOut(){
         commentInputPunchInOut.sendKeys(output);
         inOutBtn.click();

@@ -19,7 +19,7 @@ public class PunchIOTest extends BaseTest {
                 .punchOut()
                 .clickMyRecords()
                 .goToDateWithMonth("5","Dec");
-        assertThat(new MyRecordsPage().filterTable()).as("Hello").isTrue();
+        assertThat(new MyRecordsPage().filterTable()).isTrue();
     }
 
 }

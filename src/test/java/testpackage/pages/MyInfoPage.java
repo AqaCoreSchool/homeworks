@@ -1,5 +1,6 @@
 package testpackage.pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import testpackage.base.BasePage;
@@ -34,6 +35,7 @@ public class MyInfoPage extends BasePage {
     @FindBy(id = "personal_DOB")
     private WebElement dateOfBirth;
 
+    @Step
     public MyInfoPage createUser(User user){
         editSaveBtn.click();
         firstNameInput.clear();

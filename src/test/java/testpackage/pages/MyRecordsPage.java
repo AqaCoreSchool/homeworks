@@ -1,5 +1,6 @@
 package testpackage.pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -28,12 +29,14 @@ public class MyRecordsPage extends BasePage {
     @FindBy(xpath = "//table[@class='table']//tbody")
     private List<WebElement> table;
 
+    @Step
     public MyRecordsPage goToDate(String dayOfMonth){
         dateMyRecords.click();
         driver.findElement(By.linkText(dayOfMonth)).click();
         return this;
     }
 
+    @Step
     public MyRecordsPage goToDateWithMonth(String dayOfMonth,String month){
         dateMyRecords.click();
         months.click();
@@ -42,6 +45,7 @@ public class MyRecordsPage extends BasePage {
         return this;
     }
 
+    @Step
     public boolean filterTable(){
     boolean workInDate = table.stream()
             .map(WebElement::getText)
@@ -51,7 +55,8 @@ public class MyRecordsPage extends BasePage {
     return workInDate;
     }
 
-    public WebElement getMessagesNoAttendance(){
-        return messagesNoAttendance;
+    @Step
+    public boolean getMessagesNoAttendance(){
+        return messagesNoAttendance.isDisplayed();
     }
 }

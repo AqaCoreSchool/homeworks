@@ -6,18 +6,19 @@ import testpackage.base.BaseTest;
 import testpackage.pages.LoginPage;
 import testpackage.pages.MyRecordsPage;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 public class PunchIOWithStarTest extends BaseTest {
 
     @Test
     public void punchInOutTestWithStar(){
-        LoginPage loginPage = new LoginPage();
-        loginPage
+        MyRecordsPage myRecordsPage = new LoginPage()
                 .loginToTheSystem("TestUser03","Vfylhfujhf!1")
                 .clickMyRecords()
                 .goToDateWithMonth("20","Nov");
-        Assert.assertTrue(new MyRecordsPage().getMessagesNoAttendance().isDisplayed());
-               new MyRecordsPage().goToDateWithMonth("4","Dec");
-        Assert.assertTrue(new MyRecordsPage().getMessagesNoAttendance().isDisplayed());
+        assertThat(myRecordsPage.getMessagesNoAttendance()).isTrue();
+               myRecordsPage.goToDateWithMonth("4","Dec");
+        assertThat(myRecordsPage.getMessagesNoAttendance()).isTrue();
 
     }
 }

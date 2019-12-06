@@ -1,5 +1,6 @@
 package testpackage.pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -19,6 +20,7 @@ public class LoginPage extends BasePage {
     @FindBy(id = "btnLogin")
     private WebElement loginButton;
 
+    @Step
     public MainPage loginToTheSystem(String name,String password) {
         userNameInput.sendKeys(name);
         passwordInput.sendKeys(password);

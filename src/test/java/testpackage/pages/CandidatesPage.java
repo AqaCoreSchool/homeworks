@@ -1,5 +1,6 @@
 package testpackage.pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -46,6 +47,19 @@ public class CandidatesPage extends BasePage {
     @FindBy (xpath = "//table[@id='resultTable']//tbody")
     private List<WebElement> tableCandidates;
 
+    @FindBy(xpath ="//li[@class='line nameContainer']//li[1]//span[1]")
+    private WebElement firstNameInputError;
+
+    @FindBy(xpath ="//li[@class='line nameContainer']//li[3]//span[1]")
+    private WebElement lastNameInputError;
+
+    @FindBy(xpath ="//span[contains(text(),'Expected format: admin@example.com')]")
+    private WebElement emailFormatError;
+
+    @FindBy(xpath ="//span[contains(text(),'Should be less than 30 characters')]")
+    private WebElement phoneFormatError;
+
+    @Step
     public CandidatesPage createdCandidate(Candidate candidate){
         wait.until(ExpectedConditions.elementToBeClickable(btnAdd));
         btnAdd.click();
@@ -63,6 +77,16 @@ public class CandidatesPage extends BasePage {
         return this;
     }
 
+    @Step
+    public CandidatesPage addCandidateInfoForNegativeTest(){
+        wait.until(ExpectedConditions.elementToBeClickable(btnAdd));
+        btnAdd.click();
+        wait.until(ExpectedConditions.elementToBeClickable(firstNameInput));
+        btnSave.click();
+        return this;
+    }
+
+    @Step
     public boolean filterCandidates(Candidate candidate){
         boolean candidates = tableCandidates.stream()
                 .map(WebElement::getText)
@@ -72,5 +96,37 @@ public class CandidatesPage extends BasePage {
                         &e.contains(candidate.getVacancy())
                         &e.contains(candidate.getDate()));
         return candidates;
+    }
+    @Step
+    public boolean isCandidateNameErrorDisplayed(){
+        try{
+            return firstNameInputError.isDisplayed();
+        }catch (org.openqa.selenium.NoSuchElementException e){
+            return false;
+        }
+    }
+    @Step
+    public boolean isCandidateLastNameErrorDisplayed(){
+        try{
+            return lastNameInputError.isDisplayed();
+        }catch(org.openqa.selenium.NoSuchElementException e){
+            return false;
+        }
+    }
+    @Step
+    public boolean isEmailFormatErrorDisplayed(){
+        try{
+            return emailFormatError.isDisplayed();
+        }catch(org.openqa.selenium.NoSuchElementException e){
+            return false;
+        }
+    }
+    @Step
+    public boolean isPhoneFormatErrorDisplayed(){
+        try{
+            return phoneFormatError.isDisplayed();
+        }catch(org.openqa.selenium.NoSuchElementException e){
+            return false;
+        }
     }
 }
