@@ -9,12 +9,9 @@ public class JsonConvert {
     public <T> T jsonToObject(String jsonString, Class<T> object) {
         try {
             return objectMapper.readerFor(object).readValue(jsonString);
-        } catch (IOException e) {
+        } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
         return null;
     }
-}
-
-
 }
