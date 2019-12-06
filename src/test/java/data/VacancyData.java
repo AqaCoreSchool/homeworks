@@ -2,6 +2,8 @@ package data;
 
 import com.github.javafaker.Faker;
 
+import java.util.Objects;
+
 public class VacancyData {
     private static Faker faker = new Faker();
     private int jobTitleOption;
@@ -45,23 +47,16 @@ public class VacancyData {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         VacancyData that = (VacancyData) o;
-
-        if (jobTitleOption != that.jobTitleOption) return false;
-        if (!vacancyName.equals(that.vacancyName)) return false;
-        if (!hiringManager.equals(that.hiringManager)) return false;
-        if (!positions.equals(that.positions)) return false;
-        return description.equals(that.description);
+        return jobTitleOption == that.jobTitleOption &&
+                Objects.equals(vacancyName, that.vacancyName) &&
+                Objects.equals(hiringManager, that.hiringManager) &&
+                Objects.equals(positions, that.positions) &&
+                Objects.equals(description, that.description);
     }
 
     @Override
     public int hashCode() {
-        int result = jobTitleOption;
-        result = 31 * result + vacancyName.hashCode();
-        result = 31 * result + hiringManager.hashCode();
-        result = 31 * result + positions.hashCode();
-        result = 31 * result + description.hashCode();
-        return result;
+        return Objects.hash(jobTitleOption, vacancyName, hiringManager, positions, description);
     }
 }

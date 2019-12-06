@@ -2,6 +2,8 @@ package data;
 
 import com.github.javafaker.Faker;
 
+import java.util.Objects;
+
 public class CandidateData {
     private static Faker faker = new Faker();
     private String firstName;
@@ -63,29 +65,19 @@ public class CandidateData {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         CandidateData that = (CandidateData) o;
-
-        if (!firstName.equals(that.firstName)) return false;
-        if (!lastName.equals(that.lastName)) return false;
-        if (!email.equals(that.email)) return false;
-        if (!contactNo.equals(that.contactNo)) return false;
-        if (!vacancyName.equals(that.vacancyName)) return false;
-        if (!hiringManager.equals(that.hiringManager)) return false;
-        if (!comment.equals(that.comment)) return false;
-        return date.equals(that.date);
+        return Objects.equals(firstName, that.firstName) &&
+                Objects.equals(lastName, that.lastName) &&
+                Objects.equals(email, that.email) &&
+                Objects.equals(contactNo, that.contactNo) &&
+                Objects.equals(vacancyName, that.vacancyName) &&
+                Objects.equals(hiringManager, that.hiringManager) &&
+                Objects.equals(comment, that.comment) &&
+                Objects.equals(date, that.date);
     }
 
     @Override
     public int hashCode() {
-        int result = firstName.hashCode();
-        result = 31 * result + lastName.hashCode();
-        result = 31 * result + email.hashCode();
-        result = 31 * result + contactNo.hashCode();
-        result = 31 * result + vacancyName.hashCode();
-        result = 31 * result + hiringManager.hashCode();
-        result = 31 * result + comment.hashCode();
-        result = 31 * result + date.hashCode();
-        return result;
+        return Objects.hash(firstName, lastName, email, contactNo, vacancyName, hiringManager, comment, date);
     }
 }
