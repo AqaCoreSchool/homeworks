@@ -2,6 +2,8 @@ package data;
 
 import com.github.javafaker.Faker;
 
+import java.util.Objects;
+
 public class LocationData {
     private static Faker faker = new Faker();
     private String name;
@@ -66,32 +68,20 @@ public class LocationData {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         LocationData that = (LocationData) o;
-
-        if (!name.equals(that.name)) return false;
-        if (!countryCode.equals(that.countryCode)) return false;
-        if (!state.equals(that.state)) return false;
-        if (!city.equals(that.city)) return false;
-        if (!address.equals(that.address)) return false;
-        if (!zip.equals(that.zip)) return false;
-        if (!phone.equals(that.phone)) return false;
-        if (!fax.equals(that.fax)) return false;
-        return notes.equals(that.notes);
+        return Objects.equals(name, that.name) &&
+                Objects.equals(countryCode, that.countryCode) &&
+                Objects.equals(state, that.state) &&
+                Objects.equals(city, that.city) &&
+                Objects.equals(address, that.address) &&
+                Objects.equals(zip, that.zip) &&
+                Objects.equals(phone, that.phone) &&
+                Objects.equals(fax, that.fax) &&
+                Objects.equals(notes, that.notes);
     }
 
     @Override
     public int hashCode() {
-        int result = name.hashCode();
-        result = 31 * result + countryCode.hashCode();
-        result = 31 * result + state.hashCode();
-        result = 31 * result + city.hashCode();
-        result = 31 * result + address.hashCode();
-        result = 31 * result + zip.hashCode();
-        result = 31 * result + phone.hashCode();
-        result = 31 * result + fax.hashCode();
-        result = 31 * result + notes.hashCode();
-        return result;
+        return Objects.hash(name, countryCode, state, city, address, zip, phone, fax, notes);
     }
-
 }
