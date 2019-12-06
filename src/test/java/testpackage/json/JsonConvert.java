@@ -9,7 +9,7 @@ import testpackage.entity.Vacancy;
 
 import java.io.IOException;
 
-public class JsonParser {
+public class JsonConvert {
     public ObjectMapper objectMapper = new ObjectMapper();
 
     public String objectToJson(Object obj)  {

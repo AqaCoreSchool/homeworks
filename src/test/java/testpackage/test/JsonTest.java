@@ -10,7 +10,7 @@ import testpackage.factory.CandidateFactory;
 import testpackage.factory.LocationFactory;
 import testpackage.factory.UserFactory;
 import testpackage.factory.VacancyFactory;
-import testpackage.json.JsonParser;
+import testpackage.json.JsonConvert;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -18,28 +18,28 @@ public class JsonTest {
 
     @Test
     public void TestJson() {
-        JsonParser jsonParser = new JsonParser();
+        JsonConvert jsonConvert = new JsonConvert();
 
         Candidate candidate = new CandidateFactory().defaultCandidate();
-        String candidateJson = jsonParser.objectToJson(candidate);
+        String candidateJson = jsonConvert.objectToJson(candidate);
 
         Location location = new LocationFactory().defaultLocation();
-        String locationJson = jsonParser.objectToJson(location);
+        String locationJson = jsonConvert.objectToJson(location);
 
         Vacancy vacancy = new VacancyFactory().defaultVacancy();
-        String vacancyJson = jsonParser.objectToJson(vacancy);
+        String vacancyJson = jsonConvert.objectToJson(vacancy);
 
         User user = new UserFactory().defaultUser();
-        String userJson = jsonParser.objectToJson(user);
+        String userJson = jsonConvert.objectToJson(user);
 
         SoftAssert softAssert = new SoftAssert();
-        softAssert.assertEquals(candidate, jsonParser.getCandidateFrom(candidateJson),
+        softAssert.assertEquals(candidate, jsonConvert.getCandidateFrom(candidateJson),
                 "Compared candidates have different parameters");
-        softAssert.assertEquals(vacancy, jsonParser.getVacancyFrom(vacancyJson),
+        softAssert.assertEquals(vacancy, jsonConvert.getVacancyFrom(vacancyJson),
                 "Compared candidates have different parameters");
-        softAssert.assertEquals(user, jsonParser.getUserFrom(userJson),
+        softAssert.assertEquals(user, jsonConvert.getUserFrom(userJson),
                 "Compared candidates have different parameters");
-        softAssert.assertEquals(location, jsonParser.getLocationFrom(locationJson),
+        softAssert.assertEquals(location, jsonConvert.getLocationFrom(locationJson),
                 "Compared candidates have different parameters");
         softAssert.assertAll();
     }
