@@ -66,6 +66,9 @@ public class RecruitmentPage implements Convertable {
     @FindBy(xpath = "//div[@class='ac_results']//li")
     private List<WebElement> managerValue;
 
+    @FindBy(xpath = "//input[@id='btnBack']")
+    private WebElement backButton;
+
     // vacancy search
     @FindBy(xpath = "//select[@id='vacancySearch_jobVacancy']")
     private WebElement vacancyJobSelect;
@@ -137,11 +140,11 @@ public class RecruitmentPage implements Convertable {
         vacancyNameInput.sendKeys(vacancy.getPosition());
 
         managerInput.sendKeys(" ");
-
         managerName = managerValue.get(vacancy.getManagerValue()).getText();
         managerInput.sendKeys(managerName);
 
         saveButton.click();
+        backButton.click();
     }
 
     public String checkVacancy(Vacancy vacancy) {
@@ -161,7 +164,7 @@ public class RecruitmentPage implements Convertable {
 
     public void searchVacancy(Vacancy vacancy) {
         Select vacancyJob = new Select(vacancyJobSelect);
-        vacancyJob.selectByVisibleText(vacancy.getPosition());
+        vacancyJob.selectByValue(vacancy.getPosition());
 
         Select vacancyManager = new Select(vacancyManagerSelect);
         vacancyManager.selectByVisibleText(managerName);
@@ -171,13 +174,6 @@ public class RecruitmentPage implements Convertable {
 
     public void searchVacancyByJSON() {
         Vacancy vac = (Vacancy) Convertable.super.getObject(jsonVacancy, Vacancy.class);
-
-        Select vacancyJob = new Select(vacancyJobSelect);
-        vacancyJob.selectByValue(position);
-
-        Select vacancyManager = new Select(vacancyManagerSelect);
-        vacancyManager.selectByValue(managerName);
-
-        vacancySearchButton.click();
+        searchVacancy(vac);
     }
 }

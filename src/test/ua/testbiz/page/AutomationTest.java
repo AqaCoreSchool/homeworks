@@ -8,7 +8,7 @@ public class AutomationTest extends BaseTest {
     private String jsonLocation = "{\"locationName\":\"AMark & Spencer\",\"locationPostalCode\":\"11450-3689\",\"locationAddress\":\"013 Stephani Cliffs\",\"locationState\":\"Ohio\",\"locationCity\":\"Cleveland\",\"locationCountryIndex\":0}";
 
     @org.testng.annotations.Test
-    public void CandidateAutomationTest() {
+    public void testCandidate() {
         LoginPage loginPage = new LoginPage();
         HomePage homePage = new HomePage();
         RecruitmentPage recruitmentPage = new RecruitmentPage();
@@ -30,7 +30,7 @@ public class AutomationTest extends BaseTest {
     }
 
     @org.testng.annotations.Test()
-    public void ProfileAutomationTest() {
+    public void testProfile() {
         LoginPage loginPage = new LoginPage();
         HomePage homePage = new HomePage();
         PersonalDetailsPage personalDetailsPage = new PersonalDetailsPage();
@@ -50,7 +50,7 @@ public class AutomationTest extends BaseTest {
     }
 
     @org.testng.annotations.Test()
-    public void VacancyAutomationTest() {
+    public void testVacancy() {
         LoginPage loginPage = new LoginPage();
         HomePage homePage = new HomePage();
         RecruitmentPage recruitmentPage = new RecruitmentPage();
@@ -72,7 +72,7 @@ public class AutomationTest extends BaseTest {
     }
 
     @Test
-    public void locationAutomationTest() {
+    public void testLocation() {
         LoginPage loginPage = new LoginPage();
         HomePage homePage = new HomePage();
         LocationPage locationPage = new LocationPage();
