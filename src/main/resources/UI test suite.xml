@@ -1,0 +1,17 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name = "Page suite">
+
+    <test name = "Page tests">
+        <classes>
+            <class name="ua.biz.test.tests.UItest.candidate.CandidateDataTest"/>
+            <class name="ua.biz.test.tests.UItest.punch.PunchTimeTest"/>
+            <class name="ua.biz.test.tests.UItest.records.OtherDaysRecordsListTest"/>
+            <class name="ua.biz.test.tests.UItest.userData.CorrectEmployeeDataTest"/>
+            <class name="ua.biz.test.tests.UItest.vacancy.VacancyDataTest"/>
+            <class name="ua.biz.test.tests.UItest.location.LocationDataTest"/>
+        </classes>
+    </test>
+
+</suite>

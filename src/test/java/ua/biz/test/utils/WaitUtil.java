@@ -9,7 +9,7 @@ public class WaitUtil {
     private static WebDriverWait wait;
 
     public static void waitAndClick(WebElement element) {
-        waitAndClick(element, 5);
+        waitAndClick(element, 10);
     }
 
 
@@ -20,7 +20,7 @@ public class WaitUtil {
     }
 
     public static void waitAndType(WebElement element, String data) {
-        waitAndType(element, data, 5);
+        waitAndType(element, data, 10);
     }
 
     public static void waitAndType(WebElement element, String data, long sec) {
@@ -30,7 +30,7 @@ public class WaitUtil {
     }
 
     public static void waitAndClear(WebElement element) {
-        waitAndClear(element, 5);
+        waitAndClear(element, 10);
     }
 
     public static void waitAndClear(WebElement element, long sec) {
@@ -40,7 +40,7 @@ public class WaitUtil {
     }
 
     public static void waitForVisible(WebElement element) {
-        waitForVisible(element, 5);
+        waitForVisible(element, 10);
     }
 
     public static void waitForVisible(WebElement element, long sec) {

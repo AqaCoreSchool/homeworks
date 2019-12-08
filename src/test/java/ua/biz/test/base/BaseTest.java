@@ -18,9 +18,9 @@ public abstract class BaseTest {
     protected Faker faker = new Faker();
     private final String URL = "http://test.biz.ua/symfony/web/index.php/auth/login";
 
-   @BeforeSuite
-    public void init(){
-        Path driverPath = Paths.get("src","main", "resources");
+    @BeforeSuite
+    public void init() {
+        Path driverPath = Paths.get("src", "main", "resources");
         System.setProperty("webdriver.chrome.driver", driverPath + File.separator + "chromedriver.exe");
         driver = DriverManager.getBrowserInstance();
         driver.manage().window().maximize();
@@ -28,12 +28,12 @@ public abstract class BaseTest {
         new LoginPage(DriverManager.getBrowserInstance()).login();
     }
 
-    @BeforeMethod (alwaysRun = true)
+    @BeforeMethod(alwaysRun = true)
     protected void configure() {
         mainPage = new MainPage();
     }
 
-   @AfterSuite(alwaysRun = true)
+//    @AfterSuite(alwaysRun = true)
     protected void tearDown() {
         driver.quit();
     }

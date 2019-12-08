@@ -1,4 +1,4 @@
-package ua.biz.test.tests.candidate;
+package ua.biz.test.tests.UItest.candidate;
 
 
 

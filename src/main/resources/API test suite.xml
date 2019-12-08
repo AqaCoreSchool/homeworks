@@ -1,0 +1,13 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name = "API test suite">
+    <test name = "Employee work experience tests">
+        <classes>
+            <class name="ua.biz.test.tests.APItest.workExperience.CreateEmployeeWorkExperienceTest"/>
+            <class name="ua.biz.test.tests.APItest.workExperience.GetEmployeeWorkExperienceTest"/>
+            <class name="ua.biz.test.tests.APItest.workExperience.UpdateEmployeeWorkExperienceTest"/>
+            <class name="ua.biz.test.tests.APItest.workExperience.DeleteEmployeeWorkExperienceTest"/>
+        </classes>
+    </test>
+</suite>

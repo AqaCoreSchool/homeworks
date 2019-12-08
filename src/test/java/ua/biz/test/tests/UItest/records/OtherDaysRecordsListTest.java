@@ -1,4 +1,4 @@
-package ua.biz.test.tests.records;
+package ua.biz.test.tests.UItest.records;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;

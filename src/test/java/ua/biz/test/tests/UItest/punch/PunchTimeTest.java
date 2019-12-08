@@ -1,4 +1,4 @@
-package ua.biz.test.tests.punch;
+package ua.biz.test.tests.UItest.punch;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
