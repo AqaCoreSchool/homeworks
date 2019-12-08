@@ -14,8 +14,8 @@ public class PunchData {
         this.punchInMessage = "Start punch message";
         this.punchOutMessage = "End punch message";
         this.todayDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        this.weekBefore = LocalDateTime.now().minusWeeks(1).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));;
-        this.weekAfter = LocalDateTime.now().plusWeeks(1).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));;
+        this.weekBefore = LocalDateTime.now().minusWeeks(1).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        this.weekAfter = LocalDateTime.now().plusWeeks(1).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }
 
     public String getPunchInMessage() {
