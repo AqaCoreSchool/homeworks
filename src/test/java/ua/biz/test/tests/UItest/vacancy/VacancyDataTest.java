@@ -1,7 +1,5 @@
-package ua.biz.test.tests.vacancy;
+package ua.biz.test.tests.UItest.vacancy;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -9,8 +7,6 @@ import ua.biz.test.base.BaseTest;
 import ua.biz.test.entity.Vacancy;
 import ua.biz.test.pages.CreateVacancyPage;
 import ua.biz.test.pages.VacanciesListPage;
-
-import java.util.List;
 
 public class VacancyDataTest extends BaseTest {
 

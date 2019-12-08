@@ -1,18 +1,12 @@
 package io;
+import io.restassured.path.json.JsonPath;
+import org.json.simple.JSONObject;
 
-import io.reader.CSVReader;
-import io.writer.XMLWriter;
 
-import java.io.File;
-
+import static io.restassured.RestAssured.given;
 public class Main {
 
     public static void main(String[] args) {
-//        String sep = File.separator;
-//        String inputFilePath = "src"+sep+"main"+sep+"resourses"+sep+"Input data.csv";
-//        String outputFilePath = "src"+sep+"main"+sep+"resourses"+sep+"AQA courses.xls";
-//        String[] names= CSVReader.read(inputFilePath);
-//        XMLWriter.write(names,outputFilePath);
     }
 
 }

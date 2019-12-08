@@ -1,4 +1,4 @@
-package ua.biz.test.tests.location;
+package ua.biz.test.tests.UItest.location;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -8,7 +8,7 @@ import ua.biz.test.pages.LocationsPage;
 
 
 public class LocationDataTest extends BaseTest {
-    private final Location TEST_LOCATION = new Location(faker.name(), "Ukraine", "Lviv", 4657);
+    private final Location TEST_LOCATION = new Location("A"+faker.name(), "Ukraine", "Lviv", 4657);
 
     @Test
     public void testLocationData() {
