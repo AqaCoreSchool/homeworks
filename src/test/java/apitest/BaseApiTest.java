@@ -9,7 +9,7 @@ import org.testng.annotations.BeforeClass;
 public class BaseApiTest {
     public static final String USER_ID = "33";
     public String token;
-    public String seqId = "1";
+    public String seqId;
     public String uri = "http://test.biz.ua/symfony/web/index.php";
     public String path = "/api/v1/employee/{id}/work-experience";
 
