@@ -12,13 +12,13 @@ public class WorkExperience {
 
     public Response saveEmployeeExperience(){
         return given().auth().oauth2(getToken())
-                .contentType("multipart/form-data")
-                .multiPart("id", 29)
-                .multiPart("company", "SpaceX")
-                .multiPart("title", "space engineer")
-                .multiPart("fromDate", LocalDate.now().minusYears(5).toString())
-                .multiPart("toDate", LocalDate.now().minusYears(2).toString())
-                .multiPart("comment", "it's a joke")
+                .contentType(ContentType.URLENC)
+                .formParam("id", 29)
+                .formParam("company", "SpaceX")
+                .formParam("title", "space engineer")
+                .formParam("fromDate", LocalDate.now().minusYears(5).toString())
+                .formParam("toDate", LocalDate.now().minusYears(2).toString())
+                .formParam("comment", "it's a joke")
                 .when()
                 .post("/api/v1/employee/29/work-experience");
     }

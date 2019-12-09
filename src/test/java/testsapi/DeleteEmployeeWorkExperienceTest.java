@@ -11,7 +11,7 @@ public class DeleteEmployeeWorkExperienceTest extends BaseApiTest{
     @Test
     public void testdeleteEmployeeWorkExperience(){
         WorkExperience workExperience = new WorkExperience();
-        Response response = workExperience.deleteEmployeeExperience(29, 2);
+        Response response = workExperience.deleteEmployeeExperience(29, 3);
 
         assertThat(response.getStatusCode())
                 .as(response.getBody().asString()).isEqualTo(200);
