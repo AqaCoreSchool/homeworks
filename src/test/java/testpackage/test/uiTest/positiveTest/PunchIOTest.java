@@ -1,4 +1,4 @@
-package testpackage.test;
+package testpackage.test.uiTest.positiveTest;
 
 import testpackage.base.BaseTest;
 import testpackage.pages.LoginPage;
