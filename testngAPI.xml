@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="TestSuite2">
+    <test name="TestsAPI">
+        <classes>
+            <class name="testsapi.SaveEmployeeWorkExperienceTest" />
+            <class name="testsapi.GetEmployeeWorkExperienceTest" />
+            <class name="testsapi.UpdateEmployeeWorkExperienceTest" />
+            <class name="testsapi.DeleteEmployeeWorkExperienceTest" />
+        </classes>
+    </test>
+</suite>
