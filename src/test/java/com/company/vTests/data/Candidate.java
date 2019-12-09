@@ -1,7 +1,5 @@
 package com.company.vTests.data;
 
-import com.github.javafaker.Faker;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
@@ -19,17 +17,10 @@ public class Candidate {
 
     public Candidate(String firstName,
                      String lastName,
-//                     String email,
-                     String contactNo
-//                     String candidateVacancy,
-//                     String candidateApplicationDate
-                     ) {
+                     String contactNo) {
         this.firstName = firstName;
         this.lastName = lastName;
-//        this.email = email;
         this.contactNo = contactNo;
-//        this.candidateVacancy = candidateVacancy;
-//        this.candidateApplicationDate = candidateApplicationDate;
     }
 
     public String getFirstName() {
@@ -40,22 +31,9 @@ public class Candidate {
         return lastName;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
     public String getContactNo() {
         return contactNo;
     }
-
-    public String getCandidateVacancy() {
-        return candidateVacancy;
-    }
-
-    public String getCandidateApplicationDate() {
-        return candidateApplicationDate;
-    }
-
 
     @Override
     public boolean equals(Object o) {
@@ -65,14 +43,11 @@ public class Candidate {
         Candidate candidate = (Candidate) o;
         if (!firstName.equals(candidate.firstName)) return false;
         if (!lastName.equals(candidate.lastName)) return false;
-        if (!email.equals(candidate.email)) return false;
-        if (!candidateApplicationDate.equals(candidate.candidateApplicationDate)) return false;
-        return candidateVacancy.equals(candidate.candidateVacancy);
+        return contactNo.equals(candidate.contactNo);
     }
     @Override
     public int hashCode() {
-        return Objects.hash(firstName, lastName, email, candidateVacancy,
-                candidateApplicationDate);
+        return Objects.hash(firstName, lastName, contactNo);
     }
 
 }
