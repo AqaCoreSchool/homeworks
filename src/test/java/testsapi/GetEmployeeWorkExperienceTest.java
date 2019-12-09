@@ -17,5 +17,6 @@ public class GetEmployeeWorkExperienceTest extends BaseApiTest{
 
         assertThat(response.getStatusCode())
                 .as(response.getBody().asString()).isEqualTo(200);
+        System.out.println(response.getBody().asString());
     }
 }
