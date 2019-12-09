@@ -35,6 +35,25 @@ public class Candidate {
         return contactNo;
     }
 
+    public String getFromDate(){
+        LocalDate date = LocalDate.now();
+        DateTimeFormatter format =
+                DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        String formatedDateTime = date.format(format);
+        return formatedDateTime;
+    }
+
+
+    public String getToDate(){
+        LocalDate date = LocalDate.now().plusYears(2);
+        DateTimeFormatter format =
+                DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        String toDate = date.format(format);
+        return toDate;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
