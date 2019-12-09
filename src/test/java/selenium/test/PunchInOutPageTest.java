@@ -18,6 +18,6 @@ public class PunchInOutPageTest extends BaseTest {
                 .clickPunchIn();
 
         String expectationDate = Utils.getCurrentDate().toString();
-        Assert.assertEquals(expectationDate, homePage.getCurrentDateLabel());
+        Assert.assertEquals(expectationDate, homePage.getCurrentDateLabel(), "Check Attendance date.");
     }
 }

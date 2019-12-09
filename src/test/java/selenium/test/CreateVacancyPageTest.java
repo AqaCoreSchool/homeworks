@@ -26,6 +26,6 @@ public class CreateVacancyPageTest extends BaseTest {
                 .saveVacancy();
 
         String successMessage = page.getSuccessMessage();
-        Assert.assertEquals(successMessage, "Successfully Saved\nClose");
+        Assert.assertEquals(successMessage, "Successfully Saved\nClose", "Successfully isn't displayed.");
     }
 }

@@ -26,6 +26,6 @@ public class CreateCandidatePageTest extends BaseTest {
 
 
         String successMessage = page.getSuccessMessage();
-        Assert.assertEquals(successMessage, "Successfully Saved\nClose");
+        Assert.assertEquals(successMessage, "Successfully Saved\nClose", "Successfully message isn't displayed.");
     }
 }

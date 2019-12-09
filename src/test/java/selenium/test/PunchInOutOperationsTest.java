@@ -22,7 +22,7 @@ public class PunchInOutOperationsTest extends BaseTest {
                 .clickPunchButton();
 
         String successMessage = page.getSuccessMessage();
-        Assert.assertEquals(successMessage, "Successfully Saved\nClose");
+        Assert.assertEquals(successMessage, "Successfully Saved\nClose", "Successfully message isn't displayed");
     }
 
 }

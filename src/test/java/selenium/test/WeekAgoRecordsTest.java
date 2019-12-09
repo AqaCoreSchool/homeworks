@@ -20,6 +20,6 @@ public class WeekAgoRecordsTest extends BaseTest {
                 .fillAttendanceDate(Utils.getCurrentDate().minusWeeks(1).toString());
 
         String recordColumnText = page.getRecordColumnText();
-        Assert.assertEquals(recordColumnText, "No attendance records to display");
+        Assert.assertEquals(recordColumnText, "No attendance records to display", "There is nothing to display!");
     }
 }

@@ -20,7 +20,7 @@ public class MyRecordsPageTest extends BaseTest {
                 .fillAttendanceDate(Utils.getCurrentDate().toString())
                 .getMyLastRecordsDetails();
 
-        Assert.assertEquals(page.getLatestPunchIn(), Utils.getCurrentDateTime());
+        Assert.assertEquals(page.getLatestPunchIn(), Utils.getCurrentDateTime(), "");
         Assert.assertEquals(Utils.getProperty("inNote"), page.getLatestPunchInNote());
         Assert.assertEquals(page.getLatestPunchOut(), Utils.getCurrentDateTime());
         Assert.assertEquals(Utils.getProperty("outNote"), page.getLatestPunchOutNote());
