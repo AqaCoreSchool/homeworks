@@ -34,14 +34,14 @@ public class BaseAPITest {
                 .multiPart("company", workExperience.getCompany())
                 .multiPart("title", workExperience.getTitle())
                 .when()
-                .post("/api/v1/employee/31/work-experience");
+                .post("/api/v1/employee/30/work-experience");
     }
 
 
     protected Response getEmployeeWorkExperiences() {
         return given().auth().oauth2(token)
                 .contentType("multipart/form-data")
-                .when().get("/api/v1/employee/31/work-experience");
+                .when().get("/api/v1/employee/30/work-experience");
     }
 
 
@@ -52,16 +52,16 @@ public class BaseAPITest {
                 .formParam("title", workExperience.getTitle())
                 .formParam("seqId", 1)
                 .when()
-                .put("/api/v1/employee/31/work-experience");
+                .put("/api/v1/employee/30/work-experience");
     }
 
 
     protected Response deleteEmployeeWorkExperience(WorkExperience workExperience) {
         return given().auth().oauth2(token)
                 .contentType(ContentType.URLENC)
-                .formParam("id", "31")
+                .formParam("id", "30")
                 .formParam("seqId", 1)
                 .when()
-                .delete("/api/v1/employee/31/work-experience");
+                .delete("/api/v1/employee/30/work-experience");
     }
 }
