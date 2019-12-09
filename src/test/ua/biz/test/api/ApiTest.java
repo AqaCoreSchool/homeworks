@@ -12,7 +12,6 @@ import ua.biz.test.data.Path;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.containsStringIgnoringCase;
-import static org.hamcrest.CoreMatchers.is;
 
 public class ApiTest {
     private String token;
@@ -89,7 +88,7 @@ public class ApiTest {
                 .getBody()
                 .asString();
 
-        org.junit.Assert.assertThat(result, is(containsStringIgnoringCase(SUCCESS)));
+        org.junit.Assert.assertThat(result, containsStringIgnoringCase(SUCCESS));
     }
 
     @Test(dependsOnMethods = "saveEmployeeWorkExperience")
@@ -100,7 +99,7 @@ public class ApiTest {
                 .getBody()
                 .asString();
 
-        org.junit.Assert.assertThat(result, is(containsStringIgnoringCase("data")));
+        org.junit.Assert.assertThat(result, containsStringIgnoringCase("data"));
     }
 
     @Test(dependsOnMethods = "updateEmployeeWorkExperience")
@@ -115,6 +114,6 @@ public class ApiTest {
                 .getBody()
                 .asString();
 
-        org.junit.Assert.assertThat(result, is(containsStringIgnoringCase(SUCCESS)));
+        org.junit.Assert.assertThat(result, containsStringIgnoringCase(SUCCESS));
     }
 }
