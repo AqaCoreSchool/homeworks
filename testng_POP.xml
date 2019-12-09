@@ -1,0 +1,34 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="OrangeHRM Test" verbose="1" >
+    <test name="Create Punch and check it in records table">
+        <classes>
+            <class name="test.CreatePunchRecordTest"/>
+        </classes>
+    </test>
+    <test name="Check user punch records is empty week before and after">
+        <classes>
+            <class name="test.CheckEmptyPunchesTest"/>
+        </classes>
+    </test>
+    <test name="Change user data and check it in the list">
+        <classes>
+            <class name="test.ChangeUserDataTest"/>
+        </classes>
+    </test>
+    <test name="Create vacancy and check it in the list">
+        <classes>
+            <class name="test.CreateVacancyTest"/>
+        </classes>
+    </test>
+    <test name="Apply candidate to vacancy">
+        <classes>
+            <class name="test.ApplyCandidateTest"/>
+        </classes>
+    </test>
+    <test name="Create new location">
+        <classes>
+            <class name="test.CreateLocationTest"/>
+        </classes>
+    </test>
+</suite>
