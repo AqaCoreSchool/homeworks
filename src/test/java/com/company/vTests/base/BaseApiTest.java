@@ -4,9 +4,6 @@ import io.restassured.path.json.JsonPath;
 import org.json.JSONObject;
 import org.testng.annotations.BeforeClass;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
 import static io.restassured.RestAssured.given;
 
 public class BaseApiTest {
@@ -28,22 +25,5 @@ public class BaseApiTest {
         return token;
     }
 
-    public String getFromDate(){
-        LocalDate date = LocalDate.now();
-        DateTimeFormatter format =
-                DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-        String formatedDateTime = date.format(format);
-        return formatedDateTime;
-    }
-
-
-    public String getToDate(){
-        LocalDate date = LocalDate.now().plusYears(2);
-        DateTimeFormatter format =
-                DateTimeFormatter.ofPattern("yyyy-MM-dd");
-
-        String toDate = date.format(format);
-        return toDate;
-    }
 }
