@@ -23,6 +23,6 @@ public class CreateLocationPageTest extends BaseTest {
 
         boolean isCreated = page.toLocationPage()
                 .checkLocation(getLocation().getName(), getLocation().getCity());
-        Assert.assertTrue(isCreated);
+        Assert.assertTrue(isCreated, "Location is not created.");
     }
 }

@@ -5,9 +5,9 @@ import org.testng.annotations.Test;
 import selenium.model.Vacancy;
 import selenium.page.CreateVacancyPage;
 
-public class CreateVacancyPageTest extends BaseTest {
+public class NegativeVacancyCreationTest extends BaseTest {
     @Test
-    public void createVacancyTest() {
+    public void negativeVacancyTest() {
         Vacancy vacancy = new Vacancy();
         CreateVacancyPage page = getLoginPage()
                 .fillUsername(getCredentials().getUserLoginName())
@@ -16,7 +16,7 @@ public class CreateVacancyPageTest extends BaseTest {
                 .moveToRecruitmentItem()
                 .clickVacanciesButton()
                 .clickNewVacancyButton()
-                .fillJobTitle(vacancy.getJobTitle())
+                .fillJobTitle("")
                 .fillVacancyName(vacancy.getVacancyName())
                 .fillHiringManager(vacancy.getHiringManager())
                 .fillPositionsNo(vacancy.getNoOfPositions())
@@ -25,7 +25,6 @@ public class CreateVacancyPageTest extends BaseTest {
                 .setPublishedInFeedStatus()
                 .saveVacancy();
 
-        String successMessage = page.getSuccessMessage();
-        Assert.assertEquals(successMessage, "Successfully Saved\nClose");
+        Assert.fail("Check required fields! Fields message: \n" + page.getValidationMessage());
     }
 }
