@@ -7,28 +7,29 @@ import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 public class Candidate {
-    private String firstName = "Olya";
-    private String lastName = "Bilynska";
-    private String email = "bilynska.mes@gmail.com";
-    private String contactNo = "123";
-    private String candidateVacancy = "Quality Assurance";
+    private String firstName;
+    private String lastName;
+    private String email;
+    private String contactNo;
+    private String candidateVacancy;
     DateTimeFormatter date = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     LocalDate localDate = LocalDate.now();
-    private String candidateApplicationDate = localDate.format(date).toString();
+    private String candidateApplicationDate = localDate.format(date);
 
 
     public Candidate(String firstName,
-                    String lastName,
-                    String email,
-                     String contactNo,
-                     String candidateVacancy,
-                     String candidateApplicationDate) {
+                     String lastName,
+//                     String email,
+                     String contactNo
+//                     String candidateVacancy,
+//                     String candidateApplicationDate
+                     ) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.email = email;
+//        this.email = email;
         this.contactNo = contactNo;
-        this.candidateVacancy = candidateVacancy;
-        this.candidateApplicationDate = candidateApplicationDate;
+//        this.candidateVacancy = candidateVacancy;
+//        this.candidateApplicationDate = candidateApplicationDate;
     }
 
     public String getFirstName() {

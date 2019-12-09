@@ -1,13 +1,15 @@
 package com.company.vTests;
 
-/**
- * Hello world!
- *
- */
+import io.restassured.path.json.JsonPath;
+import org.json.JSONObject;
+
+import static io.restassured.RestAssured.given;
+
 public class App 
 {
     public static void main( String[] args )
     {
-        System.out.println( "Hello World!" );
+
+
     }
 }

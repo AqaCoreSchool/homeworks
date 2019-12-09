@@ -11,7 +11,6 @@ public class Vacancy {
     private String numberOfPositions;
     private String description;
 
-
     public Vacancy() {
         this.jobTitle = "AQA";
         this.vacancyName = Faker.instance().job().seniority();

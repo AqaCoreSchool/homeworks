@@ -1,7 +1,6 @@
 package com.company.vTests.pages;
 
 import com.company.vTests.base.BasePage;
-import jdk.jfr.Description;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -41,7 +40,6 @@ public class LocationPage extends BasePage {
         return this;
     }
 
-    @Description("Location VERIFY")
     public boolean verifyLocation(String name, String country){
         boolean locations = tableWithLocations.stream()
                 .map(WebElement::getText)
