@@ -46,13 +46,12 @@ public class VacancyPage extends BasePage {
         System.out.println("add");
         return this;
     }
-
-    public VacancyPage inputVacancyData(){
+ public VacancyPage inputVacancyData(String email, String newName){
         jobTitleOfVacancy.click();
         vacancyName.click();
-        vacancyName.sendKeys("hgbg@gmail.com");
+        vacancyName.sendKeys(email);
         hiringManagerName.click();
-        hiringManagerName.sendKeys("NewName");
+        hiringManagerName.sendKeys(newName);
         return this;
     }
 
