@@ -12,7 +12,6 @@ public class GetEmployeeWorkExperienceTest extends BaseApiTest{
 
     @Test
     public void testGetEmployeeExperience(){
-        WorkExperience workExperience = new WorkExperience();
         Response response = workExperience.getEmployeeExperience();
 
         assertThat(response.getStatusCode())

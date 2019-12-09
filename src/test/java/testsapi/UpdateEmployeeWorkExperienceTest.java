@@ -11,7 +11,6 @@ public class UpdateEmployeeWorkExperienceTest extends BaseApiTest{
 
     @Test
     public void testUpdateEmployeeWorkExperience(){
-        WorkExperience workExperience = new WorkExperience();
         Response response = workExperience.updateEmployeeExperience(29, 1);
 
         assertThat(response.getStatusCode())

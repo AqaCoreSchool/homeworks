@@ -25,6 +25,7 @@ public class WorkExperience {
 
     public Response getEmployeeExperience(){
         return given().auth().oauth2(getToken())
+                .contentType(ContentType.URLENC)
                 .when()
                 .get("/api/v1/employee/29/work-experience");
     }

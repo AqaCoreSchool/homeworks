@@ -1,5 +1,6 @@
 package testsapi;
 
+import data.WorkExperience;
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import org.json.simple.JSONObject;
@@ -8,6 +9,7 @@ import org.testng.annotations.BeforeMethod;
 import static io.restassured.RestAssured.given;
 
 public class BaseApiTest {
+    public WorkExperience workExperience = new WorkExperience();
 
     @BeforeMethod
     public static String getToken() {
