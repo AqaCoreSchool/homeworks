@@ -20,7 +20,9 @@ public class BaseApiTest {
         String response = given()
                 .header("Content-Type", "application/json")
                 .body((login.toString()))
-                .post("http://test.biz.ua/symfony/web/index.php/oauth/issueToken").getBody().asString();
+                .post("http://test.biz.ua/symfony/web/index.php/oauth/issueToken")
+                .getBody()
+                .asString();
 
         String token = JsonPath.from(response).getString("access_token");
         return token;
