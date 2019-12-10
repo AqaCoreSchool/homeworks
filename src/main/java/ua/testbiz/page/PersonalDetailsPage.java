@@ -4,7 +4,9 @@ import data.UserInformation;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import util.Application;
 
 public class PersonalDetailsPage {
@@ -29,13 +31,17 @@ public class PersonalDetailsPage {
     @FindBy(xpath = "//input[@id='btnSave']")
     public static WebElement saveButton;
 
+    private WebDriverWait wait;
+
     public PersonalDetailsPage() {
         PageFactory.initElements(Application.getDriver(), this);
+        wait = new WebDriverWait(Application.getDriver(), 15);
     }
 
     public HomePage setPersonalDetail(UserInformation information) {
         saveButton.click();
 
+        wait.until(ExpectedConditions.visibilityOf(firstNameInput));
         firstNameInput.clear();
         firstNameInput.sendKeys(information.getFirstName());
 

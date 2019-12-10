@@ -12,7 +12,7 @@ public class Vacancy {
 
         jobTitleValue = "1";
         position = faker.job().position();
-        managerValue = faker.random().nextInt(31, 35);
+        managerValue = faker.random().nextInt(1, 9);
     }
 
     public String getJobTitleValue() {

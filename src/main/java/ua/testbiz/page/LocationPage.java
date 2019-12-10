@@ -4,7 +4,9 @@ import data.Location;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import util.Application;
 
 import java.util.List;
@@ -58,15 +60,21 @@ public class LocationPage {
     @FindBy(xpath = "//input[@id='btnSearch']")
     private WebElement searchButton;
 
+    private WebDriverWait wait;
+
     public LocationPage() {
         PageFactory.initElements(Application.getDriver(), this);
+        wait = new WebDriverWait(Application.getDriver(),15);
     }
 
     public LocationPage addLocation(Location location) {
+        wait.until(ExpectedConditions.visibilityOf(addButton));
+
         organizationOption.click();
         locationSubMenu.click();
         addButton.click();
 
+        wait.until(ExpectedConditions.visibilityOf(nameInput));
         nameInput.sendKeys(location.getLocationName());
 
         Select countySelect = new Select(countrySelect);
@@ -83,6 +91,7 @@ public class LocationPage {
     }
 
     public LocationPage searchLocation(Location location) {
+        wait.until(ExpectedConditions.visibilityOf(searchNameInput));
         searchNameInput.sendKeys(location.getLocationName());
         searchCityInput.sendKeys(location.getLocationCity());
         searchButton.click();

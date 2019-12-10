@@ -6,7 +6,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import util.Application;
 
 import java.util.List;
@@ -78,21 +80,27 @@ public class RecruitmentPage {
     @FindBy(xpath = "//input[@id='btnSrch']")
     private WebElement vacancySearchButton;
 
+    private WebDriverWait wait;
+
     public RecruitmentPage() {
         PageFactory.initElements(Application.getDriver(), this);
+        wait = new WebDriverWait(Application.getDriver(), 15);
     }
 
     public RecruitmentPage switchToCandidate() {
+        wait.until(ExpectedConditions.visibilityOf(candidateSubOption));
         candidateSubOption.click();
         return this;
     }
 
     public RecruitmentPage switchToVacancy() {
+        wait.until(ExpectedConditions.visibilityOf(vacancySubOption));
         vacancySubOption.click();
         return this;
     }
 
     public RecruitmentPage addCandidate(Candidate candidate) {
+        wait.until(ExpectedConditions.visibilityOf(addButton));
         addButton.click();
 
         firstNameInput.sendKeys(candidate.getFirstName());
@@ -101,7 +109,7 @@ public class RecruitmentPage {
         contactNoInput.sendKeys(candidate.getContactNo());
 
         Select selectVacancy = new Select(jobVacancySelect);
-        selectVacancy.selectByValue(candidate.getJobVacancyValue());
+        selectVacancy.selectByIndex(candidate.getJobVacancyValue());
 
         saveButton.click();
 
@@ -109,6 +117,7 @@ public class RecruitmentPage {
     }
 
     public RecruitmentPage searchCandidate(Candidate candidate) {
+        wait.until(ExpectedConditions.visibilityOf(candidateSearchNameInput));
         candidateSearchNameInput.sendKeys(String.join(" ", candidate.getFirstName(), candidate.getLastName()));
         candidateSearchButton.click();
         return this;
@@ -145,11 +154,10 @@ public class RecruitmentPage {
     }
 
     public RecruitmentPage searchVacancy(Vacancy vacancy) {
+        Application.getDriver().navigate().refresh();
+        wait.until(ExpectedConditions.visibilityOf(vacancyJobSelect));
         Select vacancyJob = new Select(vacancyJobSelect);
         vacancyJob.selectByVisibleText(vacancy.getPosition());
-
-        Select vacancyManager = new Select(vacancyManagerSelect);
-        vacancyManager.selectByValue(String.valueOf(vacancy.getManagerValue()));
 
         vacancySearchButton.click();
         return this;
