@@ -1,9 +1,7 @@
 package orangetest.tests;
 
-import orangetest.utils.Application;
 import orangetest.pages.AttendancePage;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.Test;
 
 import java.time.LocalDate;
@@ -16,14 +14,14 @@ public class CheckPunchOtherWeeksTest extends BaseTest {
     public void checkPreviousWeek() {
         attendancePage = new AttendancePage();
         String previousWeekDate = date.minusDays(7).toString();
-        boolean stringSearch = attendancePage.checkPreviousOrNextWeek(previousWeekDate);
-        Assert.assertTrue(stringSearch);
+        boolean stringSearch = attendancePage.isPrevOrNextWeekWithoutRecords(previousWeekDate);
+        Assert.assertTrue(stringSearch, "Punch In/Out records table is not empty for this date");
     }
 
     @Test(priority = 2)
     public void checkNextWeek() {
         String nextWeekDate = date.plusDays(7).toString();
-        boolean stringSearch = attendancePage.checkPreviousOrNextWeek(nextWeekDate);
-        Assert.assertTrue(stringSearch);
+        boolean stringSearch = attendancePage.isPrevOrNextWeekWithoutRecords(nextWeekDate);
+        Assert.assertTrue(stringSearch, "Punch In/Out records table is not empty for this date");
     }
 }

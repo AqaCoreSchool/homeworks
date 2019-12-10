@@ -1,10 +1,10 @@
 package orangetest.pages;
 
 import io.qameta.allure.Step;
-import orangetest.utils.Application;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import java.util.List;
 
 public class LoginPage extends BasePage {
 
@@ -16,6 +16,9 @@ public class LoginPage extends BasePage {
 
     @FindBy(xpath = ("//input[@id='btnLogin']"))
     private WebElement submitButton;
+
+    @FindBy(id = "welcome")
+    private List<WebElement> welcomeField;
 
     public LoginPage() {
         super();
@@ -30,7 +33,7 @@ public class LoginPage extends BasePage {
     }
 
     @Step("Check if user is logged")
-    public boolean checkLogin(){
-        return Application.getDriver().findElements(By.xpath("//a[@id='welcome']")).size() > 0;
+    public boolean isHomePageOpened() {
+        return welcomeField.size() == 1;
     }
 }

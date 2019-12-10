@@ -1,9 +1,7 @@
 package orangetest.tests;
 
 import orangetest.pages.AttendancePage;
-import orangetest.utils.Application;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.Test;
 
 public class PunchInOutTest extends BaseTest {
@@ -16,6 +14,6 @@ public class PunchInOutTest extends BaseTest {
         attendancePage = new AttendancePage();
         Assert.assertTrue(attendancePage.punchInOut(NOTE_IN)
                 .punchInOut(NOTE_OUT)
-                .checkRecord());
+                .isRecordAdded());
     }
 }

@@ -45,20 +45,18 @@ public class CandidatesPage extends BasePage {
     @FindBy(id = "candidateSearch_candidateName")
     WebElement searchName;
 
-    Candidate candidate = new Candidate();
-
     public CandidatesPage() {
         super();
     }
 
-    public CandidatesPage addCandidate() {
+    public CandidatesPage addCandidate(String fName, String lName, String mName, String email) {
         menuRecruitment.click();
         viewCandidates.click();
         btnAdd.click();
-        addCandidateFirstName.sendKeys(candidate.getCandidateFirstName());
-        addCandidateLastName.sendKeys(candidate.getCandidateLastName());
-        addCandidateMiddleName.sendKeys(candidate.getCandidateMiddleName());
-        addCandidateEmail.sendKeys(candidate.getCandidateEmail());
+        addCandidateFirstName.sendKeys(fName);
+        addCandidateLastName.sendKeys(lName);
+        addCandidateMiddleName.sendKeys(mName);
+        addCandidateEmail.sendKeys(email);
         addCandidateVacancy.click();
         List<WebElement> vacancies = addCandidateVacancy.findElements(By.xpath("./*"));
         int size = vacancies.size();
@@ -70,15 +68,15 @@ public class CandidatesPage extends BasePage {
         return this;
     }
 
-    public boolean addEmptyCandidate() {
+    public boolean isEmptyCandidateAdded() {
         menuRecruitment.click();
         viewCandidates.click();
         btnAdd.click();
         btnSave.click();
         try {
-            System.out.println("First Name. Error message: " + errorFirstName.getText());
-            System.out.println("Last Name. Error message: " + errorLastName.getText());
-            System.out.println("Email Name. Error message: " + errorEmail.getText());
+            errorFirstName.isEnabled();
+            errorLastName.isEnabled();
+            errorEmail.isEnabled();
             return true;
         } catch (NoSuchElementException e) {
             System.out.println("Error messages is not displaying correctly");
@@ -86,24 +84,22 @@ public class CandidatesPage extends BasePage {
         }
     }
 
-    public boolean checkAddedCandidate() {
+    public boolean isCandidateAdded(String fName, String lName, String mName) {
         viewCandidates.click();
         LocalDate currentDate = LocalDate.now();
         searchFromDate.click();
         searchFromDate.clear();
         searchFromDate.sendKeys(currentDate.toString());
-        String fullName = new StringBuilder(candidate.getCandidateFirstName()).append(" ")
-                .append(candidate.getCandidateMiddleName()).append(" ")
-                .append(candidate.getCandidateLastName()).toString();
+        String fullName = new StringBuilder(fName).append(" ")
+                .append(mName).append(" ")
+                .append(lName).toString();
         searchName.sendKeys(fullName, Keys.ENTER);
         btnSrch.click();
         System.out.println("Vacancy: " + vacancy);
         List<WebElement> tableRows = resultTable.findElements(By.tagName("tr"));
-        boolean searchResult = tableRows.stream().map(WebElement::getText).anyMatch(
+        return tableRows.stream().map(WebElement::getText).anyMatch(
                 o -> o.contains(currentDate.toString()) &&
                         o.contains(vacancy) &&
-                        o.contains(candidate.getCandidateLastName()) &&
-                        o.contains(candidate.getCandidateFirstName()));
-        return searchResult;
+                        o.contains(fName));
     }
 }

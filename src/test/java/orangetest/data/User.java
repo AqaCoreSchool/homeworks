@@ -1,7 +1,5 @@
 package orangetest.data;
 
-import com.github.javafaker.Faker;
-
 public class User {
     private String firstName = "Mariana";
     private String lastName = "Mykytovych";
