@@ -8,7 +8,7 @@ public class Candidate {
     private String email;
     private String contactNo;
 
-    public void setCandidateInfo() {
+    public Candidate() {
         Faker faker = new Faker();
 
         firstName = faker.name().firstName();

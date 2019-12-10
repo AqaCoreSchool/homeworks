@@ -17,13 +17,18 @@ public class LoginPage {
     @FindBy(xpath = "//input[@id='btnLogin']")
     private WebElement loginButton;
 
+    private WebDriver webDriver;
+
     public LoginPage(WebDriver driver) {
+        webDriver = driver;
         PageFactory.initElements(driver, this);
     }
 
-    public void loginIntoSystem() {
+    public HomePage loginIntoSystem() {
         usernameInput.sendKeys(UserCredential.USER_NAME);
         passwordInput.sendKeys(UserCredential.PASSWORD);
         loginButton.click();
+
+        return new HomePage(webDriver);
     }
 }

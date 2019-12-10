@@ -29,11 +29,14 @@ public class PersonalDetailsPage {
     @FindBy(xpath = "//input[@id='btnSave']")
     private WebElement saveButton;
 
+    private WebDriver webDriver;
+
     public PersonalDetailsPage(WebDriver driver) {
+        webDriver = driver;
         PageFactory.initElements(driver, this);
     }
 
-    public void setPersonalDetail(UserInformation information) {
+    public HomePage setPersonalDetail(UserInformation information) {
         saveButton.click();
 
         firstNameInput.clear();
@@ -54,5 +57,7 @@ public class PersonalDetailsPage {
         birthdayInput.sendKeys(information.getBirthdayValue());
 
         saveButton.click();
+
+        return new HomePage(webDriver);
     }
 }

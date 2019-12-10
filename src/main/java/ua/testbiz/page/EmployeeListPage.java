@@ -1,7 +1,6 @@
 package ua.testbiz.page;
 
 import data.UserInformation;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -17,13 +16,16 @@ public class EmployeeListPage {
         PageFactory.initElements(driver, this);
     }
 
-    public void checkEmployee(UserInformation information) {
+    public boolean checkEmployee(UserInformation information) {
         for (WebElement element : employeeTable) {
-            List<WebElement> employeeData = element.findElements(By.tagName("a"));
-            if (employeeData.get(1).getText().equals(information.getFirstName())) {
-                System.out.printf("Employee %s %s exists.", employeeData.get(1).getText(), employeeData.get(2).getText());
+            if (element.getText().contains(information.getFirstName())
+                    && element.getText().contains(information.getLastName())) {
+                System.out.printf("Employee %s exists.", element.getText());
+                return true;
             }
+
         }
+        return false;
     }
 
 }

@@ -18,23 +18,25 @@ public class HomePage {
     @FindBy(xpath = "//a[@id='menu_recruitment_viewRecruitmentModule']")
     private WebElement recruitmentOption;
 
+    private WebDriver webDriver;
+
     public HomePage(WebDriver driver) {
+        webDriver = driver;
         PageFactory.initElements(driver, this);
     }
 
-    public boolean isOpened() {
-        return welcomeLabel.isDisplayed();
-    }
-
-    public void selectMyInfo() {
+    public PersonalDetailsPage selectMyInfo() {
         myInfoOption.click();
+        return new PersonalDetailsPage(webDriver);
     }
 
-    public void selectPim() {
+    public EmployeeListPage selectPim() {
         pimOption.click();
+        return new EmployeeListPage(webDriver);
     }
 
-    public void selectRecruitment() {
+    public RecruitmentPage selectRecruitment() {
         recruitmentOption.click();
+        return new RecruitmentPage(webDriver);
     }
 }

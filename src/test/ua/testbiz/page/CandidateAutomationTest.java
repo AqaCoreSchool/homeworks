@@ -7,23 +7,18 @@ public class CandidateAutomationTest extends BaseTest {
 
     @org.testng.annotations.Test
     public void addCandidate() {
-        LoginPage loginPage = new LoginPage(driver);
-        HomePage homePage = new HomePage(driver);
-        RecruitmentPage recruitmentPage = new RecruitmentPage(driver);
-
-        loginPage.loginIntoSystem();
-        Assert.assertTrue(homePage.isOpened(), "Not a home page");
-
-        homePage.selectRecruitment();
-
-        recruitmentPage.switchToCandidate();
-
         Candidate candidate = new Candidate();
-        candidate.setCandidateInfo();
-        recruitmentPage.addCandidate(candidate);
 
-        recruitmentPage.switchToCandidate();
-
-        Assert.assertNotNull(recruitmentPage.checkCandidate(candidate), "Candidate is not found");
+        Assert.assertTrue(
+                new LoginPage(driver)
+                        .loginIntoSystem()
+                        .selectRecruitment()
+                        .switchToCandidate()
+                        .addRecord()
+                        .addCandidate(candidate)
+                        .saveRecord()
+                        .switchToCandidate()
+                        .checkCandidate(candidate),
+                "Candidate is not found");
     }
 }
