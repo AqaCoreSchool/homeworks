@@ -1,8 +1,6 @@
-package com.company.vTests.base;
+package com.company.sqlTest.pages;
 
-import com.company.vTests.pages.LoginPage;
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterTest;
 
 public class BaseTest {
     public WebDriver driver = Application.getDriver();
@@ -10,9 +8,5 @@ public class BaseTest {
     public LoginPage openLoginPage(){
         driver.get("http://test.biz.ua");
         return new LoginPage();
-    }
-    @AfterTest
-    public void close(){
-        Application.closeDriver();
     }
 }

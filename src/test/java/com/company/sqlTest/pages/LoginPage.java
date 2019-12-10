@@ -1,11 +1,10 @@
-package com.company.vTests.pages;
+package com.company.sqlTest.pages;
 
-import com.company.vTests.base.BasePage;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class LoginPage extends BasePage {
+public class LoginPage extends BasePage{
 
     @FindBy(xpath ="//input[@id='txtUsername']")
     private WebElement userName;

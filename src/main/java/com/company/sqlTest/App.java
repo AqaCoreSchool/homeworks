@@ -1,4 +1,4 @@
-package com.company.vTests;
+package com.company.sqlTest;
 
 /**
  * Hello world!
