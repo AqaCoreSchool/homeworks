@@ -1,32 +1,23 @@
 package orangetest;
 
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 
-public class EditUserTest extends BaseTest{
+public class EditUserTest extends BaseTest {
+    private static final String FIRST_NAME = "Mariana";
+    private static final String LAST_NAME = "Mykytovych";
+    private static final String MIDDLE_NAME = "Romanivna";
+    private static final String BIRTHDAY = "1993-09-07";
     private EditUserPage userPage;
 
-    @BeforeTest
-    public void beforeClass() {
-        loginPage = openLoginPage();
-        loginPage.loginIntoSystem("TestUser05","Vfylhfujhf!1");
-        userPage = new EditUserPage(driver);
-    }
-
     @Test
-    public void editUserTest(){
-        userPage.editUser();
-        boolean result = userPage.checkEditedUser();
-        Assert.assertTrue(result);
+    public void editUserTest() {
+        userPage = new EditUserPage(driver);
+        userPage.editUser(FIRST_NAME, LAST_NAME, MIDDLE_NAME, BIRTHDAY);
+        boolean result = userPage.isUserEdited(FIRST_NAME, LAST_NAME, MIDDLE_NAME);
+        Assert.assertTrue(result, "Such user has not been found");
 
-    }
-
-    @AfterTest
-    public void close() {
-        driver.close();
     }
 
 }

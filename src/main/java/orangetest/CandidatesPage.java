@@ -12,27 +12,27 @@ import java.util.List;
 public class CandidatesPage {
     private static String vacancy;
     @FindBy(xpath = "//b[contains(text(),'Recruitment')]")
-    WebElement menuRecruitment;
+    private WebElement menuRecruitment;
     @FindBy(xpath = "//a[@id='menu_recruitment_viewCandidates']")
-    WebElement viewCandidates;
+    private WebElement viewCandidates;
     @FindBy(xpath = "//input[@id='btnAdd']")
-    WebElement btnAdd;
+    private WebElement btnAdd;
     @FindBy(xpath = "//input[@id='btnSave']")
-    WebElement btnSave;
+    private WebElement btnSave;
     @FindBy(xpath = "//input[@id='addCandidate_firstName']")
-    WebElement addCandidateFirstName;
+    private WebElement addCandidateFirstName;
     @FindBy(xpath = "//input[@id='addCandidate_lastName']")
-    WebElement addCandidateLastName;
+    private WebElement addCandidateLastName;
     @FindBy(xpath = "//input[@id='addCandidate_middleName']")
-    WebElement addCandidateMiddleName;
+    private WebElement addCandidateMiddleName;
     @FindBy(xpath = "//input[@id='addCandidate_email']")
-    WebElement addCandidateEmail;
+    private WebElement addCandidateEmail;
     @FindBy(xpath = "//select[@id='addCandidate_vacancy']")
-    WebElement addCandidateVacancy;
+    private WebElement addCandidateVacancy;
     @FindBy(xpath = "//table[@id='resultTable']//tbody")
-    WebElement resultTable;
+    private WebElement resultTable;
     @FindBy(xpath = "//input[@id='addCandidate_consentToKeepData']")
-    WebElement consentToKeepData;
+    private WebElement consentToKeepData;
 
     public CandidatesPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
@@ -56,15 +56,14 @@ public class CandidatesPage {
         btnSave.click();
     }
 
-    public boolean checkAddedCandidate(String firstName, String lastName) {
+    public boolean isCandidateAdded(String firstName, String lastName) {
         viewCandidates.click();
         List<WebElement> tableRows = resultTable.findElements(By.tagName("tr"));
         LocalDate currentDate = LocalDate.now();
-        boolean searchResult = tableRows.stream().map(WebElement::getText).anyMatch(
+        return tableRows.stream().map(WebElement::getText).anyMatch(
                 o -> o.contains(currentDate.toString()) &&
                         o.contains(firstName) &&
                         o.contains(lastName) &&
                         o.contains(vacancy));
-        return searchResult;
     }
 }

@@ -11,29 +11,18 @@ public class CheckPunchOtherWeeksTest extends BaseTest {
     private HomePage homePage;
     private LocalDate date = LocalDate.now();
 
-    @BeforeClass
-    public void beforeClass() {
-        loginPage = openLoginPage();
-        loginPage.loginIntoSystem("TestUser05", "Vfylhfujhf!1");
-        homePage = new HomePage(driver);
-    }
-
     @Test(priority = 1)
     public void checkPreviousWeek() {
+        homePage = new HomePage(driver);
         String previousWeekDate = date.minusDays(7).toString();
-        boolean stringSearch = homePage.checkPreviousOrNextWeek(previousWeekDate);
+        boolean stringSearch = homePage.isPrevOrNextWeekWithoutRecords(previousWeekDate);
         Assert.assertTrue(stringSearch);
     }
 
     @Test(priority = 2)
     public void checkNextWeek() {
         String nextWeekDate = date.plusDays(7).toString();
-        boolean stringSearch = homePage.checkPreviousOrNextWeek(nextWeekDate);
+        boolean stringSearch = homePage.isPrevOrNextWeekWithoutRecords(nextWeekDate);
         Assert.assertTrue(stringSearch);
-    }
-
-    @AfterTest
-    public void close() {
-        driver.close();
     }
 }

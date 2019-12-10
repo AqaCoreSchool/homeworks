@@ -5,6 +5,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.List;
+
 
 public class LoginPage {
     protected WebDriver driver;
@@ -18,6 +20,9 @@ public class LoginPage {
     @FindBy(xpath = ("//input[@id='btnLogin']"))
     private WebElement submitButton;
 
+    @FindBy(id = "welcome")
+    private List<WebElement> welcomeField;
+
     public LoginPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
     }
@@ -28,5 +33,9 @@ public class LoginPage {
         passwordField.sendKeys(password);
         submitButton.click();
         return new HomePage(driver);
+    }
+
+    public boolean isHomePageOpened() {
+        return welcomeField.size() == 1;
     }
 }

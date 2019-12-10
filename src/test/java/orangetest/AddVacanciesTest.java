@@ -2,8 +2,6 @@ package orangetest;
 
 import com.github.javafaker.Faker;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 public class AddVacanciesTest extends BaseTest {
@@ -12,22 +10,11 @@ public class AddVacanciesTest extends BaseTest {
     private String vacancyNameStr = "AQA Junior" + faker.zipCode();
     private String hiringManagerStr = "Mariana Romanivna Mykytovych";
 
-    @BeforeTest
-    public void beforeClass() {
-        loginPage = openLoginPage();
-        loginPage.loginIntoSystem("TestUser05", "Vfylhfujhf!1");
-        vacanciesPage = new VacanciesPage(driver);
-    }
-
     @Test
     public void addVacanciesTest() {
+        vacanciesPage = new VacanciesPage(driver);
         vacanciesPage.addVacancy(vacancyNameStr, hiringManagerStr);
-        boolean result = vacanciesPage.checkAddedVacancy(vacancyNameStr, hiringManagerStr);
+        boolean result = vacanciesPage.isVacancyAdded(vacancyNameStr, hiringManagerStr);
         Assert.assertTrue(result);
-    }
-
-    @AfterTest
-    public void close() {
-        driver.close();
     }
 }

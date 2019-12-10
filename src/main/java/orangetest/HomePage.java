@@ -14,23 +14,23 @@ public class HomePage {
     private static final String NOTE_IN = "I am a good worker :-)";
     private static final String NOTE_OUT = "I am already finished my work :-)";
     @FindBy(xpath = "//b[contains(text(),'Time')]")
-    WebElement timeMenu;
+    private WebElement timeMenu;
     @FindBy(xpath = "//a[@id='menu_attendance_Attendance']")
-    WebElement attendance;
+    private WebElement attendance;
     @FindBy(linkText = ("Punch In/Out"))
-    WebElement punchInOut;
+    private WebElement punchInOut;
     @FindBy(xpath = "//textarea[@id='note']")
-    WebElement note;
+    private WebElement note;
     @FindBy(xpath = ("//span[@id='currentTime']"))
-    WebElement timeInOut;
+    private WebElement timeInOut;
     @FindBy(xpath = "//input[@id='btnPunch']")
-    WebElement btnPunch;
+    private WebElement btnPunch;
     @FindBy(xpath = "//a[@id='menu_attendance_viewMyAttendanceRecord']")
-    WebElement viewMyAttendanceRecord;
+    private WebElement viewMyAttendanceRecord;
     @FindBy(xpath = "//input[@id='attendance_date']")
-    WebElement attendanceDate;
+    private WebElement attendanceDate;
     @FindBy(xpath = "//table[@class='table']")
-    WebElement baseTable;
+    private WebElement baseTable;
 
     private String timeString;
     private LocalDate dateNow = LocalDate.now();
@@ -48,21 +48,20 @@ public class HomePage {
         btnPunch.click();
     }
 
-    public boolean checkRecord() {
+    public boolean isRecordAdded() {
         timeMenu.click();
         attendance.click();
         viewMyAttendanceRecord.click();
         attendanceDate.click();
         attendanceDate.sendKeys(dateNow.toString(), Keys.ENTER);
         List<WebElement> tableRows = baseTable.findElements(By.tagName("tr"));
-        boolean stringSearch = tableRows.stream().map(WebElement::getText).anyMatch(
+        return tableRows.stream().map(WebElement::getText).anyMatch(
                 o -> o.contains(NOTE_IN) &&
                         o.contains(NOTE_OUT) &&
                         o.contains(timeString));
-        return stringSearch;
     }
 
-    public boolean checkPreviousOrNextWeek(String date) {
+    public boolean isPrevOrNextWeekWithoutRecords(String date) {
         timeMenu.click();
         attendance.click();
         viewMyAttendanceRecord.click();

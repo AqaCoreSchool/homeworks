@@ -11,31 +11,31 @@ import java.util.List;
 public class VacanciesPage {
 
     @FindBy(xpath = "//b[contains(text(),'Recruitment')]")
-    WebElement menuRecruitment;
+    private WebElement menuRecruitment;
 
     @FindBy(xpath = "//a[@id='menu_recruitment_viewJobVacancy']")
-    WebElement viewJobVacancy;
+    private WebElement viewJobVacancy;
 
     @FindBy(xpath = "//input[@id='btnAdd']")
-    WebElement btnAdd;
+    private WebElement btnAdd;
 
     @FindBy(xpath = "//input[@id='btnSave']")
-    WebElement btnSave;
+    private WebElement btnSave;
 
     @FindBy(xpath = "//select[@id='addJobVacancy_jobTitle']")
-    WebElement jobTitle;
+    private WebElement jobTitle;
 
     @FindBy(xpath = "//input[@id='addJobVacancy_name']")
-    WebElement vacancyName;
+    private WebElement vacancyName;
 
     @FindBy(xpath = "//input[@id='addJobVacancy_hiringManager']")
-    WebElement hiringManager;
+    private WebElement hiringManager;
 
     @FindBy(xpath = "//input[@id='addJobVacancy_noOfPositions']")
-    WebElement numberOfPositions;
+    private WebElement numberOfPositions;
 
     @FindBy(xpath = "//table[@id='resultTable']//tbody")
-    WebElement resultTable;
+    private WebElement resultTable;
 
     public VacanciesPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
@@ -53,12 +53,11 @@ public class VacanciesPage {
         btnSave.click();
     }
 
-    public boolean checkAddedVacancy(String vacancy, String manager) {
+    public boolean isVacancyAdded(String vacancy, String manager) {
         viewJobVacancy.click();
         List<WebElement> tableRows = resultTable.findElements(By.tagName("tr"));
-        boolean stringSearch = tableRows.stream().map(WebElement::getText).anyMatch(
+        return tableRows.stream().map(WebElement::getText).anyMatch(
                 o -> o.contains(vacancy) &&
                         o.contains(manager));
-        return stringSearch;
     }
 }
