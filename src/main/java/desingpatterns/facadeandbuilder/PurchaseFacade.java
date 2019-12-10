@@ -1,6 +1,6 @@
-package desingpatterns.facade;
+package desingpatterns.facadeandbuilder;
 
-import desingpatterns.facade.pages.ItemPage;
+import desingpatterns.facadeandbuilder.pages.ItemPage;
 
 public class PurchaseFacade {
 

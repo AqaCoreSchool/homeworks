@@ -1,4 +1,4 @@
-package desingpatterns.facade.pages;
+package desingpatterns.facadeandbuilder.pages;
 
 public class ItemPage {
 

@@ -1,6 +1,6 @@
-package desingpatterns.facade.pages;
+package desingpatterns.facadeandbuilder.pages;
 
-import desingpatterns.facade.ClientInfo;
+import desingpatterns.facadeandbuilder.ClientInfo;
 
 public class ShippingAddressPage {
 
