@@ -16,13 +16,13 @@ public class CheckPunchOtherWeeksTest extends BaseTest {
         homePage = new HomePage(driver);
         String previousWeekDate = date.minusDays(7).toString();
         boolean stringSearch = homePage.isPrevOrNextWeekWithoutRecords(previousWeekDate);
-        Assert.assertTrue(stringSearch);
+        Assert.assertTrue(stringSearch, "Punch In/Out records table is not empty for this date");
     }
 
     @Test(priority = 2)
     public void checkNextWeek() {
         String nextWeekDate = date.plusDays(7).toString();
         boolean stringSearch = homePage.isPrevOrNextWeekWithoutRecords(nextWeekDate);
-        Assert.assertTrue(stringSearch);
+        Assert.assertTrue(stringSearch, "Punch In/Out records table is not empty for this date");
     }
 }

@@ -14,6 +14,6 @@ public class PunchInOutTest extends BaseTest {
         homePage.punchInOut(NOTE_IN);
         homePage.punchInOut(NOTE_OUT);
         boolean stringSearch = homePage.isRecordAdded();
-        Assert.assertTrue(stringSearch);
+        Assert.assertTrue(stringSearch, "Punch In/Out record with added parameters has not been found");
     }
 }

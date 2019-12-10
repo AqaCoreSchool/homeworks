@@ -15,6 +15,6 @@ public class AddVacanciesTest extends BaseTest {
         vacanciesPage = new VacanciesPage(driver);
         vacanciesPage.addVacancy(vacancyNameStr, hiringManagerStr);
         boolean result = vacanciesPage.isVacancyAdded(vacancyNameStr, hiringManagerStr);
-        Assert.assertTrue(result);
+        Assert.assertTrue(result, "Vacancy with such parameters has not been found");
     }
 }

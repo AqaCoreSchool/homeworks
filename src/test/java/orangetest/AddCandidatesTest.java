@@ -15,6 +15,6 @@ public class AddCandidatesTest extends BaseTest {
         candidatesPage = new CandidatesPage(driver);
         candidatesPage.addCandidate(candidateFirstName, candidateLastName, candidateMiddleName, candidateEmail);
         boolean result = candidatesPage.isCandidateAdded(candidateFirstName, candidateLastName);
-        Assert.assertTrue(result);
+        Assert.assertTrue(result, "Candidate with such parameters has not been found");
     }
 }
