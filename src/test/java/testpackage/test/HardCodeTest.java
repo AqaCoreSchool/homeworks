@@ -22,8 +22,8 @@ public class HardCodeTest extends BaseTest {
     private  WebDriver driver;
     private String name = "TestUser03";
     private String password = "Vfylhfujhf!1";
-    private String input = "Test start";
-    private String output = "Test finish";
+    private String input = "PurchaseTest start";
+    private String output = "PurchaseTest finish";
     private Actions action ;
 
     @BeforeMethod

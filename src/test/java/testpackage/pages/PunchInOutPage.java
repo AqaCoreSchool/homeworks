@@ -9,8 +9,8 @@ import java.time.LocalDate;
 
 public class PunchInOutPage extends BasePage {
 
-    private String input = "Test start";
-    private String output = "Test finish";
+    private String input = "PurchaseTest start";
+    private String output = "PurchaseTest finish";
     static String date = LocalDate.now().toString();
 
     @FindBy(id = "btnPunch")

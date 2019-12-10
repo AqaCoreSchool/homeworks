@@ -13,8 +13,8 @@ import java.util.List;
 public class MyRecordsPage extends BasePage {
 
     private WebDriver driver = DriverManager.getInstance().getDriver();
-    private String input = "Test start";
-    private String output = "Test finish";
+    private String input = "PurchaseTest start";
+    private String output = "PurchaseTest finish";
     private String date = PunchInOutPage.date;
 
     @FindBy (className = "ui-datepicker-month")
