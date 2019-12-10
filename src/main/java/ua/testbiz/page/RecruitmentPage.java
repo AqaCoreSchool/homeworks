@@ -1,7 +1,7 @@
 package ua.testbiz.page;
 
-import com.github.javafaker.Faker;
 import data.Candidate;
+import data.Vacancy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -10,7 +10,6 @@ import org.openqa.selenium.support.ui.Select;
 import util.Application;
 
 import java.util.List;
-import java.util.Random;
 
 public class RecruitmentPage {
     @FindBy(xpath = "//a[@id='menu_recruitment_viewCandidates']")
@@ -44,6 +43,13 @@ public class RecruitmentPage {
     @FindBy(xpath = "//select[@id='addCandidate_vacancy']")
     private WebElement jobVacancySelect;
 
+    // candidate search
+    @FindBy(xpath = "//input[@id='candidateSearch_candidateName']")
+    private WebElement candidateSearchNameInput;
+
+    @FindBy(xpath = "//input[@id='btnSrch']")
+    private WebElement candidateSearchButton;
+
     // vacancy
     @FindBy(xpath = "//select[@id='addJobVacancy_jobTitle']")
     private WebElement jobTitleSelect;
@@ -60,22 +66,33 @@ public class RecruitmentPage {
     @FindBy(xpath = "//div[@class='ac_results']//li")
     private List<WebElement> managerValue;
 
-    private String position;
     private String managerName;
+
+    // vacancy search
+    @FindBy(xpath = "//select[@id='vacancySearch_jobVacancy']")
+    private WebElement vacancyJobSelect;
+
+    @FindBy(xpath = "//select[@id='vacancySearch_hiringManager']")
+    private WebElement vacancyManagerSelect;
+
+    @FindBy(xpath = "//input[@id='btnSrch']")
+    private WebElement vacancySearchButton;
 
     public RecruitmentPage() {
         PageFactory.initElements(Application.getDriver(), this);
     }
 
-    public void switchToCandidate() {
+    public RecruitmentPage switchToCandidate() {
         candidateSubOption.click();
+        return this;
     }
 
-    public void switchToVacancy() {
+    public RecruitmentPage switchToVacancy() {
         vacancySubOption.click();
+        return this;
     }
 
-    public void addCandidate(Candidate candidate) {
+    public RecruitmentPage addCandidate(Candidate candidate) {
         addButton.click();
 
         firstNameInput.sendKeys(candidate.getFirstName());
@@ -84,52 +101,75 @@ public class RecruitmentPage {
         contactNoInput.sendKeys(candidate.getContactNo());
 
         Select selectVacancy = new Select(jobVacancySelect);
-        selectVacancy.selectByValue(Integer.toString(new Random().nextInt(5) + 1));
+        selectVacancy.selectByValue(candidate.getJobVacancyValue());
 
         saveButton.click();
+
+        return this;
     }
 
-    public String checkCandidate(Candidate candidate) {
+    public RecruitmentPage searchCandidate(Candidate candidate) {
+        candidateSearchNameInput.sendKeys(String.join(" ", candidate.getFirstName(), candidate.getLastName()));
+        candidateSearchButton.click();
+        return this;
+    }
+
+    public boolean isCandidateInList(Candidate candidate) {
         for (WebElement element : candidateTable) {
             List<WebElement> candidateName = element.findElements(By.tagName("a"));
 
             if (candidateName.get(0).getText().equals(candidate.getFirstName() + " " + candidate.getLastName())) {
                 System.out.printf("Candidate %s exists.%n", candidateName.get(0).getText());
-                return candidateName.get(0).getText();
+                return true;
             }
         }
-        return null;
+        return false;
     }
 
-    public void addVacancy() {
+    public RecruitmentPage addVacancy(Vacancy vacancy) {
         addButton.click();
 
         Select jobSelect = new Select(jobTitleSelect);
-        jobSelect.selectByValue("1");
+        jobSelect.selectByValue(vacancy.getJobTitleValue());
 
-        position = new Faker().job().position();
-        vacancyNameInput.sendKeys(position);
+        vacancyNameInput.sendKeys(vacancy.getPosition());
 
         managerInput.sendKeys(" ");
 
-        managerName = managerValue.get(new Random().nextInt(managerValue.size())).getText();
+        managerName = managerValue.get(vacancy.getManagerValue()).getText();
         managerInput.sendKeys(managerName);
 
         saveButton.click();
+
+        return this;
     }
 
-    public String checkVacancy() {
+    public RecruitmentPage searchVacancy(Vacancy vacancy) {
+        Select vacancyJob = new Select(vacancyJobSelect);
+        vacancyJob.selectByVisibleText(vacancy.getPosition());
+
+        Select vacancyManager = new Select(vacancyManagerSelect);
+        vacancyManager.selectByValue(String.valueOf(vacancy.getManagerValue()));
+
+        vacancySearchButton.click();
+        return this;
+    }
+
+    public boolean isVacancyInList(Vacancy vacancy) {
         for (WebElement element : candidateTable) {
             List<WebElement> vacancies = element.findElements(By.tagName("a"));
             List<WebElement> managers = element.findElements(By.xpath("//td[4]"));
 
             for (int i = 0; i < managers.size(); i++) {
-                if (vacancies.get(0).getText().equals(position) && managers.get(i).getText().equals(managerName)) {
-                    System.out.printf("Vacancy of %s [manager %s] exists.%n", vacancies.get(0).getText(), managers.get(i).getText());
-                    return vacancies.get(0).getText() + " " + managers.get(i).getText();
+                if (vacancies.get(0).getText().equals(vacancy.getPosition())
+                        && managers.get(i).getText().equals(managerName)) {
+                    System.out.printf("Vacancy of %s [manager %s] exists.%n",
+                            vacancies.get(0).getText(),
+                            managers.get(i).getText());
+                    return true;
                 }
             }
         }
-        return null;
+        return false;
     }
 }

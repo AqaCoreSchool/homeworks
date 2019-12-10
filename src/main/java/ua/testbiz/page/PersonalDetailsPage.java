@@ -33,7 +33,7 @@ public class PersonalDetailsPage {
         PageFactory.initElements(Application.getDriver(), this);
     }
 
-    public void setPersonalDetail(UserInformation information) {
+    public HomePage setPersonalDetail(UserInformation information) {
         saveButton.click();
 
         firstNameInput.clear();
@@ -54,5 +54,7 @@ public class PersonalDetailsPage {
         birthdayInput.sendKeys(information.getBirthdayValue());
 
         saveButton.click();
+
+        return new HomePage();
     }
 }

@@ -10,7 +10,7 @@ public class Location {
     private String locationAddress;
     private String locationPostalCode;
 
-    public void setLocation(){
+    public void setLocation() {
         Faker faker = new Faker();
 
         locationName = faker.company().name();

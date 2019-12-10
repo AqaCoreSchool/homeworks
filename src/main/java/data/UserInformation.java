@@ -5,12 +5,12 @@ import com.github.javafaker.Faker;
 import java.util.Random;
 
 public final class UserInformation {
-    private static String firstName;
-    private static String lastName;
-    private static String genderValue;
-    private static String maritalStatus;
-    private static String nationValue;
-    private static String birthdayValue;
+    private String firstName;
+    private String lastName;
+    private String genderValue;
+    private String maritalStatus;
+    private String nationValue;
+    private String birthdayValue;
 
     public void setUserInformation() {
         Faker faker = new Faker();

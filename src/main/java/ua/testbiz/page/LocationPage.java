@@ -45,11 +45,24 @@ public class LocationPage {
     @FindBy(xpath = "//input[@id='location_zipCode']")
     private WebElement postalCodeInput;
 
+    // search
+    @FindBy(xpath = "//input[@id='searchLocation_name']")
+    private WebElement searchNameInput;
+
+    @FindBy(xpath = "//input[@id='searchLocation_city']")
+    private WebElement searchCityInput;
+
+    @FindBy(xpath = "//select[@id='searchLocation_country']")
+    private WebElement searchCountrySelect;
+
+    @FindBy(xpath = "//input[@id='btnSearch']")
+    private WebElement searchButton;
+
     public LocationPage() {
         PageFactory.initElements(Application.getDriver(), this);
     }
 
-    public void addLocation(Location location) {
+    public LocationPage addLocation(Location location) {
         organizationOption.click();
         locationSubMenu.click();
         addButton.click();
@@ -66,10 +79,17 @@ public class LocationPage {
         postalCodeInput.sendKeys(location.getLocationPostalCode());
 
         saveButton.click();
+        return this;
+    }
+
+    public LocationPage searchLocation(Location location) {
+        searchNameInput.sendKeys(location.getLocationName());
+        searchCityInput.sendKeys(location.getLocationCity());
+        searchButton.click();
+        return this;
     }
 
     public boolean isLocationInList(Location location) {
-
         for (WebElement element : locationTable) {
             if (element.getText().startsWith(String.join(" ", location.getLocationName(), location.getLocationCity()))) {
                 System.out.println("Location exist: " + element.getText());
