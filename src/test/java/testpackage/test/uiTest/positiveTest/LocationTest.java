@@ -1,4 +1,4 @@
-package testpackage.test;
+package testpackage.test.uiTest.positiveTest;
 
 import org.testng.annotations.Test;
 import testpackage.base.BaseTest;
