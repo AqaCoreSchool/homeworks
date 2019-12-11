@@ -9,6 +9,7 @@ public class Vacancy {
     private String noOfPositions;
     private String description;
     private User user;
+    private Candidate hiringManagerId;
 
     public Vacancy() {
         user = new User();
@@ -37,5 +38,17 @@ public class Vacancy {
 
     public String getDescription() {
         return description;
+    }
+
+    public void setVacancyName(String vacancyName) {
+        this.vacancyName = vacancyName;
+    }
+
+    public Candidate getHiringManagerId() {
+        return hiringManagerId;
+    }
+
+    public void setHiringManagerId(Candidate hiringManagerId) {
+        this.hiringManagerId = hiringManagerId;
     }
 }

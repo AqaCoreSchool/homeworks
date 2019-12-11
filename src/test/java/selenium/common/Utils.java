@@ -8,8 +8,7 @@ import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
-import java.util.Properties;
+import java.util.*;
 
 public class Utils {
 
@@ -30,16 +29,33 @@ public class Utils {
     }
 
     public static String getProperty(String propertyKey) {
-        String userDir = System.getProperty("user.dir");
-        Path path = Paths.get(userDir, "src", "test", "java", "selenium", "common");
+        Path path = Paths.get(System.getProperty("user.dir"));
         Properties property = new Properties();
         String value = "";
-        try(FileInputStream fis = new FileInputStream(path + File.separator + "model_data.properties")) {
+        try(FileInputStream fis = new FileInputStream(path + File.separator + "data.properties")) {
             property.load(fis);
             value = property.getProperty(propertyKey);
         } catch (IOException e) {
             System.err.println("Property file not found");
         }
         return value;
+    }
+
+    public static int getColumnCount(String prefix) {
+        Properties properties = new Properties();
+        List<String> propsCount = new ArrayList<>();
+        try {
+            properties.load(new FileInputStream("data.properties"));
+            for (Enumeration<?> e = properties.propertyNames(); e.hasMoreElements();) {
+                String name = e.nextElement().toString();
+                String value = properties.getProperty(name);
+                if (name.startsWith(prefix)) {
+                    propsCount.add(name);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return propsCount.size();
     }
 }
