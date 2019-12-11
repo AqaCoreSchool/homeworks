@@ -10,7 +10,6 @@ import ua.biz.test.pages.VacanciesListPage;
 
 public class VacancyDataTest extends BaseTest {
 
-    private Vacancy TEST_VACANCY = new Vacancy(faker.name()+"Manager", "Ivan Mosiychuk", 2, true);
 
     private CreateVacancyPage createVacancyPage;
 

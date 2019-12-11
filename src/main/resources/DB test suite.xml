@@ -1,0 +1,13 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name = "Page suite">
+
+    <test name = "Page tests">
+        <classes>
+            <class name="ua.biz.test.tests.UItest.employee.EmployeeByVacancyTest"/>
+            <class name="ua.biz.test.tests.UItest.vacancy.EmployeeVacanciesTest"/>
+        </classes>
+    </test>
+
+</suite>

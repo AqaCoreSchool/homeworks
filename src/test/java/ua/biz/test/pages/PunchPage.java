@@ -19,10 +19,6 @@ public class PunchPage extends BasePage {
     @FindBy(xpath = "//*[@id=\"btnPunch\"]")
     private WebElement punchInButton;
 
-    public PunchPage() {
-        super();
-    }
-
     public void punchInOut(PunchData punchData) {
         WaitUtil.waitAndType(punchNoteField, punchData.getPunchInMessage());
         punchData.setPunchInTime(punchTime.getText());

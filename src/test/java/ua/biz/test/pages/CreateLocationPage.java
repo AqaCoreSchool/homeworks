@@ -20,17 +20,14 @@ public class CreateLocationPage extends BasePage {
     @FindBy(id = "btnSave")
     private WebElement saveButton;
 
-    public CreateLocationPage() {
-        super();
-    }
-
-    public void createNewLocation(Location location){
+    public CreateLocationPage createNewLocation(Location location){
         WaitUtil.waitAndType(nameField,location.getName());
         Select select = new Select(countrySelect);
         select.selectByVisibleText(location.getCountry());
         cityField.sendKeys(location.getCity());
         number.sendKeys(String.valueOf(location.getNumber()));
         saveButton.click();
+        return this;
     }
 
 

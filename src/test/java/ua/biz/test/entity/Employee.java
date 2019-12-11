@@ -1,18 +1,26 @@
 package ua.biz.test.entity;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Employee {
-private String firstName;
-private String middleName;
-private String lastName;
-private int id;
 
-    public Employee(String firstName, String middleName, String lastName, int id) {
+    private String id;
+    private String firstName;
+    private String lastName;
+    private List<Vacancy> vacancies;
+
+    public Employee( String firstName, String lastName) {
         this.firstName = firstName;
-        this.middleName = middleName;
         this.lastName = lastName;
+        vacancies = new ArrayList<>();
+    }
+
+    public Employee(String id, String firstName, String lastName) {
         this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
     public String getFirstName() {
@@ -23,14 +31,6 @@ private int id;
         this.firstName = firstName;
     }
 
-    public String getMiddleName() {
-        return middleName;
-    }
-
-    public void setMiddleName(String middleName) {
-        this.middleName = middleName;
-    }
-
     public String getLastName() {
         return lastName;
     }
@@ -39,12 +39,28 @@ private int id;
         this.lastName = lastName;
     }
 
-    public int getId() {
+    public String getFullName(){
+        return String.format("%s %s",firstName,lastName);
+    }
+
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
+    }
+
+    public void setVacancies(List<Vacancy> vacancies) {
+        this.vacancies = vacancies;
+    }
+
+    public List<Vacancy> getVacancies() {
+        return vacancies;
+    }
+
+    public void addVacancy(Vacancy vacancy) {
+        vacancies.add(vacancy);
     }
 
     @Override
@@ -54,12 +70,20 @@ private int id;
         Employee employee = (Employee) o;
         return id == employee.id &&
                 Objects.equals(firstName, employee.firstName) &&
-                Objects.equals(middleName, employee.middleName) &&
                 Objects.equals(lastName, employee.lastName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(firstName, middleName, lastName, id);
+        return Objects.hash(firstName, lastName, id);
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id='" + id + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                '}';
     }
 }

@@ -22,23 +22,17 @@ public class MyRecordsPage extends BasePage {
     @FindBy(xpath = "//form[@id='employeeRecordsForm']/table/tbody/tr[@class='odd' or @class='even']")
     private List<WebElement> recordsList;
 
-
-    public MyRecordsPage() {
-        super();
-    }
-
     public boolean isRecordsListEmpty(LocalDate date) {
         showRecordListByDate(date);
         return recordsList.isEmpty();
     }
 
-    private void showRecordListByDate(LocalDate date){
+    private MyRecordsPage showRecordListByDate(LocalDate date){
         WaitUtil.waitAndClear(dateInput);
         dateInput.sendKeys(date.toString());
         dateInput.sendKeys(Keys.ENTER);
+        return this;
     }
-
-
 
     public boolean isRecordPresent(PunchData punchData, LocalDate date) {
         System.out.println(recordsList.size());

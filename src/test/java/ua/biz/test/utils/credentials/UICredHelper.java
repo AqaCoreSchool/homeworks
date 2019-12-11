@@ -1,29 +1,29 @@
-package ua.biz.test.utils;
+package ua.biz.test.utils.credentials;
 
 import java.io.*;
 import java.util.Properties;
 
-public final class CredentialsHelper {
+public final class UICredHelper {
 
     private String login;
     private String password;
-    private static CredentialsHelper credentialsHelper;
+    private static UICredHelper credentialsHelper;
 
-    public static CredentialsHelper getInstance() {
+    public static UICredHelper getInstance() {
         if (credentialsHelper == null) {
-            credentialsHelper = new CredentialsHelper();
+            credentialsHelper = new UICredHelper();
         }
         return credentialsHelper;
     }
 
-    private CredentialsHelper() {
+    private UICredHelper() {
         credProperties();
     }
 
     private void credProperties() {
         Properties properties = new Properties();
         try {
-            properties.load(CredentialsHelper.class.getResourceAsStream("/cred.properties"));
+            properties.load(UICredHelper.class.getResourceAsStream("/cred.properties"));
         } catch (IOException e) {
             e.printStackTrace();
         }
