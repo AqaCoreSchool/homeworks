@@ -1,6 +1,7 @@
 package testpackage.test.sqlTest;
 
 import org.testng.annotations.Test;
+import testpackage.base.BaseTest;
 import testpackage.dataProvider.VacancySQL;
 import testpackage.pages.LoginPage;
 import testpackage.pages.VacanciesPage;
@@ -11,17 +12,17 @@ import java.util.regex.Pattern;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class VacancyInWebTest {
+public class VacancyInWebTest extends BaseTest {
 
     @Test
-    public void testRecruitment() {
+    public void VacancyInWebTest() {
         ArrayList<String> map = new ArrayList<>();
 
         VacancySQL vacancySqlDataProvider = new VacancySQL();
         String vacancyFromSql = vacancySqlDataProvider.getVacanciesByEmployeeNameList("AQA Jun",
                 "Pazykov").toString();
 
-        Pattern pattern = Pattern.compile("\\b\\w*([A-z])\\w*\\b");
+        Pattern pattern = Pattern.compile("\\b([A-z])\\b");
         Matcher matcher = pattern.matcher(vacancyFromSql);
         while (matcher.find()) {
             for (int i = 0; i < matcher.groupCount(); i += 1) {
@@ -37,6 +38,5 @@ public class VacancyInWebTest {
                 .moveToVacancies();
         assertThat(vacanciesPage.filterVacancies(vacancyTitleFromSql,lastNameFromSql))
                 .as("No vacancy").isTrue();
-
     }
 }
