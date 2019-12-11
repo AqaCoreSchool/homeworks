@@ -12,8 +12,8 @@ import java.util.List;
 public class EmployeeSQL {
     Candidate employee = new Candidate();
     Vacancy vacancy = new Vacancy();
-    URLsql urlClass = new URLsql();
-    String url = urlClass.getURL();
+    URLsql urlSql = new URLsql();
+    String url = urlSql.getURL();
 
     public List<Candidate> getAllEmployeeList() {
 
