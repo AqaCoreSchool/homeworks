@@ -9,7 +9,7 @@ public class VacancyFactory {
 
     public Vacancy defaultVacancy(){
         return Vacancy.builder()
-                .hiringManager("Danylo Alexandrovich Pazykov")
+                .hiringManagerID("Danylo Alexandrovich Pazykov")
                 .jobTitle("Junior")
                 .vacancy("AQA")
                 .status("Active")
@@ -18,7 +18,7 @@ public class VacancyFactory {
 
     public Vacancy randomVacancy(){
         return Vacancy.builder()
-                .hiringManager(faker.name().fullName())
+                .hiringManagerID(faker.name().fullName())
                 .jobTitle(faker.job().title())
                 .vacancy(faker.job().position())
                 .status("Active")

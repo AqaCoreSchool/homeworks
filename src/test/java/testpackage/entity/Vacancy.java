@@ -14,7 +14,9 @@ import lombok.NoArgsConstructor;
 public class Vacancy {
 
     @JsonProperty("HiringManager")
-    private String hiringManager ;
+    private String hiringManagerID;
+
+    private String name;
 
     @JsonProperty("Vacancy")
     private String vacancy;
@@ -25,9 +27,11 @@ public class Vacancy {
     @JsonProperty("Status")
     private String status;
 
+    Candidate candidate;
+
     @Override
     public String toString() {
-        return "Vacancy[HiringManager:" + hiringManager + "Vacancy:" + vacancy + "JobTitle:" + jobTitle +
-                ", Status: " + status + "]";
+        return String.format("Vacancy [hiring_manager_id: %s| name: %s|\t emp_number: %s| first_name: %s| last_name: %s]",
+                hiringManagerID, name, candidate.getEmpNumber(), candidate.getFirstName(), candidate.getLastName());
     }
 }

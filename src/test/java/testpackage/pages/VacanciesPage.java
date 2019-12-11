@@ -45,7 +45,7 @@ public class VacanciesPage extends BasePage {
     public VacanciesPage createVacancy(Vacancy vacancy){
         wait.until(ExpectedConditions.elementToBeClickable(btnAdd));
         btnAdd.click();
-        inputHiringManager.sendKeys(vacancy.getHiringManager());
+        inputHiringManager.sendKeys(vacancy.getHiringManagerID());
         inputVacancyName.sendKeys(vacancy.getVacancy());
         wait.until(ExpectedConditions.elementToBeClickable(btnSelectVacancy));
         btnSelectVacancy.click();
@@ -59,9 +59,7 @@ public class VacanciesPage extends BasePage {
         boolean vacancies = tableVacancies.stream()
                 .map(WebElement::getText)
                 .anyMatch(e->e.contains(vacancy.getJobTitle())
-                        &e.contains(vacancy.getVacancy())
-                        &e.contains(vacancy.getHiringManager())
-                        &e.contains(vacancy.getStatus()));
+                        &e.contains(vacancy.getHiringManagerID()));
         return vacancies;
     }
 
@@ -100,5 +98,13 @@ public class VacanciesPage extends BasePage {
         }catch (org.openqa.selenium.NoSuchElementException e){
             return false;
         }
+    }
+    @Step
+    public boolean filterVacancies(String jobTitle, String hiringManagerID){
+        boolean vacancies = tableVacancies.stream()
+                .map(WebElement::getText)
+                .anyMatch(e->e.contains(jobTitle)
+                        &e.contains(hiringManagerID));
+        return vacancies;
     }
 }

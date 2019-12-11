@@ -16,6 +16,8 @@ public class Candidate {
     @JsonProperty("FirstName")
     private String firstName ;
 
+    private String empNumber ;
+
     @JsonProperty("MiddleName")
     private String middleName ;
 
@@ -36,11 +38,12 @@ public class Candidate {
 
     @JsonProperty("Resume")
     private String resume;
+
+    Vacancy vacanc;
     
     @Override
     public String toString() {
-        return "Candidate[FirstName:" + firstName + ", MiddleName:" + middleName + ", LastName:" + lastName +
-                ", Email: " + email + ", Date: " + date + ", PhoneNumber: " + phoneNumber
-                + ", Vacancy: " + vacancy + ", Resume: " + resume + "]";
+        return String.format("Employee [emp_number: %s| first_name: %s\t| last_name: %s| hiring_manager_id: %s| name=%s",
+                empNumber, firstName, lastName, vacanc.getHiringManagerID(), vacanc.getName());
     }
 }
