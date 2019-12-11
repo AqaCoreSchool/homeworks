@@ -11,9 +11,7 @@ import java.time.LocalDate;
 
 public class PunchTimeTest extends BaseTest {
 
-    private  String name = faker.firstName();
-    private final PunchData TEST_PUNCH_DATA =
-            new PunchData(name+" PunchIn",name+"PunchOut");
+
 
     @Test
     public void testPunchDate() {

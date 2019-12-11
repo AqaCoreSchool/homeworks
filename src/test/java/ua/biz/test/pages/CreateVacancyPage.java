@@ -4,7 +4,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 
-import ua.biz.test.driver.DriverManager;
 import ua.biz.test.utils.WaitUtil;
 import ua.biz.test.base.BasePage;
 import ua.biz.test.entity.Vacancy;
@@ -40,7 +39,7 @@ public class CreateVacancyPage extends BasePage {
         WaitUtil.waitAndType(vacancyNameField,vacancy.getName());
         Select select = new Select(jobTitle);
         select.selectByValue("1");
-        hiringManagerField.sendKeys(vacancy.getHiringManagerName());
+        hiringManagerField.sendKeys(vacancy.getHiringManager().getFullName());
         numberOfPositionField.sendKeys(String.valueOf(vacancy.getNubmerOfPositions()));
         if (!vacancy.isActive()) {
             isActiveCheckBox.click();

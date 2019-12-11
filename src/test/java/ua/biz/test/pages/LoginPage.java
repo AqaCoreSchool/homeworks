@@ -4,9 +4,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import ua.biz.test.utils.CredentialsHelper;
+import ua.biz.test.utils.credentials.UICredHelper;
 import ua.biz.test.base.BasePage;
-import ua.biz.test.utils.WaitUtil;
 
 public class LoginPage extends BasePage {
 
@@ -22,7 +21,7 @@ public class LoginPage extends BasePage {
     }
 
     public MainPage login() {
-        CredentialsHelper helper = CredentialsHelper.getInstance();
+        UICredHelper helper = UICredHelper.getInstance();
         loginField.sendKeys(helper.getLogin());
         passwordField.sendKeys(helper.getPassword());
         loginButton.click();

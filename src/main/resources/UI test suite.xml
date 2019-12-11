@@ -8,7 +8,7 @@
             <class name="ua.biz.test.tests.UItest.candidate.CandidateDataTest"/>
             <class name="ua.biz.test.tests.UItest.punch.PunchTimeTest"/>
             <class name="ua.biz.test.tests.UItest.records.OtherDaysRecordsListTest"/>
-            <class name="ua.biz.test.tests.UItest.userData.CorrectEmployeeDataTest"/>
+            <class name="ua.biz.test.tests.UItest.employeeData.CorrectEmployeeDataTest"/>
             <class name="ua.biz.test.tests.UItest.vacancy.VacancyDataTest"/>
             <class name="ua.biz.test.tests.UItest.location.LocationDataTest"/>
         </classes>
