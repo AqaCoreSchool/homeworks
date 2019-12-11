@@ -24,19 +24,15 @@ public class CreateVacancyPage extends BasePage {
     private WebElement backToVacancyListPageButton;
     @FindBy(xpath = "//select[@id='addJobVacancy_jobTitle']")
     private WebElement jobTitle;
-    @FindBy(xpath="//span[contains(text(),'Already exists')]")
+    @FindBy(xpath = "//span[contains(text(),'Already exists')]")
     private WebElement incorectVacancyNameMessage;
-    @FindBy(xpath="//span[contains(text(),'Required')]")
+    @FindBy(xpath = "//span[contains(text(),'Required')]")
     private WebElement incorectJobSelectMessage;
-    @FindBy(xpath="//span[contains(text(),'Invalid')]")
+    @FindBy(xpath = "//span[contains(text(),'Invalid')]")
     private WebElement invalidManagerNameMessage;
 
-    public CreateVacancyPage() {
-        super();
-    }
-
-    public void createNewVacancy(Vacancy vacancy) {
-        WaitUtil.waitAndType(vacancyNameField,vacancy.getName());
+    public CreateVacancyPage createNewVacancy(Vacancy vacancy) {
+        WaitUtil.waitAndType(vacancyNameField, vacancy.getName());
         Select select = new Select(jobTitle);
         select.selectByValue("1");
         hiringManagerField.sendKeys(vacancy.getHiringManager().getFullName());
@@ -45,15 +41,16 @@ public class CreateVacancyPage extends BasePage {
             isActiveCheckBox.click();
         }
         saveVacancyButton.click();
+        return this;
     }
 
     public VacanciesListPage backToVacanciesPage() {
-WaitUtil.waitAndClick( backToVacancyListPageButton);
+        WaitUtil.waitAndClick(backToVacancyListPageButton);
         return new VacanciesListPage();
     }
 
-    public boolean isIncorrectVacancyNameMessageVisible(){
-        return  incorectVacancyNameMessage.isDisplayed();
+    public boolean isIncorrectVacancyNameMessageVisible() {
+        return incorectVacancyNameMessage.isDisplayed();
     }
 }
 

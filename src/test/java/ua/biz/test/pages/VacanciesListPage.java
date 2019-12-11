@@ -18,10 +18,6 @@ public class VacanciesListPage extends BasePage {
     @FindBy(xpath = "//table[@id='resultTable']//tbody//tr[@class='odd' or @class='even']")
     List<WebElement> vacanciesDataList;
 
-    public VacanciesListPage() {
-        super();
-    }
-
     public CreateVacancyPage addNewVacancy() {
         WaitUtil.waitAndClick(addVacancyButton);
         return new CreateVacancyPage();
@@ -35,7 +31,7 @@ public class VacanciesListPage extends BasePage {
 
     public boolean isAllEmployeeVacanciesPresent(Employee employee){
         List<Vacancy> vacancies = VacancySQLDataProvider.getEmployeeVacanciesList(employee);
-        boolean result = false;
+        boolean result=false;
         for (Vacancy vacancy: vacancies) {
             result= vacanciesDataList.stream().map(WebElement::getText).
                     anyMatch(data -> data.contains(vacancy.getName()) &&

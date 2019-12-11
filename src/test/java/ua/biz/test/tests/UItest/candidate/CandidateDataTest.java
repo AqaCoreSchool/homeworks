@@ -28,7 +28,6 @@ public class CandidateDataTest extends BaseTest {
         createCandidatePage.saveNewCandidate(TEST_CANDIDATE);
         CandidatesListPage candidatesListPage =createCandidatePage.backToCandidatesListPage();
 
-        SoftAssert softAssert = new SoftAssert();
         Assert.assertTrue(candidatesListPage.isCandidatesPresent(TEST_CANDIDATE),"Not found a candidate with this data");
     }
 }

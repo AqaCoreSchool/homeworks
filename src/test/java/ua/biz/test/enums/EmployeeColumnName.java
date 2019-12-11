@@ -1,6 +1,6 @@
 package ua.biz.test.enums;
 
-public enum ColumnName {
+public enum EmployeeColumnName {
     ID("employee_id"),
     NUMBER("emp_number"),
     FIRST_NAME("emp_firstname"),
@@ -8,7 +8,7 @@ public enum ColumnName {
 
     private String name;
 
-    ColumnName(String name) {
+    EmployeeColumnName(String name) {
         this.name = name;
     }
 

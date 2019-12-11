@@ -17,17 +17,13 @@ public class MyInfoPage extends BasePage {
     @FindBy(xpath ="//input[@id='btnSave']" )
     private WebElement editButton;
 
-    public MyInfoPage() {
-        super();
-    }
-
-    public void editEmployeeData(Employee employee) {
+    public MyInfoPage editEmployeeData(Employee employee) {
         editButton.click();
         WaitUtil.waitAndClear(firstName);
         firstName.sendKeys(employee.getFirstName());
         lastName.clear();
         lastName.sendKeys(employee.getLastName());
         editButton.click();
+        return this;
     }
-
 }

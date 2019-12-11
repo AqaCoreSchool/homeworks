@@ -17,10 +17,6 @@ public class CandidatesListPage extends BasePage {
     @FindBy(xpath = "//table[@id='resultTable']//tbody//tr[@class='odd' or @class='even']")
    private List<WebElement> candidatesData;
 
-    public CandidatesListPage(){
-        super();
-    }
-
     public boolean isCandidatesPresent(Candidate candidate) {
         return candidatesData.stream().map(WebElement::getText).anyMatch(data->data.contains(candidate.getFullName())&&
                 data.contains(candidate.getVacancy().getName()));

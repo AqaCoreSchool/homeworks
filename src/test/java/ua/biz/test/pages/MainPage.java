@@ -46,12 +46,6 @@ public class MainPage extends BasePage {
     @FindBy(id = "menu_admin_viewLocations")
     private WebElement locationButton;
 
-
-    public MainPage() {
-        super();
-
-    }
-
     public CandidatesListPage openCandidatesListPage() {
         WaitUtil.waitAndClick(recruitmentButton);
         WaitUtil.waitAndClick(candidatesButton);

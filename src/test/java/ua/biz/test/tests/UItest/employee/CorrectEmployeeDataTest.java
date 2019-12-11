@@ -1,4 +1,4 @@
-package ua.biz.test.tests.UItest.employeeData;
+package ua.biz.test.tests.UItest.employee;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;

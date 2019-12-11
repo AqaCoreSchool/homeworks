@@ -23,7 +23,7 @@ public abstract class BaseTest {
     protected final Employee MY_TEST_EMPLOYEE
             = new Employee("Ivan", "Mosiychuk");
     protected final Vacancy TEST_VACANCY =
-            new Vacancy(faker.name() + "Manager", MY_TEST_EMPLOYEE, 2, true);
+            new Vacancy("Engineer of automatization", MY_TEST_EMPLOYEE, 2, true);
     protected final Candidate TEST_CANDIDATE =
             new Candidate("Oleg", "Olegov", "Oleg@mail.ua", TEST_VACANCY);
     protected final Location TEST_LOCATION =

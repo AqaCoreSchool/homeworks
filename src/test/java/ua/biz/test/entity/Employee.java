@@ -17,6 +17,12 @@ public class Employee {
         vacancies = new ArrayList<>();
     }
 
+    public Employee(String id, String firstName, String lastName) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
     public String getFirstName() {
         return firstName;
     }
@@ -43,6 +49,10 @@ public class Employee {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public void setVacancies(List<Vacancy> vacancies) {
+        this.vacancies = vacancies;
     }
 
     public List<Vacancy> getVacancies() {

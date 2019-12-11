@@ -16,10 +16,6 @@ public class LocationsPage extends BasePage {
     @FindBy(xpath = "//table[@id='resultTable']//tbody//tr[@class='odd' or @class='even']")
     private List<WebElement> locationsList;
 
-    public LocationsPage() {
-        super();
-    }
-
     public CreateLocationPage openCreateLocationPage() {
         WaitUtil.waitAndClick(addLocationButton);
         return new CreateLocationPage();

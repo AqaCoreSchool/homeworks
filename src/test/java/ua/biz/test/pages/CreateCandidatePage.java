@@ -27,17 +27,14 @@ public class CreateCandidatePage extends BasePage {
     @FindBy(xpath = "//input[@id='btnBack']")
     private WebElement backToCandidateListPageButton;
 
-    public CreateCandidatePage() {
-        super();
-    }
-
-    public void saveNewCandidate(Candidate candidate) {
+    public CreateCandidatePage saveNewCandidate(Candidate candidate) {
         WaitUtil.waitAndType(firstNameField, candidate.getFirstName());
         Select select = new Select(jobVacancySelect);
         select.selectByVisibleText(candidate.getVacancy().getName());
         lastNameField.sendKeys(candidate.getLastName());
         emailField.sendKeys(candidate.getEmail());
         saveCandidateButton.click();
+        return this;
     }
 
     public CandidatesListPage backToCandidatesListPage() {

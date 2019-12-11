@@ -32,6 +32,10 @@ public class Vacancy{
         return name;
     }
 
+    public void setHiringManager(Employee hiringManager) {
+        this.hiringManager = hiringManager;
+    }
+
     public Employee getHiringManager() {
         return hiringManager;
     }

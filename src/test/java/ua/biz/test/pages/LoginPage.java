@@ -16,8 +16,7 @@ public class LoginPage extends BasePage {
     @FindBy(xpath = "//*[@id=\"btnLogin\"]")
     private  WebElement loginButton;
 
-    public LoginPage(WebDriver driver) {
-        super();
+    public LoginPage(WebDriver browserInstance) {
     }
 
     public MainPage login() {
