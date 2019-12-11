@@ -13,15 +13,12 @@ import java.util.List;
 public class MainTasks {
 
     public static void main(String[] args) {
-        Employee employee = new Employee();
-        Vacancy vacancy = new Vacancy();
-
         System.out.println("Mapping: ");
 
         URLClass urlClass = new URLClass();
         String url = urlClass.getURL();
 
-        String joinQuery = "SELECT hs_hr_employee.emp_number, emp_firstname, emp_lastname, " +
+        String innerQuery1 = "SELECT hs_hr_employee.emp_number, emp_firstname, emp_lastname, " +
                 "ohrm_job_vacancy.hiring_manager_id, ohrm_job_vacancy.name " +
                 "FROM hs_hr_employee " +
                 "INNER JOIN ohrm_job_vacancy " +
@@ -31,8 +28,10 @@ public class MainTasks {
 
         try (Connection con = DriverManager.getConnection(url, UserProfile.NAME, UserProfile.PASSWORD);
              Statement stmt = con.createStatement();
-             ResultSet rs = stmt.executeQuery(joinQuery)) {
+             ResultSet rs = stmt.executeQuery(innerQuery1)) {
             while (rs.next()) {
+                Employee employee = new Employee();
+                Vacancy vacancy = new Vacancy();
 
                 employee.setEmpNumber(rs.getObject("emp_number").toString());
                 employee.setFirstName(rs.getObject("emp_firstname").toString());
