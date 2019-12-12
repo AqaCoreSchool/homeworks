@@ -1,4 +1,4 @@
-package apitask.data;
+package orangetest.apitask.data;
 
 public class WorkExperience {
     String id = "10";

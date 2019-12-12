@@ -1,4 +1,4 @@
-package apitask.utils;
+package orangetest.apitask.utils;
 
 import io.restassured.path.json.JsonPath;
 import org.json.simple.JSONObject;

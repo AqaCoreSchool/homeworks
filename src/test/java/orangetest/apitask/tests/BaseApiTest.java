@@ -1,6 +1,6 @@
-package apitask.tests;
+package orangetest.apitask.tests;
 
-import apitask.data.EmployeeWorkExperienceApi;
+import  orangetest.apitask.data.EmployeeWorkExperienceApi;
 
 public class BaseApiTest {
     EmployeeWorkExperienceApi e = new EmployeeWorkExperienceApi();
