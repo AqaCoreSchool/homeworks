@@ -35,10 +35,11 @@ public class SqlDataProvider extends DataProvider {
         try (ResultSet rs = connection.ConnectionToDatabase().executeQuery(queryUniqueEmployee)) {
             while (rs.next()) {
                 Employee employee = new Employee();
+                List<JobVacancy> vacancies = getVacancyListByEmployeeNum(rs.getObject("emp_number").toString());
                 employee.setEmpNumber(rs.getObject("emp_number").toString());
                 employee.setEmpFirstName(rs.getObject("emp_firstname").toString());
                 employee.setEmpLastName(rs.getObject("emp_lastname").toString());
-                employee.setVacancyList(getVacancyListByEmployeeNum(rs.getObject("emp_number").toString()));
+                employee.setVacancyList(vacancies);
                 employeeList.add(employee);
             }
         } catch (SQLException e) {
