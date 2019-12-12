@@ -10,7 +10,6 @@ public class App {
         List<JobVacancy> vacancyListByEmployee = sqlDataProvider.getVacanciesByEmployeeName(
                 sqlDataProvider.vacancySqlDataProvider(),
                 "Mariana", "Mykytovych");
-
         System.out.println("\n      " + SqlDataProvider.printVacancyListToString(vacancyListByEmployee));
         String vacancyNameForSearch = "Administrator";
         System.out.println("\nEmployee by vacancy name " + vacancyNameForSearch);

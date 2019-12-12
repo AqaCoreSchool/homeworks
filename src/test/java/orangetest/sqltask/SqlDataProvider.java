@@ -126,4 +126,10 @@ public class SqlDataProvider extends DataProvider {
                         .collect(Collectors.toList());
         return employeesByVacancy;
     }
+
+    public String getEmployeeNameByVacancyName(String jobVacancyName){
+        List<JobVacancy> vacancies = vacancySqlDataProvider();
+        JobVacancy vacancy = vacancies.stream().filter(o->o.getVacancyName().contains(jobVacancyName)).findFirst().get();
+        return vacancy.getHiringManager();
+    }
 }
