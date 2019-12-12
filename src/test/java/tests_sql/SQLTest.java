@@ -1,4 +1,4 @@
-package sql.tests_sql;
+package tests_sql;
 
 import data.LoginInfo;
 import data.Vacancy;
@@ -18,6 +18,5 @@ public class SQLTest extends BaseTest {
                 .moveToVacanciesPage()
                 .addNewVacancy(vacancy);
 
-        assertThat(vacanciesPage.findVacancy(vacancy)).isEqualTo()
     }
 }

@@ -2,7 +2,7 @@ package data;
 
 public class Vacancy {
 
-    private String vacancyName = "AJunior";
+    private String vacancyName = "SuperWorker";
     private String jobTitle = "AQA";
     private String hiringManager = "Oleksandr Yablonskyi";
     private String status = "Active";
