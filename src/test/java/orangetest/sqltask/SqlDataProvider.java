@@ -118,16 +118,12 @@ public class SqlDataProvider extends DataProvider {
                 .collect(Collectors.toList());
     }
 
-    public List<Employee> getEmployeesByJobVacancyName (String jobVacancyName){
+    public List<Employee> getEmployeesByVacancyName(String jobVacancyName){
         List<Employee> employees = employeeSqlDataProvider();
-        List <JobVacancy> allVacanciesList = vacancySqlDataProvider();
-        List<JobVacancy> vacancyListByName = getVacanciesByVacancyName(allVacanciesList,jobVacancyName);
-        if (vacancyListByName.size()>0){
+
         List<Employee> employeesByVacancy = employees.stream().filter(o->!o.getVacancyList().isEmpty())
-                .filter(o-> SqlDataProvider.printVacancyListToString(o.getVacancyList()).contains(jobVacancyName))
-                .collect(Collectors.toList());
+                .filter(o->o.getVacancyList().stream().anyMatch(jobVacancy -> jobVacancy.getVacancyName().contains(jobVacancyName)))
+                        .collect(Collectors.toList());
         return employeesByVacancy;
-        }
-        return null;
     }
 }
