@@ -20,7 +20,7 @@ public class EmployeeWorkExperienceApi {
 
     public Response getEmployeeExperience() {
         RestAssured.baseURI = baseUrl;
-        Response response = RestAssured.given().auth().oauth2(token.getToken()).get("5/work-experience");
+        Response response = RestAssured.given().auth().oauth2(token.getToken()).get("32/work-experience");
         System.out.println(response.getBody().asString());
         return response;
     }
@@ -37,7 +37,7 @@ public class EmployeeWorkExperienceApi {
                 .multiPart("toDate", "2020-01-03")
                 .multiPart("comment", "Good job")
                 .when()
-                .post("5/work-experience");
+                .post("32/work-experience");
         System.out.println(response.getStatusLine());
         System.out.println(response.getBody().asString());
         return response;
@@ -55,7 +55,7 @@ public class EmployeeWorkExperienceApi {
                 .formParam("comment", "Good job")
                 .formParam("seqId", "1")
                 .when()
-                .put("5/work-experience");
+                .put("32/work-experience");
         System.out.println(response.getBody().asString());
         System.out.println(response.getStatusLine());
         return response;
@@ -68,7 +68,7 @@ public class EmployeeWorkExperienceApi {
                 .formParam("id", 5)
                 .formParam("seqId", 1)
                 .when()
-                .delete("5/work-experience");
+                .delete("32/work-experience");
         System.out.println(response.getBody().asString());
         System.out.println(response.getStatusLine());
         return response;
@@ -76,7 +76,7 @@ public class EmployeeWorkExperienceApi {
 
     public void VerifyJsonResponse() {
         RestAssured.baseURI = baseUrl;
-        Response response = RestAssured.given().auth().oauth2(token.getToken()).get("5/work-experience");
+        Response response = RestAssured.given().auth().oauth2(token.getToken()).get("32/work-experience");
         JSONObject jsonResponse = new JSONObject(response.getBody().asString());
         JSONArray jsonArrayOfRecords =jsonResponse.getJSONArray("data");
         String title = jsonArrayOfRecords.getJSONObject(0).getString("jobTitle");
