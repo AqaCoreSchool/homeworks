@@ -1,4 +1,4 @@
-package apitask.tests;
+package orangetest.apitask.tests;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;

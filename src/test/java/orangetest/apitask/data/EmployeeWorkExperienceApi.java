@@ -1,6 +1,6 @@
-package apitask.data;
+package orangetest.apitask.data;
 
-import apitask.utils.Token;
+import orangetest.apitask.utils.Token;
 import com.github.javafaker.Faker;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
