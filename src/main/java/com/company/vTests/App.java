@@ -1,4 +1,4 @@
-package com.company.verifytests;
+package com.company.vTests;
 
 /**
  * Hello world!
