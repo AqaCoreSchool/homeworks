@@ -21,7 +21,7 @@ public class EmployeeWorkExperienceApi {
     Token token = new Token();
     Faker faker = new Faker();
 
-    public RequestSpecification getSpec(){
+    public RequestSpecification getSpecification(){
         return new RequestSpecBuilder()
                 .setBaseUri(BASE_URL)
                 .setBasePath(BASE_PATH)
@@ -30,14 +30,14 @@ public class EmployeeWorkExperienceApi {
     }
 
     public Response getEmployeeExperience() {
-        Response response = RestAssured.given().spec(getSpec()).when().get();
+        Response response = RestAssured.given().spec(getSpecification()).when().get();
         System.out.println(response.getBody().asString());
         return response;
     }
 
 
     public Response saveEmployeeExperience() {
-        Response response = given().spec(getSpec())
+        Response response = given().spec(getSpecification())
                 .contentType("multipart/form-data")
                 .multiPart("company", "OOps company")
                 .multiPart("title", "AQA Junior")
@@ -54,7 +54,7 @@ public class EmployeeWorkExperienceApi {
 
     public Response updateEmployeeExperience() {
         String company = faker.words(2).stream().collect(Collectors.joining(" "));
-        Response response = given().spec(getSpec())
+        Response response = given().spec(getSpecification())
                 .formParam("company", company)
                 .formParam("title", "AQA Junior")
                 .formParam("job", "Junior")
@@ -70,7 +70,7 @@ public class EmployeeWorkExperienceApi {
     }
 
     public Response deleteEmployeeExperience() {
-        Response response = given().spec(getSpec())
+        Response response = given().spec(getSpecification())
                 .contentType(ContentType.URLENC)
                 .formParam("id", 5)
                 .formParam("seqId", 1)
@@ -82,7 +82,7 @@ public class EmployeeWorkExperienceApi {
     }
 
     public void VerifyJsonResponse() {
-        Response response = RestAssured.given().spec(getSpec()).get("32/work-experience");
+        Response response = RestAssured.given().spec(getSpecification()).get("32/work-experience");
         JSONObject jsonResponse = new JSONObject(response.getBody().asString());
         JSONArray jsonArrayOfRecords =jsonResponse.getJSONArray("data");
         String title = jsonArrayOfRecords.getJSONObject(0).getString("jobTitle");
