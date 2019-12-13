@@ -21,15 +21,10 @@ public class VacanciesPage extends BasePage {
         return new CreateVacancyPage();
     }
 
-    public VacanciesPage checkVacancy (String vacancyName, String managerName) {
-         isCreated = resultList.stream()
-                 .map(WebElement::getText)
-                 .anyMatch(item -> item.contains(vacancyName) &&
-                         item.contains(managerName));
-        return this;
-    }
-
-    public boolean isCreated() {
-        return isCreated;
+    public boolean isVacancyCreated(String vacancyName, String managerName) {
+        return isCreated = resultList.stream()
+                .map(WebElement::getText)
+                .anyMatch(item -> item.contains(vacancyName) &&
+                        item.contains(managerName));
     }
 }

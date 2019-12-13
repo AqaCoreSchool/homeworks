@@ -72,8 +72,8 @@ public class Candidate {
         return vacancies;
     }
 
-    public void setVacancies(List<Vacancy> vacancies) {
-        this.vacancies = vacancies;
+    public void setVacancies(Vacancy vacancy) {
+        this.vacancies.add(vacancy);
     }
 
     public void setCandidateFirstName(String candidateFirstName) {

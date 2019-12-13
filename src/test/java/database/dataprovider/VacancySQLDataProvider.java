@@ -1,49 +1,50 @@
 package database.dataprovider;
 
 import database.DataBaseManager;
-import database.interfaces.VacancyDao;
+import database.interfaces.EmployeeDAO;
 import selenium.common.Utils;
 import selenium.model.Candidate;
 import selenium.model.Vacancy;
 
 import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
-public class VacancySQLDataProvider extends DataBaseManager implements VacancyDao {
+public class VacancySQLDataProvider extends DataBaseManager implements EmployeeDAO {
     private List<Vacancy> vacancyList = new ArrayList<>();
+    private EmployeeSQLDataProvider employee = new EmployeeSQLDataProvider();
     private String dbVacancyManager = Utils.getProperty("dbVacancyManager");
     private String dbVacancyName = Utils.getProperty("dbVacancyName");
 
-    @Override
-    public List<Vacancy> getVacanciesByEmployeeName(String name, String lastName) {
-        String query = String.format("SELECT hs_hr_employee.emp_number, emp_firstname, emp_lastname," +
-                " ohrm_job_vacancy.hiring_manager_id, ohrm_job_vacancy.name FROM hs_hr_employee" +
-                " INNER JOIN ohrm_job_vacancy ON hs_hr_employee.emp_number=ohrm_job_vacancy.hiring_manager_id " +
-                "WHERE hs_hr_employee.emp_firstname = '%s' AND hs_hr_employee.emp_lastname = '%s'", name, lastName);
+    public void getData() {
+        String query = String.format("SELECT %s, %s FROM ohrm_job_vacancy",
+                dbVacancyManager, dbVacancyName);
 
-        try(Connection connection = getConnection();
-            Statement stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery(query)) {
-            while(rs.next()) {
+        try(Connection connection = getConnection()) {
+            performQuery(connection, query, rs -> {
                 Vacancy vacancy = new Vacancy();
-                Candidate candidate = new Candidate();
-                vacancy.setVacancyName(rs.getObject(dbVacancyName).toString());
-                candidate.setCandidateFirstName(rs.getObject("emp_firstname").toString());
-                candidate.setCandidateLastName(rs.getObject("emp_lastname").toString());
-                candidate.setId(rs.getObject("emp_number").toString());
+                vacancy.setHiringManager(rs.getString(dbVacancyManager));
+                vacancy.setVacancyName(rs.getString(dbVacancyName));
                 vacancyList.add(vacancy);
-            }
+            });
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return vacancyList;
     }
 
-    public List<Vacancy> getVacancyList() {
-        return vacancyList;
+    public String getEmployeeId(String jobVacancyName) {
+        return vacancyList.stream()
+                .filter(item -> item.getVacancyName().equals(jobVacancyName))
+                .map(Vacancy::getHiringManager).findAny().orElse("Not Found");
+    }
+
+    @Override
+    public List<Candidate> getEmployeesByJobVacancyName(String jobVacancyName) {
+        getData();
+        return employee.getCandidateList().stream()
+                .filter(item -> item.getId().equals(getEmployeeId(jobVacancyName)))
+                .collect(Collectors.toList());
     }
 }

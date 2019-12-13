@@ -3,6 +3,6 @@ package database.interfaces;
 import selenium.model.Candidate;
 import java.util.List;
 
-public interface EmployeeDao {
+public interface EmployeeDAO {
     List<Candidate> getEmployeesByJobVacancyName (String jobVacancyName);
 }
