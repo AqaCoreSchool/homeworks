@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="TestSuite1">
+    <test name="TestsUI">
+        <classes>
+            <class name="tests.EditUserInfoTest" />
+            <class name="tests.CandidatesPageTest" />
+            <class name="tests.CandidatesPageNegativeTest" />
+            <class name="tests.VacanciesPageNegativeTest" />
+            <class name="tests.VacanciesPageTest" />
+            <class name="tests.LocationsPageTest" />
+        </classes>
+    </test>
+</suite>
