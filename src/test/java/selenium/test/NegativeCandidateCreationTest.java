@@ -5,9 +5,10 @@ import org.testng.annotations.Test;
 import selenium.model.Candidate;
 import selenium.page.CreateCandidatePage;
 
-public class CreateCandidatePageTest extends BaseTest {
+public class NegativeCandidateCreationTest extends BaseTest {
+
     @Test
-    public void createCandidateTest() {
+    public void negativeCandidateCreationTest() {
         Candidate candidate = new Candidate();
         CreateCandidatePage page = getLoginPage()
                 .fillUsername(getCredentials().getUserLoginName())
@@ -16,16 +17,14 @@ public class CreateCandidatePageTest extends BaseTest {
                 .moveToRecruitmentItem()
                 .clickCandidateListButton()
                 .clickNewCandidateButton()
-                .fillFirstName(candidate.getCandidateFirstName())
+                .fillFirstName("")
                 .fillLastName(candidate.getCandidateLastName())
-                .fillEmail(candidate.getCandidateEmail())
+                .fillEmail("==@gmail.com 12##")
                 .fillContactNo(candidate.getCandidateContactNo())
                 .selectVacancy(candidate.getCandidateVacancy())
                 .fillDate(candidate.getCandidateAppliedDate())
                 .btnSaveClick();
 
-
-        String successMessage = page.getSuccessMessage();
-        Assert.assertEquals(successMessage, "Successfully Saved\nClose", "Successfully message isn't displayed.");
+        Assert.fail("Check required fields! Fields message: \n" + page.getValidationMessage());
     }
 }

@@ -17,6 +17,6 @@ public class VacanciesPageTest extends BaseTest {
                 .checkVacancy(getVacancy().getVacancyName(), getVacancy().getHiringManager());
 
         boolean isCreated = page.isCreated();
-        Assert.assertTrue(isCreated);
+        Assert.assertTrue(isCreated, "Vacancy is not created!");
     }
 }
