@@ -1,4 +1,4 @@
-package pojo;
+package ua.biz.test.pojo;
 
 import java.util.ArrayList;
 import java.util.List;

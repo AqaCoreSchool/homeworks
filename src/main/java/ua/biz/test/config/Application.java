@@ -1,9 +1,9 @@
-package runner;
+package ua.biz.test.config;
 
-import data.TableAccess;
-import data.UserCredential;
-import pojo.Employee;
-import pojo.JobVacancy;
+import ua.biz.test.data.TableAccess;
+import ua.biz.test.data.DBCredential;
+import ua.biz.test.pojo.Employee;
+import ua.biz.test.pojo.JobVacancy;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -21,14 +21,15 @@ public class Application {
     }
 
     public void getEmployee() {
-        try (Connection con = DriverManager.getConnection(TableAccess.URL, UserCredential.NAME, UserCredential.PASSWORD);
+        try (Connection con = DriverManager.getConnection(TableAccess.URL, DBCredential.NAME, DBCredential.PASSWORD);
              Statement stmt = con.createStatement();
              ResultSet rs = stmt.executeQuery("SELECT * FROM " + TableAccess.TABLE1)) {
+
             while (rs.next()) {
                 Employee employee = new Employee();
                 employee.setNumber(rs.getString(1));
-                employee.setFirstName(rs.getString(3));
-                employee.setLastName(rs.getString(4));
+                employee.setFirstName(rs.getString(4));
+                employee.setLastName(rs.getString(3));
 
                 employees.add(employee);
                 System.out.println(employee);
@@ -39,22 +40,33 @@ public class Application {
     }
 
     public void getVacancy() {
-        try (Connection con = DriverManager.getConnection(TableAccess.URL, UserCredential.NAME, UserCredential.PASSWORD);
+        try (Connection con = DriverManager.getConnection(TableAccess.URL, DBCredential.NAME, DBCredential.PASSWORD);
              Statement stmt = con.createStatement();
              ResultSet rs = stmt.executeQuery("SELECT * FROM " + TableAccess.TABLE2)) {
+
             while (rs.next()) {
                 JobVacancy vacancy = new JobVacancy();
 
                 String managerId = rs.getString(3);
                 String vacancyName = rs.getString(4);
 
-                for (Employee employee : employees) {
-                    if (employee.getNumber().equals(managerId)) {
-                        vacancy.setHiringManagerId(managerId);
-                        vacancy.setName(vacancyName);
-                        employee.setVacancies(vacancy);
-                    }
-                }
+                employees
+                        .forEach(employee -> {
+                            if (employee.getNumber().equals(managerId)) {
+                                vacancy.setHiringManagerId(managerId);
+                                vacancy.setName(vacancyName);
+                                employee.setVacancies(vacancy);
+                            }
+                        });
+
+                //for (Employee employee : employees) {
+                //    if (employee.getNumber().equals(managerId)) {
+                //        vacancy.setHiringManagerId(managerId);
+                //        vacancy.setName(vacancyName);
+                //        employee.setVacancies(vacancy);
+                //    }
+                //}
+
                 System.out.println(vacancy);
             }
         } catch (SQLException e) {

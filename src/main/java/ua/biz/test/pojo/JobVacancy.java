@@ -1,4 +1,4 @@
-package pojo;
+package ua.biz.test.pojo;
 
 public class JobVacancy {
     private String hiringManagerId;

@@ -1,4 +1,4 @@
-package data;
+package ua.biz.test.data;
 
 public class TableAccess {
     public static final String URL = "jdbc:mysql://test.biz.ua:3306/orangehrm_mysql";

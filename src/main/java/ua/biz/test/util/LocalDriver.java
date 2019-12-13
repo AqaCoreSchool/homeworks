@@ -1,0 +1,15 @@
+package ua.biz.test.util;
+
+import org.openqa.selenium.WebDriver;
+
+public class LocalDriver {
+    private static ThreadLocal<DriverFactory> driverInstance = ThreadLocal.withInitial(DriverFactory::new);
+
+    public static WebDriver getDriver() {
+        return driverInstance.get().getDriver();
+    }
+
+    public static void closeDriver() {
+        driverInstance.get().closeDriver();
+    }
+}
