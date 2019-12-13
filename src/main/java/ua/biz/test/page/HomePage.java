@@ -8,11 +8,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import ua.biz.test.util.LocalDriver;
 
 public class HomePage {
-    @FindBy(xpath = "//a[@id='welcome']")
-    private WebElement welcomeLabel;
-
-    @FindBy(xpath = "//a[@id='menu_pim_viewMyDetails']")
-    private WebElement myInfoOption;
 
     @FindBy(xpath = "//a[@id='menu_pim_viewPimModule']")
     private WebElement pimOption;
@@ -20,17 +15,17 @@ public class HomePage {
     @FindBy(xpath = "//a[@id='menu_recruitment_viewRecruitmentModule']")
     private WebElement recruitmentOption;
 
-    @FindBy(xpath = "//a[@id='menu_admin_viewAdminModule']")
-    private WebElement adminOption;
-
-    @FindBy(xpath = "//a[@id='menu_admin_viewLocations']")
-    private WebElement locationSubMenu;
-
     private WebDriverWait wait;
 
     public HomePage() {
         PageFactory.initElements(LocalDriver.getDriver(), this);
         wait = new WebDriverWait(LocalDriver.getDriver(), 30);
+    }
+
+    public EmployeeListPage selectPim() {
+        wait.until(ExpectedConditions.visibilityOf(pimOption));
+        pimOption.click();
+        return new EmployeeListPage();
     }
 
     public RecruitmentPage selectRecruitment() {

@@ -2,8 +2,8 @@ package ua.biz.test;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ua.biz.test.config.Main;
 import ua.biz.test.page.LoginPage;
@@ -19,7 +19,7 @@ public class ApplicationTest {
 
     Main main = new Main().setEmployeeList(jobVacancyName).setVacancyList(name, lastName);
 
-    @BeforeSuite
+    @BeforeMethod
     public void setUp() {
         WebDriver driver = LocalDriver.getDriver();
         driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
@@ -28,7 +28,6 @@ public class ApplicationTest {
 
     @Test
     public void checkVacancy() {
-
         boolean isVacancy =
                 new LoginPage()
                         .loginIntoSystem()
@@ -40,7 +39,18 @@ public class ApplicationTest {
         Assert.assertTrue(isVacancy, "Vacancy is not found!");
     }
 
-    @AfterSuite
+    @Test
+    public void checkEmployee() {
+        boolean isEmployee =
+                new LoginPage()
+                        .loginIntoSystem()
+                        .selectPim()
+                        .isEmployeeInList(main.getEmployees());
+
+        Assert.assertTrue(isEmployee, "Employee is not found!");
+    }
+
+    @AfterMethod
     public void tearDown() {
         LocalDriver.closeDriver();
     }

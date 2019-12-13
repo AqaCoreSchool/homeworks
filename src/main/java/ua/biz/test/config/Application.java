@@ -1,7 +1,7 @@
 package ua.biz.test.config;
 
-import ua.biz.test.data.TableAccess;
 import ua.biz.test.data.DBCredential;
+import ua.biz.test.data.TableAccess;
 import ua.biz.test.pojo.Employee;
 import ua.biz.test.pojo.JobVacancy;
 
@@ -14,10 +14,6 @@ public class Application {
 
     public Application() {
         employees = new ArrayList<>();
-    }
-
-    public List<Employee> getEmployees() {
-        return employees;
     }
 
     public void getEmployee() {
@@ -58,14 +54,6 @@ public class Application {
                                 employee.setVacancies(vacancy);
                             }
                         });
-
-                //for (Employee employee : employees) {
-                //    if (employee.getNumber().equals(managerId)) {
-                //        vacancy.setHiringManagerId(managerId);
-                //        vacancy.setName(vacancyName);
-                //        employee.setVacancies(vacancy);
-                //    }
-                //}
 
                 System.out.println(vacancy);
             }

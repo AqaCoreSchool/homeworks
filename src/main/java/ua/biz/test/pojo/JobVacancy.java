@@ -22,9 +22,9 @@ public class JobVacancy {
 
     @Override
     public String toString() {
-        return "JobVacancy{" +
-                "hiringManagerId='" + hiringManagerId + '\'' +
-                ", name='" + name + '\'' +
+        return "JobVacancy{ " +
+                hiringManagerId + '\t' +
+                name +
                 '}';
     }
 }
