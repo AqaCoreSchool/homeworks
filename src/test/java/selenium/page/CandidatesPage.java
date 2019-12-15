@@ -20,7 +20,7 @@ public class CandidatesPage extends BasePage {
         return new CreateCandidatePage();
     }
 
-    public boolean isCreated(String candidateName, String vacancyName) {
+    public boolean isCandidateWithVacancyPresent(String candidateName, String vacancyName) {
         return usersList.stream()
                 .map(WebElement::getText)
                 .anyMatch(item -> item.contains(candidateName) &&

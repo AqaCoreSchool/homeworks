@@ -11,7 +11,7 @@ public class Main {
     public static void main(String[] args) {
         VacancySQLDataProvider vacancyProvider = new VacancySQLDataProvider();
         System.out.println("Getting employee name by vacancy name 'Quality Assurance'");
-        vacancyProvider.getData();
+        vacancyProvider.performQuery();
         List<Candidate> resultList = vacancyProvider.getEmployeesByJobVacancyName("Quality Assurance");
         for (Candidate candidate : resultList) {
             System.out.println(String.format("%s %s",

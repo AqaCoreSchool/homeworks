@@ -14,7 +14,7 @@ public class CandidatesPageTest extends BaseTest {
                 .moveToRecruitmentItem()
                 .clickCandidateListButton();
 
-        boolean isCreated = page.isCreated(getUser().getUserLastName(), getVacancy().getVacancyName());
+        boolean isCreated = page.isCandidateWithVacancyPresent(getUser().getUserLastName(), getVacancy().getVacancyName());
         Assert.assertTrue(isCreated, "Candidate is not created.");
     }
 }

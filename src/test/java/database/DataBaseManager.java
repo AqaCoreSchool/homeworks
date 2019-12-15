@@ -14,8 +14,8 @@ public class DataBaseManager {
         return DriverManager.getConnection(url, user, password);
     }
 
-    public void performQuery(Connection connection, String sql, ResultSetHandler handler) {
-        try (PreparedStatement ps = connection.prepareStatement(sql);
+    public void select(String sql, ResultSetHandler handler) {
+        try (PreparedStatement ps = getConnection().prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
             ps.setFetchSize(10);
             while (rs.next()) {

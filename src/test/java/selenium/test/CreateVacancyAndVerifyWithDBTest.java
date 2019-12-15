@@ -32,9 +32,9 @@ public class CreateVacancyAndVerifyWithDBTest extends BaseTest {
                 .saveVacancy()
                 .goBack();
 
-        String dbVacancyName = null, dbEmployeeLastName = null;
+        String dbVacancyName = "", dbEmployeeLastName = "";
         VacancySQLDataProvider vacancyProvider = new VacancySQLDataProvider();
-        vacancyProvider.getData();
+        vacancyProvider.performQuery();
         List<Candidate> resultList = vacancyProvider.getEmployeesByJobVacancyName(vacancy.getVacancyName());
         for (Candidate candidate : resultList) {
             dbEmployeeLastName = candidate.getCandidateLastName();
