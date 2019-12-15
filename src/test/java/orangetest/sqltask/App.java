@@ -3,17 +3,23 @@ package orangetest.sqltask;
 import java.util.List;
 
 public class App {
-    public static void main(String[] args) {
-        SqlDataProvider sqlDataProvider = new SqlDataProvider();
-        sqlDataProvider.printEmployeeList(sqlDataProvider.employeeSqlDataProvider());
+    private static String vacancyName = "Administrator";
+    private static String employeeFirstName = "Mariana";
+    private static String employeeLastName = "Mykytovych";
 
-        List<JobVacancy> vacancyListByEmployee = sqlDataProvider.getVacanciesByEmployeeName(
-                sqlDataProvider.vacancySqlDataProvider(),
-                "Mariana", "Mykytovych");
-        System.out.println("\n      " + SqlDataProvider.printVacancyListToString(vacancyListByEmployee));
-        String vacancyNameForSearch = "Administrator";
-        System.out.println("\nEmployee by vacancy name " + vacancyNameForSearch);
-        List<Employee> employeesByVacancyName = sqlDataProvider.getEmployeesByVacancyName(vacancyNameForSearch);
-        sqlDataProvider.printEmployeeList(employeesByVacancyName);
+    public static void main(String[] args) {
+        VacanciesDataProvider vacanciesDataProvider = new VacanciesDataProvider();
+        EmployeesDataProvider employeesDataProvider = new EmployeesDataProvider();
+        List<Employee> employees = employeesDataProvider.getEmployees();
+        List<JobVacancy> vacancies = vacanciesDataProvider.getVacancies();
+        System.out.println("List of employees");
+        employeesDataProvider.printEmployeeList(employees);
+        List<JobVacancy> vacancyListByEmployee = vacanciesDataProvider
+                .getVacanciesByEmployeeName(vacancies, employeeFirstName, employeeLastName);
+        System.out.println(String.format(" ", "\nList of vacancies created by:", employeeFirstName, employeeLastName));
+        System.out.println("\n      " + vacanciesDataProvider.printVacancyListToString(vacancyListByEmployee));
+        System.out.println("\nEmployee by vacancy name " + vacancyName);
+        List<Employee> employeesByVacancyName = employeesDataProvider.getEmployeesByVacancyName(vacancyName);
+        employeesDataProvider.printEmployeeList(employeesByVacancyName);
     }
 }

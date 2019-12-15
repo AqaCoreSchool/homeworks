@@ -44,7 +44,7 @@ public class Employee {
     @Override
     public String toString() {
         return String.format("Employee: empNumber = %s, empFirstName = %s, empLastName = %s",
-                empNumber, empFirstName, empLastName)+ "\n      " + SqlDataProvider.printVacancyListToString(vacancyList);
+                empNumber, empFirstName, empLastName)+ "\n      " + VacanciesDataProvider.printVacancyListToString(vacancyList);
     }
 
     public String fullName() {

@@ -94,7 +94,7 @@ public class VacanciesPage extends BasePage {
                         o.contains(vacancy.getVacancyName()));
     }
 
-    public boolean isHiringManager(String vacancyName, String hiringManager) {
+    public boolean isHiringManagerPresent(String vacancyName, String hiringManager) {
         menuRecruitment.click();
         viewJobVacancy.click();
         Select drpVacancy = new Select(search_jobVacancy);

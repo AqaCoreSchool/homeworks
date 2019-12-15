@@ -14,12 +14,12 @@ import java.util.stream.Collectors;
 import static io.restassured.RestAssured.given;
 
 public class EmployeeWorkExperienceApi {
-    private final String baseUrl = "http://test.biz.ua/symfony/web/index.php/api/v1/employee/";
+    private final String BASE_URL = "http://test.biz.ua/symfony/web/index.php/api/v1/employee/";
     Token token = new Token();
     Faker faker = new Faker();
 
     public Response getEmployeeExperience() {
-        RestAssured.baseURI = baseUrl;
+        RestAssured.baseURI = BASE_URL;
         Response response = RestAssured.given().auth().oauth2(token.getToken()).get("32/work-experience");
         System.out.println(response.getBody().asString());
         return response;
@@ -27,7 +27,7 @@ public class EmployeeWorkExperienceApi {
 
 
     public Response saveEmployeeExperience() {
-        RestAssured.baseURI = baseUrl;
+        RestAssured.baseURI = BASE_URL;
         Response response = given().given().auth().oauth2(token.getToken())
                 .contentType("multipart/form-data")
                 .multiPart("company", "OOps company")
@@ -44,7 +44,7 @@ public class EmployeeWorkExperienceApi {
     }
 
     public Response updateEmployeeExperience() {
-        RestAssured.baseURI = baseUrl;
+        RestAssured.baseURI = BASE_URL;
         String company = faker.words(2).stream().collect(Collectors.joining(" "));
         Response response = given().auth().oauth2(token.getToken())
                 .formParam("company", company)
@@ -62,7 +62,7 @@ public class EmployeeWorkExperienceApi {
     }
 
     public Response deleteEmployeeExperience() {
-        RestAssured.baseURI = baseUrl;
+        RestAssured.baseURI = BASE_URL;
         Response response = given().auth().oauth2(token.getToken())
                 .contentType(ContentType.URLENC)
                 .formParam("id", 5)
@@ -75,7 +75,7 @@ public class EmployeeWorkExperienceApi {
     }
 
     public void VerifyJsonResponse() {
-        RestAssured.baseURI = baseUrl;
+        RestAssured.baseURI = BASE_URL;
         Response response = RestAssured.given().auth().oauth2(token.getToken()).get("32/work-experience");
         JSONObject jsonResponse = new JSONObject(response.getBody().asString());
         JSONArray jsonArrayOfRecords =jsonResponse.getJSONArray("data");
