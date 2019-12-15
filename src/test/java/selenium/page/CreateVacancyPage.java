@@ -44,6 +44,9 @@ public class CreateVacancyPage extends BasePage {
     @FindBy(className = "validation-error")
     private List<WebElement> requiredFields;
 
+    @FindBy(id = "btnBack")
+    private WebElement btnBack;
+
     public CreateVacancyPage fillJobTitle(String title) {
         Wait.waitForVisible(jobTitle);
         jobTitle.sendKeys(title);
@@ -93,6 +96,12 @@ public class CreateVacancyPage extends BasePage {
     public String getSuccessMessage() {
         Wait.waitForVisible(successMsg);
         return successMsg.getText();
+    }
+
+    public VacanciesPage goBack() {
+        Wait.waitForElementToBeClickable(btnBack);
+        btnBack.click();
+        return new VacanciesPage();
     }
 
     public boolean checkValidation() {

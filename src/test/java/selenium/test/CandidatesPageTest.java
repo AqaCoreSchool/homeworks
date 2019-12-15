@@ -12,10 +12,9 @@ public class CandidatesPageTest extends BaseTest {
                 .fillPassword(getCredentials().getUserPassword())
                 .clickLoginButton()
                 .moveToRecruitmentItem()
-                .clickCandidateListButton()
-                .checkCandidate(getUser().getUserLastName(), getVacancy().getVacancyName());
+                .clickCandidateListButton();
 
-        boolean isCreated = page.isCreated();
-        Assert.assertTrue(isCreated);
+        boolean isCreated = page.isCandidateWithVacancyPresent(getUser().getUserLastName(), getVacancy().getVacancyName());
+        Assert.assertTrue(isCreated, "Candidate is not created.");
     }
 }

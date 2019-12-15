@@ -21,6 +21,6 @@ public class MyInfoPageTest extends BaseTest {
                 .fillEmployeeNation(getUser().getUserNation())
                 .btnClick();
 
-        Assert.assertEquals(page.getEmployeeFirstName(), "Pavlo");
+        Assert.assertEquals(page.getEmployeeFirstName(), "Pavlo", "My info form is not filled in correctly.");
     }
 }

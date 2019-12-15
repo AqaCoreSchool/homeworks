@@ -13,10 +13,10 @@ public class VacanciesPageTest extends BaseTest {
                 .fillPassword(getCredentials().getUserPassword())
                 .clickLoginButton()
                 .moveToRecruitmentItem()
-                .clickVacanciesButton()
-                .checkVacancy(getVacancy().getVacancyName(), getVacancy().getHiringManager());
+                .clickVacanciesButton();
 
-        boolean isCreated = page.isCreated();
+
+        boolean isCreated = page.isVacancyCreated(getVacancy().getVacancyName(), getVacancy().getHiringManager());
         Assert.assertTrue(isCreated);
     }
 }

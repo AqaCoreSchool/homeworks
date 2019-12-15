@@ -14,7 +14,7 @@ public class Vacancy {
         user = new User();
         this.jobTitle = Utils.getProperty("jobTitle");
         this.vacancyName = Utils.getProperty("vacancyName");
-        this.hiringManager = String.format("%s %s",user.getUserFirstName(), user.getUserLastName());
+        this.hiringManager = String.format("%s %s", user.getUserFirstName(), user.getUserLastName());
         this.noOfPositions = Utils.getProperty("noOfPositions");
         this.description = Utils.getProperty("description");
     }
@@ -31,6 +31,10 @@ public class Vacancy {
         return hiringManager;
     }
 
+    public void setHiringManager(String hiringManager) {
+        this.hiringManager = hiringManager;
+    }
+
     public String getNoOfPositions() {
         return noOfPositions;
     }
@@ -38,4 +42,9 @@ public class Vacancy {
     public String getDescription() {
         return description;
     }
+
+    public void setVacancyName(String vacancyName) {
+        this.vacancyName = vacancyName;
+    }
 }
+

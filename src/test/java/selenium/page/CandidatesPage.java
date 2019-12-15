@@ -7,7 +7,6 @@ import selenium.common.Wait;
 import java.util.List;
 
 public class CandidatesPage extends BasePage {
-    private boolean isCreated = false;
 
     @FindBy(id = "btnAdd")
     private WebElement btnAdd;
@@ -21,16 +20,10 @@ public class CandidatesPage extends BasePage {
         return new CreateCandidatePage();
     }
 
-    public CandidatesPage checkCandidate (String candidateName, String vacancyName) {
-        isCreated = usersList.stream()
+    public boolean isCandidateWithVacancyPresent(String candidateName, String vacancyName) {
+        return usersList.stream()
                 .map(WebElement::getText)
                 .anyMatch(item -> item.contains(candidateName) &&
                         item.contains(vacancyName));
-        return this;
     }
-
-    public boolean isCreated() {
-        return isCreated;
-    }
-
 }

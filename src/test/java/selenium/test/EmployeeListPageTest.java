@@ -16,6 +16,6 @@ public class EmployeeListPageTest extends BaseTest {
                 .collectEmployees()
                 .isUserExists();
 
-        Assert.assertTrue(userExists);
+        Assert.assertTrue(userExists, "Employee is not exist");
     }
 }

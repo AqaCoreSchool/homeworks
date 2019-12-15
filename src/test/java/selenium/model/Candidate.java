@@ -2,15 +2,19 @@ package selenium.model;
 
 import selenium.common.Utils;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Candidate {
+    private String id;
     private String candidateFirstName;
     private String candidateLastName;
     private String candidateEmail;
     private String candidateVacancy;
     private String candidateAppliedDate;
     private String candidateContactNo;
+    private List<Vacancy> vacancies = new ArrayList<>();
 
     public Candidate() {
         this.candidateFirstName = Utils.getProperty("userFirstName");
@@ -21,14 +25,15 @@ public class Candidate {
         this.candidateContactNo = Utils.getProperty("candidateContactNo");
     }
 
-    public Candidate(String candidateFirstName, String candidateLastName, String candidateEmail,
-                     String candidateVacancy, String candidateAppliedDate, String candidateContactNo) {
+    public Candidate(String id) {
+        this.id = id;
+    }
+
+    public Candidate(String id, String candidateFirstName, String candidateLastName, List<Vacancy> vacancies) {
+        this.id = id;
         this.candidateFirstName = candidateFirstName;
         this.candidateLastName = candidateLastName;
-        this.candidateEmail = candidateEmail;
-        this.candidateVacancy = candidateVacancy;
-        this.candidateAppliedDate = candidateAppliedDate;
-        this.candidateContactNo = candidateContactNo;
+        this.vacancies = vacancies;
     }
 
     public String getCandidateFirstName() {
@@ -53,6 +58,30 @@ public class Candidate {
 
     public String getCandidateContactNo() {
         return candidateContactNo;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public List<Vacancy> getVacancies() {
+        return vacancies;
+    }
+
+    public void setVacancies(Vacancy vacancy) {
+        this.vacancies.add(vacancy);
+    }
+
+    public void setCandidateFirstName(String candidateFirstName) {
+        this.candidateFirstName = candidateFirstName;
+    }
+
+    public void setCandidateLastName(String candidateLastName) {
+        this.candidateLastName = candidateLastName;
     }
 
     @Override
