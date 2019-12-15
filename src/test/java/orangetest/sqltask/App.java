@@ -16,8 +16,9 @@ public class App {
         employeesDataProvider.printEmployeeList(employees);
         List<JobVacancy> vacancyListByEmployee = vacanciesDataProvider
                 .getVacanciesByEmployeeName(vacancies, employeeFirstName, employeeLastName);
-        System.out.println(String.format(" ", "\nList of vacancies created by:", employeeFirstName, employeeLastName));
-        System.out.println("\n      " + vacanciesDataProvider.printVacancyListToString(vacancyListByEmployee));
+        System.out.println(String.join(" "
+                , "List of vacancies created by:", employeeFirstName, employeeLastName));
+        System.out.println("      " + vacanciesDataProvider.printVacancyListToString(vacancyListByEmployee));
         System.out.println("\nEmployee by vacancy name " + vacancyName);
         List<Employee> employeesByVacancyName = employeesDataProvider.getEmployeesByVacancyName(vacancyName);
         employeesDataProvider.printEmployeeList(employeesByVacancyName);
