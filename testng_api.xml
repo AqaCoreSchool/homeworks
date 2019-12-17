@@ -1,0 +1,16 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="API Suite" verbose="1" parallel="classes" thread-count="2">
+    <test name="API Tests">
+        <classes>
+            <class name="selenium.api.test.WorkExperienceApiTest">
+                <methods>
+                    <include name="postWorkExperience" />
+                    <include name="getWorkExperience" />
+                    <include name="updateWorkExperience" />
+                    <include name="deleteWorkExperience" />
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

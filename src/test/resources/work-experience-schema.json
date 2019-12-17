@@ -1,0 +1,50 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "data": {
+      "type": "array",
+      "items": [
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "company": {
+              "type": "string"
+            },
+            "jobTitle": {
+              "type": "string"
+            },
+            "fromDate": {
+              "type": "string"
+            },
+            "toDate": {
+              "type": "string"
+            },
+            "comment": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "id",
+            "company",
+            "jobTitle",
+            "fromDate",
+            "toDate",
+            "comment"
+          ]
+        }
+      ]
+    },
+    "rels": {
+      "type": "array",
+      "items": {}
+    }
+  },
+  "required": [
+    "data",
+    "rels"
+  ]
+}
