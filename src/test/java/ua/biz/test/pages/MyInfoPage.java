@@ -4,6 +4,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import ua.biz.test.base.BasePage;
 import ua.biz.test.entity.Employee;
+import ua.biz.test.utils.WaitUtil;
 
 public class MyInfoPage extends BasePage {
 
@@ -22,7 +23,7 @@ public class MyInfoPage extends BasePage {
 
     public void editEmployeeData(Employee employee) {
         editButton.click();
-        firstName.clear();
+        WaitUtil.waitAndClear(firstName);
         firstName.sendKeys(employee.getFirstName());
         lastName.clear();
         lastName.sendKeys(employee.getLastName());

@@ -1,5 +1,6 @@
 package ua.biz.test.base;
 
+import com.github.javafaker.Faker;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.*;
 import ua.biz.test.driver.DriverManager;
@@ -14,9 +15,10 @@ public abstract class BaseTest {
 
     protected WebDriver driver;
     protected MainPage mainPage;
+    protected Faker faker = new Faker();
     private final String URL = "http://test.biz.ua/symfony/web/index.php/auth/login";
 
-    @BeforeSuite
+   @BeforeSuite
     public void init(){
         Path driverPath = Paths.get("src","main", "resources");
         System.setProperty("webdriver.chrome.driver", driverPath + File.separator + "chromedriver.exe");

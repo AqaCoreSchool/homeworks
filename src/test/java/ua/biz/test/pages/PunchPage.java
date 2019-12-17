@@ -10,7 +10,6 @@ import java.util.List;
 
 public class PunchPage extends BasePage {
 
-
     @FindBy(xpath = "//textarea[@id='note']")
     private WebElement punchNoteField;
 
@@ -19,9 +18,6 @@ public class PunchPage extends BasePage {
 
     @FindBy(xpath = "//*[@id=\"btnPunch\"]")
     private WebElement punchInButton;
-
-    @FindBy(xpath ="//table[@class='table']//tbody//tr[@class='odd' or @class='even']")
-    private List<WebElement> recordData;
 
     public PunchPage() {
         super();
@@ -35,13 +31,4 @@ public class PunchPage extends BasePage {
         punchData.setPunchOutTime(punchTime.getText());
         punchInButton.click();
     }
-
-    public boolean isRecordPresent(PunchData punchData) {
-        return recordData.stream().map(WebElement::getText).
-                anyMatch(data->data.contains(punchData.getPunchInTime())&&
-                        data.contains(punchData.getPunchInMessage())&&
-                        data.contains(punchData.getPunchOutTime())&&
-                        data.contains(punchData.getPunchOutMessage()));
-    }
-
 }

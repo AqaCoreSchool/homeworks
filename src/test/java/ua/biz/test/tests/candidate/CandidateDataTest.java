@@ -19,7 +19,7 @@ import java.util.List;
 public class CandidateDataTest extends BaseTest {
 
     private final Vacancy TEST_VACANCY =
-            new Vacancy("TEST_VACANCY_IMO","Ivan Mosiychuk",2,true);
+            new Vacancy(faker.name()+"vak","Ivan Mosiychuk",2,true);
     private final Candidate TEST_CANDIDATE =
             new Candidate("Ivan", "Mosiychuk", "MWIvanko@gmail.com", TEST_VACANCY);
 
