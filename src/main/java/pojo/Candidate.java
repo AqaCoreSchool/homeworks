@@ -1,4 +1,4 @@
-package data;
+package pojo;
 
 public class Candidate {
     private String firstName;

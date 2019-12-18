@@ -1,6 +1,6 @@
 package ua.testbiz.page;
 
-import data.UserInformation;
+import pojo.UserInformation;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;

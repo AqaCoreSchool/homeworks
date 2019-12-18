@@ -1,6 +1,10 @@
 package data;
 
 import com.github.javafaker.Faker;
+import pojo.Candidate;
+import pojo.Location;
+import pojo.UserInformation;
+import pojo.Vacancy;
 
 import java.util.Random;
 

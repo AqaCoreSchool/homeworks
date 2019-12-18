@@ -1,4 +1,4 @@
-package data;
+package pojo;
 
 public final class UserInformation {
     private String firstName;

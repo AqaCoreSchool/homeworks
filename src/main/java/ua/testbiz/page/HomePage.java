@@ -29,10 +29,6 @@ public class HomePage {
         PageFactory.initElements(Application.getDriver(), this);
     }
 
-    public boolean isOpened() {
-        return welcomeLabel.isDisplayed();
-    }
-
     public PersonalDetailsPage selectMyInfo() {
         myInfoOption.click();
         return new PersonalDetailsPage();

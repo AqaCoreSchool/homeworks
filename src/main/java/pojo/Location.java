@@ -1,4 +1,4 @@
-package data;
+package pojo;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 

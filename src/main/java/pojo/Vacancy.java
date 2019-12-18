@@ -1,4 +1,4 @@
-package data;
+package pojo;
 
 public class Vacancy {
     private String jobTitle = "1";

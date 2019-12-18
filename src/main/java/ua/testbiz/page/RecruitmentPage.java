@@ -1,13 +1,12 @@
 package ua.testbiz.page;
 
-import data.Candidate;
-import data.Vacancy;
-import org.json.JSONObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
+import pojo.Candidate;
+import pojo.Vacancy;
 import util.Application;
 import util.Convertable;
 
@@ -82,9 +81,6 @@ public class RecruitmentPage implements Convertable {
     private String position;
     private String managerName;
 
-    private JSONObject jsonCandidate;
-    private JSONObject jsonVacancy;
-
     public RecruitmentPage() {
         PageFactory.initElements(Application.getDriver(), this);
     }
@@ -130,11 +126,6 @@ public class RecruitmentPage implements Convertable {
         return this;
     }
 
-    public void searchCandidateByJSON() {
-        Candidate cand = (Candidate) Convertable.super.getObject(jsonCandidate, Candidate.class);
-        searchCandidate(cand);
-    }
-
     public RecruitmentPage addVacancy(Vacancy vacancy) {
         addButton.click();
 
@@ -176,10 +167,5 @@ public class RecruitmentPage implements Convertable {
 
         vacancySearchButton.click();
         return this;
-    }
-
-    public void searchVacancyByJSON() {
-        Vacancy vac = (Vacancy) Convertable.super.getObject(jsonVacancy, Vacancy.class);
-        searchVacancy(vac);
     }
 }

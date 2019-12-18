@@ -1,7 +1,6 @@
 package ua.testbiz.page;
 
-import data.Location;
-import org.json.JSONObject;
+import pojo.Location;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -60,15 +59,11 @@ public class LocationPage implements Convertable {
     @FindBy(xpath = "//input[@id='btnSearch']")
     private WebElement searchButton;
 
-    private JSONObject jsonLocation;
-
     public LocationPage() {
         PageFactory.initElements(Application.getDriver(), this);
     }
 
     public LocationPage addLocation(Location location) {
-        jsonLocation = convertToJson(location);
-
         organizationOption.click();
         locationSubMenu.click();
         addButton.click();
@@ -99,10 +94,9 @@ public class LocationPage implements Convertable {
         return false;
     }
 
-    public LocationPage searchLocationByJSON() {
-        Location loc = (Location) Convertable.super.getObject(jsonLocation, Location.class);
-        searchNameInput.sendKeys(loc.getLocationName());
-        searchCityInput.sendKeys(loc.getLocationCity());
+    public LocationPage searchLocation(Location location) {
+        searchNameInput.sendKeys(location.getLocationName());
+        searchCityInput.sendKeys(location.getLocationCity());
 
         searchButton.click();
         return this;
