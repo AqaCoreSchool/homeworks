@@ -89,17 +89,17 @@ public class RecruitmentPage implements Convertable {
         PageFactory.initElements(Application.getDriver(), this);
     }
 
-    public void switchToCandidate() {
+    public RecruitmentPage switchToCandidate() {
         candidateSubOption.click();
+        return this;
     }
 
-    public void switchToVacancy() {
+    public RecruitmentPage switchToVacancy() {
         vacancySubOption.click();
+        return this;
     }
 
-    public void addCandidate(Candidate candidate) {
-        jsonCandidate = convertToJson(candidate);
-
+    public RecruitmentPage addCandidate(Candidate candidate) {
         addButton.click();
 
         firstNameInput.sendKeys(candidate.getFirstName());
@@ -107,23 +107,27 @@ public class RecruitmentPage implements Convertable {
         emailInput.sendKeys(candidate.getEmail());
 
         saveButton.click();
+
+        return this;
     }
 
-    public String checkCandidate(Candidate candidate) {
+    public boolean checkCandidate(Candidate candidate) {
         for (WebElement element : candidateTable) {
             List<WebElement> candidateName = element.findElements(By.tagName("a"));
 
             if (candidateName.get(0).getText().equals(candidate.getFirstName() + " " + candidate.getLastName())) {
                 System.out.printf("Candidate %s exists.%n", candidateName.get(0).getText());
-                return candidateName.get(0).getText();
+                return true;
             }
         }
-        return null;
+        return false;
     }
 
-    public void searchCandidate(Candidate candidate) {
+    public RecruitmentPage searchCandidate(Candidate candidate) {
         candidateSearchNameInput.sendKeys(String.join(" ", candidate.getFirstName(), candidate.getLastName()));
         candidateSearchButton.click();
+
+        return this;
     }
 
     public void searchCandidateByJSON() {
@@ -131,7 +135,7 @@ public class RecruitmentPage implements Convertable {
         searchCandidate(cand);
     }
 
-    public void addVacancy(Vacancy vacancy) {
+    public RecruitmentPage addVacancy(Vacancy vacancy) {
         addButton.click();
 
         Select jobSelect = new Select(jobTitleSelect);
@@ -145,9 +149,10 @@ public class RecruitmentPage implements Convertable {
 
         saveButton.click();
         backButton.click();
+        return this;
     }
 
-    public String checkVacancy(Vacancy vacancy) {
+    public boolean checkVacancy(Vacancy vacancy) {
         for (WebElement element : candidateTable) {
             List<WebElement> vacancies = element.findElements(By.tagName("a"));
             List<WebElement> managers = element.findElements(By.xpath("//td[4]"));
@@ -155,14 +160,14 @@ public class RecruitmentPage implements Convertable {
             for (int i = 0; i < managers.size(); i++) {
                 if (vacancies.get(0).getText().equals(vacancy.getPosition()) && managers.get(i).getText().equals(managerName)) {
                     System.out.printf("Vacancy of %s [manager %s] exists.%n", vacancies.get(0).getText(), managers.get(i).getText());
-                    return vacancies.get(0).getText() + " " + managers.get(i).getText();
+                    return true;
                 }
             }
         }
-        return null;
+        return false;
     }
 
-    public void searchVacancy(Vacancy vacancy) {
+    public RecruitmentPage searchVacancy(Vacancy vacancy) {
         Select vacancyJob = new Select(vacancyJobSelect);
         vacancyJob.selectByValue(vacancy.getPosition());
 
@@ -170,6 +175,7 @@ public class RecruitmentPage implements Convertable {
         vacancyManager.selectByVisibleText(managerName);
 
         vacancySearchButton.click();
+        return this;
     }
 
     public void searchVacancyByJSON() {

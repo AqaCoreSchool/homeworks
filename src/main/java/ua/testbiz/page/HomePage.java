@@ -33,19 +33,26 @@ public class HomePage {
         return welcomeLabel.isDisplayed();
     }
 
-    public void selectMyInfo() {
+    public PersonalDetailsPage selectMyInfo() {
         myInfoOption.click();
+        return new PersonalDetailsPage();
     }
 
-    public void selectPim() {
+    public EmployeeListPage selectPim() {
         pimOption.click();
+
+        return new EmployeeListPage();
     }
 
-    public void selectRecruitment() {
+    public RecruitmentPage selectRecruitment() {
         recruitmentOption.click();
+
+        return new RecruitmentPage();
     }
 
-    public void selectAdmin(){
+    public LocationPage selectAdmin(){
         adminOption.click();
+
+        return new LocationPage();
     }
 }

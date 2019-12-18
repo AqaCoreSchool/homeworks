@@ -13,7 +13,7 @@ public class BaseTest {
     @BeforeMethod
     public void setUp() {
         WebDriver driver = Application.getDriver();
-        driver.manage().window().maximize();
+        //driver.manage().window().maximize();
         driver.get(URL);
 
         wait = new WebDriverWait(driver, 5);

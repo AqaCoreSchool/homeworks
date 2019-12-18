@@ -66,7 +66,7 @@ public class LocationPage implements Convertable {
         PageFactory.initElements(Application.getDriver(), this);
     }
 
-    public void addLocation(Location location) {
+    public LocationPage addLocation(Location location) {
         jsonLocation = convertToJson(location);
 
         organizationOption.click();
@@ -85,7 +85,7 @@ public class LocationPage implements Convertable {
         postalCodeInput.sendKeys(location.getLocationPostalCode());
 
         saveButton.click();
-
+        return this;
     }
 
     public boolean isLocationInList(Location location) {
@@ -99,11 +99,12 @@ public class LocationPage implements Convertable {
         return false;
     }
 
-    public void searchLocationByJSON() {
+    public LocationPage searchLocationByJSON() {
         Location loc = (Location) Convertable.super.getObject(jsonLocation, Location.class);
         searchNameInput.sendKeys(loc.getLocationName());
         searchCityInput.sendKeys(loc.getLocationCity());
 
         searchButton.click();
+        return this;
     }
 }

@@ -21,9 +21,11 @@ public class LoginPage {
         PageFactory.initElements(Application.getDriver(), this);
     }
 
-    public void loginIntoSystem() {
+    public HomePage loginIntoSystem() {
         usernameInput.sendKeys(UserCredential.USER_NAME);
         passwordInput.sendKeys(UserCredential.PASSWORD);
         loginButton.click();
+
+        return new HomePage();
     }
 }

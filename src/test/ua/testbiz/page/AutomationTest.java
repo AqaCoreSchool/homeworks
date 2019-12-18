@@ -5,89 +5,65 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class AutomationTest extends BaseTest {
-    private String jsonLocation = "{\"locationName\":\"AMark & Spencer\",\"locationPostalCode\":\"11450-3689\",\"locationAddress\":\"013 Stephani Cliffs\",\"locationState\":\"Ohio\",\"locationCity\":\"Cleveland\",\"locationCountryIndex\":0}";
 
     @org.testng.annotations.Test
     public void testCandidate() {
-        LoginPage loginPage = new LoginPage();
-        HomePage homePage = new HomePage();
-        RecruitmentPage recruitmentPage = new RecruitmentPage();
+        DataFaker dataFaker = new DataFaker().setCandidate();
 
-        loginPage.loginIntoSystem();
-        Assert.assertTrue(homePage.isOpened(), "Not a home page");
+        boolean isCandidate =
+                new LoginPage()
+                        .loginIntoSystem()
+                        .selectRecruitment()
+                        .switchToCandidate()
+                        .addCandidate(dataFaker.getCandidate())
+                        .switchToCandidate()
+                        .checkCandidate(dataFaker.getCandidate());
 
-        homePage.selectRecruitment();
-
-        recruitmentPage.switchToCandidate();
-
-        DataFaker dataFaker = new DataFaker();
-        dataFaker.setCandidate();
-        recruitmentPage.addCandidate(dataFaker.getCandidate());
-
-        recruitmentPage.switchToCandidate();
-        recruitmentPage.searchCandidateByJSON();
-        Assert.assertNotNull(recruitmentPage.checkCandidate(dataFaker.getCandidate()), "Candidate is not found");
+        Assert.assertTrue(isCandidate, "Candidate is not found");
     }
 
     @org.testng.annotations.Test()
     public void testProfile() {
-        LoginPage loginPage = new LoginPage();
-        HomePage homePage = new HomePage();
-        PersonalDetailsPage personalDetailsPage = new PersonalDetailsPage();
-        EmployeeListPage employeeListPage = new EmployeeListPage();
+        DataFaker dataFaker = new DataFaker().setUserInformation();
 
-        loginPage.loginIntoSystem();
-        Assert.assertTrue(homePage.isOpened(), "Not a home page");
+        boolean isEmployee =
+                new LoginPage()
+                        .loginIntoSystem()
+                        .selectMyInfo()
+                        .setPersonalDetail(dataFaker.getUserInformation())
+                        .selectPim()
+                        .checkEmployee(dataFaker.getUserInformation());
 
-        homePage.selectMyInfo();
-
-        DataFaker dataFaker = new DataFaker();
-        dataFaker.setUserInformation();
-        personalDetailsPage.setPersonalDetail(dataFaker.getUserInformation());
-
-        homePage.selectPim();
-        employeeListPage.checkEmployee(dataFaker.getUserInformation());
+        Assert.assertTrue(isEmployee, "Employee is not found!");
     }
 
     @org.testng.annotations.Test()
     public void testVacancy() {
-        LoginPage loginPage = new LoginPage();
-        HomePage homePage = new HomePage();
-        RecruitmentPage recruitmentPage = new RecruitmentPage();
+        DataFaker dataFaker = new DataFaker().setVacancy();
 
-        loginPage.loginIntoSystem();
-        Assert.assertTrue(homePage.isOpened(), "Not a home page");
+        boolean isVacancy =
+                new LoginPage()
+                        .loginIntoSystem()
+                        .selectRecruitment()
+                        .switchToVacancy()
+                        .addVacancy(dataFaker.getVacancy())
+                        .searchVacancy(dataFaker.getVacancy())
+                        .checkVacancy(dataFaker.getVacancy());
 
-        homePage.selectRecruitment();
-
-        recruitmentPage.switchToVacancy();
-
-        DataFaker dataFaker = new DataFaker();
-        dataFaker.setVacancy();
-        recruitmentPage.addVacancy(dataFaker.getVacancy());
-
-        recruitmentPage.switchToVacancy();
-        recruitmentPage.searchVacancy(dataFaker.getVacancy());
-        Assert.assertNotNull(recruitmentPage.checkVacancy(dataFaker.getVacancy()), "Vacancy is not found!");
+        Assert.assertTrue(isVacancy, "Vacancy is not found!");
     }
 
     @Test
     public void testLocation() {
-        LoginPage loginPage = new LoginPage();
-        HomePage homePage = new HomePage();
-        LocationPage locationPage = new LocationPage();
+        DataFaker dataFaker = new DataFaker().setLocation();
 
-        loginPage.loginIntoSystem();
-        Assert.assertTrue(homePage.isOpened(), "Not a home page");
+        boolean isLocation =
+                new LoginPage()
+                        .loginIntoSystem()
+                        .selectAdmin()
+                        .addLocation(dataFaker.getLocation())
+                        .isLocationInList(dataFaker.getLocation());
 
-        homePage.selectAdmin();
-
-        DataFaker dataFaker = new DataFaker();
-        dataFaker.setLocation();
-
-        locationPage.addLocation(dataFaker.getLocation());
-
-        locationPage.searchLocationByJSON();
-        Assert.assertTrue(locationPage.isLocationInList(dataFaker.getLocation()), "Location is not exist!");
+        Assert.assertTrue(isLocation, "Location is not exist!");
     }
 }

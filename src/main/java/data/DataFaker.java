@@ -26,37 +26,42 @@ public class DataFaker {
         return vacancy;
     }
 
-    public void setVacancy() {
+    public DataFaker setVacancy() {
         vacancy.setPosition(faker.job().position());
+        return this;
     }
 
     public Candidate getCandidate() {
         return candidate;
     }
 
-    public void setCandidate() {
+    public DataFaker setCandidate() {
         candidate.setFirstName(faker.name().firstName());
         candidate.setLastName(faker.name().lastName());
         candidate.setEmail(faker.internet().emailAddress());
+
+        return this;
     }
 
     public Location getLocation() {
         return location;
     }
 
-    public void setLocation() {
+    public DataFaker setLocation() {
         location.setLocationName(faker.company().name());
         location.setLocationState(faker.address().state());
         location.setLocationCity(faker.address().cityName());
         location.setLocationAddress(faker.address().streetAddress());
         location.setLocationPostalCode(faker.address().zipCode());
+
+        return this;
     }
 
     public UserInformation getUserInformation() {
         return userInformation;
     }
 
-    public void setUserInformation() {
+    public DataFaker setUserInformation() {
         userInformation.setFirstName(faker.name().firstName());
         userInformation.setLastName(faker.name().lastName());
         userInformation.setGenderValue(Integer.toString(random.nextInt(2)));
@@ -66,5 +71,7 @@ public class DataFaker {
                 faker.number().numberBetween(1970, 2010),
                 faker.number().numberBetween(10, 12),
                 faker.number().numberBetween(10, 27)));
+
+        return this;
     }
 }

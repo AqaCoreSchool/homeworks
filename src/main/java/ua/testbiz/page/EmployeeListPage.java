@@ -17,12 +17,14 @@ public class EmployeeListPage {
         PageFactory.initElements(Application.getDriver(), this);
     }
 
-    public void checkEmployee(UserInformation information) {
+    public boolean checkEmployee(UserInformation information) {
         for (WebElement element : employeeTable) {
             List<WebElement> employeeData = element.findElements(By.tagName("a"));
             if (employeeData.get(1).getText().equals(information.getFirstName())) {
                 System.out.printf("Employee %s %s exists.", employeeData.get(1).getText(), employeeData.get(2).getText());
+                return true;
             }
         }
+        return false;
     }
 }
