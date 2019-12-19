@@ -7,9 +7,9 @@ import org.testng.annotations.Test;
 import pojo.Candidate;
 import pojo.Location;
 import pojo.Vacancy;
-import util.Convertable;
+import util.Converter;
 
-public class AutomationTest extends BaseTest implements Convertable {
+public class AutomationTest extends BaseTest {
 
     @org.testng.annotations.Test
     public void testCandidate() {
@@ -75,7 +75,10 @@ public class AutomationTest extends BaseTest implements Convertable {
 
     @Test
     public void testLocationJSON() {
-        Location location = Convertable.super.getObject(JsonObject.LOCATION.getPath(), Location.class);
+        Location location =
+                new Converter<Location>()
+                        .convertToObject(JsonObject.LOCATION.getPath(), Location.class)
+                        .getObject();
 
         boolean isLocation =
                 new LoginPage()
@@ -90,7 +93,10 @@ public class AutomationTest extends BaseTest implements Convertable {
 
     @Test
     public void testCandidateJSON() {
-        Candidate candidate = Convertable.super.getObject(JsonObject.CANDIDATE.getPath(), Candidate.class);
+        Candidate candidate =
+                new Converter<Candidate>()
+                        .convertToObject(JsonObject.CANDIDATE.getPath(), Candidate.class)
+                        .getObject();
 
         boolean isCandidate =
                 new LoginPage()
@@ -106,7 +112,10 @@ public class AutomationTest extends BaseTest implements Convertable {
 
     @Test
     public void testVacancyJSON() {
-        Vacancy vacancy = Convertable.super.getObject(JsonObject.VACANCY.getPath(), Vacancy.class);
+        Vacancy vacancy =
+                new Converter<Vacancy>()
+                        .convertToObject(JsonObject.VACANCY.getPath(), Vacancy.class)
+                        .getObject();
 
         boolean isCandidate =
                 new LoginPage()
@@ -114,7 +123,6 @@ public class AutomationTest extends BaseTest implements Convertable {
                         .selectRecruitment()
                         .switchToVacancy()
                         .addVacancy(vacancy)
-                        //.searchVacancy(vacancy)
                         .checkVacancy(vacancy);
 
         Assert.assertTrue(isCandidate, "Vacancy from JSON is not found");

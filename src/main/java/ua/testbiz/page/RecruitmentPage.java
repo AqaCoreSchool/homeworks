@@ -8,11 +8,10 @@ import org.openqa.selenium.support.ui.Select;
 import pojo.Candidate;
 import pojo.Vacancy;
 import util.Application;
-import util.Convertable;
 
 import java.util.List;
 
-public class RecruitmentPage implements Convertable {
+public class RecruitmentPage {
     @FindBy(xpath = "//a[@id='menu_recruitment_viewCandidates']")
     private WebElement candidateSubOption;
 

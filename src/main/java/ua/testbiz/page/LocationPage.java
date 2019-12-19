@@ -1,17 +1,16 @@
 package ua.testbiz.page;
 
-import pojo.Location;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
+import pojo.Location;
 import util.Application;
-import util.Convertable;
 
 import java.util.List;
 import java.util.Random;
 
-public class LocationPage implements Convertable {
+public class LocationPage {
     @FindBy(xpath = "//a[@id='menu_admin_Organization']")
     private WebElement organizationOption;
 
