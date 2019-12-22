@@ -95,7 +95,6 @@ public class OrangeRecruitmentPage extends BasePage{
     }
 
     public OrangeRecruitmentPage selectJobTitle(int index){
-        wait.waitForVisibility(jobTitleList);
         Select jobTitle = new Select(jobTitleList);
         jobTitle.selectByIndex(index);
         title = jobTitle.getFirstSelectedOption().getText();

@@ -7,10 +7,10 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EmployeeSQLDataProvider extends SQLDataProvider{
+public class EmployeeSqlDataProvider extends SqlDataProvider {
     public static List<EmployeeSQLData> employeePool = new ArrayList<>();
 
-    public static void getEmployeePool() {
+    public static void makeEmployeePool() {
 
         String empQuery = "SELECT hs_hr_employee.emp_number, hs_hr_employee.emp_firstname, hs_hr_employee.emp_lastname " +
                 "FROM hs_hr_employee;";
@@ -50,10 +50,11 @@ public class EmployeeSQLDataProvider extends SQLDataProvider{
         }
     }
 
-    public static List<JobVacancySQLData> getVacanciesByEmployeeName(String name, String surname){
-        EmployeeSQLData employee = employeePool.stream()
-                .filter(o -> o.getEmp_firstname().equals(name) && o.getEmp_lastname().equals(surname))
-                .findFirst().get();
-        return employee.getVacancies();
+    public static EmployeeSQLData getEmployeesByJobVacancyName (String jobVacancyName){
+        List<EmployeeSQLData> employeesByVacancy = new ArrayList<>();
+        String managerID = VacancySqlDataProvider.vacancyPool.stream()
+                .filter(o -> o.getName().equals(jobVacancyName))
+                .findFirst().map(JobVacancySQLData::getHiring_manager_id).get();
+        return employeePool.stream().filter(o ->o.getEmp_number().equals(managerID)).findFirst().get();
     }
 }

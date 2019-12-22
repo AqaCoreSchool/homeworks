@@ -7,10 +7,10 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class VacancySQLDataProvider extends SQLDataProvider{
+public class VacancySqlDataProvider extends SqlDataProvider {
     public static List<JobVacancySQLData> vacancyPool = new ArrayList<>();
 
-    public static void getVacancyPool() {
+    public static void makeVacancyPool() {
         String url = "jdbc:mysql://test.biz.ua:3306/orangehrm_mysql";
 
         String vcQuery = "SELECT ohrm_job_vacancy.hiring_manager_id, ohrm_job_vacancy.name " +
@@ -30,12 +30,11 @@ public class VacancySQLDataProvider extends SQLDataProvider{
         }
     }
 
-    public static EmployeeSQLData getEmployeesByJobVacancyName (String jobVacancyName){
-        List<EmployeeSQLData> employeesByVacancy = new ArrayList<>();
-        String managerID = vacancyPool.stream()
-                .filter(o -> o.getName().equals(jobVacancyName))
-                .findFirst().map(JobVacancySQLData::getHiring_manager_id).get();
-        return EmployeeSQLDataProvider.employeePool.stream().filter(o ->o.getEmp_number().equals(managerID)).findFirst().get();
+    public static List<JobVacancySQLData> getVacanciesByEmployeeName(String name, String surname){
+        EmployeeSQLData employee = EmployeeSqlDataProvider.employeePool.stream()
+                .filter(o -> o.getEmp_firstname().equals(name) && o.getEmp_lastname().equals(surname))
+                .findFirst().get();
+        return employee.getVacancies();
     }
 
 }
