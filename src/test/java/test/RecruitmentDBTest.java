@@ -1,0 +1,32 @@
+package test;
+
+import data.EmployeeSQLData;
+import data.JobVacancySQLData;
+import data.VacancyData;
+import org.testng.Assert;
+import org.testng.annotations.Test;
+import pages.OrangeRecruitmentPage;
+import utils.EmployeeSqlDataProvider;
+import utils.VacancySqlDataProvider;
+
+import java.util.List;
+
+public class RecruitmentDBTest extends BaseTest{
+    VacancyData vacancy = new VacancyData("DBTEST", "Nazariy Kushnir");
+
+    @Test
+    public void createVacancyAndCheckInDB(){
+        OrangeRecruitmentPage recruitmentPage = openLoginPage()
+                .loginCorrect(USERNAME, PASSWORD)
+                .toRecruitmentModulePage()
+                .toVacancies()
+                .createVacancy(vacancy);
+        recruitmentPage.clickBackBtn();
+        VacancySqlDataProvider.makeVacancyPool();
+        EmployeeSqlDataProvider.makeEmployeePool();
+        EmployeeSQLData emp = EmployeeSqlDataProvider.getEmployeesByJobVacancyName(vacancy.getVacancyName());
+        List<JobVacancySQLData> vacanciesByEmployee = VacancySqlDataProvider.getVacanciesByEmployeeName(emp.getEmp_firstname(), emp.getEmp_lastname());
+        boolean found = vacanciesByEmployee.stream().anyMatch(vacancySQLData -> vacancySQLData.getName().equals(vacancy.getVacancyName()));
+        Assert.assertTrue(found, "Created vacancy by this hiring manager not found in DB");
+    }
+}
