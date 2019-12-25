@@ -1,5 +1,6 @@
-package orangetest;
+package orangetest.tests;
 
+import orangetest.tests.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 

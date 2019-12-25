@@ -1,5 +1,6 @@
-package orangetest;
+package orangetest.tests;
 
+import pages.EditUserPage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 

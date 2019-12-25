@@ -1,4 +1,4 @@
-package orangetest;
+package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -10,7 +10,7 @@ import org.openqa.selenium.support.PageFactory;
 import java.time.LocalDate;
 import java.util.List;
 
-public class HomePage {
+public class AttendancePage {
     private static final String NOTE_IN = "I am a good worker :-)";
     private static final String NOTE_OUT = "I am already finished my work :-)";
     @FindBy(xpath = "//b[contains(text(),'Time')]")
@@ -35,7 +35,7 @@ public class HomePage {
     private String timeString;
     private LocalDate dateNow = LocalDate.now();
 
-    public HomePage(WebDriver driver) {
+    public AttendancePage(WebDriver driver) {
         PageFactory.initElements(driver, this);
     }
 

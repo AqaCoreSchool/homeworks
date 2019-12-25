@@ -1,4 +1,4 @@
-package orangetest;
+package pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -28,11 +28,11 @@ public class LoginPage {
     }
 
 
-    public HomePage loginIntoSystem(String login, String password) {
+    public AttendancePage loginIntoSystem(String login, String password) {
         loginField.sendKeys(login);
         passwordField.sendKeys(password);
         submitButton.click();
-        return new HomePage(driver);
+        return new AttendancePage(driver);
     }
 
     public boolean isHomePageOpened() {

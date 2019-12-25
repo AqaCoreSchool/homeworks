@@ -1,26 +1,26 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
 <suite name="orangetest" verbose="1" >
-    <test name="orangetest.PunchInOutTest" >
-        <classes> <class name="orangetest.PunchInOutTest">
+    <test name="orangetest.tests.PunchInOutTest" >
+        <classes> <class name="orangetest.tests.PunchInOutTest">
         </class>
         </classes>
     </test>
-    <test name="orangetest.CheckPunchOtherWeeksTest" >
-        <classes> <class name="orangetest.CheckPunchOtherWeeksTest">
+    <test name="orangetest.tests.CheckPunchOtherWeeksTest" >
+        <classes> <class name="orangetest.tests.CheckPunchOtherWeeksTest">
         </class>
         </classes>
     </test>
-    <test name="orangetest.EditUserTest" >
-        <classes> <class name="orangetest.EditUserTest"/>
+    <test name="orangetest.tests.EditUserTest" >
+        <classes> <class name="orangetest.tests.EditUserTest"/>
         </classes>
     </test>
-    <test name="orangetest.AddVacanciesTest" >
-        <classes> <class name="orangetest.AddVacanciesTest"/>
+    <test name="orangetest.tests.AddVacanciesTest" >
+        <classes> <class name="orangetest.tests.AddVacanciesTest"/>
         </classes>
     </test>
-    <test name="orangetest.AddCandidatesTest" >
-        <classes> <class name="orangetest.AddCandidatesTest"/>
+    <test name="orangetest.tests.AddCandidatesTest" >
+        <classes> <class name="orangetest.tests.AddCandidatesTest"/>
         </classes>
     </test>
 </suite>

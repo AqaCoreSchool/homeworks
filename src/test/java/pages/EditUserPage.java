@@ -1,4 +1,4 @@
-package orangetest;
+package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;

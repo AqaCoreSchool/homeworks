@@ -1,6 +1,7 @@
-package orangetest;
+package orangetest.tests;
 
 import com.github.javafaker.Faker;
+import pages.VacanciesPage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
