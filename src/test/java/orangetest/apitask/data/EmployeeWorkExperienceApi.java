@@ -1,5 +1,7 @@
 package orangetest.apitask.data;
 
+import io.restassured.builder.RequestSpecBuilder;
+import io.restassured.specification.RequestSpecification;
 import orangetest.apitask.utils.Token;
 import com.github.javafaker.Faker;
 import io.restassured.RestAssured;
@@ -11,24 +13,31 @@ import org.testng.Assert;
 
 import java.util.stream.Collectors;
 
-import static io.restassured.RestAssured.given;
+import static io.restassured.RestAssured.*;
 
 public class EmployeeWorkExperienceApi {
     private final String BASE_URL = "http://test.biz.ua/symfony/web/index.php/api/v1/employee/";
+    private final String BASE_PATH = "32/work-experience";
     Token token = new Token();
     Faker faker = new Faker();
 
+    public RequestSpecification getSpecification(){
+        return new RequestSpecBuilder()
+                .setBaseUri(BASE_URL)
+                .setBasePath(BASE_PATH)
+                .setAuth(oauth2(token.getToken()))
+                .build();
+    }
+
     public Response getEmployeeExperience() {
-        RestAssured.baseURI = BASE_URL;
-        Response response = RestAssured.given().auth().oauth2(token.getToken()).get("32/work-experience");
+        Response response = RestAssured.given().spec(getSpecification()).when().get();
         System.out.println(response.getBody().asString());
         return response;
     }
 
 
     public Response saveEmployeeExperience() {
-        RestAssured.baseURI = BASE_URL;
-        Response response = given().given().auth().oauth2(token.getToken())
+        Response response = given().spec(getSpecification())
                 .contentType("multipart/form-data")
                 .multiPart("company", "OOps company")
                 .multiPart("title", "AQA Junior")
@@ -37,16 +46,15 @@ public class EmployeeWorkExperienceApi {
                 .multiPart("toDate", "2020-01-03")
                 .multiPart("comment", "Good job")
                 .when()
-                .post("32/work-experience");
+                .post();
         System.out.println(response.getStatusLine());
         System.out.println(response.getBody().asString());
         return response;
     }
 
     public Response updateEmployeeExperience() {
-        RestAssured.baseURI = BASE_URL;
         String company = faker.words(2).stream().collect(Collectors.joining(" "));
-        Response response = given().auth().oauth2(token.getToken())
+        Response response = given().spec(getSpecification())
                 .formParam("company", company)
                 .formParam("title", "AQA Junior")
                 .formParam("job", "Junior")
@@ -55,28 +63,26 @@ public class EmployeeWorkExperienceApi {
                 .formParam("comment", "Good job")
                 .formParam("seqId", "1")
                 .when()
-                .put("32/work-experience");
+                .put();
         System.out.println(response.getBody().asString());
         System.out.println(response.getStatusLine());
         return response;
     }
 
     public Response deleteEmployeeExperience() {
-        RestAssured.baseURI = BASE_URL;
-        Response response = given().auth().oauth2(token.getToken())
+        Response response = given().spec(getSpecification())
                 .contentType(ContentType.URLENC)
                 .formParam("id", 5)
                 .formParam("seqId", 1)
                 .when()
-                .delete("32/work-experience");
+                .delete();
         System.out.println(response.getBody().asString());
         System.out.println(response.getStatusLine());
         return response;
     }
 
     public void VerifyJsonResponse() {
-        RestAssured.baseURI = BASE_URL;
-        Response response = RestAssured.given().auth().oauth2(token.getToken()).get("32/work-experience");
+        Response response = RestAssured.given().spec(getSpecification()).get("32/work-experience");
         JSONObject jsonResponse = new JSONObject(response.getBody().asString());
         JSONArray jsonArrayOfRecords =jsonResponse.getJSONArray("data");
         String title = jsonArrayOfRecords.getJSONObject(0).getString("jobTitle");
