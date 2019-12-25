@@ -1,5 +1,6 @@
 package orangetest.tests;
 
+import orangetest.data.Vacancy;
 import orangetest.pages.VacanciesPage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -9,9 +10,12 @@ public class AddVacancyTest extends BaseTest {
 
     @Test
     public void addVacanciesTest() {
+        Vacancy vacancy = new Vacancy();
         vacanciesPage = new VacanciesPage();
-        vacanciesPage.addVacancy();
-        boolean result = vacanciesPage.checkAddedVacancy();
-        Assert.assertTrue(result);
+        Assert.assertTrue(vacanciesPage
+                        .addVacancy(vacancy.getVacancyName(), vacancy.getHiringManager(), vacancy.getNumberOfPositions())
+                        .isVacancyAdded(vacancy.getVacancyName(), vacancy.getHiringManager()),
+                "Vacancy with such parameters has not been found");
+
     }
 }

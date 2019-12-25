@@ -10,7 +10,7 @@ import org.openqa.selenium.support.FindBy;
 import java.time.LocalDate;
 import java.util.List;
 
-public class AttendancePage extends BasePage{
+public class AttendancePage extends BasePage {
     private static final String NOTE_IN = "I am a good worker :-)";
     private static final String NOTE_OUT = "I am already finished my work :-)";
 
@@ -44,7 +44,7 @@ public class AttendancePage extends BasePage{
     }
 
     @Step("Checking of user's punch record")
-    public boolean checkRecord() {
+    public boolean isRecordAdded() {
         timeMenu.click();
         attendance.click();
         viewMyAttendanceRecord.click();
@@ -52,15 +52,14 @@ public class AttendancePage extends BasePage{
         attendanceDate.clear();
         attendanceDate.sendKeys(dateNow.toString(), Keys.ENTER);
         List<WebElement> tableRows = baseTable.findElements(By.tagName("tr"));
-        boolean stringSearch = tableRows.stream().map(WebElement::getText).anyMatch(
+        return tableRows.stream().map(WebElement::getText).anyMatch(
                 o -> o.contains(NOTE_IN) &&
                         o.contains(NOTE_OUT) &&
                         o.contains(timeString));
-        return stringSearch;
     }
 
     @Step("Checking if there are no punch records from current user in Next/Previous week")
-    public boolean checkPreviousOrNextWeek(String date) {
+    public boolean isPrevOrNextWeekWithoutRecords(String date) {
         timeMenu.click();
         attendance.click();
         viewMyAttendanceRecord.click();

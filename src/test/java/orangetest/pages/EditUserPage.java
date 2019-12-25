@@ -10,11 +10,6 @@ import org.openqa.selenium.support.FindBy;
 import java.util.List;
 
 public class EditUserPage extends BasePage {
-    private static final String FIRST_NAME = "Mariana";
-    private static final String LAST_NAME = "Mykytovych";
-    private static final String MIDDLE_NAME = "Romanivna";
-    private static final String BIRTHDAY = "1993-09-07";
-
 
     @FindBy(xpath = "//input[@id='btnSave']")
     WebElement saveEditButton;
@@ -34,21 +29,17 @@ public class EditUserPage extends BasePage {
     WebElement middleName;
     @FindBy(xpath = "//table[@id='resultTable']//tbody")
     WebElement resultTable;
-    @FindBy(linkText = LAST_NAME)
+    @FindBy(linkText = "Mykytovych")
     WebElement myUser;
 
-    User user = new User();
-
-    public EditUserPage() {
-        super();
-    }
-
-    @Step("Editing an Existing User")
-    public EditUserPage editUser() {
+    public EditUserPage editUser(String fName, String lName, String mName, String birthday) {
         pimMenuItem.click();
         viewEmployeeList.click();
         myUser.click();
         saveEditButton.click();
+        calendar.click();
+        calendar.clear();
+        calendar.sendKeys(birthday, Keys.ENTER);
         nationality.click();
         nationality.findElement(By.xpath("//option[contains(text(),'Ukrainian')]")).click();
         marital.click();
@@ -58,23 +49,23 @@ public class EditUserPage extends BasePage {
         calendar.clear();
         calendar.sendKeys(user.getBirthday(), Keys.ENTER);
         firstName.clear();
-        firstName.sendKeys(user.getFirstName());
+        firstName.sendKeys(fName);
         lastName.clear();
-        lastName.sendKeys(user.getLastName());
+        lastName.sendKeys(lName);
         middleName.clear();
-        middleName.sendKeys(user.getMiddleName());
+        middleName.sendKeys(mName);
         saveEditButton.click();
         return this;
     }
 
     @Step("Checking if all changes are saved after editing")
-    public boolean checkEditedUser() {
+    public boolean isUserEdited(String fName, String lName, String mName) {
         pimMenuItem.click();
         viewEmployeeList.click();
         List<WebElement> tableRows = resultTable.findElements(By.tagName("tr"));
         return tableRows.stream().map(WebElement::getText).anyMatch
-                (o -> o.contains(FIRST_NAME) &&
-                        o.contains(LAST_NAME) &&
-                        o.contains(MIDDLE_NAME));
+                (o -> o.contains(fName) &&
+                        o.contains(lName) &&
+                        o.contains(mName));
     }
 }

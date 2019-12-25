@@ -33,26 +33,26 @@ public class LocationPage extends BasePage {
     WebElement btnSearch;
     @FindBy(id = "resultTable")
     WebElement resultTable;
-    Location location = new Location();
 
     @Step("Creating new Location")
-    public LocationPage addLocation() {
+    public LocationPage addLocation(String name, String country, String city,
+                                    String address, String state, String zipCode) {
         adminMenu.click();
         organization.click();
         viewLocations.click();
         btnAdd.click();
-        locationName.sendKeys(location.getName());
-        locationCountry.sendKeys(location.getCountry());
-        locationCity.sendKeys(location.getCity());
-        locationAddress.sendKeys(location.getAddress());
-        locationProvince.sendKeys(location.getState());
-        locationZipCode.sendKeys(location.getZipPostalCode());
+        locationName.sendKeys(name);
+        locationCountry.sendKeys(country);
+        locationCity.sendKeys(city);
+        locationAddress.sendKeys(address);
+        locationProvince.sendKeys(state);
+        locationZipCode.sendKeys(zipCode);
         btnSave.click();
         return this;
     }
 
     @Step("Checking created Location in result table")
-    public boolean checkLocation() {
+    public boolean isLocationAdded(String name, String country, String city) {
         adminMenu.click();
         organization.click();
         viewLocations.click();
@@ -62,9 +62,9 @@ public class LocationPage extends BasePage {
         btnSearch.click();
         List<WebElement> tableRows = resultTable.findElements(By.tagName("tr"));
         return tableRows.stream().map(WebElement::getText).anyMatch
-                (o -> o.contains(location.getName()) &&
-                        o.contains(location.getCity()) &&
-                        o.contains(location.getCountry()));
+                (o -> o.contains(name) &&
+                        o.contains(city) &&
+                        o.contains(country));
     }
 
     public boolean checkFromJSON() {

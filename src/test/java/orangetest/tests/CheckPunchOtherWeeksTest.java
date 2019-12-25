@@ -13,15 +13,15 @@ public class CheckPunchOtherWeeksTest extends BaseTest {
     @Test(priority = 1)
     public void checkPreviousWeek() {
         attendancePage = new AttendancePage();
-        String previousWeekDate = date.minusWeeks(2).toString();
-        boolean stringSearch = attendancePage.checkPreviousOrNextWeek(previousWeekDate);
-        Assert.assertTrue(stringSearch);
+        String previousWeekDate = date.minusDays(7).toString();
+        boolean stringSearch = attendancePage.isPrevOrNextWeekWithoutRecords(previousWeekDate);
+        Assert.assertTrue(stringSearch, "Punch In/Out records table is not empty for this date");
     }
 
     @Test(priority = 2)
     public void checkNextWeek() {
         String nextWeekDate = date.plusDays(7).toString();
-        boolean stringSearch = attendancePage.checkPreviousOrNextWeek(nextWeekDate);
-        Assert.assertTrue(stringSearch);
+        boolean stringSearch = attendancePage.isPrevOrNextWeekWithoutRecords(nextWeekDate);
+        Assert.assertTrue(stringSearch, "Punch In/Out records table is not empty for this date");
     }
 }

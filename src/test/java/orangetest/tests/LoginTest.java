@@ -18,7 +18,7 @@ public class LoginTest extends BaseTest {
     @Test
     public void loginTest() {
         loginPage.loginIntoSystem(LOGIN, PASSWORD);
-        Assert.assertTrue(loginPage.checkLogin());
+        Assert.assertTrue(loginPage.isHomePageOpened());
     }
 
     @AfterSuite

@@ -14,6 +14,6 @@ public class PunchInOutTest extends BaseTest {
         attendancePage = new AttendancePage();
         Assert.assertTrue(attendancePage.punchInOut(NOTE_IN)
                 .punchInOut(NOTE_OUT)
-                .checkRecord());
+                .isRecordAdded());
     }
 }

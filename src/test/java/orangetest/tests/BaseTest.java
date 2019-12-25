@@ -3,26 +3,29 @@ package orangetest.tests;
 import orangetest.pages.LoginPage;
 import orangetest.utils.Application;
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 
 public class BaseTest {
-    protected LoginPage loginPage;
     public WebDriver driver;
+    protected LoginPage loginPage;
 
-    @BeforeTest
-    public void beforeTest() {
+    @BeforeClass
+    public void beforeClass() {
         driver = Application.getDriver();
         loginPage = openLoginPage();
         loginPage.loginIntoSystem("TestUser05", "Vfylhfujhf!1");
     }
 
-    public LoginPage openLoginPage( ) {
+    @Test
+    public LoginPage openLoginPage() {
         driver = Application.getDriver();
         driver.get("http://test.biz.ua");
         return new LoginPage();
     }
-    @AfterTest
+
+    @AfterClass(alwaysRun = true)
     public void close() {
         Application.closeDriver();
     }

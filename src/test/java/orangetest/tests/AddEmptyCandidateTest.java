@@ -10,6 +10,6 @@ public class AddEmptyCandidateTest extends BaseTest {
     @Test
     public void addEmptyCandidateTest() {
         candidatesPage = new CandidatesPage();
-        Assert.assertTrue(candidatesPage.addEmptyCandidate(), "Should be 3 error messages");
+        Assert.assertTrue(candidatesPage.isEmptyCandidateAdded(), "Should be 3 error messages");
     }
 }

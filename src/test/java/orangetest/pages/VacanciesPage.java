@@ -50,23 +50,22 @@ public class VacanciesPage extends BasePage {
     @FindBy(css = "div.box:nth-child(1) div.inner form:nth-child(1) fieldset:nth-child(3) ol:nth-child(1) li:nth-child(3) > span.validation-error:nth-child(3)")
     WebElement errorHiringManager;
 
-    private Vacancy vacancy = new Vacancy();
-
     public VacanciesPage() {
         super();
     }
 
-    public void addVacancy() {
+    public VacanciesPage addVacancy(String name, String manager, String position) {
         menuRecruitment.click();
         viewJobVacancy.click();
         btnAdd.click();
         Utils.waitUntilIsClickable(jobTitle);
         jobTitle.click();
         jobTitle.findElement(By.xpath("//option[contains(text(),'AQA')]")).click();
-        vacancyName.sendKeys(vacancy.getVacancyName());
-        hiringManager.sendKeys(vacancy.getHiringManager());
-        numberOfPositions.sendKeys(vacancy.getNumberOfPositions());
+        vacancyName.sendKeys(name);
+        hiringManager.sendKeys(manager);
+        numberOfPositions.sendKeys(position);
         btnSave.click();
+        return this;
     }
 
     public boolean addEmptyVacancy() {
@@ -76,9 +75,9 @@ public class VacanciesPage extends BasePage {
         Utils.waitUntilIsClickable(btnSave);
         btnSave.click();
         try {
-            System.out.println("Job Title. Error message: " + errorJobTitle.getText());
-            System.out.println("Hiring Manager. Error message: " + errorHiringManager.getText());
-            System.out.println("Vacancy Name. Error message: " + errorVacancyName.getText());
+            errorJobTitle.isEnabled();
+            errorVacancyName.isEnabled();
+            errorHiringManager.isEnabled();
             return true;
         } catch (NoSuchElementException e) {
             System.out.println("Error messages is not displaying correctly");
@@ -86,12 +85,12 @@ public class VacanciesPage extends BasePage {
         }
     }
 
-    public boolean checkAddedVacancy() {
+    public boolean isVacancyAdded(String name, String manager) {
         viewJobVacancy.click();
         List<WebElement> tableRows = resultTable.findElements(By.tagName("tr"));
         return tableRows.stream().map(WebElement::getText).anyMatch(
-                o -> o.contains(vacancy.getHiringManager()) &&
-                        o.contains(vacancy.getVacancyName()));
+                o -> o.contains(name) &&
+                        o.contains(manager));
     }
 
     public boolean isHiringManagerPresent(String vacancyName, String hiringManager) {

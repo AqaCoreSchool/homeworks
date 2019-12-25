@@ -36,7 +36,6 @@ public class BasePage {
     WebElement viewJobVacancy;
 
 
-
     public BasePage() {
         PageFactory.initElements(Application.getDriver(), this);
     }
