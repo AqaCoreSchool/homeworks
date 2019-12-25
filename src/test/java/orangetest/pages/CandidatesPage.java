@@ -1,6 +1,9 @@
 package orangetest.pages;
 
 import orangetest.data.Candidate;
+import orangetest.utils.JsonConverter;
+import orangetest.utils.Utils;
+import org.json.JSONObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
@@ -87,6 +90,7 @@ public class CandidatesPage extends BasePage {
     public boolean isCandidateAdded(String fName, String lName, String mName) {
         viewCandidates.click();
         LocalDate currentDate = LocalDate.now();
+        Utils.waitUntilIsClickable(searchFromDate);
         searchFromDate.click();
         searchFromDate.clear();
         searchFromDate.sendKeys(currentDate.toString());
@@ -102,4 +106,12 @@ public class CandidatesPage extends BasePage {
                         o.contains(vacancy) &&
                         o.contains(fName));
     }
+
+    public boolean checkFromJSON() {
+        JsonConverter converter = new JsonConverter();
+        JSONObject candidateJson = converter.convertObjectToJson(candidate);
+        Candidate candidateObjFromJson = (Candidate) converter.convertJsonToObject(candidateJson.toString(), Candidate.class);
+        return candidate.equals(candidateObjFromJson);
+    }
 }
+

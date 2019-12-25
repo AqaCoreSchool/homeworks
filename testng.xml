@@ -1,5 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-
 <suite name="orangetest" verbose="1">
     <test name="Home task Selenium">
         <classes>
@@ -19,4 +19,12 @@
             <class name="orangetest.tests.AddEmptyVacancyTest"/>
         </classes>
     </test>
+    <test name="Home task API Jackson">
+        <classes>
+            <class name="orangetest.tests.CheckCandidateJsonTest"></class>
+            <class name="orangetest.tests.CheckVacancyJsonTest"></class>
+            <class name="orangetest.tests.CheckLocationJsonTest"></class>
+        </classes>
+    </test>
 </suite>
+

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="orangetest" verbose="1">
+    <test name="Home task Rest Assured API">
+        <classes>
+            <class name="orangetest.apitask.tests.SaveEmployeeExperienceTest"/>
+            <class name="orangetest.apitask.tests.GetEmployeeExperienceTest"/>
+            <class name="orangetest.apitask.tests.UpdateEmployeeExperienceTest"/>
+            <class name="orangetest.apitask.tests.DeleteEmployeeExperienceTest"/>
+        </classes>
+    </test>
+</suite>
+

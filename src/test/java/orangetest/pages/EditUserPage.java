@@ -45,6 +45,9 @@ public class EditUserPage extends BasePage {
         marital.click();
         marital.findElement(By.xpath("//option[contains(text(),'Other')]")).click();
         gender.click();
+        calendar.click();
+        calendar.clear();
+        calendar.sendKeys(user.getBirthday(), Keys.ENTER);
         firstName.clear();
         firstName.sendKeys(fName);
         lastName.clear();
