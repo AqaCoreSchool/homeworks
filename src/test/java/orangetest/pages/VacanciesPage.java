@@ -8,6 +8,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
 
@@ -18,6 +19,12 @@ public class VacanciesPage extends BasePage {
 
     @FindBy(xpath = "//input[@id='btnSave']")
     WebElement btnSave;
+
+    @FindBy(id="btnSrch")
+    WebElement btnSrch;
+
+    @FindBy(id="vacancySearch_jobVacancy")
+    WebElement search_jobVacancy;
 
     @FindBy(xpath = "//select[@id='addJobVacancy_jobTitle']")
     WebElement jobTitle;
@@ -85,6 +92,17 @@ public class VacanciesPage extends BasePage {
         return tableRows.stream().map(WebElement::getText).anyMatch(
                 o -> o.contains(vacancy.getHiringManager()) &&
                         o.contains(vacancy.getVacancyName()));
+    }
+
+    public boolean isHiringManagerPresent(String vacancyName, String hiringManager) {
+        menuRecruitment.click();
+        viewJobVacancy.click();
+        Select drpVacancy = new Select(search_jobVacancy);
+        drpVacancy.selectByVisibleText(vacancyName);
+        btnSrch.click();
+        List<WebElement> tableRows = resultTable.findElements(By.tagName("tr"));
+        return tableRows.stream().map(WebElement::getText).anyMatch(
+                o -> o.contains(hiringManager));
     }
 
     public boolean checkFromJSON() {
